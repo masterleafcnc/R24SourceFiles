@@ -66,13 +66,22 @@ bar4 = {} -- for tracking the bar four of the harvester.
 
 harvesterData = {}
 crystalData = {}
-reverseMaster = nil
+reverseMasters = {} -- per-team reverse anchor (first confirmed reverse unit)
+reverseBatches = {} -- per-team snapshot of selected units for a reverse pass
 
 snapshotBefore = {}
 snapshotAfter = {}
 
-unitsReversing = {}
-selectedUnits = {}
+unitsReversing = {} -- per-unit reverse tracking (reverseSeen, ref, team)
+selectedUnits = {} -- per-team selection cache used for snapshotting
+
+-- Reverse fix timing is defined in frames, then converted to seconds for durations.
+REVERSE_FRAMES_PER_SECOND = 15 -- 15 frames ~= 1 second in this codebase
+REVERSE_BATCH_DELAY_FRAMES = 8
+REVERSE_GUARD_DURATION_FRAMES = 20
+REVERSE_BATCH_DELAY_SECONDS = REVERSE_BATCH_DELAY_FRAMES / REVERSE_FRAMES_PER_SECOND
+REVERSE_GUARD_DURATION_SECONDS = REVERSE_GUARD_DURATION_FRAMES / REVERSE_FRAMES_PER_SECOND
+REVERSE_GUARD_STOPPING_DISTANCE = 100 -- keep a loose bubble while re-cohering
 
 MAX_FRAMES_WHEN_NOT_HARVESTED = 900 -- 60s
 MAX_FRAMES_BEING_HARVESTED = 50 -- 15 frames is 1s (gdi/scrin harvest action time)
@@ -837,84 +846,232 @@ end
 
 -- ####################### REVERSE MOVE WORKAROUND ############################
 
--- Set the reference of an object in order to assign object status successfully.
+-- Set a deterministic reference for engine conditions/actions (avoids RNG desync).
 function SetObjectReference(self)
-	local ObjectStringRef = "object_" .. floor(GetRandomNumber()*99999999)
-	ExecuteAction("SET_UNIT_REFERENCE", ObjectStringRef , self)
-	return ObjectStringRef
-end
-
--- Sets the initial frame when a unit fast turns while backing up
-function BackingUpFast(self)
-	local a = getObjectId(self)
-	local curFrame = GetFrame()
-	if unitsReversing[a].firstFrame == 0 and not unitsReversing[a].isReverseMoving then
-		unitsReversing[a].firstFrame = curFrame
-		unitsReversing[a].isReverseMoving = true
+	if self == nil then
+		return nil
 	end
+	local objectRef = "u_" .. tostring(getObjectId(self))
+	ExecuteAction("SET_UNIT_REFERENCE", objectRef, self)
+	return objectRef
 end
 
--- Triggered by +BACKING_UP -TURN_LEFT_HIGH_SPEED and +BACKING_UP -TURN_RIGHT_HIGH_SPEED
-function BackingUpFastEnd(self)	
-	local a = getObjectId(self)
+-- Cache a unit reference string on a table entry when available.
+function EnsureUnitReference(self, entry)
+	if self == nil then
+		return nil
+	end
+	if entry ~= nil and entry.ref ~= nil then
+		return entry.ref
+	end
+	local objectRef = SetObjectReference(self)
+	if entry ~= nil then
+		entry.ref = objectRef
+	end
+	return objectRef
+end
+
+-- Get or initialize per-unit reverse tracking data.
+function GetReverseUnitData(self)
+	local unitId = tostring(getObjectId(self))
 	local playerTeam = tostring(ObjectTeamName(self))
-	
-	if unitsReversing[a] ~= nil and reverseMaster ~= nil then
-		unitsReversing[a].timesTriggered = unitsReversing[a].timesTriggered + 1
 
-		local shouldTrigger =
-			(unitsReversing[a].timesTriggered == 2 and
-			 floor(GetFrame() - unitsReversing[a].firstFrame) == 7)
-			or
-			(unitsReversing[a].timesTriggered ~= 2 and
-			 GetObjectDistance(self) > (unitsReversing[a].distanceToMaster + 50))
+	unitsReversing[unitId] = unitsReversing[unitId] or {
+		team = playerTeam,
+		reverseSeen = false,
+		isMaster = false,
+		ref = nil,
+		object = self
+	}
 
-		-- if true the unit has reverse bugged.
-		if shouldTrigger then		
-			-- flag this unit as being bugged
-			unitsReversing[a].hasBugged = true
-		end
+	local data = unitsReversing[unitId]
+	data.team = playerTeam
+	data.object = self
+	EnsureUnitReference(self, data)
 
-		--  check if this is the last unit to be checked and it is go through all the selected units and assign them to the first unit that hasnt reverse bugged.
-		if selectedUnits[playerTeam].unitsChecked == selectedUnits[playerTeam].selectedCount then
-			local reverseAnchor = nil
+	return data, unitId, playerTeam
+end
 
-			-- assign the anchor (first occurence of hasBugged=false)
-			for key,value in unitsReversing do 
-				if not unitsReversing[key].hasBugged then
-					--- assign reverseAnchor to be the reference of the unit in this current iteration
-					reverseAnchor = unitsReversing[key].selfReference
-				end
+-- Capture a snapshot of the selected units for this team and start a one-shot timer.
+function StartReverseBatch(self)
+	local playerTeam = tostring(ObjectTeamName(self))
+	local batch = reverseBatches[playerTeam]
+	if batch ~= nil then
+		return batch
+	end
+
+	batch = {
+		units = {},
+		processed = false
+	}
+	reverseBatches[playerTeam] = batch
+	reverseMasters[playerTeam] = nil
+
+	local selection = selectedUnits[playerTeam]
+	if selection ~= nil and selection.units ~= nil then
+		for unitId, entry in selection.units do
+			if entry.object ~= nil then
+				batch.units[unitId] = {
+					object = entry.object,
+					ref = EnsureUnitReference(entry.object, entry),
+					reverseSeen = false
+				}
+				ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", entry.object, "USER_72", REVERSE_BATCH_DELAY_SECONDS, 100)
 			end
-
-			-- go through unitsReversing and apply the fixes
-			for key,value in unitsReversing do 
-				if unitsReversing[key].hasBugged then
-					-- only execute this if the global reverse counter has reached the same as 
-					ExecuteAction("NAMED_FLASH", unitsReversing[key].selfReference, 2)
-					ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", SetObjectReference(unitsReversing[key].selfReference), 4, 1)
-					ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[key].selfReference, reverseAnchor)
-					ExecuteAction("NAMED_SET_STOPPING_DISTANCE", unitsReversing[key].selfReference, 100)
-					-- reset the unitsChecked attribute
-				end
-			end
-			-- finally reset unitsChecked back to 0 again
-			selectedUnits[playerTeam].unitsChecked = 0
-		else
-			-- increment the global 
-			selectedUnits[playerTeam].unitsChecked = selectedUnits[playerTeam].unitsChecked + 1
 		end
 	end
 
+	if next(batch.units) == nil and self ~= nil then
+		local unitId = tostring(getObjectId(self))
+		batch.units[unitId] = {
+			object = self,
+			ref = EnsureUnitReference(self),
+			reverseSeen = false
+		}
+		ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", self, "USER_72", REVERSE_BATCH_DELAY_SECONDS, 100)
+	end
+
+	return batch
+end
+
+-- Mark that this unit actually entered reverse (BACKING_UP or fast-back event).
+function MarkReverseSignal(self)
+	local data, unitId, playerTeam = GetReverseUnitData(self)
+	data.reverseSeen = true
+
+	local batch = reverseBatches[playerTeam]
+	if batch ~= nil then
+		if batch.units[unitId] == nil then
+			batch.units[unitId] = {
+				object = self,
+				ref = EnsureUnitReference(self, data),
+				reverseSeen = true
+			}
+		else
+			batch.units[unitId].reverseSeen = true
+		end
+	end
+
+	if reverseMasters[playerTeam] == nil then
+		reverseMasters[playerTeam] = self
+		data.isMaster = true
+	end
+
+	return data, unitId, playerTeam
+end
+
+-- Apply a single fix pass for the current reverse batch of a team.
+function ProcessReverseBatch(playerTeam)
+	local batch = reverseBatches[playerTeam]
+	if batch == nil or batch.processed then
+		return
+	end
+
+	batch.processed = true
+
+	local anchorObj = nil
+	local anchorRef = nil
+
+	-- Anchor priority: first confirmed reverse unit, then master, then first in snapshot.
+	for unitId, entry in batch.units do
+		if entry.object ~= nil and entry.reverseSeen then
+			anchorObj = entry.object
+			anchorRef = entry.ref or EnsureUnitReference(entry.object, entry)
+			break
+		end
+	end
+
+	if anchorObj == nil then
+		local master = reverseMasters[playerTeam]
+		if master ~= nil then
+			anchorObj = master
+			anchorRef = EnsureUnitReference(master)
+		end
+	end
+
+	if anchorObj == nil then
+		for unitId, entry in batch.units do
+			if entry.object ~= nil then
+				anchorObj = entry.object
+				anchorRef = entry.ref or EnsureUnitReference(entry.object, entry)
+				break
+			end
+		end
+	end
+
+	if anchorObj == nil or anchorRef == nil then
+		reverseBatches[playerTeam] = nil
+		return
+	end
+
+	-- Units without a reverse signal get re-cohered to the anchor.
+	for unitId, entry in batch.units do
+		if entry.object ~= nil then
+			local hasReverseSignal = entry.reverseSeen or ObjectTestModelCondition(entry.object, "BACKING_UP")
+			if not hasReverseSignal then
+				ExecuteAction("NAMED_FLASH", entry.object, 2)
+				ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", entry.ref or EnsureUnitReference(entry.object, entry), 4, 1)
+				ExecuteAction("UNIT_GUARD_OBJECT", entry.object, anchorObj)
+				ExecuteAction("NAMED_SET_STOPPING_DISTANCE", entry.object, REVERSE_GUARD_STOPPING_DISTANCE)
+				ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", entry.object, "USER_74", REVERSE_GUARD_DURATION_SECONDS, 100)
+			end
+		end
+	end
+
+	reverseBatches[playerTeam] = nil
+end
+
+-- Timer end for USER_72: triggers the batch fix pass.
+function ReverseBatchTimerEnd(self)
+	local playerTeam = tostring(ObjectTeamName(self))
+	ProcessReverseBatch(playerTeam)
+end
+
+-- Timer end for USER_74: clean up guard/spacing and collisions.
+function ReverseGuardCleanup(self)
+	local objectRef = EnsureUnitReference(self)
+	if objectRef ~= nil then
+		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", objectRef, 4, 0)
+	end
+	ExecuteAction("NAMED_SET_STOPPING_DISTANCE", self, 0)
+	ExecuteAction("UNIT_CLEAR_MODELCONDITION", self, "GUARDING")
+end
+
+-- Fast-turn reverse event; used as a positive reverse signal.
+function BackingUpFast(self)
+	StartReverseBatch(self)
+	MarkReverseSignal(self)
+end
+
+-- Fast-turn end event; still counts as a reverse signal for this batch.
+function BackingUpFastEnd(self)
+	StartReverseBatch(self)
+	MarkReverseSignal(self)
 	return true
+end
+
+-- Reverse intent without a reverse signal yet: ensures the snapshot starts.
+function ReverseIntentStart(self)
+	StartReverseBatch(self)
+
+	local data, unitId, playerTeam = GetReverseUnitData(self)
+	local batch = reverseBatches[playerTeam]
+	if batch ~= nil and batch.units[unitId] == nil then
+		batch.units[unitId] = {
+			object = self,
+			ref = EnsureUnitReference(self, data),
+			reverseSeen = false
+		}
+		ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", self, "USER_72", REVERSE_BATCH_DELAY_SECONDS, 100)
+	end
 end
 
 -- Remove collisions when unit no longer is guarding (this event handler doesnt work)
 function UnitNoLongerGuarding(self)
 	ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 	print("guarding!")
-	local object = SetObjectReference(self)
-	if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", object , 4) then
+	local object = EnsureUnitReference(self)
+	if object ~= nil and EvaluateCondition("UNIT_HAS_OBJECT_STATUS", object , 4) then
 		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", object, 4, 0)
 		-- remove stopping distance to prevent overlapping units
 		ExecuteAction("NAMED_SET_STOPPING_DISTANCE", self, 0)
@@ -923,64 +1080,40 @@ end
 
 -- Triggered by +BACKING_UP
 function BackingUp(self)
-	local a = getObjectId(self)
-	-- apparently unitsReversing[a] is nil when set from OnCreated.
-	-- fire weapon that spawns an object that this unit then follows if bugging, save in unitsReversing table a reference to that object.
-	-- firing weapons appears to break the move command.
-	-- ObjectCreateAndFireTempWeapon(self, "ReverseAnchorWeapon")
+	StartReverseBatch(self)
+	local data = MarkReverseSignal(self)
 
-	unitsReversing[a] = unitsReversing[a] or {
-		firstFrame = 0, -- first frame after reversing while turning fast
-		isReverseMoving = false, -- flag to stop the re-assignment of firstFrame
-		timesTriggered = 0, 
-		distanceToMaster = 0, 
-		isMaster = false,
-		hasBugged = false,
-		selfReference = self
-	}
-
-	ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", SetObjectReference(self), 48, 1)
-
-	-- broadcasted events dont work on stealthed units
-	if reverseMaster == nil then 
-		unitsReversing[a].isMaster = true
-		--unitsReversing[a].ObjectRef = self
-		-- assign self as the master (global var)
-		-- reverseMaster = unitsReversing[a]
-		reverseMaster = self
-	end 
-	
-	-- only do this if not the master, in the future ill need to make a second candidate for this to check if the "master" is reverse bugging.
-	if not unitsReversing[a].isMaster then
-		unitsReversing[a].distanceToMaster = GetObjectDistance(self) 
-	else 
-		-- flash the master
+	if data ~= nil and data.isMaster then
 		ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 	end
+end
+
+-- Selection bookkeeping is per-team to avoid cross-player contamination.
+function GetSelectionData(playerTeam)
+	selectedUnits[playerTeam] = selectedUnits[playerTeam] or { units = {}, count = 0 }
+	return selectedUnits[playerTeam]
 end
 
 function AddToUnitSelection(self)
     local playerTeam = tostring(ObjectTeamName(self))
     local unit = tostring(getObjectId(self))
 
-    if not selectedUnits[playerTeam] then
-        selectedUnits[playerTeam] = {}
-        selectedUnits[playerTeam].selectedCount = 0 
-		selectedUnits[playerTeam].unitsChecked = 0 
-    end
+    local selection = GetSelectionData(playerTeam)
 
     -- Add the unit to the table and increment the current units selected counter
-    if not selectedUnits[playerTeam][unit] then
-        selectedUnits[playerTeam][unit] = {
-            isBugging = false
+    if not selection.units[unit] then
+        selection.units[unit] = {
+            object = self,
+            ref = nil
         }
-        local currentCount = selectedUnits[playerTeam].selectedCount or 0
-        selectedUnits[playerTeam].selectedCount = currentCount + 1
-    end
+        selection.count = selection.count + 1
+    else
+		selection.units[unit].object = self
+	end
 
     --local file = openfile("C:\\Users\\Public\\Documents\\kw_test.txt", "w")
     --if file then
-    --    write(file, selectedUnits[playerTeam].selectedCount)
+    --    write(file, selection.count)
     --    closefile(file)
     --end
 end
@@ -990,84 +1123,102 @@ function RemoveFromUnitSelection(self)
     local unit = tostring(getObjectId(self))
 
     -- Check if the team table and the unit actually exist
-    if selectedUnits[playerTeam] and selectedUnits[playerTeam][unit] then
-    
-        selectedUnits[playerTeam][unit] = nil
+	local selection = selectedUnits[playerTeam]
+    if selection and selection.units[unit] then
+        selection.units[unit] = nil
         
         -- Decrement the counter
-        local currentCount = selectedUnits[playerTeam].selectedCount or 1
-        if currentCount > 0 then
-            selectedUnits[playerTeam].selectedCount = currentCount - 1
+        if selection.count > 0 then
+            selection.count = selection.count - 1
         end
 
         --local file = openfile("C:\\Users\\Public\\Documents\\kw_test.txt", "w")
         --if file then
-        --    write(file, selectedUnits[playerTeam].selectedCount)
+        --    write(file, selection.count)
         --    closefile(file)
         --end
     end
 end
 
-function GetObjectDistance(self) 
-	local a = getObjectId(self)
-	if reverseMaster ~= nil and self ~= nil then
-		local val = 10
-		--  1 is less than or equal to
-		while not EvaluateCondition("DISTANCE_BETWEEN_OBJ", SetObjectReference(self), SetObjectReference(reverseMaster), 1, val) do
-			val = val + 25
-		end
-		-- from here val is the distance between the units
-		--local file = openfile("C:\\Users\\Public\\Documents\\kw_test.txt", "w")
-		--if file then
-		--	local i = reverseMaster.ObjectReferenceId
-		--	write(file, "Distance between master and this unit is: " .. val .. "unit id: " .. i)
-		--	closefile(file)
-		--end
-		return val	
+function GetObjectDistance(self)
+	if self == nil then
+		return nil
 	end
+
+	local playerTeam = tostring(ObjectTeamName(self))
+	local master = reverseMasters[playerTeam]
+	if master == nil then
+		return nil
+	end
+
+	local selfRef = EnsureUnitReference(self)
+	local masterRef = EnsureUnitReference(master)
+	if selfRef == nil or masterRef == nil then
+		return nil
+	end
+
+	-- Binary-ish search: find a coarse upper bound, then narrow it.
+	local low = 0
+	local high = 50
+	while not EvaluateCondition("DISTANCE_BETWEEN_OBJ", selfRef, masterRef, 1, high) do
+		low = high
+		high = high + 50
+		if high > 2000 then
+			return high
+		end
+	end
+
+	while high - low > 25 do
+		local mid = floor((low + high) / 2)
+		if EvaluateCondition("DISTANCE_BETWEEN_OBJ", selfRef, masterRef, 1, mid) then
+			high = mid
+		else
+			low = mid + 1
+		end
+	end
+
+	return high
 end
 
 -- clears the table 
 function ReverseUnitOnDeath(self)
 	-- mayube store objectid and reference (GetObjectReference) in their own properties of this table instead of repeatedly calling it every function.
-	local a = getObjectId(self)
+	local a = tostring(getObjectId(self))
 	if unitsReversing[a] ~= nil then
 		unitsReversing[a] = nil
 	end
 
-	if self == reverseMaster then 
+	local playerTeam = tostring(ObjectTeamName(self))
+	if reverseMasters[playerTeam] == self then
 		-- clear master when it stops moving
-		reverseMaster = nil
+		reverseMasters[playerTeam] = nil
+	end
+
+	-- Remove dead units from any pending batch snapshot.
+	for team, batch in reverseBatches do
+		if batch.units and batch.units[a] then
+			batch.units[a] = nil
+		end
 	end
 end
 
 -- Triggered by -BACKING_UP
 function BackingUpEnd(self)
-	local a = getObjectId(self)
-	
-	-- somehow is nil
-	if unitsReversing[a] ~= nil and not unitsReversing[a].hasBugged then
-		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", SetObjectReference(self), 4, 0)
+	local unitId = tostring(getObjectId(self))
+	local data = unitsReversing[unitId]
+
+	local objectRef = EnsureUnitReference(self, data)
+	if objectRef ~= nil then
+		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", objectRef, 4, 0)
 	end
-	--print("triggered backing up end")
-	
-	-- check again if it has finished backing up
-	if BackingUpFastEnd(self) then
-		-- reset bug flag before cleanup
-		if unitsReversing[a] then
-			-- reset values instead of assinging table to nil
-			unitsReversing[a].firstFrame = 0 
-			unitsReversing[a].isReverseMoving = false
-			unitsReversing[a].timesTriggered = 0
-			unitsReversing[a].distanceToMaster = 0
-			unitsReversing[a].isMaster = false
-			unitsReversing[a].hasBugged = false
-		end	
-		-- to be replaced with ocl RELATIVE_ANGLE object offset by -200
-		--if self == reverseMaster then 
-		-- clear master when it stops moving
-		-- reverseMaster = nil
-		--end
+
+	if data ~= nil then
+		local playerTeam = data.team or tostring(ObjectTeamName(self))
+		if data.isMaster and reverseMasters[playerTeam] == self then
+			reverseMasters[playerTeam] = nil
+		end
+		-- Clean out per-unit reverse state after the reverse completes.
+		unitsReversing[unitId] = nil
 	end
 end
 

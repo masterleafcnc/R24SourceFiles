@@ -557,6 +557,10 @@
 		<ModelConditionEvent Name="OnUser74">
 			<Conditions>+USER_74</Conditions>
 		</ModelConditionEvent>			
+		<!-- Reverse move: end of guard cleanup timer -->
+		<ModelConditionEvent Name="OnUser74End">
+			<Conditions>-USER_74</Conditions>
+		</ModelConditionEvent>			
 		<ModelConditionEvent Name="OnUser75">
 			<Conditions>+USER_75</Conditions>
 		</ModelConditionEvent>		
@@ -886,6 +890,8 @@
 
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
+		<!-- Reverse move: start batch on reverse intent -->
+		<EventHandler EventName="OnReverse"	ScriptFunctionName="ReverseIntentStart" DebugSingleStep="false"/>
 		<!--
 		<EventHandler EventName="OnBackingUpFastRight"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeft"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
@@ -895,6 +901,9 @@
 
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastEnd" DebugSingleStep="false"/>
+		<!-- Reverse move: delayed batch pass + guard cleanup -->
+		<EventHandler EventName="OnUser72End"	ScriptFunctionName="ReverseBatchTimerEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnUser74End"	ScriptFunctionName="ReverseGuardCleanup" DebugSingleStep="false"/>
 
 		<!-- no worky -->
 		<EventHandler EventName="OnGuardingEnd"	ScriptFunctionName="UnitNoLongerGuarding" DebugSingleStep="false"/>
