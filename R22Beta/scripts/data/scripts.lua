@@ -78,6 +78,10 @@ selectedUnits = {} -- per-team selection cache (stores unit refs)
 -- Reverse fix timing is defined in frames to match KW's frame-based cadence.
 REVERSE_BATCH_DELAY_FRAMES = 8
 REVERSE_GUARD_DURATION_FRAMES = 20
+REVERSE_FRAMES_PER_SECOND = 30 -- adjust if your sim tick differs
+REVERSE_BATCH_DELAY_SECONDS = REVERSE_BATCH_DELAY_FRAMES / REVERSE_FRAMES_PER_SECOND
+REVERSE_GUARD_DURATION_SECONDS = REVERSE_GUARD_DURATION_FRAMES / REVERSE_FRAMES_PER_SECOND
+REVERSE_HORDE_PERCENT = 100 -- percent of horde members to receive the model condition
 REVERSE_GUARD_STOPPING_DISTANCE = 100 -- keep a loose bubble while re-cohering
 
 MAX_FRAMES_WHEN_NOT_HARVESTED = 900 -- 60s
@@ -942,7 +946,7 @@ function StartReverseBatch(self)
 	if isNew then
 		for unitId, entry in next, batch.units do
 			if entry.ref ~= nil then
-				ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", entry.ref, "USER_72", REVERSE_BATCH_DELAY_FRAMES, 100)
+				ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", entry.ref, "USER_72", REVERSE_BATCH_DELAY_SECONDS, REVERSE_HORDE_PERCENT)
 			end
 		end
 	end
@@ -1022,7 +1026,7 @@ function ProcessReverseBatch(playerTeam)
 			ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", entry.ref, 4, 1)
 			ExecuteAction("NAMED_SET_STOPPING_DISTANCE", entry.ref, REVERSE_GUARD_STOPPING_DISTANCE)
 			ExecuteAction("UNIT_GUARD_OBJECT", entry.ref, anchorRef)
-			ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", entry.ref, "USER_74", REVERSE_GUARD_DURATION_FRAMES, 100)
+			ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", entry.ref, "USER_74", REVERSE_GUARD_DURATION_SECONDS, REVERSE_HORDE_PERCENT)
 		end
 	end
 
