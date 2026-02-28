@@ -118,34 +118,34 @@
 		<Include source="Nod\Units\NODHarvester.xml" type="all"/>	 -->
 
 		<!-- post r23z changes
-		<Include source="ReverseDummy.xml" type="all"/>	 -->
+		<Include source="ReverseDummy.xml" type="all"/>	 
 
-		<Include source="LocomotorR24.xml" type="all"/>
-		<Include source="Reaper17\Units\Reaper17Mothership.xml" type="all"/>
-		<Include source="traveler59\Units\Traveler59Mothership.xml" type="all"/>
-		<Include source="Alien/Units/AlienMothership.xml" type="all"/>
-		<Include source="GlobalData/upgrade.xml" type="all"/>
-		<Include source="GlobalData/AttributeModifier.xml" type="all"/>
+		<Include source="Reaper17\Units\Reaper17Mothership.xml" type="all" />
+		<Include source="traveler59\Units\Traveler59Mothership.xml" type="all" />
+		<Include source="Alien/Units/AlienMothership.xml" type="all" />
+		<Include source="GlobalData/upgrade.xml" type="all" />
+		<Include source="LocomotorR24.xml" type="all" />
+		<Include source="GlobalData/AttributeModifier.xml" type="all" /> -->
 
 		<!-- new objects -->
-		 <Include type="all" source="New Objects/AlienBuzzerHive.xml" />
-		 <Include type="all" source="New Objects/AlienControlCenter.xml" />
-		 <Include type="all" source="New Objects/AlienStormrider.xml" />
-		 <Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
-		 <Include type="all" source="New Objects/GDISonicTank.xml" />
-		 <Include type="all" source="New Objects/GDIWatchTower.xml" />
-		 <Include type="all" source="New Objects/MarkedOfKaneRaiderTank.xml" />
-		 <Include type="all" source="New Objects/NODRaiderTank.xml" />
-		 <Include type="all" source="New Objects/Reaper17BuzzerHive.xml" />
-		 <Include type="all" source="New Objects/Reaper17ControlCenter.xml" />
-		 <Include type="all" source="New Objects/Reaper17Stormrider.xml" />
-		 <Include type="all" source="New Objects/SteelTalonsWatchTower.xml" />
-		 <Include type="all" source="New Objects/Traveler59BuzzerHive.xml" />
-		 <Include type="all" source="New Objects/Traveler59ControlCenter.xml" />
-		 <Include type="all" source="New Objects/Traveler59Stormrider.xml" />
-		 <Include type="all" source="New Objects/ZOCOMSonicTank.xml" />
-		 <Include type="all" source="New Objects/ZOCOMWatchTower.xml" />
-		<!-- Reverse move speed buff updated units -->
+		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
+		<Include type="all" source="New Objects/AlienControlCenter.xml" />
+		<Include type="all" source="New Objects/AlienStormrider.xml" />
+		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
+		<Include type="all" source="New Objects/GDISonicTank.xml" />
+		<Include type="all" source="New Objects/GDIWatchTower.xml" />
+		<Include type="all" source="New Objects/MarkedOfKaneRaiderTank.xml" />
+		<Include type="all" source="New Objects/NODRaiderTank.xml" />
+		<Include type="all" source="New Objects/Reaper17BuzzerHive.xml" />
+		<Include type="all" source="New Objects/Reaper17ControlCenter.xml" />
+		<Include type="all" source="New Objects/Reaper17Stormrider.xml" />
+		<Include type="all" source="New Objects/SteelTalonsWatchTower.xml" />
+		<Include type="all" source="New Objects/Traveler59BuzzerHive.xml" />
+		<Include type="all" source="New Objects/Traveler59ControlCenter.xml" />
+		<Include type="all" source="New Objects/Traveler59Stormrider.xml" />
+		<Include type="all" source="New Objects/ZOCOMSonicTank.xml" />
+		<Include type="all" source="New Objects/ZOCOMWatchTower.xml" />
+		<!-- Reverse move speed buff updated units 
 		<Include source="Alien\Units\AlienDevourerTank.xml" type="all"/>
 		<Include source="BlackHand\Units\BHEmissary.xml" type="all"/>
 		<Include source="BlackHand\Units\BHFlametank.xml" type="all"/>
@@ -208,9 +208,9 @@
 		<Include source="New Objects\AlienCorrupter.xml" type="all"/>
 		<Include source="New Objects\Reaper17Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59Corrupter.xml" type="all"/>
-		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/>
-	
-		<!-- Edited squad files (R24 AILuaEventsList) -->
+		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/> -->
+
+		<!-- Edited squad files (R24 AILuaEventsList)
 		<Include source="Alien\Units\AlienStalkerSquad.xml" type="all"/>
 		<Include source="BlackHand\Units\BHBlackhandSquad.xml" type="all"/>
 		<Include source="BlackHand\Units\BlackHandConfessorSquad.xml" type="all"/>
@@ -253,7 +253,8 @@
 		<Include source="ZOCOM\Units\ZOCOMGrenadeSoldierSquad.xml" type="all"/>
 		<Include source="ZOCOM\Units\ZOCOMMissileSoldierVeteranSquad.xml" type="all"/>
 		<Include source="ZOCOM\Units\ZOCOMRifleSoldierVeteranSquad.xml" type="all"/>
-		<Include source="ZOCOM\Units\ZOCOMZoneInf.xml" type="all"/>
+		<Include source="ZOCOM\Units\ZOCOMZoneInf.xml" type="all"/>  -->
+
 	</Includes>
 
 </AssetDeclaration>

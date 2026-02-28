@@ -1831,6 +1831,17 @@ end
 
 -- ###################################################################
 
+-- EMP EXPLOIT FIX --
+
+function OnUnpackingDisableCommands(self)
+	ObjectForbidPlayerCommands( self, true )
+end
+
+function OnUnpackingDisableCommandsEnd(self)
+	ObjectForbidPlayerCommands( self, false )
+end
+
+
 function OnGDIWatchTowerCreated(self)
 	ObjectHideSubObjectPermanently( self, "MuzzleFlash_01", true )
 	ObjectHideSubObjectPermanently( self, "MuzzleFlash_02", true )

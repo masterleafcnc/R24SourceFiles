@@ -59,6 +59,14 @@
 			<Conditions>+REALLYDAMAGED</Conditions>
 		</ModelConditionEvent>
 
+		<ModelConditionEvent Name="OnUnpacking">
+			<Conditions>+UNPACKING</Conditions>
+		</ModelConditionEvent>
+
+		<ModelConditionEvent Name="OnUnpackingEnd">
+			<Conditions>-UNPACKING</Conditions>
+		</ModelConditionEvent>
+
 		<ObjectStatusEvent Name="OnReverse">
 			<Conditions>+NEXT_MOVE_IS_REVERSE</Conditions>
 		</ObjectStatusEvent>	
@@ -963,6 +971,11 @@
   		<EventHandler EventName="OnCreated" ScriptFunctionName="OnReaperTripodCreated" DebugSingleStep="false"/>
 		<!-- <EventHandler EventName="OnUser9End"	ScriptFunctionName="delete" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser3"	ScriptFunctionName="OnHuskHide" DebugSingleStep="false"/>  -->
+   	 </EventList>
+
+	 <EventList Name="ElectroMagneticPulseControlCenter_Functions" Inherit="BuildingPowerFunctions">
+  		<EventHandler EventName="OnUnpacking" ScriptFunctionName="OnUnpackingDisableCommands" DebugSingleStep="false"/>
+		<EventHandler EventName="OnUnpackingEnd" ScriptFunctionName="OnUnpackingDisableCommandsEnd" DebugSingleStep="false"/>
    	 </EventList>
 
 	 <!-- r24 reverse move units -->
