@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
     <GameObject
         id="NODRaiderTank"
         SelectPortrait="Portrait_NODScorpionTank"

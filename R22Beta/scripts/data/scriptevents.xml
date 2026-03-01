@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <SageLuaScriptSection xmlns="http://tempuri.org/ScriptEvents.xsd">
     <Events>
 		<!-- All internal events have a first parameter of self, which is the object receiving the event.  They may have additial parameters, depending

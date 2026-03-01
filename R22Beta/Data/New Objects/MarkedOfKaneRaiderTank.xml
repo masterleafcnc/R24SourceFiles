@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration>
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
     <Tags></Tags>
     <Includes>
         <!-- Base Object -->
@@ -27,11 +27,10 @@
         WeaponCategory="CANNON"
         VoicePriority="188"
         TypeDescription="Type:NODScorpionTank"
-        WorldMapArmoryUpgradesAllowed="Upgrade_NODDozerBlades Upgrade_NODTechCenterLaserCapacitor"
+        WorldMapArmoryUpgradesAllowed="Upgrade_NODDozerBlades"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
-        <DisplayName>
-			Name:NODScorpionTank</DisplayName>
+        <DisplayName>Name:NODScorpionTank</DisplayName>
         <ArmorSet
             Armor="NODRaiderTankArmor"
             DamageFX="VehicleDamageFX" />
@@ -723,5 +722,3 @@
             CrushableLevel="2" />
     </GameObject>
 </AssetDeclaration>
-
-

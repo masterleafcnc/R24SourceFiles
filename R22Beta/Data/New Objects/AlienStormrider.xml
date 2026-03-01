@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
     <Tags></Tags>
     <Includes>
         <Include
@@ -70,8 +70,7 @@
         TypeDescription="Type:AlienStormrider"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
-        <DisplayName>
-			NAME:ALIENStormrider</DisplayName>
+        <DisplayName>NAME:ALIENStormrider</DisplayName>
         <ArmorSet
             Armor="AlienStormriderArmor"
             DamageFX="VehicleDamageFX" />

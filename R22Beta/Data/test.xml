@@ -129,7 +129,9 @@
 
 		<!-- new objects -->
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
-		<Include type="all" source="New Objects/AlienControlCenter.xml" />
+		<!-- <Include type="all" source="New Objects/AlienControlCenter.xml" /> 
+		<Include type="all" source="New Objects/Traveler59ControlCenter.xml" />
+		<Include type="all" source="New Objects/Reaper17ControlCenter.xml" /> ALREADY IN MOD -->
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
 		<Include type="all" source="New Objects/GDISonicTank.xml" />
@@ -137,11 +139,9 @@
 		<Include type="all" source="New Objects/MarkedOfKaneRaiderTank.xml" />
 		<Include type="all" source="New Objects/NODRaiderTank.xml" />
 		<Include type="all" source="New Objects/Reaper17BuzzerHive.xml" />
-		<Include type="all" source="New Objects/Reaper17ControlCenter.xml" />
 		<Include type="all" source="New Objects/Reaper17Stormrider.xml" />
 		<Include type="all" source="New Objects/SteelTalonsWatchTower.xml" />
 		<Include type="all" source="New Objects/Traveler59BuzzerHive.xml" />
-		<Include type="all" source="New Objects/Traveler59ControlCenter.xml" />
 		<Include type="all" source="New Objects/Traveler59Stormrider.xml" />
 		<Include type="all" source="New Objects/ZOCOMSonicTank.xml" />
 		<Include type="all" source="New Objects/ZOCOMWatchTower.xml" />
