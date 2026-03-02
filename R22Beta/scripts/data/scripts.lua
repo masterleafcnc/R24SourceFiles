@@ -447,12 +447,14 @@ function OnHarvesterDeath(self)
 		ObjectCreateAndFireTempWeapon(self, "DeployGreenTiberium")
 	end
 	harvesterData[a] = nil
+	GroupUnitOnDeath(self)
 end
 
 function OnHarvesterDeathScrin(self)
 	local a = getObjectId(self)
 	-- new for tib exploit fix
 	harvesterData[a] = nil
+	GroupUnitOnDeath(self)
 end
 
 function OnCyborgSquadCreated_R21g(self)

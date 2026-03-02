@@ -1106,7 +1106,6 @@
 		<EventHandler EventName="OffMoney2"	ScriptFunctionName="OffMoney2" DebugSingleStep="false"/>
 		<EventHandler EventName="OffMoney3"	ScriptFunctionName="OffMoney3" DebugSingleStep="false"/>
 		<EventHandler EventName="OffMoney4"	ScriptFunctionName="OffMoney4" DebugSingleStep="false"/>
-		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="OnHarvesterDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnHarvestingMoney3"	ScriptFunctionName="UpdateMoney3Frames" DebugSingleStep="false"/>
 		<EventHandler EventName="OnHarvestingMoney3End"	ScriptFunctionName="UpdateMoney3FramesEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnHarvesting"	ScriptFunctionName="OnTiberiumHarvested" DebugSingleStep="false"/>
@@ -1119,7 +1118,7 @@
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpLeftEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
-		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
+		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="OnHarvesterDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser72End"	ScriptFunctionName="BuggedUnitTimeoutEnd" DebugSingleStep="false"/>
@@ -1349,7 +1348,6 @@
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpLeftEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
-		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser72End"	ScriptFunctionName="BuggedUnitTimeoutEnd" DebugSingleStep="false"/>
@@ -1557,6 +1555,20 @@
 	</EventList>
 
 	<!-- Non-reverse unit Lua event lists (R24) -->
+
+	<EventList Name="AlienHarvesterFunctions_R24" Inherit="BaseScriptFunctions">	
+		<EventHandler EventName="OnHarvestingMoney3"	ScriptFunctionName="UpdateMoney3Frames" DebugSingleStep="false"/>
+		<EventHandler EventName="OnHarvestingMoney3End"	ScriptFunctionName="UpdateMoney3FramesEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnHarvesting"	ScriptFunctionName="OnTiberiumHarvested" DebugSingleStep="false"/>
+		<EventHandler EventName="OnHarvestingEnd"	ScriptFunctionName="OffTiberiumHarvested" DebugSingleStep="false"/>
+		<EventHandler EventName="OnMoney1"	ScriptFunctionName="OnMoneyScrin" DebugSingleStep="false"/>
+		<EventHandler EventName="OnMoney2"	ScriptFunctionName="OnMoneyScrin" DebugSingleStep="false"/>
+		<EventHandler EventName="OnMoney3"	ScriptFunctionName="OnMoneyScrin" DebugSingleStep="false"/>
+		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="OnHarvesterDeathScrin" DebugSingleStep="false"/>	
+		<EventHandler EventName="OnSelected" ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="OnSelectedEnd" ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
+	</EventList>
+
 	<EventList Name="AlienBuzzers_SlavedFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected" ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
@@ -1577,6 +1589,12 @@
 
 	<EventList Name="AlienDevastatorFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnCreated" ScriptFunctionName="OnAlienDevastatorCreated" DebugSingleStep="false"/>
+		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
+		<EventHandler EventName="OnSelected" ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="OnSelectedEnd" ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
+	</EventList>
+
+	<EventList Name="Traveler59DevastatorFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected" ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd" ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>

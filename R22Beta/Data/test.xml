@@ -145,6 +145,7 @@
 		<Include type="all" source="New Objects/Traveler59Stormrider.xml" />
 		<Include type="all" source="New Objects/ZOCOMSonicTank.xml" />
 		<Include type="all" source="New Objects/ZOCOMWatchTower.xml" />
+		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" />
 		<!-- Reverse move speed buff updated units 
 		<Include source="Alien\Units\AlienDevourerTank.xml" type="all"/>
 		<Include source="BlackHand\Units\BHEmissary.xml" type="all"/>

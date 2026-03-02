@@ -918,7 +918,7 @@
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
-				AILuaEventsList="AlienHarvesterFunctions_R21b"
+				AILuaEventsList="AlienHarvesterFunctions_R24"
 				BurningDeathTime="0s"
 				TimeToEjectPassengersOnRampage="0"
 				ComboLocomotorSet="NORMAL"
