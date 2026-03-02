@@ -889,7 +889,6 @@
     
     <EventList Name="BaseScriptFunctions">
 		<!-- If there are any events that need to apply to all units, put them here. jba -->
-		<!-- R24 reverse bug events (for vehicles that can reverse move)-->
     </EventList>
 	
 	<EventList Name="BlueTiberiumFunctions_R23" Inherit="BaseScriptFunctions">
