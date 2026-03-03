@@ -1123,21 +1123,17 @@ function UnitNoLongerMoving(self)
 end
 
 function UnitIsAttacking(self)
-	--if ObjectTestModelCondition(self, "BACKING_UP") then
-		local _,unitReversing = GetUnitReversingData(self)
-		if unitReversing == nil then return end
-		unitReversing.isAttacking = true
-	--end
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+	unitReversing.isAttacking = true
 end
 
 function UnitIsNotAttacking(self)
-	--if ObjectTestModelCondition(self, "BACKING_UP") then
-		local _,unitReversing = GetUnitReversingData(self)
-		if unitReversing == nil then return end
-		if not EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
-			ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 1)   
-		end
-	--end
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+	if not EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 1)   
+	end
 end
 
 -- Triggered by +BACKING_UP -TURN_LEFT_HIGH_SPEED and +BACKING_UP -TURN_RIGHT_HIGH_SPEED
@@ -1265,16 +1261,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 		end
 	end
 
-	-- Check if any unit hasnt attempted to move yet and move it if so.
-	--if checksDone >= ceil(selectedCount * CHECKS_DONE_THRESHOLD) then
-	--	for id, unitRef in selectedUnitList do 
-	--		if not unitsReversing[unitRef].isReverseMoving and not unitsReversing[unitRef].hasBeenFixed then
-	--			tinsert(unitsToFix, getObjectId(unitsReversing[unitRef].selfReference))
-	--			print("unit inserted")
-	--		end
-	--	end
-	--end
-
 	-- WriteToFile("checksDoneInt.txt",  tostring(checksDone) .. " num of units bugging: " .. tostring(getn(unitsToFix)) "\n")
 	-- Now check threshold after unitsToFix has been updated
 	local fixUnits = false
@@ -1317,7 +1303,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					group.fixCancelledByType = group.fixCancelledByType or {}
 					group.fixCancelledByType[objName] = true
 					fixUnits = false
-					ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+					--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 				end
 			end
 
@@ -1329,7 +1315,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 			if thirdTurnUnitCount < ceil(selectedCount*unitBugData.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*unitBugData.notMovingBackupRatio)) then
 				fixUnits = false
 				--group.fixCancelled = true
-				ExecuteAction("NAMED_FLASH", self, 2)
+				--ExecuteAction("NAMED_FLASH", self, 2)
 			end
 			
 		end		
@@ -1486,13 +1472,15 @@ function BackingUp(self)
 	end 
 
 	if unitReversing.hasCameToAStop then
-		 unitReversing.hasCameToAStop = false
-		 return
-	else
-		unitReversing.isMovingFlag = true
+		unitReversing.hasCameToAStop = false
+		-- Only skip if the unit still belongs to an active group (mid-group re-trigger).
+		-- If groupId is nil, the previous group ended and this is a new reverse move.
+		if unitReversing.groupId ~= nil then
+			return
+		end
 	end
-
 	-- Reset the flags here to ensure we don't carry over bugs from previous moves
+	unitReversing.isMovingFlag = true
 	unitReversing.hasAlreadyReversed = false
 	unitReversing.hasBeenFixed = false
 	unitReversing.unitAnchor = nil
@@ -1700,13 +1688,12 @@ function GroupUnitOnDeath(self)
     end
 end
 
--- Triggered by -BACKING_UP -MOVING
 -- checks if the group still exists if most units are still moving, and if this one has stopped then call FixBuggingUnit to fix it
-function SuddenStopAfterBackingUp(self)
+function SuddenStopCheck(self)
 	local a = getObjectId(self)
 	if unitsReversing[a] == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
-	if unitReversing.hasBeenFixed or not unitReversing.isMovingFlag or not unitReversing.lastMoveWasReverse then return end
+	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or not unitReversing.isMovingFlag or not unitReversing.lastMoveWasReverse then return end
 	unitReversing.lastMoveWasReverse = false
 	if unitReversing.groupId == nil then return end
 	--unitReversing.isReverseMoving = false
@@ -1744,6 +1731,8 @@ function SuddenStopAfterBackingUp(self)
 			FixBuggingUnit(self)
 		end
 	end
+	unitReversing.groupId = nil
+	unitReversing.groupIdAssigned = false
 end
 
 -- gets the current selection count of units that are within a group of units
@@ -1831,8 +1820,8 @@ function BackingUpEnd(self)
 			setglobal(groupId, nil)
 		end
 	end
-	--unitReversing.groupId = nil
-	--unitReversing.groupIdAssigned = false
+	-- necessary if units stop 
+	SuddenStopCheck(self)
 end
 
 -- USER_72 has ended, remove NO_COLLISIONS and speed buff if this unit has it.

@@ -1003,7 +1003,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 		<EventHandler EventName="OnCommandeered"	ScriptFunctionName="OnCommandeerStealthTank" DebugSingleStep="false"/>
 		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="OnCommandeeredDestroyed" DebugSingleStep="false"/>
 	</EventList>
@@ -1026,7 +1025,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 		<EventHandler EventName="OnCreated"	ScriptFunctionName="OnNODScorpionBuggyCreated" DebugSingleStep="false"/>
 	</EventList>
 	<EventList Name="Reaper17DevourerFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1048,7 +1046,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser2End"	ScriptFunctionName="OnTibChargeNoAttack_103" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser3End"	ScriptFunctionName="OnTibChargeNoAttackEnd_103" DebugSingleStep="false"/>
 	</EventList>
@@ -1071,7 +1068,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="NodFlameTankFunctions_R24" Inherit="GenericRagedFunctions_103">
@@ -1094,7 +1090,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="NodHarvesterFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1127,7 +1122,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="BeamCannonFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1148,7 +1142,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="NodBunkerTruckFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1170,7 +1163,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GunWalkerFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1191,7 +1183,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GDIPitbullFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1213,7 +1204,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GDIPredatorFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1235,7 +1225,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GenericRagedFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1258,7 +1247,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="ShardWalkerFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1279,7 +1267,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GDIAAScoutFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1301,7 +1288,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GDIAPCFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1323,7 +1309,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GDIHarvesterFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1356,7 +1341,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="SteelTalonsMammothFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1378,7 +1362,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 		<EventHandler EventName="OnCreated"	ScriptFunctionName="OnSteelTalonsMammothCreated_103" DebugSingleStep="false"/>
 	</EventList>
 
@@ -1401,7 +1384,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="MCVFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1422,7 +1404,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="RigFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1443,7 +1424,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="SurveyorFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1464,7 +1444,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="NODRaiderTankFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1486,7 +1465,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="AlienSeekerTankFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1508,7 +1486,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GDIMammothFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1530,7 +1507,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="CorrupterFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1551,7 +1527,6 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpMovingEnd"	ScriptFunctionName="SuddenStopAfterBackingUp" DebugSingleStep="false"/>
 	</EventList>
 
 	<!-- Non-reverse unit Lua event lists (R24) -->
