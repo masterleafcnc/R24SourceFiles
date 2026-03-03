@@ -1414,7 +1414,7 @@ function FixBuggingUnit(self)
 				-- assign the new closeestUnit to a unit not flagged as being bugged
 				unitsReversing[unitRef].unitAnchor = nonBuggingUnit
 				-- move this unit to the previously assigned non bugging unit
-				if unitsReversing[unitRef].hasBeenFixed then
+				if unitsReversing[unitRef].hasBeenFixed and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") then
 					--print("assigning to different unit")
 					ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[unitRef].stringReference, unitsReversing[unitRef].unitAnchor)
 				end
@@ -1727,7 +1727,7 @@ function SuddenStopCheck(self)
 		end
 
 		if fixUnit then
-			--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+			ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 			FixBuggingUnit(self)
 		end
 	end
@@ -1792,9 +1792,12 @@ function BackingUpEnd(self)
 			break
 		end
 	end
+
+	local groupId  = unitReversing.groupId
+	-- necessary if units stop 
+	SuddenStopCheck(self)
 	
 	if clearList and group ~= nil then
-		local groupId  = unitReversing.groupId
 		group.unitsToFix = {}
 		group.checksDone = 0
 		group.fixCancelled = false
@@ -1820,8 +1823,6 @@ function BackingUpEnd(self)
 			setglobal(groupId, nil)
 		end
 	end
-	-- necessary if units stop 
-	SuddenStopCheck(self)
 end
 
 -- USER_72 has ended, remove NO_COLLISIONS and speed buff if this unit has it.
