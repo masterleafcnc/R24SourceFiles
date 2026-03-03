@@ -6,7 +6,6 @@
 		<Include source="Nod/Units/NodMilitantRocketSquad.xml" type="all"/>
 
 		<Include source="ZOCOM/Structures/ZOCOMBattlebase.xml" type="all"/>
-		<Include source="GlobalData/Locomotor.xml" type="all"/>
 		<Include source="GDI/Units/GDIMammoth.xml" type="all"/>
 		<Include source="ZOCOM/Units/ZOCOMMammoth.xml" type="all"/>
 		<Include source="SteelTalons/Units/STMammoth.xml" type="all"/>
@@ -128,6 +127,8 @@
 		<Include source="GlobalData/AttributeModifier.xml" type="all" /> -->
 
 		<!-- new objects -->
+		<Include source="CGF\R17Shardwalker.xml" type="all"/>
+		<Include source="GlobalData/Locomotor.xml" type="all"/>
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<!-- <Include type="all" source="New Objects/AlienControlCenter.xml" /> 
 		<Include type="all" source="New Objects/Traveler59ControlCenter.xml" />
@@ -159,7 +160,6 @@
 		<Include source="CGF\GDIPitbull.xml" type="all"/>
 		<Include source="CGF\GDIPred.xml" type="all"/>
 		<Include source="CGF\NodFlametank.xml" type="all"/>
-		<Include source="CGF\R17Shardwalker.xml" type="all"/>
 		<Include source="CGF\Slingshots.xml" type="all"/>
 		<Include source="CGF\STPitbull.xml" type="all"/>
 		<Include source="CGF\T59Gunwalker.xml" type="all"/>
