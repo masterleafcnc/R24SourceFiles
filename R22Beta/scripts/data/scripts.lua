@@ -1414,7 +1414,7 @@ function FixBuggingUnit(self)
 				-- assign the new closeestUnit to a unit not flagged as being bugged
 				unitsReversing[unitRef].unitAnchor = nonBuggingUnit
 				-- move this unit to the previously assigned non bugging unit
-				if unitsReversing[unitRef].hasBeenFixed and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") then
+				if unitsReversing[unitRef].hasBeenFixed and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") then
 					--print("assigning to different unit")
 					ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[unitRef].stringReference, unitsReversing[unitRef].unitAnchor)
 				end
@@ -1819,8 +1819,8 @@ function BackingUpEnd(self)
 		--WriteToFile("cleared list.txt", tostring(unitReversing.groupId) .. " " ..  tostring(unitReversing.groupIdAssigned) .. "\n")
 		-- free the global snapshot since all units have been cleared
 		if groupId  ~= nil then
-			--print("clearing global")
 			setglobal(groupId, nil)
+			--print("clearing global")
 		end
 	end
 end
