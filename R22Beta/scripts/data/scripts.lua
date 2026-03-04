@@ -128,9 +128,9 @@ unitBugDataTable = {
 	["B187F87A"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.30 }, -- Reaper-17 Corruptor
 	["91B5B69D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.30 }, -- Traveler-59 Corruptor
 
-	["1A54C1B"]  = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.30 }, -- Scrin Gunwalker
-	["7FCCFDE3"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.30 }, -- Reaper-17 Shard Walker
-	["51430053"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.30 }, -- Traveler-59 Gunwalker
+	["1A54C1B"]  = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -4, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.30 }, -- Scrin Gunwalker
+	["7FCCFDE3"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -4, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.30 }, -- Reaper-17 Shard Walker
+	["51430053"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -4, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.30 }, -- Traveler-59 Gunwalker
 
 	-- GDI UNITS --
 	["D01CFD88"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.30 }, -- GDI APC
