@@ -117,14 +117,13 @@
 		<Include source="Nod\Units\NODHarvester.xml" type="all"/>	 -->
 
 		<!-- post r23z changes
-		<Include source="ReverseDummy.xml" type="all"/>	 
+		<Include source="ReverseDummy.xml" type="all"/>	  -->
 
 		<Include source="Reaper17\Units\Reaper17Mothership.xml" type="all" />
 		<Include source="traveler59\Units\Traveler59Mothership.xml" type="all" />
 		<Include source="Alien/Units/AlienMothership.xml" type="all" />
 		<Include source="GlobalData/upgrade.xml" type="all" />
-		<Include source="LocomotorR24.xml" type="all" />
-		<Include source="GlobalData/AttributeModifier.xml" type="all" /> -->
+		<Include source="GlobalData/AttributeModifier.xml" type="all" />
 
 		<!-- new objects -->
 		<Include source="CGF\R17Shardwalker.xml" type="all"/>

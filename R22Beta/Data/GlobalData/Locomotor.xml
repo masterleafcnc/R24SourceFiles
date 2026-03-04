@@ -734,12 +734,15 @@
 		SlowTurnRadius="0.0" 
 		FastTurnRadius="5.0" 
 		BehaviorZ="NO_MOTIVE_FORCE"	
-		Appearance="TREADS" 
+		Appearance="FOUR_WHEELS" 
 		UseTerrainSmoothing="true"
 		ForwardAccelerationPitchFactor="0.0"
 		LateralAccelerationRollFactor="0.0"
 		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
+
+		MinTurnSpeed="0%"
+		TurnPivotOffset="-0.1"
 		/>		
 		
 	<LocomotorTemplate
