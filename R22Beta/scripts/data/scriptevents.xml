@@ -1316,6 +1316,25 @@
 		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
 	</EventList>
 
+	<EventList Name="SteelTalonsAPCFunctions_R24" Inherit="BaseScriptFunctions">
+		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpLeftEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
+		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="OnUser72End"	ScriptFunctionName="BuggedUnitTimeoutEnd" DebugSingleStep="false"/>
+		<EventHandler EventName="OnMoving"	ScriptFunctionName="UnitIsMoving" DebugSingleStep="false"/>
+		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
+		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
+		<EventHandler EventName="OnAttackingEnd"	ScriptFunctionName="UnitIsNotAttacking" DebugSingleStep="false"/>
+	</EventList>
+
 	<EventList Name="GDIHarvesterFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnMoney1"	ScriptFunctionName="OnMoney1" DebugSingleStep="false"/>
 		<EventHandler EventName="OnMoney2"	ScriptFunctionName="OnMoney2" DebugSingleStep="false"/>
