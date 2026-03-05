@@ -171,6 +171,42 @@
                         FXParticleSystemTemplate="AlienFlyingDamageFireGlow02"
                         FollowBone="true" />
                 </ModelConditionState>
+
+                <ModelConditionState
+                    ParseCondStateType="PARSE_NORMAL"
+                    ConditionsYes="DAMAGED USER_6">
+                    <Model
+                        Name="W3DContainer:AUSRIDER_SKN" />
+                     <Texture
+                        Original="AUSRider"
+                        New="AUSRider_K" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFire01"
+                        FollowBone="true" />
+                </ModelConditionState>
+                <ModelConditionState
+                    ParseCondStateType="PARSE_NORMAL"
+                    ConditionsYes="REALLYDAMAGED USER_6">
+                    <Model
+                        Name="W3DContainer:AUSRIDER_SKN" />
+                      <Texture
+                        Original="AUSRider"
+                        New="AUSRiderD_K" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFire01"
+                        FollowBone="true" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFireGlow01"
+                        FollowBone="true" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFireGlow02"
+                        FollowBone="true" />
+                </ModelConditionState>
+
                 <ModelConditionState
                     ParseCondStateType="PARSE_NORMAL"
                     ConditionsYes="DAMAGED">
