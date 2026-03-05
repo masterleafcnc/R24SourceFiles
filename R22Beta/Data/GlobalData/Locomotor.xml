@@ -411,7 +411,7 @@
 		ForwardAccelerationPitchFactor="0.5"
 		LateralAccelerationRollFactor="0.0"
 		WheelTurnAngle="18d"
-		ClampOrientationToPathTangent="true"
+		ClampOrientationToPathTangent="false"
 		/>
 
 	<LocomotorTemplate
@@ -616,7 +616,7 @@
 		LateralAccelerationRollFactor="0.75"
 		HasSuspension="true"
 
-		ClampOrientationToPathTangent="true"
+		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
 
 		MaximumWheelExtension="-2.3"

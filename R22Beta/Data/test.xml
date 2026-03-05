@@ -149,6 +149,7 @@
 		<Include source="New Objects\Reaper17Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59Corrupter.xml" type="all"/>
 		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" />
+		<Include source="Nod\Units\NodBunkerTruck.xml" type="all"/>
 		<!-- Reverse move speed buff updated units 
 		<Include source="Alien\Units\AlienDevourerTank.xml" type="all"/>
 		<Include source="BlackHand\Units\BHEmissary.xml" type="all"/>
@@ -188,7 +189,6 @@
 		<Include source="New Objects\NODRaiderTank.xml" type="all"/>
 		<Include source="New Objects\ZOCOMSonicTank.xml" type="all"/>
 		<Include source="Nod\Units\nodbeamcannon.xml" type="all"/>
-		<Include source="Nod\Units\NodBunkerTruck.xml" type="all"/>
 		<Include source="Nod\Units\NODEmissary.xml" type="all"/>
 		<Include source="Nod\Units\NODHarvester.xml" type="all"/>
 		<Include source="Nod\Units\NODScorpionBuggy.xml" type="all"/>
