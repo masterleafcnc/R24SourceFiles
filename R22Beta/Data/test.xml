@@ -9,24 +9,23 @@
 		<Include source="GDI/Units/GDIMammoth.xml" type="all"/>
 		<Include source="ZOCOM/Units/ZOCOMMammoth.xml" type="all"/>
 		<Include source="SteelTalons/Units/STMammoth.xml" type="all"/>
-		<Include source="BlackHand/Units/blackhandmobileartillery.xml" type="all"/>
+		
 		<Include source="GDI/Units/GDIJuggernaught.xml" type="all"/>
 		<Include source="MarkedOfKane/Structures/MarkedOfKaneDisruptionTower.xml" type="all"/>
 		<Include source="Nod/Structures/NODDisruptionTower.xml" type="all"/>
-		<Include source="Nod/Units/nodmobileartillery.xml" type="all"/>
+		
 		<Include source="Nod/props/NODVertigoDisruptionStickyPod.xml" type="all"/>
 		<Include source="Nod/props/nodvertigodisruptionpod.xml" type="all"/>
 		<Include source="SteelTalons/Units/STBehemoth.xml" type="all"/>
 		<Include source="GlobalData/LogicCommandSet.xml" type="all"/>
 
-		<Include source="MarkedOfKane/Units/markedofkanemobileartillery.xml" type="all"/>
+		
 		<Include source="Nod/Units/nodmobileartillery.xml" type="all"/>
 		<Include source="MarkedOfKane/Units/markedofkanebeamcannon.xml" type="all"/>
 		<Include source="Nod/Units/nodbeamcannon.xml" type="all"/>
 		<Include source="GlobalData/SpecialPowerTemplates.xml" type="all"/>		 -->
 
 		<!--
-		<Include source="GlobalData/Locomotor.xml" type="all"/>
 		<Include source="BlackHand\Units\BHRedeemer.xml" type="all"/>
 		<Include source="MarkedOfKane\Units\MoKRedeemer.xml" type="all"/>
 		<Include source="Nod\Units\NodRedeemer.xml" type="all"/>
@@ -124,8 +123,10 @@
 		<!-- post r23z changes
 		<Include source="ReverseDummy.xml" type="all"/>	  -->
 
-
-
+		<Include source="BlackHand/Units/blackhandmobileartillery.xml" type="all"/>
+		<Include source="Nod/Units/nodmobileartillery.xml" type="all"/>
+		<Include source="MarkedOfKane/Units/markedofkanemobileartillery.xml" type="all"/>
+		<Include source="GlobalData/Locomotor.xml" type="all"/>
 		<!-- new objects -->
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />

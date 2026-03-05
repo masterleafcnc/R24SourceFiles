@@ -795,6 +795,36 @@
 		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
 		/>		
+
+	<LocomotorTemplate
+		id="NODMobileArtilleryLocomotor"
+		Name="NODMobileArtilleryLocomotor"
+		Surfaces="GROUND CRUSHABLE_OBSTACLE"
+		TurnTimeSeconds="2.0s"
+		TurnTimeDamagedSeconds="4.0s"
+		MaxSpeedDamaged="75%"
+		AccelerationSeconds="0.8s"
+		BrakingSeconds="0.8s"
+		SlowTurnRadius="0.0"
+		FastTurnRadius="20.0"
+		BehaviorZ="NO_MOTIVE_FORCE"
+		Appearance="TREADS"
+		UseTerrainSmoothing="true"
+
+		AccelPitchLimit="5d"
+		BounceKick="1d"
+		PitchStiffness="0.15"
+		RollStiffness="0.25"
+		PitchDamping="0.5"
+		RollDamping="0.5"
+		ForwardAccelerationPitchFactor="0.1"
+		LateralAccelerationRollFactor="0.0"
+
+		HasSuspension="true"
+		CanMoveBackward="false"
+		ClampOrientationToPathTangent="false"
+		ReorientIfTurnTooSharp="true"
+		/>
 		
 	<LocomotorTemplate
 		id="GDIPredatorTankLocomotor"
