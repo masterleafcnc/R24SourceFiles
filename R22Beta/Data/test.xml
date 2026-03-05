@@ -121,12 +121,13 @@
 		<Include source="Nod\Units\NODHarvester.xml" type="all"/>	 -->
 
 		<!-- post r23z changes
-		<Include source="ReverseDummy.xml" type="all"/>	  -->
-
+		<Include source="ReverseDummy.xml" type="all"/>	 
+		<Include source="SteelTalons\Units\STMRT.xml" type="all"/>
 		<Include source="BlackHand/Units/blackhandmobileartillery.xml" type="all"/>
 		<Include source="Nod/Units/nodmobileartillery.xml" type="all"/>
 		<Include source="MarkedOfKane/Units/markedofkanemobileartillery.xml" type="all"/>
-		<Include source="GlobalData/Locomotor.xml" type="all"/>
+		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
+
 		<!-- new objects -->
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
@@ -145,7 +146,9 @@
 		<Include source="New Objects\AlienCorrupter.xml" type="all"/>
 		<Include source="New Objects\Reaper17Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59Corrupter.xml" type="all"/>
+		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/>
 		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" />
+		
 		<!-- Reverse move speed buff updated units 
 		<Include source="Alien\Units\AlienDevourerTank.xml" type="all"/>
 		<Include source="BlackHand\Units\BHEmissary.xml" type="all"/>
@@ -203,8 +206,7 @@
 		<Include source="ZOCOM\Units\ZOCOMMARV.xml" type="all"/>
 		<Include source="ZOCOM\Units\ZOCOMMCV.xml" type="all"/>
 		<Include source="ZOCOM\Units\ZOCOMRig.xml" type="all"/>
-		<Include source="ZOCOM\Units\ZOCOMSurveyor.xml" type="all"/>
-		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/> -->
+		<Include source="ZOCOM\Units\ZOCOMSurveyor.xml" type="all"/> -->
 
 		<!-- Edited squad files (R24 AILuaEventsList)
 		<Include source="Alien\Units\AlienStalkerSquad.xml" type="all"/>
