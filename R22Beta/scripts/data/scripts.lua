@@ -5927,7 +5927,7 @@ end
 
 function getObjectName(x)
 	-- Object name
-	print(tostring(ObjectDescription(x)))
+	-- print(tostring(ObjectDescription(x)))
 	if strfind(ObjectDescription(x),"%[%{%d+,%d+") ~= nil then
 		return strsub(ObjectDescription(x),strfind(ObjectDescription(x),'%[')+6,strfind(ObjectDescription(x),', ')-1)
 	else 
