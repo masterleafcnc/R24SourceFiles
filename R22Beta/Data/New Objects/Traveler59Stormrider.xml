@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
-    <Tags></Tags>
-    <Includes>
-        <!-- Base Object -->
-        <Include
-            type="instance"
-            source="DATA:Alien/Units/AlienStormrider.xml" />
-    </Includes>
     <GameObject
         id="Traveler59Stormrider"
         Side="Traveler59"
@@ -39,6 +32,10 @@
             Locomotor="AlienStormriderLocomotor"
             Condition="NORMAL"
             Speed="175.0" />
+        <LocomotorSet
+            Locomotor="BasicHelicopterTaxiLocomotor"
+            Condition="TAXIING"
+            Speed="30" />
         <SkirmishAIInformation
             UnitBuilderStandardCombatUnit="true" />
         <Draws>
