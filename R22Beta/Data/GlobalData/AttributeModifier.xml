@@ -24,7 +24,7 @@
 		id="Modifier_ReverseMoveSpeedBuff"
 		Category="NONE"
 		Duration="1.5s">
-		<Modifier Type="SPEED" Value="120%" />
+		<Modifier Type="SPEED" Value="115%" />
 	</AttributeModifier>
 
 	<!-- to ensure traveler 59 do not get faster infantry with the base infantry speed buff --> 

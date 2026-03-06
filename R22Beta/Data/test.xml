@@ -116,7 +116,6 @@
 		<Include source="traveler59\Units\Traveler59Mothership.xml" type="all" />
 		<Include source="Alien/Units/AlienMothership.xml" type="all" />
 		<Include source="GlobalData/upgrade.xml" type="all" />
-		<Include source="GlobalData/AttributeModifier.xml" type="all" />
 		<Include source="GDI\Units\GDIHarvester.xml" type="all"/>
 		<Include source="Nod\Units\NODHarvester.xml" type="all"/>	 -->
 
@@ -129,6 +128,8 @@
 		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
 
 		<!-- new objects -->
+		<Include source="Alien/Units/alienseekertank.xml" type="all"/> 	
+		<Include source="GlobalData/AttributeModifier.xml" type="all" />
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
