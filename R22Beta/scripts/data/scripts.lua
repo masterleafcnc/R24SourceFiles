@@ -1258,6 +1258,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- WriteToFile("upperLimit.txt",  tostring(upperLimit) .. "\n")
 
 	-- lowerLimit causes false positives when units are ordered to move at more than screen distance
+	if frameDiff > bugDuration + upperLimit then frameDiff = bugDuration + upperLimit end
 	local inBugRange = frameDiff >= bugDuration - lowerLimit and frameDiff <= bugDuration + upperLimit
 	-- if the average first turn frameDiff for this unit type equals bugDuration, override inBugRange
 	local objName = getObjectName(self)
@@ -1362,6 +1363,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 				--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 				-- 4
 				if avgFirstTurnCount >= bugDuration*0.36 then
+					--print("exceeded")
 					for i = getn(unitsToFix), 1, -1 do
 						local unit = unitsReversing[unitsToFix[i]]
 						if unit == nil or unit.bugFrameDiff ~= bugDuration then
