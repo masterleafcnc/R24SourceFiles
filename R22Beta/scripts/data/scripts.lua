@@ -63,12 +63,11 @@ unitsReversing = {}
 TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
-CHECKS_DONE_THRESHOLD = 0.80 -- ratio of units that must finish checking before fix decision
-BUG_THRESHOLD_LARGE_GROUP = 0.25 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
-BUG_THRESHOLD_SMALL_GROUP = 0.35 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
+CHECKS_DONE_THRESHOLD = 0.9 -- ratio of units that must finish checking before fix decision
+BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
+BUG_THRESHOLD_SMALL_GROUP = 0.45 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
 UNITS_STILL_MOVING_THRESHOLD = 0.75 -- ratio of units still moving before clearing movement flag
-AVERAGE_TURN_COUNT_OFFSET = 1 -- offset subtracted from bugDuration when comparing avg turn count.
 
 unitBugDataTable = {
 	-- PARAMETER DOCUMENTATION:
@@ -1026,7 +1025,8 @@ function GetUnitReversingData(self)
 			groupIdAssigned = false,
 			fastTurnWas0Frames = false,
 			hasCameToAStop = false,
-			unitAnchor = nil -- can be an array from closest to farthest
+			unitAnchor = nil, -- can be an array from closest to farthest
+			bugFrameDiff = 0
 		}
 		return a, unitsReversing[a]
 	end
@@ -1164,15 +1164,27 @@ function BackingUpFastTurnEnd(self)
 	local timesToTrigger = TURN_TRIGGER_COUNT
 	local curFrame = GetFrame()
 	local frameDiff = curFrame - unitReversing.firstFrame
+	local group = getglobal(unitReversing.groupId)
+
+	-- track units that entered the turn process (first fast turn trigger)
+	if unitReversing.timesTriggeredFast == 0 and group ~= nil then
+		group.expectedChecks = (group.expectedChecks or 0) + 1
+	end
 
 	if unitReversing.timesTriggeredFast == 1 then
 		--WriteToFile("backingupfastend.txt",  "object went this long with 1 trigger: " .. tostring(frameDiff) .. "\n")
+		if group ~= nil then
+			local objName = getObjectName(self)
+			group.firstTurnFrameCountByType = group.firstTurnFrameCountByType or {}
+			group.firstTurnUnitCountByType = group.firstTurnUnitCountByType or {}
+			group.firstTurnFrameCountByType[objName] = (group.firstTurnFrameCountByType[objName] or 0) + frameDiff
+			group.firstTurnUnitCountByType[objName] = (group.firstTurnUnitCountByType[objName] or 0) + 1
+		end
 		CheckForObjReverseBugging(self, frameDiff)
 	end
 	
 	if unitReversing.timesTriggeredFast == 2 and unitReversing.groupId ~= nil then
-		--WriteToFile("backingupfastend2.txt",  "object went this long with 2 trigger: " .. tostring(frameDiff) .. "\n")
-		local group = getglobal(unitReversing.groupId)
+		--WriteToFile("backingupfastend2.txt",  "object went this long with 2 trigger: " .. tostring(frameDiff) .. "\n")	
 		if group ~= nil then
 			-- objName is the type of unit such as Scorpion Tank, Raider Buggy, Seeker Tank
 			local objName = getObjectName(self)
@@ -1224,6 +1236,9 @@ function CheckForObjReverseBugging(self, frameDiff)
 	group.fixCancelledByType = group.fixCancelledByType or {}
 	group.thirdTurnFrameCountByType = group.thirdTurnFrameCountByType or {}
 	group.thirdTurnUnitCountByType = group.thirdTurnUnitCountByType or {}
+	group.firstTurnFrameCountByType = group.firstTurnFrameCountByType or {}
+	group.firstTurnUnitCountByType = group.firstTurnUnitCountByType or {}
+	group.expectedChecks = group.expectedChecks or 0
 	group.unitsNotMovingBeforeBackingUp = group.unitsNotMovingBeforeBackingUp or 0
 	local selectedUnitList = group.reverseUnits
 	local selectedCount = group.reverseUnitCount
@@ -1242,7 +1257,12 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local upperLimit = unitBugData.bugCheckUpperLimit
 	-- WriteToFile("upperLimit.txt",  tostring(upperLimit) .. "\n")
 
+	-- lowerLimit causes false positives when units are ordered to move at more than screen distance
 	local inBugRange = frameDiff >= bugDuration - lowerLimit and frameDiff <= bugDuration + upperLimit
+	-- if the average first turn frameDiff for this unit type equals bugDuration, override inBugRange
+	local objName = getObjectName(self)
+	local firstTurnUnitCountForType = (group.firstTurnUnitCountByType and group.firstTurnUnitCountByType[objName]) or 0
+	local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or 0
 	local isBugging = false
 	if unitReversing.fastTurnWas0Frames then
 		-- if two fast turns yields framediff of 0, it can be assumed the number of frames in -TURN_LEFT or -TURN_RIGHT is 7 (for buggies)
@@ -1266,6 +1286,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	if isBugging and not unitReversing.hasBeenFixed then
 		-- unitReversing.hasBeenFixed = true
 		-- cache the units if they are to be fixed in this table
+		unitReversing.bugFrameDiff = frameDiff
 		--ExecuteAction("NAMED_FLASH", self, 2)
 		-- verify the unit doesnt already exist in the table to prevent duplicate entries
 		local alreadyExists = false
@@ -1283,7 +1304,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- WriteToFile("checksDoneInt.txt",  tostring(checksDone) .. " num of units bugging: " .. tostring(getn(unitsToFix)) "\n")
 	-- Now check threshold after unitsToFix has been updated
 	local fixUnits = false
-	local objName = getObjectName(self)
 	-- per-type counts for avg third turn cancellation
 	local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
 	local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType[objName]) or 0
@@ -1298,7 +1318,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- this prevents fixing a group of units that are doing a 180 degree turn.
 	local fixCancelledForType = group.fixCancelledByType and group.fixCancelledByType[objName]
 	if not group.fixCancelled and not fixCancelledForType then
-		if checksDone >= ceil(selectedCount * CHECKS_DONE_THRESHOLD) then
+		if checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
 			-- if number of units bugging is less than the count * BUG_THRESHOLD_SMALL_GROUP
 			-- if more than LARGE_GROUP_SIZE units are selected, make the detection more forgiving
 			local bugThreshold = selectedCount > LARGE_GROUP_SIZE and BUG_THRESHOLD_LARGE_GROUP or BUG_THRESHOLD_SMALL_GROUP
@@ -1325,7 +1345,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 					--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 				end
 			end
-
 			-- FOR ADDING NEW UNITS 
 			-- WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCount) .. "is less than " .. tostring(ceil(selectedCount*0.25)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. "is more than: " .. tostring(ceil(selectedCount*0.25)) .. "\n")
 
@@ -1336,8 +1355,23 @@ function CheckForObjReverseBugging(self, frameDiff)
 				--group.fixCancelled = true
 				--ExecuteAction("NAMED_FLASH", self, 2)
 			end
-			
-		end		
+
+			-- if the average first turn frameDiff for this unit type is within bug range, only fix units whose frameDiff == bugDuration
+			if firstTurnUnitCountForType > 0 then
+				local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
+				--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
+				-- 4
+				if avgFirstTurnCount >= bugDuration*0.36 then
+					for i = getn(unitsToFix), 1, -1 do
+						local unit = unitsReversing[unitsToFix[i]]
+						if unit == nil or unit.bugFrameDiff ~= bugDuration then
+							tremove(unitsToFix, i)
+						end
+					end
+				end
+			end
+
+		end
 		-- Apply fixes if threshold was met
 		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
 		-- checksDone over the threshold can still fix earlier-detected bugging units
@@ -1366,7 +1400,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 				--ExecuteAction("NAMED_FLASH", self, 2)
 				FixBuggingUnit(self)
 			end
-		elseif isBugging and checksDone >= ceil(selectedCount * CHECKS_DONE_THRESHOLD) then
+		elseif isBugging and checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
 			-- Only clear bugging state when threshold was reached and we decided not to fix
 			-- (too many bugging = likely false positive). Before threshold is reached,
 			-- keep the state so the unit can still be fixed when slower types finish checking.
@@ -1549,6 +1583,9 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 		teamSnapshot.fixCancelledByType = {}
 		teamSnapshot.thirdTurnFrameCountByType = {}
 		teamSnapshot.thirdTurnUnitCountByType = {}
+		teamSnapshot.firstTurnFrameCountByType = {}
+		teamSnapshot.firstTurnUnitCountByType = {}
+		teamSnapshot.expectedChecks = 0
 		teamSnapshot.unitsNotMovingBeforeBackingUp = 0
 		setglobal(groupId, teamSnapshot)
 		-- assign every unit the same groupId
@@ -1823,6 +1860,9 @@ function BackingUpEnd(self)
 		group.fixCancelledByType = nil
 		group.thirdTurnFrameCountByType = nil
 		group.thirdTurnUnitCountByType = nil
+		group.firstTurnFrameCountByType = nil
+		group.firstTurnUnitCountByType = nil
+		group.expectedChecks = 0
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
 			-- if the id is the same as the id in current index clear it
