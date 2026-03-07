@@ -467,6 +467,8 @@
             </ContactPoint>
         </Geometry>
         <AudioArrayVoice>
+            <AudioEntry EvaEvent="BuildingStolen" AudioType="voiceDefectingAway" />
+			<AudioEntry EvaEvent="EnemyBuildingCaptured" AudioType="voiceDefectingTowards" />
             <AudioEntry
                 Sound="AudioEvent:ALI_BuzzerHive_Select"
                 AudioType="voiceSelect" />

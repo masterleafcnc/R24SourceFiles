@@ -1687,7 +1687,8 @@
 	</EventList>
 
 	<EventList Name="CombatEngineerFunctions_R24" Inherit="BaseScriptFunctions">
-		<EventHandler EventName="OnCreated" ScriptFunctionName="OnCombatEngineerCreated" DebugSingleStep="false"/>
+		<EventHandler EventName="OnSlaughtered"	ScriptFunctionName="OnHuskCapture" DebugSingleStep="false"/>
+		<EventHandler EventName="OnCreated" ScriptFunctionName="OnCombatEngineerCreatedR23" DebugSingleStep="false"/>
 		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected" ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd" ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
