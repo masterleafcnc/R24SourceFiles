@@ -22,7 +22,7 @@
         TypeDescription="Type:Traveler59Corrupter"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
-        <DisplayName>NAME:Traveler59Corrupter</DisplayName>
+        <DisplayName>NAME:ALIENCorrupter</DisplayName>
         <GameDependency>
             <RequiredObject>Traveler59ControlCenter</RequiredObject>
         </GameDependency>

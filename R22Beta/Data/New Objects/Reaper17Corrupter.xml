@@ -92,7 +92,7 @@
         TypeDescription="Type:Reaper17Corrupter"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
-        <DisplayName>NAME:Reaper17Corrupter</DisplayName>
+        <DisplayName>NAME:ALIENCorrupter</DisplayName>
         <GameDependency>
             <RequiredObject>AlienControlCenter</RequiredObject>
         </GameDependency>
