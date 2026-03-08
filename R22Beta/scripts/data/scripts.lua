@@ -1165,8 +1165,7 @@ function BackingUpFastTurnEnd(self)
     local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
 	-- prevents this from executing when the unit is not moving or has already reverse moved 
-	if not unitReversing.isMovingFlag or unitReversing.hasAlreadyReversed  then return end
-	local timesToTrigger = TURN_TRIGGER_COUNT
+	if not unitReversing.isMovingFlag or unitReversing.hasAlreadyReversed or unitReversing.timesTriggeredFast > TURN_TRIGGER_COUNT then return end
 	local curFrame = GetFrame()
 	local frameDiff = curFrame - unitReversing.firstFrame
 	local group = getglobal(unitReversing.groupId)
@@ -1200,10 +1199,7 @@ function BackingUpFastTurnEnd(self)
 		end
 	end
 
-    if unitReversing ~= nil and unitReversing.timesTriggeredFast < timesToTrigger then
-		unitReversing.timesTriggeredFast = unitReversing.timesTriggeredFast + 1
-		--CheckForObjReverseBugging(self, unitReversing)
-	end
+	unitReversing.timesTriggeredFast = unitReversing.timesTriggeredFast + 1
 end	
 
 -- Triggered by +BACKING_UP -TURN_LEFT and +BACKING_UP -TURN_RIGHT
