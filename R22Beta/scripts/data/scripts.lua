@@ -1755,12 +1755,16 @@ function SuddenStopCheck(self)
 	local a = getObjectId(self)
 	if unitsReversing[a] == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
-	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or not unitReversing.isMovingFlag or not unitReversing.lastMoveWasReverse then return end
+	local resetGroupId = function()
+		%unitReversing.groupId = nil
+		%unitReversing.groupIdAssigned = false
+	end
+	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or not unitReversing.isMovingFlag or not unitReversing.lastMoveWasReverse then return resetGroupId() end
 	unitReversing.lastMoveWasReverse = false
-	if unitReversing.groupId == nil then return end
+	if unitReversing.groupId == nil then return resetGroupId() end
 	--unitReversing.isReverseMoving = false
 	local group = getglobal(unitReversing.groupId)
-	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return end
+	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return resetGroupId() end
 	local curFrame = GetFrame()
 	-- the duration of the reverse move since this unit came to an abrupt stop
 	-- if most units are still moving but this one suddenly stopped, it bugged
@@ -1772,7 +1776,7 @@ function SuddenStopCheck(self)
 	-- 15 frames works for Seeker (frameCount=12), ratio: 15/12 = 1.25
 	-- This is necessary to prevent tagging units that never backed up but got the model state somehow.
 	local unitBugData = unitBugDataTable[getObjectName(self)]
-	if unitBugData == nil then return end
+	if unitBugData == nil then return resetGroupId() end
 	local bugDuration = unitBugData.frameCount
 	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and bugDuration * unitBugData.reallyDamagedDurationMult or bugDuration
 	local maxFrameDiff = floor(bugDuration * 1.25)
@@ -1793,8 +1797,7 @@ function SuddenStopCheck(self)
 			FixBuggingUnit(self)
 		end
 	end
-	unitReversing.groupId = nil
-	unitReversing.groupIdAssigned = false
+	resetGroupId()
 end
 
 -- gets the current selection count of units that are within a group of units
