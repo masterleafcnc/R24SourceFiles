@@ -1025,7 +1025,7 @@ function GetUnitReversingData(self)
 			lastMoveWasReverse = false,
 			lastReverseMoveFrame = 0,
 			hasAlreadyReversed = false,
-			isAttacking = false,
+			wasAttackingBeforeReverse = false,
 			hasBeenCounted = false,
 			groupIdAssigned = false,
 			fastTurnWas0Frames = false,
@@ -1102,10 +1102,10 @@ function UnitNoLongerMoving(self)
 			for _, unitRef in group.reverseUnits do
 				if unitsReversing[unitRef] ~= nil then
 					if numberOfUnitsMoving <= floor(group.reverseUnitCount * UNITS_STILL_MOVING_THRESHOLD)
-					and ((group.unitsNotMovingBeforeBackingUp or 0) >= group.reverseUnitCount * 0.35) and unitsReversing[unitRef].isAttacking then
+					and ((group.unitsNotMovingBeforeBackingUp or 0) >= group.reverseUnitCount * 0.35) and unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].isMovingFlag = true
 						unitsReversing[unitRef].hasCameToAStop = false
-					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].isAttacking then
+					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].isMovingFlag = false
 						unitsReversing[unitRef].hasCameToAStop = true
 						--unitsReversing[unitRef].lastMoveWasReverse = false
@@ -1124,7 +1124,7 @@ function UnitNoLongerMoving(self)
 			if numberOfUnitsMoving <= floor(teamTable.reverseUnitCount * 0.15) then
 				-- assign isMovingFlag as false only if the last move was a reverse move
 				for _, unitRef in teamTable.reverseUnits do
-					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].isAttacking then
+					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].isMovingFlag = false
 						--unitsReversing[unitRef].lastMoveWasReverse = false
 						unitsReversing[unitRef].hasCameToAStop = true
@@ -1134,7 +1134,7 @@ function UnitNoLongerMoving(self)
 			end
 		else
 			-- team table is empty (player has deselected it), so clear flags for this unit directly
-			if not unitReversing.isAttacking then
+			if not unitReversing.wasAttackingBeforeReverse then
 				unitReversing.isMovingFlag = false
 				--unitReversing.lastMoveWasReverse = false
 				unitReversing.hasCameToAStop = true
@@ -1147,7 +1147,7 @@ end
 function UnitIsAttacking(self)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	unitReversing.isAttacking = true
+	unitReversing.wasAttackingBeforeReverse = true
 end
 
 function UnitIsNotAttacking(self)
@@ -1243,10 +1243,10 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local checksDone = group.checksDone
 	--WriteToFile("groupId.txt",  tostring(groupId) .. "\n")
 	-- edge case for when units are attacking to permit an extended range check (disabled for now)
-	--local enableExtendedCheck = unitReversing.isAttacking and (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*0.50))
-	unitReversing.isAttacking = false
+	--local enableExtendedCheck = unitReversing.wasAttackingBeforeReverse and (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*0.50))
+	unitReversing.wasAttackingBeforeReverse = false
 	-- when units attack they always stop moving before a reverse move is issued
-	--if (unitReversing.isAttacking and enableExtendedCheck) then print("attacking") end
+	--if (unitReversing.wasAttackingBeforeReverse and enableExtendedCheck) then print("attacking") end
 	--local lowerLimit = enableExtendedCheck and unitBugData.bugCheckLowerLimit+1 or unitBugData.bugCheckLowerLimit
 	--local upperLimit = enableExtendedCheck and unitBugData.bugCheckUpperLimit+1 or unitBugData.bugCheckUpperLimit
 	local lowerLimit = unitBugData.bugCheckLowerLimit
@@ -1374,7 +1374,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 				    -- print("3rd if")
 					for i = getn(unitsToFixForType), 1, -1 do
 						local unit = unitsReversing[unitsToFixForType[i]]
-						if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.isAttacking then
+						if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse then
 							tremove(unitsToFixForType, i)
 						end
 					end
@@ -1525,7 +1525,7 @@ function BackingUp(self)
     local curFrame = GetFrame()
 	unitReversing.lastMoveWasReverse = true
 
-	--WriteToFile("isAttacking.txt",  tostring(unitReversing.isAttacking) .. "\n")
+	--WriteToFile("wasAttackingBeforeReverse.txt",  tostring(unitReversing.wasAttackingBeforeReverse) .. "\n")
 	if EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") then
 		--print("removing upgrade")
 		ObjectRemoveUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
