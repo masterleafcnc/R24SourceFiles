@@ -1232,7 +1232,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local group = getglobal(unitReversing.groupId)
 	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return end
 	group.checksDone = group.checksDone or 0
-	group.unitsToFix = group.unitsToFix or {}
+	group.unitsToFixByType = group.unitsToFixByType or {}
 	group.fixCancelled = group.fixCancelled or false
 	group.fixCancelledByType = group.fixCancelledByType or {}
 	group.thirdTurnFrameCountByType = group.thirdTurnFrameCountByType or {}
@@ -1245,7 +1245,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local selectedCount = group.reverseUnitCount
 	if selectedCount <= 0 then return end
 	local checksDone = group.checksDone
-	local unitsToFix = group.unitsToFix
 	--WriteToFile("groupId.txt",  tostring(groupId) .. "\n")
 	-- edge case for when units are attacking to permit an extended range check (disabled for now)
 	--local enableExtendedCheck = unitReversing.isAttacking and (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*0.50))
@@ -1263,6 +1262,8 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local inBugRange = frameDiff >= bugDuration - lowerLimit and frameDiff <= bugDuration + upperLimit
 	-- if the average first turn frameDiff for this unit type equals bugDuration, override inBugRange
 	local objName = getObjectName(self)
+	group.unitsToFixByType[objName] = group.unitsToFixByType[objName] or {}
+	local unitsToFixForType = group.unitsToFixByType[objName]
 	local firstTurnUnitCountForType = (group.firstTurnUnitCountByType and group.firstTurnUnitCountByType[objName]) or 0
 	local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or 0
 	local isBugging = false
@@ -1292,19 +1293,19 @@ function CheckForObjReverseBugging(self, frameDiff)
 		--ExecuteAction("NAMED_FLASH", self, 2)
 		-- verify the unit doesnt already exist in the table to prevent duplicate entries
 		local alreadyExists = false
-		for _, v in unitsToFix do
+		for _, v in unitsToFixForType do
 			if v == a then
 				alreadyExists = true
 				break
 			end
 		end
 		if not alreadyExists then
-			tinsert(unitsToFix, a)
+			tinsert(unitsToFixForType, a)
 		end
 	end
 
-	-- WriteToFile("checksDoneInt.txt",  tostring(checksDone) .. " num of units bugging: " .. tostring(getn(unitsToFix)) "\n")
-	-- Now check threshold after unitsToFix has been updated
+	-- WriteToFile("checksDoneInt.txt",  tostring(checksDone) .. " num of units bugging: " .. tostring(getn(unitsToFixForType)) "\n")
+	-- Now check threshold after unitsToFixByType has been updated
 	local fixUnits = false
 	-- per-type counts for avg third turn cancellation
 	local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
@@ -1325,7 +1326,9 @@ function CheckForObjReverseBugging(self, frameDiff)
 			-- if more than LARGE_GROUP_SIZE units are selected, make the detection more forgiving
 			local bugThreshold = selectedCount > LARGE_GROUP_SIZE and BUG_THRESHOLD_LARGE_GROUP or BUG_THRESHOLD_SMALL_GROUP
 			local maxBugging = ceil(selectedCount*bugThreshold)
-			if getn(unitsToFix) <= maxBugging then
+			local totalBugging = 0
+			for _, list in group.unitsToFixByType do totalBugging = totalBugging + getn(list) end
+			if totalBugging <= maxBugging then
 				-- proceed to fix the units
 				fixUnits = true
 				-- print("fixing units")
@@ -1371,10 +1374,10 @@ function CheckForObjReverseBugging(self, frameDiff)
 				-- 4
 				if avgFirstTurnCount >= bugDuration*unitBugData.avgFirstTurnRatio then
 					-- print("3rd if")
-					for i = getn(unitsToFix), 1, -1 do
-						local unit = unitsReversing[unitsToFix[i]]
+					for i = getn(unitsToFixForType), 1, -1 do
+						local unit = unitsReversing[unitsToFixForType[i]]
 						if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.isAttacking then
-							tremove(unitsToFix, i)
+							tremove(unitsToFixForType, i)
 						end
 					end
 				end
@@ -1385,23 +1388,23 @@ function CheckForObjReverseBugging(self, frameDiff)
 		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
 		-- checksDone over the threshold can still fix earlier-detected bugging units
 		if fixUnits then
-			if getn(unitsToFix) > 0 then
-				--local stringUnits = ""
-				--for i = 1, getn(unitsToFix) do
-				--	stringUnits = stringUnits .. "Fixing unit: " .. tostring(unitsToFix[i]) .. "\n"
-				--end
-				--WriteToFile("fixUnits.txt", stringUnits .. "\n\n\n" .. "------------------------------------------------")
+			local totalToFix = 0
+			for _, list in group.unitsToFixByType do totalToFix = totalToFix + getn(list) end
+			if totalToFix > 0 then
+				--WriteToFile("fixUnits.txt", "fixing " .. tostring(totalToFix) .. " units\n\n\n" .. "------------------------------------------------")
 				-- mark all bugging units with USER_72 before reassignment so
 				-- GetANonBuggingUnit wont return a unit that is about to be fixed
-				for i = getn(unitsToFix), 1, -1 do
-					local buggingUnit = unitsReversing[unitsToFix[i]]
-					if buggingUnit ~= nil then
-						local buggingRef = buggingUnit.selfReference
-						--ExecuteAction("NAMED_FLASH", buggingRef, 2)
-						FixBuggingUnit(buggingRef)
-					else
-						if unitsToFix[i] ~= nil then
-							tremove(unitsToFix, i)
+				for _, list in group.unitsToFixByType do
+					for i = getn(list), 1, -1 do
+						local buggingUnit = unitsReversing[list[i]]
+						if buggingUnit ~= nil then
+							local buggingRef = buggingUnit.selfReference
+							--ExecuteAction("NAMED_FLASH", buggingRef, 2)
+							FixBuggingUnit(buggingRef)
+						else
+							if list[i] ~= nil then
+								tremove(list, i)
+							end
 						end
 					end
 				end
@@ -1587,7 +1590,7 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 		-- the table contains a unique id that all units share when selected during this reverse move
 		groupId = "group_" .. tostring(curFrame) .. "_" .. tostring(a)
 		-- store a global variable with the id generated for this group containing all selected units (obtained by DeepCopyTable)
-		teamSnapshot.unitsToFix = {}
+		teamSnapshot.unitsToFixByType = {}
 		teamSnapshot.checksDone = 0
 		teamSnapshot.fixCancelled = false
 		teamSnapshot.thirdTurnCountChecked = false
@@ -1868,7 +1871,7 @@ function BackingUpEnd(self)
 	SuddenStopCheck(self)
 	
 	if clearList and group ~= nil then
-		group.unitsToFix = {}
+		group.unitsToFixByType = {}
 		group.checksDone = 0
 		group.fixCancelled = false
 		group.thirdTurnCountChecked = false
