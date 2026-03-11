@@ -1904,6 +1904,25 @@
 					AcceptModelCondition=""
 					RejectModelCondition="" />
 			</SpecialPower>
+
+			<AISpecialPowerUpdate
+					id="ModuleTag_STAdaptiveArmourAI"
+					CommandButtonName="Command_ActivateAdaptiveArmor"
+					SecondaryCommandButtonName=""
+					SpecialPowerAIType="SPECIAL_POWER_HEAL_AOE"
+					SpecialPowerRadius="-1"
+					ReinforceDistance="0"
+					SpellMakesAStructure=""
+					SpecificUnit=""
+					UnitKindOf=""
+					AllyUnitInclude=""
+					AllyUnitExclude=""
+					EnemyUnitInclude=""
+					EnemyUnitExclude=""
+					MinimumCutoff="0"
+					UpdateTime="1s"
+					MaxFrequency="0"
+					RandomizeTargetLocation="False"/>
 			
 		</Behaviors>
 		<AI>

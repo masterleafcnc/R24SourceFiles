@@ -98,7 +98,7 @@
 			DamageFX="FactionStructureDamageFX"
 			Conditions="" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="BACK"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -668,12 +668,12 @@
 				id="866A22F0"
 				CommandButtonName="Command_SpecialPowerSwarm"
 				SecondaryCommandButtonName=""
-				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT"
-				SpecialPowerRadius="250"
-				ReinforceDistance="0"
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
+				SpecialPowerRadius="99999"
+				ReinforceDistance="99999"
 				SpellMakesAStructure=""
 				SpecificUnit=""
-				UnitKindOf=""
+				UnitKindOf="INFANTRY"
 				AllyUnitInclude=""
 				AllyUnitExclude=""
 				EnemyUnitInclude=""
@@ -681,7 +681,7 @@
 				MinimumCutoff="0"
 				UpdateTime="1s"
 				MaxFrequency="0"
-				RandomizeTargetLocation="False" />
+				RandomizeTargetLocation="True" />
 			<OCLSpecialPower
 				id="22CEE74B"
 				SpecialPowerTemplate="SpecialPower_AlienSeedTiberium"
@@ -754,8 +754,8 @@
 					RejectModelCondition="" />
 			</OCLSpecialPower>
 			<AISpecialPowerUpdate
-				id="61F41A27"
-				CommandButtonName="Command_AlienSeedTiberium"
+				id="ModuleTag_AlienCastSeedTiberium"
+				CommandButtonName="Command_ControlCenterSeedTiberium"
 				SecondaryCommandButtonName=""
 				SpecialPowerAIType="SPECIAL_POWER_SEED_TIBERIUM"
 				SpecialPowerRadius="-1"

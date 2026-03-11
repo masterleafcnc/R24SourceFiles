@@ -345,9 +345,21 @@
 			<AISpecialPowerUpdate
 				id="ModuleTag_IonCannonSpecialPower"
 				CommandButtonName="Command_IonCannonSuperweapon"
-				SpecialPowerRadius="999999.0"
+				SecondaryCommandButtonName=""
 				SpecialPowerAIType="SPECIAL_POWER_SUPERWEAPON"
-				UnitKindOf="STRUCTURE"
+				SpecialPowerRadius="999999"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf=""
+				AllyUnitInclude=""
+				AllyUnitExclude="INFANTRY VEHICLE AIRCRAFT HUSK INFILTRATOR STRUCTURE"
+				EnemyUnitInclude="FS_FACTORY FS_WAR_FACTORY FS_AIRFIELD AIRFIELD"
+				EnemyUnitExclude="INFANTRY AIRCRAFT FS_POWER FS_BARRACKS NEUTRAL_TECH CIVILIAN_BUILDING SUPER_WEAPON HUSK INFILTRATOR"
+				MinimumCutoff="0"
+				UpdateTime="1s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False"
 			/>
 
 			<!--Monitors when this special power template is ready to fire and sets a model condition-->

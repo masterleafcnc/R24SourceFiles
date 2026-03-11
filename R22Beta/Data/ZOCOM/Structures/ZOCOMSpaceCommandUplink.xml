@@ -35,7 +35,7 @@
 			Armor="GDISpaceCommandUplinkSonicRepulsionFieldArmor"
 			DamageFX="NormalDamageFX" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD" />
+			BaseBuildingLocation="HOMEBASE" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"
@@ -373,9 +373,12 @@
 			<AISpecialPowerUpdate			
 				id="ModuleTag_ZOCOMSpaceCommandDropPodsAI"
 				CommandButtonName="Command_SpaceCommandZOCOMRaiderPods"
-				ReinforceDistance="100.0" 
-		        SpecialPowerRadius="300.0"
-				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT" 
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
+				SpecialPowerRadius="99999"
+				ReinforceDistance="99999"
+				UnitKindOf="HARVESTER"
+				EnemyUnitInclude="HARVESTER"
+				RandomizeTargetLocation="True"
 			/>		
 			<OCLSpecialPower
 				id="ModuleTag_ShockwaveArtillery"
@@ -386,22 +389,29 @@
 			<AISpecialPowerUpdate
 				id="ModuleTag_GDISpaceCommandShockwaveAI"
 				CommandButtonName="Command_SpaceCommandGDIShockwave"
-		        SpecialPowerRadius="999999.0"
-				UnitKindOf="FS_POWER"
-				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES" 
-			/>
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
+				SpecialPowerRadius="99999"
+				ReinforceDistance="1200"
+				UnitKindOf="UNIQUE_UNIT"
+				EnemyUnitInclude="CAN_ATTACK STRUCTURE"
+				EnemyUnitExclude="INFANTRY AIRCRAFT CIVILIAN_BUILDING HUSK"
+				RandomizeTargetLocation="False" />
 			
 			<MonitorSpecialPowerTimerUpdate
 				id="ModuleTag_ShockwaveArtilleryReadyToFireUpdate"
 				SpecialPowerTemplate="SpecialPowerGDI_SpaceCommandShockwaveArtillery"
 				ReadyCondition="SPECIALPOWER1_READY" />
 <!-- MJOLNIR -->
-			<OCLSpecialPower
-				id="ModuleTag_MjolnirStrikePower"
-				SpecialPowerTemplate="SpecialPower_MjolnirStrike"
-				OCL="OCL_GDIMjolnirBeaconOne"
-				CreateLocation="CREATE_AT_LOCATION"
-			/>
+			<AISpecialPowerUpdate
+				id="ModuleTag_MjolnirStrikeAI"
+				CommandButtonName="Command_SpecialPowerMjolnirStrike"
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
+				SpecialPowerRadius="99999"
+				ReinforceDistance="1500"
+				UnitKindOf=""
+				EnemyUnitInclude="CAN_ATTACK STRUCTURE"
+				EnemyUnitExclude="INFANTRY AIRCRAFT CIVILIAN_BUILDING HUSK"
+				RandomizeTargetLocation="False" />
 			<AISpecialPowerUpdate
 				id="ModuleTag_MjolnirStrikeAI"
 				CommandButtonName="Command_SpecialPowerMjolnirStrike"
@@ -416,14 +426,19 @@
 				OCL="OCL_GDISuperSonicAirAttackBeacon"
 				CreateLocation="CREATE_AT_LOCATION"
 			/>
-			
+
 			<AISpecialPowerUpdate
-				id="ModuleTag_SpecialPowerAirAttackAI"
+				id="ModuleTag_SupersonicAirAttackAI"
 				CommandButtonName="Command_SpecialPowerSupersonicAirAttack"
-				SpecialPowerRadius="999999.0"
-				UnitKindOf="FS_POWER"
-				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES" 
-			/>				
+				SecondaryCommandButtonName=""
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
+				SpecialPowerRadius="99999"
+				UnitKindOf="ASSAULT_AIRCRAFT"
+				AllyUnitInclude=""
+				AllyUnitExclude="INFANTRY VEHICLE AIRCRAFT STRUCTURE CIVILIAN_BUILDING NEUTRAL_TECH HUSK"
+				EnemyUnitInclude="ASSAULT_AIRCRAFT"
+				EnemyUnitExclude="INFANTRY INFILTRATOR TRANSPORT STRUCTURE CIVILIAN_BUILDING HUSK NEUTRAL_TECH"
+				RandomizeTargetLocation="False" />
 			<ArmorUpgrade 
 							id="ModuleTag_SonicRepulsionFieldUpgrade"
 							Permanent="false"

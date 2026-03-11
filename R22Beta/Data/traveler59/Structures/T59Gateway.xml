@@ -98,7 +98,7 @@
 			DamageFX="FactionStructureDamageFX"
 			Conditions="" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="FRONT"
+			BaseBuildingLocation="TIBERIUM"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -911,18 +911,18 @@
 			</OCLSpecialPower>
 			<AISpecialPowerUpdate
 				id="11CE5E73"
-				CommandButtonName="Command_AlienRepairDrones"
+				CommandButtonName="Command_SpecialPowerAlienRepairDrones"
 				SecondaryCommandButtonName=""
 				SpecialPowerAIType="SPECIAL_POWER_HEAL_AOE"
 				SpecialPowerRadius="999999"
-				ReinforceDistance="0"
-				SpellMakesAStructure=""
+				ReinforceDistance="300"
+				SpellMakesAStructure="AlienReconstructionBaseSpawned"
 				SpecificUnit=""
 				UnitKindOf=""
 				AllyUnitInclude="VEHICLE"
 				AllyUnitExclude=""
 				EnemyUnitInclude=""
-				EnemyUnitExclude=""
+				EnemyUnitExclude="INFANTRY VEHICLE STRUCTURE"
 				MinimumCutoff="0"
 				UpdateTime="1s"
 				MaxFrequency="0"

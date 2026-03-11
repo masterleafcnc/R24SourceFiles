@@ -1436,6 +1436,23 @@
 					AcceptModelCondition=""
 					RejectModelCondition="" />
 			</HordeDispatchSpecialPower>
+			<AISpecialPowerUpdate
+				id="ModuleTag_AINODShadowDeployBeacon"
+				CommandButtonName="Command_NODShadowSquadBeaconGetInRange"
+				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
+				SpecialPowerRadius="300"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf="STRUCTURE"
+				AllyUnitInclude=""
+				AllyUnitExclude=""
+				EnemyUnitInclude=""
+				EnemyUnitExclude="INFANTRY VEHICLE HUSK CIVILIAN_BUILDING"
+				MinimumCutoff="0"
+				UpdateTime="1s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False"/>
 		</Behaviors>
 		<AI>
 			<HordeAIUpdate

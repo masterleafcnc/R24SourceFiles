@@ -34,7 +34,7 @@
 			Armor="GDIMedicalBaySonicRepulsionFieldArmor"
 			DamageFX="NormalDamageFX" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD" />
+			BaseBuildingLocation="HOMEBASE" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"

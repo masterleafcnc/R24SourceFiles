@@ -102,7 +102,7 @@
 			DamageFX="NormalDamageFX"
 			Conditions="PLAYER_UPGRADE" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -1099,18 +1099,14 @@
 				id="51CC365B"
 				CommandButtonName="Command_FireRadarJammingMissile"
 				SecondaryCommandButtonName=""
-				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT"
-				SpecialPowerRadius="300"
-				ReinforceDistance="300"
-				SpellMakesAStructure=""
+				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
+				SpecialPowerRadius="-1"
 				SpecificUnit=""
 				UnitKindOf=""
 				AllyUnitInclude=""
 				AllyUnitExclude=""
 				EnemyUnitInclude=""
 				EnemyUnitExclude=""
-				MinimumCutoff="0"
-				UpdateTime="1s"
 				MaxFrequency="2700"
 				RandomizeTargetLocation="False" />
 			<MonitorSpecialPowerTimerUpdate

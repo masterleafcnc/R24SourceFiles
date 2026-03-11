@@ -675,6 +675,15 @@
 				NumFalseReturns="10"
 				Radius="150"
 				HackDuration="60s" />
+			<AISpecialPowerUpdate
+				id="ModuleTag_AISignatureGenerator"
+				CommandButtonName="Command_NODSignatureGenerator"
+				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
+				SpecialPowerRadius="300"
+				MinimumCutoff="0"
+				UpdateTime="1s"
+				MaxFrequency="2700"
+				RandomizeTargetLocation="False"/>
 			<StatusBitsUpgrade
 				id="ModuleTag_UpgradeWeapon"
 				StatusToSet="WEAPON_UPGRADED_01">

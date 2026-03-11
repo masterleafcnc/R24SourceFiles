@@ -35,7 +35,7 @@
 			<RequiredObject>SteelTalonsCommandPost</RequiredObject>
 		</GameDependency>
 		<SkirmishAIInformation
-			BaseBuildingLocation="BACK" />
+			BaseBuildingLocation="HOMEBASE" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"
@@ -847,8 +847,9 @@
 				id="ModuleTag_CommandPostBombingRunAI"
 				CommandButtonName="Command_CommandPostBombingRun"
 				SpecialPowerRadius="999999.0"
-				UnitKindOf="FS_POWER"
+				UnitKindOf="HARVESTER"
 				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES" 
+				RandomizeTargetLocation="False"
 			/>
 
 			<OCLSpecialPower
@@ -859,11 +860,12 @@
 				CreateLocation="CREATE_AT_EDGE_NEAR_SOURCE"
 			/>
 			<AISpecialPowerUpdate
-				id="ModuleTag_CommandPostCallBloodhoundAI"
-				CommandButtonName="Command_CommandPostCallBloodhound"
-				ReinforceDistance="400.0"
-				SpecialPowerRadius="300.0"
-				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT" 
+				id="ModuleTag_STCommandPostCallBloodhoundAI"
+				CommandButtonName="Command_CommandPostCallSTBloodhound"
+				ReinforceDistance="99999"
+				SpecialPowerRadius="1000"
+				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT"
+				RandomizeTargetLocation="False"
 			/>
 				
 			<ArmorUpgrade

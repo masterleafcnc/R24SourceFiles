@@ -97,7 +97,7 @@
 			DamageFX="FactionStructureDamageFX"
 			Conditions="" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -599,6 +599,16 @@
 					AcceptModelCondition=""
 					RejectModelCondition="" />
 			</OCLSpecialPower>
+			<AISpecialPowerUpdate
+				id="ModuleTag_DeployStasisShieldAI"
+				CommandButtonName="Command_SpecialPowerCrystalField"
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
+				SpecialPowerRadius="99999"
+				ReinforceDistance="1500"
+				UnitKindOf="UNIQUE_UNIT"
+				EnemyUnitInclude="CAN_ATTACK STRUCTURE"
+				EnemyUnitExclude="INFANTRY AIRCRAFT CIVILIAN_BUILDING HUSK"
+				RandomizeTargetLocation="False"/>
 			<RepairUpdate
 				id="41FDEB2A"
 				RepopThreshold="0.2"

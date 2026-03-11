@@ -250,6 +250,23 @@
 				PackTime="0s"
 				StartAbilityRange="200"
 				ChainedButton="Command_BlackHandConfessorCabalFireGrenade" />
+			<AISpecialPowerUpdate
+				id="ModuleTag_BlackHandConfessorCabalSquadFireGrenade"
+				CommandButtonName="Command_BlackHandConfessorCabalSquadFireGrenade"
+				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"
+				SpecialPowerRadius="275"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf="INFANTRY"
+				AllyUnitInclude=""
+				AllyUnitExclude=""
+				EnemyUnitInclude="INFANTRY"
+				EnemyUnitExclude="VEHICLE AIRCRAFT STRUCTURE CIVILIAN_BUILDING NEUTRAL_TECH HUSK UNIQUE_UNIT"
+				MinimumCutoff="0"
+				UpdateTime="2.5s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False" />
 			<HordeDispatchSpecialPower
 				id="ModuleTag_ConfessorCabalDispatchFireGrenade"
 				SpecialPowerTemplate="SpecialPower_BlackHandConfessorCabalFireGrenade" >
