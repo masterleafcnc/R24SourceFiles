@@ -19,12 +19,46 @@
 		ObjectStatusToSet="UNATTACKABLE NO_COLLISIONS">
 	</AttributeModifier> -->
 
+	<AttributeModifier
+		id="AttributeModifier_TemporalWormhole"
+		Category="NONE"
+		Duration="1.25s"
+		ObjectStatusToSet="">
+		<Modifier Type="SPEED" Value="25%"/>
+		<Modifier Type="RATE_OF_FIRE" Value="60%" />
+		<Modifier Type="PRODUCTION" Value="50%" />
+	</AttributeModifier>	
+
 	<!-- grant a speed boost to units that are being corrected from a reverse move bug -->
 	<AttributeModifier
 		id="Modifier_ReverseMoveSpeedBuff"
 		Category="NONE"
 		Duration="1.5s">
 		<Modifier Type="SPEED" Value="115%" />
+	</AttributeModifier>
+
+	<!-- gunwalkers -->
+	<AttributeModifier
+		id="Modifier_ReverseMoveSpeedBuffGunwalker"
+		Category="NONE"
+		Duration="1.5s">
+		<Modifier Type="SPEED" Value="105%" />
+	</AttributeModifier>
+
+	<!-- MARVS, mammoth tanks, shatterers -->
+	<AttributeModifier
+		id="Modifier_ReverseMoveSpeedBuffMammoth"
+		Category="NONE"
+		Duration="1.5s">
+		<Modifier Type="SPEED" Value="125%" />
+	</AttributeModifier>
+
+	<!-- scorps, seekers, preds -->
+	<AttributeModifier
+		id="Modifier_ReverseMoveSpeedBuffScorp"
+		Category="NONE"
+		Duration="1.5s">
+		<Modifier Type="SPEED" Value="120%" />
 	</AttributeModifier>
 
 	<!-- to ensure traveler 59 do not get faster infantry with the base infantry speed buff --> 

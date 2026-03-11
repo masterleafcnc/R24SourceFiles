@@ -5263,15 +5263,14 @@
 						<IncludeThing>MarkedOfKaneStealthTank</IncludeThing>
 					</Filter>
 				</DamageScalarDetails>
-				<!--
-				<DamageScalarDetails Scalar= "105%">
+				
+				<DamageScalarDetails Scalar= "135%">
 					<Filter Rule="NONE">
-						<IncludeThing>NODRaiderTank</IncludeThing>	
-						<IncludeThing>MarkedOfKaneRaiderTank</IncludeThing>	
-						<IncludeThing>BlackHandRaiderTank</IncludeThing>							
+						<IncludeThing>AlienMillipedeHead</IncludeThing>	
+						<IncludeThing>AlienMillipedeBody</IncludeThing>								
 					</Filter>
 				</DamageScalarDetails>
-				-->
+			
 			</DamageNugget>
 		</Nuggets>
 		<ScatterRadiusVsType

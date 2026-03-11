@@ -439,7 +439,7 @@
             </AttributeModifierUpgrade>
             <AttributeModifierUpgrade
                 id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
-                AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+                AttributeModifier="Modifier_ReverseMoveSpeedBuffMammoth">
                 <TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
             </AttributeModifierUpgrade>
             <StancesBehavior

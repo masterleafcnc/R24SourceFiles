@@ -1059,7 +1059,7 @@
 
 			<AttributeModifierUpgrade
 				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
-				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffGunwalker">
 				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
