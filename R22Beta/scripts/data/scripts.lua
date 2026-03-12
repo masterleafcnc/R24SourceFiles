@@ -56,6 +56,19 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 "SkirmishBlackHand", "SkirmishCivilian", "SkirmishCommentator", "SkirmishGDI", "SkirmishMarkedOfKane",
 "SkirmishNeutral", "SkirmishNod", "SkirmishNull", "SkirmishObserver", "SkirmishReaper17","SkirmishSteelTalons", "SkirmishTraveler59", "SkirmishZOCOM", "PlyrCreeps", "PlyrCivilian"}
 
+function flushPlayerTeams() 
+	for i = 1, getn(playerTable), 1 do
+		if i <= 8 then
+			local player = tostring(playerTable[i] .. "/" .. "team" .. playerTable[i])
+			setglobal(player, nil)
+		else
+			break
+		end
+	end
+end
+
+flushPlayerTeams() 
+
 harvesterData = {}
 crystalData = {}
 unitsReversing = {}

@@ -127,8 +127,6 @@
 		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
 
 		<!-- new objects -->
-		<Include source="Alien/Units/alienseekertank.xml" type="all"/> 	
-		<Include source="GlobalData/AttributeModifier.xml" type="all" />
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
@@ -148,10 +146,12 @@
 		<Include source="New Objects\Traveler59Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/>
 		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" />
-		<Include source="GlobalData/SpecialPowerTemplates.xml" type="all"/>	
 		
 		<!-- Reverse move speed buff updated units 
+		<Include source="Alien/Units/alienseekertank.xml" type="all"/> 	
+		<Include source="GlobalData/AttributeModifier.xml" type="all" />
 		<Include source="Alien\Units\AlienDevourerTank.xml" type="all"/>
+		<Include source="GlobalData/SpecialPowerTemplates.xml" type="all"/>	
 		<Include source="BlackHand\Units\BHEmissary.xml" type="all"/>
 		<Include source="BlackHand\Units\BHFlametank.xml" type="all"/>
 		<Include source="BlackHand\Units\BHHarvester.xml" type="all"/>

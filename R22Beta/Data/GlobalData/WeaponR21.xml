@@ -5264,7 +5264,7 @@
 					</Filter>
 				</DamageScalarDetails>
 				
-				<DamageScalarDetails Scalar= "135%">
+				<DamageScalarDetails Scalar= "125%">
 					<Filter Rule="NONE">
 						<IncludeThing>AlienMillipedeHead</IncludeThing>	
 						<IncludeThing>AlienMillipedeBody</IncludeThing>								
