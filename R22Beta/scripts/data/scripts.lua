@@ -59,7 +59,7 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 function flushPlayerTeams() 
 	for i = 1, getn(playerTable), 1 do
 		if i <= 8 then
-			local player = tostring(playerTable[i] .. "/" .. "team" .. playerTable[i])
+			local player = tostring("team" .. playerTable[i])
 			setglobal(player, nil)
 		else
 			break
