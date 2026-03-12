@@ -124,8 +124,8 @@ unitBugDataTable = {
 	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Scorpion Tank
 	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Scorpion Tank
 	
-	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Stealth Tank
-	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Marked of Kane Stealth Tank
+	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Stealth Tank
+	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Stealth Tank
 
 	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
 
@@ -1358,7 +1358,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					group.fixCancelledByType = group.fixCancelledByType or {}
 					group.fixCancelledByType[objName] = true
 					fixUnits = false
-					 --print("1st false positive trigger")
+					-- print("1st false positive trigger")
 					--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 				end
 			end
