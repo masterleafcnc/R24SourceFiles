@@ -76,7 +76,7 @@ unitsReversing = {}
 TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
-CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
+CHECKS_DONE_THRESHOLD = 0.85 -- ratio of units that must finish checking before fix decision
 BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
 BUG_THRESHOLD_SMALL_GROUP = 0.50 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
@@ -1182,6 +1182,12 @@ function BackingUpFastTurnEnd(self)
 	local frameDiff = curFrame - unitReversing.firstFrame
 	local group = getglobal(unitReversing.groupId)
 
+	-- track units that have backedup after receiving a groupId
+	if not unitReversing.expectedChecksFlag then
+		group.expectedChecks = (group.expectedChecks or 0) + 1
+		unitReversing.expectedChecksFlag = true
+	end
+
 	if unitReversing.timesTriggeredFast == 1 then
 		--WriteToFile("backingupfastend.txt",  "object went this long with 1 trigger: " .. tostring(frameDiff) .. "\n")
 		if group ~= nil then
@@ -1311,9 +1317,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- Now check threshold after unitsToFixByType has been updated
 
 	-- FALSE POSITIVE FILTERS -- 
-
 	local fixUnits = false
-
 	-- WriteToFile("data.txt", "this unit has three turn count: " .. tostring(thirdTurnUnitCount) .. "\n")
 	-- this prevents fixing a group of units that are doing a 180 degree turn.
 	--local fixCancelledForType = group.fixCancelledByType and group.fixCancelledByType[objName]
@@ -1329,13 +1333,12 @@ function CheckForObjReverseBugging(self, frameDiff)
 			local totalBugging = 0	
 
 			for _, unitType in group.unitsToFixByType do totalBugging = totalBugging + getn(unitType) end
+			--ExecuteAction("SHOW_MILITARY_CAPTION", tostring(totalBugging), 2)	
+			--WriteToFile("totalBugging.txt", tostring(totalBugging) .. "\n")
 			if totalBugging <= maxBugging then
 				-- proceed to fix the units
 				fixUnits = true
-				-- print("fixing units")
 			else
-				--print("not fixing units")
-				-- if the total number of bugging units of all types exceeds the threshold, cancel the fix on the entire group.
 				group.fixCancelled = true
 			end
 
@@ -1360,7 +1363,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 						-- objName is currently only just this object
 						group.fixCancelledByType[objName] = true
 						-- fixUnits = false
-						-- print("1st false positive trigger")
+						--print("1st false positive trigger")
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end
 				end
@@ -1372,7 +1375,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
-						print("3rd false positive trigger")
+						--print("3rd false positive trigger")
 						for i = getn(unitsToFixForType), 1, -1 do
 							local unit = unitsReversing[unitsToFixForType[i]]
 							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
@@ -1389,13 +1392,14 @@ function CheckForObjReverseBugging(self, frameDiff)
 			-- A high thirdTurnUnitCount indicates units have performed the reverse move bug.
 			-- A low value (0-2) means units are turning normally and not bugging, so cancel the fix.
 			-- Exception: when most units were not moving before backing up (e.g. units that stopped to attack),
+			-- used to prevent false detections when reversing in the direction it was oriented in before reverse moving.
 			if not group.thirdTurnCountChecked then
 				group.thirdTurnCountChecked = true
 				-- total across all types for thirdTurnMinRatio check
 				local notAllTypesAreBugging = false
 				for objName,_ in eachTypeOfReverseUnit do
 					unitBugDataType = unitBugDataTable[objName]
-					if not (group.thirdTurnUnitCountByType[objName] < ceil(selectedCount*unitBugData.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*unitBugDataType.notMovingBackupRatio))) then
+					if not (group.thirdTurnUnitCountByType[objName] < ceil(selectedCount*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*unitBugDataType.notMovingBackupRatio))) then
 						notAllTypesAreBugging = true
 						--group.fixCancelledByType[objName] = true
 						-- group.fixCancelled = true
@@ -1403,7 +1407,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					end
 				end
 				if not notAllTypesAreBugging then
-					print("2nd false positive trigger")
+					--print("2nd false positive trigger")
 					fixUnits = false
 				end
 			end
@@ -1573,7 +1577,9 @@ function BackingUp(self)
 		%unitReversing.hasBeenCounted = false
 		%unitReversing.firstFrame = %curFrame
 		%unitReversing.isReverseMoving = true
-		%unitReversing.isMovingFlag = true
+		%unitReversing.hasBeenCounted = false
+		%unitReversing.expectedChecksFlag = false
+		--%unitReversing.isMovingFlag = true
 	end
 
 	 -- Check if this is a spam/repeat command (within 2 frames) or a generic new command
@@ -1593,17 +1599,11 @@ function BackingUp(self)
 
 	-- Reset the flags here to ensure we don't carry over bugs from previous moves
 	resetFlags()
+	unitReversing.isMovingFlag = true
 	unitReversing.hasAlreadyReversed = false
 
 	if not unitReversing.groupIdAssigned then
 		AssignGroupId(unitReversing, a, curFrame, self)
-	end
-
-	local group = getglobal(unitReversing.groupId)
-	-- track units that have backedup after receiving a groupId
-	if not unitReversing.expectedChecksFlag then
-		group.expectedChecks = (group.expectedChecks or 0) + 1
-		unitReversing.expectedChecksFlag = true
 	end
 
 	AssignRandomAnchor(self)
@@ -1907,7 +1907,6 @@ function BackingUpEnd(self)
 	unitReversing.timesTriggeredFast = 0
 	unitReversing.timesTriggeredNormal = 0
 	unitReversing.fastTurnWas0Frames = false
-	unitReversing.expectedChecksFlag = false
 
 	--if checksDone == unitReversing.groupId.selectedCount-1 then
 	local clearList = true
@@ -1941,6 +1940,8 @@ function BackingUpEnd(self)
 				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
 				unitsReversing[unitRef].hasBeenFixed = false
+				unitsReversing[unitRef].expectedChecks = false
+				unitsReversing[unitRef].hasBeenCounted = false
 				--if EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") then
 				--	ObjectRemoveUpgrade(unitsReversing[unitRef].selfReference, "Upgrade_ReverseMoveSpeedBuff")
 				--end
