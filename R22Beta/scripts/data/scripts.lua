@@ -76,9 +76,9 @@ unitsReversing = {}
 TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
-CHECKS_DONE_THRESHOLD = 0.85 -- ratio of units that must finish checking before fix decision
-BUG_THRESHOLD_LARGE_GROUP = 0.25 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
-BUG_THRESHOLD_SMALL_GROUP = 0.35 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
+CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
+BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
+BUG_THRESHOLD_SMALL_GROUP = 0.50 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
 UNITS_STILL_MOVING_THRESHOLD = 0.75 -- ratio of units still moving before clearing movement flag
 
@@ -115,19 +115,19 @@ unitBugDataTable = {
 	--                            equals bugDuration are fixed. Higher values = less aggressive filtering.
 
 	-- NOD UNITS --
-	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
-	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
-	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
-	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
+	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
+	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
 
-	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Mok Scorpion Tank
-	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Scorpion Tank
-	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Scorpion Tank
+	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
+	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
+	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
 	
 	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Stealth Tank
 	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Stealth Tank
 
-	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
+	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
 
 	["FD8822B1"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Flame Tank
 	["1E1AEEBE"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Flame Tank
@@ -1044,7 +1044,8 @@ function GetUnitReversingData(self)
 			fastTurnWas0Frames = false,
 			hasCameToAStop = false,
 			unitAnchor = nil, -- can be an array from closest to farthest
-			bugFrameDiff = 0
+			bugFrameDiff = 0,
+			expectedChecksFlag = false
 		}
 		return a, unitsReversing[a]
 	end
@@ -1181,11 +1182,6 @@ function BackingUpFastTurnEnd(self)
 	local frameDiff = curFrame - unitReversing.firstFrame
 	local group = getglobal(unitReversing.groupId)
 
-	-- track units that entered the turn process (first fast turn trigger)
-	if unitReversing.timesTriggeredFast == 0 and group ~= nil then
-		group.expectedChecks = (group.expectedChecks or 0) + 1
-	end
-
 	if unitReversing.timesTriggeredFast == 1 then
 		--WriteToFile("backingupfastend.txt",  "object went this long with 1 trigger: " .. tostring(frameDiff) .. "\n")
 		if group ~= nil then
@@ -1285,7 +1281,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 		isBugging = true
 	end
 
-    -- if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
+    if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
 	-- checksDone is more than ceil(unitReversing.groupId.selectedCount*0.5)
 	if not unitReversing.hasBeenCounted then
 		checksDone = checksDone + 1
@@ -1346,7 +1342,8 @@ function CheckForObjReverseBugging(self, frameDiff)
 			local eachTypeOfReverseUnit = group.reverseUnitsByType or {}
 			-- key is the object name, value is the count of the units of that object name in this group
 			for objName,_ in eachTypeOfReverseUnit do
-				unitBugDataType = unitBugDataTable[objName]
+				local unitBugDataType = unitBugDataTable[objName]
+				bugDuration = unitBugDataType.frameCount
 				-- WriteToFile("objName.txt",  tostring(objName) .. "\n")
 				-- per-type counts for avg third turn cancellation
 				local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
@@ -1362,7 +1359,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 						group.fixCancelledByType = group.fixCancelledByType or {}
 						-- objName is currently only just this object
 						group.fixCancelledByType[objName] = true
-						fixUnits = false
+						-- fixUnits = false
 						-- print("1st false positive trigger")
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end
@@ -1375,7 +1372,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
-						-- print("3rd false positive trigger")
+						print("3rd false positive trigger")
 						for i = getn(unitsToFixForType), 1, -1 do
 							local unit = unitsReversing[unitsToFixForType[i]]
 							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
@@ -1406,7 +1403,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					end
 				end
 				if not notAllTypesAreBugging then
-					--print("2nd false positive trigger")
+					print("2nd false positive trigger")
 					fixUnits = false
 				end
 			end
@@ -1602,6 +1599,13 @@ function BackingUp(self)
 		AssignGroupId(unitReversing, a, curFrame, self)
 	end
 
+	local group = getglobal(unitReversing.groupId)
+	-- track units that have backedup after receiving a groupId
+	if not unitReversing.expectedChecksFlag then
+		group.expectedChecks = (group.expectedChecks or 0) + 1
+		unitReversing.expectedChecksFlag = true
+	end
+
 	AssignRandomAnchor(self)
 end
 
@@ -1792,6 +1796,9 @@ function GroupUnitOnDeath(self)
 				if group.reverseUnits ~= nil and group.reverseUnits[a] ~= nil then
 					group.reverseUnits[a] = nil
 					group.reverseUnitCount = (group.reverseUnitCount or 1) - 1
+					if group.expectedChecks > 0 then
+						group.expectedChecks = group.expectedChecks - 1
+					end
 				end
 				-- check if theres no units left in the group and if so , clear the global.
 				if group.unitCount <= 0 or next(group.units) == nil then
@@ -1900,7 +1907,7 @@ function BackingUpEnd(self)
 	unitReversing.timesTriggeredFast = 0
 	unitReversing.timesTriggeredNormal = 0
 	unitReversing.fastTurnWas0Frames = false
-	unitReversing.hasBeenCounted = false
+	unitReversing.expectedChecksFlag = false
 
 	--if checksDone == unitReversing.groupId.selectedCount-1 then
 	local clearList = true
