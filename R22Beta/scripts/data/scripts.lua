@@ -76,7 +76,7 @@ unitsReversing = {}
 TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
-CHECKS_DONE_THRESHOLD = 0.9 -- ratio of units that must finish checking before fix decision
+CHECKS_DONE_THRESHOLD = 0.85 -- ratio of units that must finish checking before fix decision
 BUG_THRESHOLD_LARGE_GROUP = 0.25 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
 BUG_THRESHOLD_SMALL_GROUP = 0.35 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
@@ -115,14 +115,14 @@ unitBugDataTable = {
 	--                            equals bugDuration are fixed. Higher values = less aggressive filtering.
 
 	-- NOD UNITS --
-	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
-	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
-	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
-	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
+	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
+	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
 
-	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Mok Scorpion Tank
-	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Scorpion Tank
-	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Scorpion Tank
+	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Mok Scorpion Tank
+	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Scorpion Tank
+	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Scorpion Tank
 	
 	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Stealth Tank
 	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Stealth Tank
@@ -1269,11 +1269,9 @@ function CheckForObjReverseBugging(self, frameDiff)
 	if frameDiff > bugDuration + upperLimit then frameDiff = bugDuration end
 	local inBugRange = frameDiff >= bugDuration - lowerLimit and frameDiff <= bugDuration + upperLimit
 	-- if the average first turn frameDiff for this unit type equals bugDuration, override inBugRange
-	local objName = getObjectName(self)
-	group.unitsToFixByType[objName] = group.unitsToFixByType[objName] or {}
-	local unitsToFixForType = group.unitsToFixByType[objName]
-	local firstTurnUnitCountForType = (group.firstTurnUnitCountByType and group.firstTurnUnitCountByType[objName]) or 0
-	local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or 0
+	local selfObjName = getObjectName(self)
+	group.unitsToFixByType[selfObjName] = group.unitsToFixByType[selfObjName] or {}
+	local unitsToFixForType = group.unitsToFixByType[selfObjName]
 	local isBugging = false
 	if unitReversing.fastTurnWas0Frames then
 		-- if two fast turns yields framediff of 0, it can be assumed the number of frames in -TURN_LEFT or -TURN_RIGHT is 7 (for buggies)
@@ -1294,7 +1292,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 		unitReversing.hasBeenCounted = true
 	end
 	-- First determine if this unit is bugging and add it to the list, dont fix units that are being already fixed
-	if isBugging and not unitReversing.hasBeenFixed then
+	if isBugging then
 		-- unitReversing.hasBeenFixed = true
 		-- cache the units if they are to be fixed in this table
 		unitReversing.bugFrameDiff = frameDiff
@@ -1309,6 +1307,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 		end
 		if not alreadyExists then
 			tinsert(unitsToFixForType, a)
+			--ExecuteAction("NAMED_FLASH", self, 2)
 		end
 	end
 
@@ -1318,82 +1317,102 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- FALSE POSITIVE FILTERS -- 
 
 	local fixUnits = false
-	-- per-type counts for avg third turn cancellation
-	local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
-	local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType[objName]) or 0
-	-- total across all types for thirdTurnMinRatio check
-	local thirdTurnUnitCount = 0
-	if group.thirdTurnUnitCountByType then
-		for _, count in group.thirdTurnUnitCountByType do
-			thirdTurnUnitCount = thirdTurnUnitCount + count
-		end
-	end
+
 	-- WriteToFile("data.txt", "this unit has three turn count: " .. tostring(thirdTurnUnitCount) .. "\n")
 	-- this prevents fixing a group of units that are doing a 180 degree turn.
-	local fixCancelledForType = group.fixCancelledByType and group.fixCancelledByType[objName]
-	if not group.fixCancelled and not fixCancelledForType then
+	--local fixCancelledForType = group.fixCancelledByType and group.fixCancelledByType[objName]
+
+	if not group.fixCancelled then
+		-- WriteToFile("checksDone.txt", "checks done: " .. tostring(checksDone) .. " expected checks: " .. tostring(group.expectedChecks) .. "\n")
 		if checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
 			-- if number of units bugging is less than the count * BUG_THRESHOLD_SMALL_GROUP
 			-- if more than LARGE_GROUP_SIZE units are selected, make the detection more forgiving
+
 			local bugThreshold = selectedCount > LARGE_GROUP_SIZE and BUG_THRESHOLD_LARGE_GROUP or BUG_THRESHOLD_SMALL_GROUP
 			local maxBugging = ceil(selectedCount*bugThreshold)
-			local totalBugging = 0
+			local totalBugging = 0	
+
 			for _, unitType in group.unitsToFixByType do totalBugging = totalBugging + getn(unitType) end
 			if totalBugging <= maxBugging then
 				-- proceed to fix the units
 				fixUnits = true
 				-- print("fixing units")
 			else
+				--print("not fixing units")
 				-- if the total number of bugging units of all types exceeds the threshold, cancel the fix on the entire group.
 				group.fixCancelled = true
 			end
-			-- local thirdTurnUnitCount = group.unitsThatPerformedThirdTurn
-			-- if the average amount of third turns exceeds the threshold for this unit type, cancel the fix for the entire group of that unit type.
-			if thirdTurnUnitCountForType > 1 then
-				local avgThirdTurnCount = ceil(thirdTurnFrameCountForType / thirdTurnUnitCountForType)
-				--WriteToFile("average.txt",  tostring(avgThirdTurnCount) .. "\n")
-				-- (disabled for now)
-				--local avgTurnCountOffset  = enableExtendedCheck and unitBugData.avgTurnCountOffset-1 or unitBugData.avgTurnCountOffset-1
-				if avgThirdTurnCount >= bugDuration-unitBugData.avgTurnCountOffset-1 then
-					group.fixCancelledByType = group.fixCancelledByType or {}
-					group.fixCancelledByType[objName] = true
-					fixUnits = false
-					-- print("1st false positive trigger")
-					--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
-				end
-			end
-			-- FOR ADDING NEW UNITS 
-			--WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCount) .. " is less than " .. tostring(ceil(selectedCount*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(selectedCount*unitBugData.notMovingBackupRatio)) .. "\n")
 
-			-- A high thirdTurnUnitCount indicates units have performed the reverse move bug.
-			-- A low value (0-2) means units are turning normally and not bugging, so cancel the fix.
-			-- Exception: when most units were not moving before backing up (e.g. units that stopped to attack),
-			if not group.thirdTurnCountChecked then
-				group.thirdTurnCountChecked = true
-				if thirdTurnUnitCount < ceil(selectedCount*unitBugData.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*unitBugData.notMovingBackupRatio)) then
-					fixUnits = false
-					--group.fixCancelled = true
-					-- print("2nd false positive trigger")
-					--ExecuteAction("NAMED_FLASH", self, 2)
+			local eachTypeOfReverseUnit = group.reverseUnitsByType or {}
+			-- key is the object name, value is the count of the units of that object name in this group
+			for objName,_ in eachTypeOfReverseUnit do
+				unitBugDataType = unitBugDataTable[objName]
+				-- WriteToFile("objName.txt",  tostring(objName) .. "\n")
+				-- per-type counts for avg third turn cancellation
+				local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
+				-- local thirdTurnUnitCount = group.unitsThatPerformedThirdTurn
+				-- if the average amount of third turns exceeds the threshold for this unit type, cancel the fix for the entire group of that unit type.
+				if thirdTurnUnitCountForType > 1 then
+					local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType[objName]) or 0
+					local avgThirdTurnCount = ceil(thirdTurnFrameCountForType / thirdTurnUnitCountForType)
+					--WriteToFile("average.txt",  tostring(avgThirdTurnCount) .. "\n")
+					-- (disabled for now)
+					--local avgTurnCountOffset  = enableExtendedCheck and unitBugData.avgTurnCountOffset-1 or unitBugData.avgTurnCountOffset-1
+					if avgThirdTurnCount >= bugDuration-unitBugDataType.avgTurnCountOffset-1 then
+						group.fixCancelledByType = group.fixCancelledByType or {}
+						-- objName is currently only just this object
+						group.fixCancelledByType[objName] = true
+						fixUnits = false
+						-- print("1st false positive trigger")
+						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+					end
 				end
-			end
 
-			-- if the average first turn frameDiff for this unit type is within bug range, only fix units whose frameDiff == bugDuration
-			if firstTurnUnitCountForType > 0 then
-				local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
-				--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
-				if avgFirstTurnCount >= bugDuration*unitBugData.avgFirstTurnRatio then
-				    -- print("3rd false positive trigger")
-					for i = getn(unitsToFixForType), 1, -1 do
-						local unit = unitsReversing[unitsToFixForType[i]]
-						if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse then
-							tremove(unitsToFixForType, i)
+				local firstTurnUnitCountForType = (group.firstTurnUnitCountByType and group.firstTurnUnitCountByType[objName]) or 0
+				-- if the average first turn frameDiff for this unit type is within bug range, only fix units whose frameDiff == bugDuration
+				if firstTurnUnitCountForType > 0 then
+					local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or 0
+					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
+					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
+					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
+						-- print("3rd false positive trigger")
+						for i = getn(unitsToFixForType), 1, -1 do
+							local unit = unitsReversing[unitsToFixForType[i]]
+							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
+								--print("removing")
+								tremove(unitsToFixForType, i)
+							end
 						end
 					end
 				end
 			end
 
+			-- FOR ADDING NEW UNITS 
+			-- WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(group.thirdTurnUnitCountByType[selfObjName]) .. " is less than " .. tostring(ceil(selectedCount*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(selectedCount*unitBugData.notMovingBackupRatio)) .. "\n")
+			-- A high thirdTurnUnitCount indicates units have performed the reverse move bug.
+			-- A low value (0-2) means units are turning normally and not bugging, so cancel the fix.
+			-- Exception: when most units were not moving before backing up (e.g. units that stopped to attack),
+			if not group.thirdTurnCountChecked then
+				group.thirdTurnCountChecked = true
+				-- total across all types for thirdTurnMinRatio check
+				local notAllTypesAreBugging = false
+				for objName,_ in eachTypeOfReverseUnit do
+					unitBugDataType = unitBugDataTable[objName]
+					if not (group.thirdTurnUnitCountByType[objName] < ceil(selectedCount*unitBugData.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*unitBugDataType.notMovingBackupRatio))) then
+						notAllTypesAreBugging = true
+						--group.fixCancelledByType[objName] = true
+						-- group.fixCancelled = true
+						--ExecuteAction("NAMED_FLASH", self, 2)
+					end
+				end
+				if not notAllTypesAreBugging then
+					--print("2nd false positive trigger")
+					fixUnits = false
+				end
+			end
 		end
+
+
 		-- Apply fixes if threshold was met
 		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
 		-- checksDone over the threshold can still fix earlier-detected bugging units
@@ -1402,16 +1421,18 @@ function CheckForObjReverseBugging(self, frameDiff)
 			for _, unitType in group.unitsToFixByType do totalToFix = totalToFix + getn(unitType) end
 			if totalToFix > 0 then
 				--WriteToFile("fixUnits.txt", "fixing " .. tostring(totalToFix) .. " units\n\n\n" .. "------------------------------------------------")
-				for _, unitType in group.unitsToFixByType do
-					for i = getn(unitType), 1, -1 do
-						local buggingUnit = unitsReversing[unitType[i]]
-						if buggingUnit ~= nil then
-							local buggingRef = buggingUnit.selfReference
-							--ExecuteAction("NAMED_FLASH", buggingRef, 2)
-							FixBuggingUnit(buggingRef)
-						else
-							if unitType[i] ~= nil then
-								tremove(unitType, i)
+				for k, unitType in group.unitsToFixByType do
+					if not group.fixCancelledByType[k] then
+						for i = getn(unitType), 1, -1 do
+							local buggingUnit = unitsReversing[unitType[i]]
+							if buggingUnit ~= nil then
+								local buggingRef = buggingUnit.selfReference
+								--ExecuteAction("NAMED_FLASH", buggingRef, 2)
+								FixBuggingUnit(buggingRef)
+							else
+								if unitType[i] ~= nil then
+									tremove(unitType, i)
+								end
 							end
 						end
 					end
@@ -1706,13 +1727,22 @@ function AddToUnitSelection(self)
         teamTable.reverseUnits = {}
     end
 
+	if teamTable.reverseUnitsByType == nil then
+        teamTable.reverseUnitsByType = {}
+    end
+
     if teamTable.units[unitId] == nil then
         teamTable.units[unitId] = unitId
         teamTable.unitCount = (teamTable.unitCount or 0) + 1
 		-- if this units hash exists in the unitBugDataTable, it can reverse move therefore we count it
-		if unitBugDataTable[getObjectName(self)] ~= nil then
+		local objName = getObjectName(self)
+		if unitBugDataTable[objName] ~= nil then
 			teamTable.reverseUnits[unitId] = unitId
 			teamTable.reverseUnitCount = (teamTable.reverseUnitCount or 0) + 1
+			-- store a table of current selected unit types
+			if teamTable.reverseUnitsByType[objName] == nil then
+				teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1
+			end
 		end
     end
 end
@@ -1732,6 +1762,14 @@ function RemoveFromUnitSelection(self)
 			if teamTable.reverseUnits ~= nil and teamTable.reverseUnits[unitId] ~= nil then
 				teamTable.reverseUnits[unitId] = nil
 				teamTable.reverseUnitCount = (teamTable.reverseUnitCount or 1) - 1
+
+				local objName = getObjectName(self)
+				if teamTable.reverseUnitsByType[objName] ~= nil then
+					teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 1) - 1
+					if teamTable.reverseUnitsByType[objName] <= 0 then 
+						teamTable.reverseUnitsByType[objName] = nil
+					end
+				end
 			end
 			--print("unit deselected")
         end

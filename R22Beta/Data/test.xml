@@ -77,7 +77,6 @@
 		<Include source="traveler59\Units\t59eradicatorhexapod.xml" type="all"/>
 		<Include source="Reaper17\Units\r17eradicatorhexapod.xml" type="all"/>
 		<Include source="CreateHuskEffect.xml" type="all"/>
-		<Include source="GlobalData/WeaponR21.xml" type="all"/>
 		<Include source="traveler59\Structures\Traveler59TemporalWormhole.xml" type="all"/>
 		<Include source="GlobalData\WeaponR20.xml" type="all"/>
 		<Include source="Alien\Structures\AlienTibHive.xml" type="all"/>
@@ -127,6 +126,7 @@
 		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
 
 		<!-- new objects -->
+		<Include source="GlobalData/WeaponR21.xml" type="all"/>
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
