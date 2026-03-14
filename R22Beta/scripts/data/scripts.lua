@@ -94,7 +94,8 @@ unitBugDataTable = {
 	-- avgTurnCountOffset:        Offset subtracted from bugDuration when comparing the average third-turn frame count.
 	--                            Used to distinguish a legitimate 180-degree turn (whole group turning) from a bug
 	--                            (only a few units stuck turning). Lower values = more sensitive detection (more false
-	--                            positives). Higher values = less sensitive (fewer false positives).
+	--                            positives). Higher values = less sensitive (fewer false positives). 
+	--							  Used in: 1st false positive filter
 	--
 	-- bugCheckLowerLimit:        Lower bound of the frame window used to detect if a unit is reverse-bugging.
 	--                            Lower values detect more units but may increase false positives.
@@ -105,24 +106,27 @@ unitBugDataTable = {
 	-- thirdTurnMinRatio:         Minimum proportion of the group that must have performed a third turn for the fix
 	--                            to apply. If fewer than this ratio turned 3 times, the group is likely doing a normal
 	--                            turn, not bugging. 
+	-- 							  Used in: 3rd false positive filter
 	--
 	-- notMovingBackupRatio:      Proportion of units that were stationary before backing up. If this ratio is exceeded,
 	--                            the fix is allowed even when thirdTurnMinRatio is not met (handles units that were
 	--                            attacking and then reverse-moved).
+	-- 							  Used in: 3rd false positive filter
 	--
 	-- avgFirstTurnRatio:         Multiplier applied to bugDuration when checking the average first-turn frame count.
 	--                            If the average is at or above this ratio of bugDuration, only units whose frameDiff
 	--                            equals bugDuration are fixed. Higher values = less aggressive filtering.
+	--							  Used in: 2nd false positive filter
 
 	-- NOD UNITS --
-	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
-	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
-	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
-	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
+	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
+	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
 
-	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
-	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
-	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
+	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
+	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
+	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
 	
 	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Stealth Tank
 	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Stealth Tank
@@ -1287,7 +1291,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 		isBugging = true
 	end
 
-    if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
+    --if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
 	-- checksDone is more than ceil(unitReversing.groupId.selectedCount*0.5)
 	if not unitReversing.hasBeenCounted then
 		checksDone = checksDone + 1
@@ -1363,7 +1367,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 						-- objName is currently only just this object
 						group.fixCancelledByType[objName] = true
 						-- fixUnits = false
-						--print("1st false positive trigger")
+						--print("1st false positive filter")
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end
 				end
@@ -1375,7 +1379,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
-						--print("3rd false positive trigger")
+						--print("2nd false positive filter")
 						for i = getn(unitsToFixForType), 1, -1 do
 							local unit = unitsReversing[unitsToFixForType[i]]
 							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
@@ -1407,7 +1411,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					end
 				end
 				if not notAllTypesAreBugging then
-					--print("2nd false positive trigger")
+					--print("3rd false positive filter")
 					fixUnits = false
 				end
 			end
@@ -1940,7 +1944,7 @@ function BackingUpEnd(self)
 				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
 				unitsReversing[unitRef].hasBeenFixed = false
-				unitsReversing[unitRef].expectedChecks = false
+				unitsReversing[unitRef].expectedChecksFlag = false
 				unitsReversing[unitRef].hasBeenCounted = false
 				--if EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") then
 				--	ObjectRemoveUpgrade(unitsReversing[unitRef].selfReference, "Upgrade_ReverseMoveSpeedBuff")
