@@ -838,6 +838,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -1120,7 +1126,7 @@
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_NODTechCenterTibCoreMissiles</TriggeredBy>
 			</AudioLoopUpgrade>
-
+			<!--
 			<AttributeModifierAuraUpdate
 				id="ModuleTag_Collisions"
 				RequiresAllTriggers="False"
@@ -1160,6 +1166,7 @@
 					<IncludeThing>BlackHandStealthTank</IncludeThing>
 				</ObjectFilter>
 			</AttributeModifierAuraUpdate>
+			-->
 		</Behaviors>
 		<AI>
 			<AIUpdate
@@ -1170,9 +1177,9 @@
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
-				AILuaEventsList=""
 				BurningDeathTime="0s"
 				TimeToEjectPassengersOnRampage="0"
+				AILuaEventsList="NODStealthTankFunctions_R24"
 				ComboLocomotorSet="NORMAL"
 				ComboLocoAttackDistance="80"
 				IdleTargetTime="0s"

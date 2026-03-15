@@ -827,6 +827,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -1016,7 +1022,7 @@
 				UpdatePeriod="0.5s">
 				<InvisibilityNugget />
 				<RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>
-			</InvisibilityUpdate>	
+			</InvisibilityUpdate>
 			<SlowDeath
 				id="73542D4A"
 				SinkRate="1"
@@ -1109,6 +1115,7 @@
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_NODTechCenterTibCoreMissiles</TriggeredBy>
 			</AudioLoopUpgrade>
+			<!--
 			<AttributeModifierAuraUpdate
                 id="ModuleTag_Collisions"
                 RequiresAllTriggers="False"
@@ -1146,8 +1153,9 @@
 					<IncludeThing>NODStealthTank</IncludeThing>
 					<IncludeThing>MarkedOfKaneStealthTank</IncludeThing>
 					<IncludeThing>BlackHandStealthTank</IncludeThing>
-				 </ObjectFilter>	
+				 </ObjectFilter>
             </AttributeModifierAuraUpdate>
+			-->
 		</Behaviors>
 		<AI>
 			<AIUpdate
@@ -1160,6 +1168,7 @@
 				RampageTime="0s"
 				BurningDeathTime="0s"
 				TimeToEjectPassengersOnRampage="0"
+				AILuaEventsList="NODStealthTankFunctions_R24"
 				ComboLocomotorSet="NORMAL"
 				ComboLocoAttackDistance="80"
 				IdleTargetTime="0s"
@@ -1256,8 +1265,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"

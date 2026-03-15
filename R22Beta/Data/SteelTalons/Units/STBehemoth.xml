@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="us-ascii" ?>
+﻿<?xml version="1.0" encoding="us-ascii" ?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="SteelTalonsBehemoth"
@@ -1807,7 +1807,7 @@
 			<DeployStyleAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="GDIJuggernaughtFunctions_R23"
+				AILuaEventsList="GDIJuggernaughtFunctions_R24"
 				UnpackTime="1s"
 				PackTime="1s"
 				MustDeployToAttack="true">
@@ -2056,3 +2056,5 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+
+

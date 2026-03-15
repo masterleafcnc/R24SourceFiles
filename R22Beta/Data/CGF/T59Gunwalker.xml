@@ -1056,6 +1056,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffGunwalker">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -1141,7 +1147,7 @@
 						Upgrade=""
 						ObjectStatus=""
 						IsPlayerUpgradePermanent="False" />
-				</WeaponSlotHardpoint>		
+				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
 			<Physics
 				id="6D41764B"
@@ -1329,7 +1335,8 @@
 				StandGround="False"
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False">
+				FadeOnPortals="False"
+				AILuaEventsList="GunWalkerFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -1419,8 +1426,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"

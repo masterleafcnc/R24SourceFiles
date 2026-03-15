@@ -53,7 +53,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DMesh:NUSUV_FP" />
-				</ModelConditionState>				
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING">
@@ -75,7 +75,7 @@
 		</Draws>
 		<Behaviors>
 
-			<AttributeModifierPoolUpdate 
+			<AttributeModifierPoolUpdate
 				id="DefaultAttributeModifierPoolUpdate"/>
 			<SquishCollide
 				id ="DefaultSquishCollide"/>
@@ -111,6 +111,12 @@
 				id="ModuleTag_AttributeModifierUpgradeMUCArmor"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="ModuleTag_Stance"
@@ -176,7 +182,7 @@
 					Index="onDeath"
 					FX="FX_GDIVehicleExplodeNoScorch" />
 			</FXListBehavior>
-			<SpecialPower 
+			<SpecialPower
 				id="ModuleTag_GiveUnpackUpgradeSpecialPowerTrigger"
 				SpecialPowerTemplate="SpecialPower_GrantUnpackUpgrade"
 				UpdateModuleStartsAttack="true"
@@ -215,12 +221,13 @@
 			  MinimumCutoff="5000"
 			  UpdateTime="5.0s"
 			   />
-		
+
 		</Behaviors>
 		<AI>
 			<AIUpdate
 				id="ModuleTag_03"
-				AutoAcquireEnemiesWhenIdle="YES"></AIUpdate>
+				AutoAcquireEnemiesWhenIdle="YES"
+				AILuaEventsList="EmissaryFunctions_R24"></AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody
@@ -259,22 +266,22 @@
 		</AudioArraySound>
 		<EvaEvents
       EvaEventDieOwner="UnitLost"
-			EvaEventProductionStarted="UnitConstructionStarted" 
-			EvaEventDamagedOwner="UnitUnderAttack" 	
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
-			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"  
-			EvaEventAmbushed="UnitAmbushed" 
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
-			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted" 
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
 			EvaEventAvailableForProduction="NewConstructionOptions"
 			EvaEventBuildOnHold="BuildOnHold"
-			EvaEventBuildCancelled="BuildCancelled" 
+			EvaEventBuildCancelled="BuildCancelled"
 			EvaEventPromotedOwner="UnitPromoted" />
 			<!-- EvaEventSecondDamageFarFromFirstOwner="UnitUnderAttackAgain"  -->
 		<CrusherInfo
-			CrusherLevel="1" 
+			CrusherLevel="1"
 			CrushableLevel="2" />
 		<ShadowInfo
 			Type="VOLUME" />

@@ -230,7 +230,7 @@
 						New="NUWoDTnkD" />
 					<Texture
 						Original="NUTibCoreMissles"
-						New="NUTibCoreMissles_D" />	
+						New="NUTibCoreMissles_D" />
 					<ParticleSysBone
 						BoneName="BONE_REAR"
 						FXParticleSystemTemplate="NODDamagedSmoke"
@@ -261,7 +261,7 @@
 						New="NUWoDTnkD" />
 					<Texture
 						Original="NUTibCoreMissles"
-						New="NUTibCoreMissles_D" />	
+						New="NUTibCoreMissles_D" />
 					<ParticleSysBone
 						BoneName="BONE_REAR"
 						FXParticleSystemTemplate="NODDamagedFire"
@@ -292,7 +292,7 @@
 						FollowBone="True"
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
-				</ModelConditionState>	
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -307,7 +307,7 @@
 					<Model
 						Name="W3DContainer:NUWODTNKR_SKN"
 						ExtraMesh="False" />
-				</ModelConditionState>				
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -450,7 +450,7 @@
 						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					Flags="MAINTAIN_FRAME_ACROSS_STATES"
@@ -478,7 +478,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					Flags="MAINTAIN_FRAME_ACROSS_STATES"
@@ -506,7 +506,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-		
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					Flags="MAINTAIN_FRAME_ACROSS_STATES"
@@ -534,7 +534,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					Flags="MAINTAIN_FRAME_ACROSS_STATES"
@@ -562,7 +562,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-	
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					Flags="MAINTAIN_FRAME_ACROSS_STATES"
@@ -627,7 +627,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-		
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -721,7 +721,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
- 
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -768,7 +768,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -815,7 +815,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</AnimationState>
-		
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					Flags="MAINTAIN_FRAME_ACROSS_STATES"
@@ -833,7 +833,7 @@
 						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
-			
+
 				<LeftTread>"TreadsL"</LeftTread>
 				<RightTread>"TreadsR"</RightTread>
 				<ArticulationBone
@@ -1021,6 +1021,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="41CCDAEF"
 				StanceTemplate="Generic" />
@@ -1153,7 +1159,7 @@
 						Upgrade=""
 						ObjectStatus=""
 						IsPlayerUpgradePermanent="False" />
-						
+
 					<Weapon
 						Ordering="SECONDARY_WEAPON"
 						Template="BlackHandTankTankTibCoreReload"
@@ -1319,6 +1325,7 @@
 				CanDetectWhileGarrisoned="False"
 				CanDetectWhileContained="False"
 				UseMetaAOI="False" />
+				<!--
 			<AttributeModifierAuraUpdate
                 id="ModuleTag_Collisions"
                 RequiresAllTriggers="False"
@@ -1356,8 +1363,9 @@
 					<IncludeThing>NODStealthTank</IncludeThing>
 					<IncludeThing>MarkedOfKaneStealthTank</IncludeThing>
 					<IncludeThing>BlackHandStealthTank</IncludeThing>
-				 </ObjectFilter>	
+				 </ObjectFilter>
             </AttributeModifierAuraUpdate>
+			-->
 		</Behaviors>
 		<AI>
 			<AIUpdate
@@ -1366,12 +1374,12 @@
 				AutoAcquireEnemiesWhenIdle=""
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList=""
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
 				BurningDeathTime="0s"
 				TimeToEjectPassengersOnRampage="0"
+				AILuaEventsList="NODStealthTankFunctions_R24"
 				ComboLocomotorSet="NORMAL"
 				ComboLocoAttackDistance="80"
 				IdleTargetTime="0s"

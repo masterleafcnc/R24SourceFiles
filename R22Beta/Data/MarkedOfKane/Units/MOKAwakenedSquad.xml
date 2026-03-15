@@ -887,7 +887,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="NodCyborgSquadFunctions_R21g"
+				AILuaEventsList="NodCyborgSquadFunctions_R24"
 				MinCowerTime="3s"
 				MaxCowerTime="5s"
 				RampageTime="0s"
@@ -987,3 +987,4 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+

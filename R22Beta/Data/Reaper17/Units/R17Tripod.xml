@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="Reaper17AnnihilatorTripod"
@@ -2482,7 +2482,7 @@
 			<DeployStyleAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="ReaperTripodFunctions_R23"
+				AILuaEventsList="ReaperTripodFunctions_R24"
 				MustDeployToAttack="false">
 				<UnitAITargetChooserData
 					CanPickDynamicTargets="false"
@@ -2676,3 +2676,5 @@
 		<DisplayUpgrade>Upgrade_Reaper17ConversionReserves</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+
+

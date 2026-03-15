@@ -144,7 +144,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DContainer:GUAAtank_FP" />
-				</ModelConditionState>				
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED">
@@ -198,7 +198,7 @@
 					<Animation
 						AnimationName="GUAAtank_LOWA"
 						AnimationMode="ONCE"
-						AnimationBlendTime="15" />			
+						AnimationBlendTime="15" />
 				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT">
@@ -210,7 +210,7 @@
 						AnimationSpeedFactorMax="1.1" />
 				</AnimationState>
 			</TankDraw>
-      
+
 			<ScriptedModelDraw
 				id="ModuleTag_Particles"
 				OkToChangeModelColor="true">
@@ -262,7 +262,7 @@
 						FXParticleSystemTemplate="TreadDirt"
 						FollowBone="true" />
 -->
-				</AnimationState>        
+				</AnimationState>
 			</ScriptedModelDraw>
 			<TracerModelDraw
 				id="Tracer_Regular"
@@ -362,7 +362,7 @@
 				<ObjectStatusValidation
 					ForbiddenStatus="WEAPON_UPGRADED_03"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>		
+			</TracerModelDraw>
 			<TracerModelDraw
 				id="Tracer_TungstenHeroic"
 				MinLength="75"
@@ -395,7 +395,7 @@
 				<ObjectStatusValidation
 					ForbiddenStatus="WEAPON_UPGRADED_02"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>			
+			</TracerModelDraw>
 			</Draws>
 		<Behaviors>
 			<AttributeModifierPoolUpdate
@@ -481,6 +481,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -798,8 +804,8 @@
 					y="0"
 					z="0" />
 			</CreateAndEnterObjectSpecialPower>
-			
-			
+
+
 			<StatusBitsUpgrade
 				id="ModuleTag_GDINoVeterancyUpgrade"
 				StatusToSet="WEAPON_UPGRADED_02">
@@ -816,8 +822,8 @@
 				id="ModuleTag_ZOCOMNoVeterancyUpgrade"
 				StatusToSet="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>
-			</StatusBitsUpgrade>	
-			
+			</StatusBitsUpgrade>
+
 			<StatusBitsUpgrade
 				id="D305500E"
 				RequiresAllTriggers="False"
@@ -830,8 +836,8 @@
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
 			</StatusBitsUpgrade>
-	
-			
+
+
 			<ModelConditionUpgrade
 				id="081018FB"
 				RequiresAllTriggers="False"
@@ -874,7 +880,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIAAScoutFunctions"
+				AILuaEventsList="GDIAAScoutFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -987,8 +993,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -1043,10 +1049,10 @@
 			CrushAllies="False" />
 		<DisplayUpgrade>Upgrade_GDITungstenAAShells</DisplayUpgrade>
 	</GameObject>
-	
-	
-<!-- *************************************************************** ST SLINGSHOT *********************************************************************** -->	
-	
+
+
+<!-- *************************************************************** ST SLINGSHOT *********************************************************************** -->
+
 	<GameObject
 		id="SteelTalonsAAScout"
 		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS PRELOAD SCORE CAN_REVERSE_MOVE VEHICLE CAN_BE_FAVORITE_UNIT"
@@ -1191,7 +1197,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DContainer:GUAAtank_FP" />
-				</ModelConditionState>				
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED">
@@ -1245,7 +1251,7 @@
 					<Animation
 						AnimationName="GUAAtank_LOWA"
 						AnimationMode="ONCE"
-						AnimationBlendTime="15" />			
+						AnimationBlendTime="15" />
 				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT">
@@ -1257,7 +1263,7 @@
 						AnimationSpeedFactorMax="1.1" />
 				</AnimationState>
 			</TankDraw>
-      
+
 			<ScriptedModelDraw
 				id="ModuleTag_Particles"
 				OkToChangeModelColor="true">
@@ -1309,7 +1315,7 @@
 						FXParticleSystemTemplate="TreadDirt"
 						FollowBone="true" />
 -->
-				</AnimationState>        
+				</AnimationState>
 			</ScriptedModelDraw>
 			<TracerModelDraw
 				id="Tracer_Regular"
@@ -1409,7 +1415,7 @@
 				<ObjectStatusValidation
 					ForbiddenStatus="WEAPON_UPGRADED_03"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>		
+			</TracerModelDraw>
 			<TracerModelDraw
 				id="Tracer_TungstenHeroic"
 				MinLength="75"
@@ -1442,7 +1448,7 @@
 				<ObjectStatusValidation
 					ForbiddenStatus="WEAPON_UPGRADED_02"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>			
+			</TracerModelDraw>
 		</Draws>
 		<Behaviors>
 			<AttributeModifierPoolUpdate
@@ -1528,6 +1534,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -1861,8 +1873,8 @@
 				id="ModuleTag_ZOCOMNoVeterancyUpgrade"
 				StatusToSet="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>
-			</StatusBitsUpgrade>	
-			
+			</StatusBitsUpgrade>
+
 			<StatusBitsUpgrade
 				id="D305500E"
 				RequiresAllTriggers="False"
@@ -1917,7 +1929,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIAAScoutFunctions"
+				AILuaEventsList="GDIAAScoutFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -2030,8 +2042,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -2087,7 +2099,7 @@
 		<DisplayUpgrade>Upgrade_GDITungstenAAShells</DisplayUpgrade>
 	</GameObject>
 
-	
+
 <!-- ********************************************************************* ZOCOM SLINGSHOT ****************************************************************** -->
 
 	<GameObject
@@ -2234,7 +2246,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DContainer:GUAAtank_FP" />
-				</ModelConditionState>				
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED">
@@ -2288,7 +2300,7 @@
 					<Animation
 						AnimationName="GUAAtank_LOWA"
 						AnimationMode="ONCE"
-						AnimationBlendTime="15" />			
+						AnimationBlendTime="15" />
 				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT">
@@ -2300,7 +2312,7 @@
 						AnimationSpeedFactorMax="1.1" />
 				</AnimationState>
 			</TankDraw>
-      
+
 			<ScriptedModelDraw
 				id="ModuleTag_Particles"
 				OkToChangeModelColor="true">
@@ -2352,7 +2364,7 @@
 						FXParticleSystemTemplate="TreadDirt"
 						FollowBone="true" />
 -->
-				</AnimationState>        
+				</AnimationState>
 			</ScriptedModelDraw>
 			<TracerModelDraw
 				id="Tracer_Regular"
@@ -2452,7 +2464,7 @@
 				<ObjectStatusValidation
 					ForbiddenStatus="WEAPON_UPGRADED_03"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>		
+			</TracerModelDraw>
 			<TracerModelDraw
 				id="Tracer_TungstenHeroic"
 				MinLength="75"
@@ -2485,7 +2497,7 @@
 				<ObjectStatusValidation
 					ForbiddenStatus="WEAPON_UPGRADED_02"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>			
+			</TracerModelDraw>
 		</Draws>
 		<Behaviors>
 			<AttributeModifierPoolUpdate
@@ -2571,6 +2583,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -2904,8 +2922,8 @@
 				id="ModuleTag_ZOCOMNoVeterancyUpgrade"
 				StatusToSet="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>
-			</StatusBitsUpgrade>	
-			
+			</StatusBitsUpgrade>
+
 			<StatusBitsUpgrade
 				id="D305500E"
 				RequiresAllTriggers="False"
@@ -2960,7 +2978,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIAAScoutFunctions"
+				AILuaEventsList="GDIAAScoutFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -3073,8 +3091,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -3129,6 +3147,6 @@
 			CrushAllies="False" />
 		<DisplayUpgrade>Upgrade_GDITungstenAAShells</DisplayUpgrade>
 	</GameObject>
-	
-	
+
+
 </AssetDeclaration>

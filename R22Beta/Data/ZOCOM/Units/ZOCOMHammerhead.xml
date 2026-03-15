@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="ZOCOMHammerhead"
@@ -1898,7 +1898,8 @@
 				CanPathThroughUnitsWhileHarvesting="True"
 				FlyOffMap="REVERSE_DIRECTION"
 				DelayAFterLoadingOrUnloading="1s"
-				FlyOffMapOnUnload="False">
+				FlyOffMapOnUnload="False"
+	AILuaEventsList="ZOCOMHammerheadFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -2075,3 +2076,5 @@
 		<DisplayUpgrade>Upgrade_CeramicArmor</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+
+

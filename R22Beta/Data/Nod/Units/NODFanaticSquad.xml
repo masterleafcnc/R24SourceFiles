@@ -720,7 +720,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GenericSquadFunctions_103"
+				AILuaEventsList="GenericSquadFunctions_R24"
 				MinCowerTime="3s"
 				MaxCowerTime="5s"
 				RampageTime="0s"
@@ -820,3 +820,4 @@
 		<DisplayUpgrade>Upgrade_TiberiumInfusion</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>	
+

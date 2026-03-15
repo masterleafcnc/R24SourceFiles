@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 		<GameObject
 		id="Reaper17Explorer"
@@ -717,7 +717,8 @@
 				StandGround="False"
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False" />
+				FadeOnPortals="False" 
+	AILuaEventsList="Reaper17ExplorerFunctions_R24"/>
 		</AI>
 		<Body>
 			<ActiveBody
@@ -835,3 +836,5 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+
+

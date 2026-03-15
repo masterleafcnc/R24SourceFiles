@@ -45,11 +45,11 @@
 				InitialRecoilSpeed="0.1"
 				MaxRecoilDistance="0.1"
 				RecoilDamping="2.0"
-				RecoilSettleSpeed="3.0"				
+				RecoilSettleSpeed="3.0"
 				ExtraPublicBone="FXTracksL FXTracksR FXClawR FXClawL"
 				TrackMarks="EXTnkTrack"
 				TrackMarksLeftBone="FXTracksL"
-				TrackMarksRightBone="FXTracksR"				
+				TrackMarksRightBone="FXTracksR"
 				TreadAnimationRate="0.15"
 				TreadDriveSpeedFraction="0.25"
 				TreadPivotSpeedFraction="0.9">
@@ -70,12 +70,12 @@
 						BoneName="MuzzleFlash_" />
 					<WeaponLaunchBone
 						WeaponSlotType="PRIMARY_WEAPON"
-						BoneName="MuzzleFlash_" />			
+						BoneName="MuzzleFlash_" />
 					<Turret
 						TurretNameKey="TURRET"
 						TurretID="1" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					RetainSubObjects="true"
@@ -87,22 +87,22 @@
 						FXParticleSystemTemplate="NODDamagedSmoke"
 						FollowBone="true" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					RetainSubObjects="true"
 					ConditionsYes="REALLYDAMAGED">
 					<Model
-						Name="W3DContainer:GUHrvstr_SKN1" />	
+						Name="W3DContainer:GUHrvstr_SKN1" />
 					<Texture
 						Original="GUHarvester"
-						New="GUHarvesterD" />											
+						New="GUHarvesterD" />
 					<ParticleSysBone
 						BoneName="FXTracksB"
 						FXParticleSystemTemplate="NODDamagedSmoke"
 						FollowBone="true" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING">
@@ -120,15 +120,15 @@
 						BoneName="ROOTTRANSFORM"
 						FXParticleSystemTemplate="GDIDebrisSmallSmoke"
 						FollowBone="true" />
-				</ModelConditionState>	
-				
+				</ModelConditionState>
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DMesh:GUHrvstr_FP" />
-				</ModelConditionState>	
-				
+				</ModelConditionState>
+
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT">
 					<Animation
@@ -178,7 +178,7 @@
 						AnimationMode="LOOP" />
 				</AnimationState>
 			</TankDraw>
-			
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_FX"
 				OkToChangeModelColor="true">
@@ -187,7 +187,7 @@
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT">
 					<Script>
@@ -201,7 +201,7 @@
 						CurDrawableShowSubObject("Tib_Stop")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="HARVEST_PREPARATION USER_26">
@@ -216,7 +216,7 @@
 						CurDrawableHideSubObject("Tib_Stop")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="HARVEST_PREPARATION">
@@ -231,7 +231,7 @@
 						CurDrawableShowSubObject("Tib_Stop")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="HARVEST_ACTION USER_26">
@@ -244,13 +244,13 @@
 						CurDrawableShowSubObject("TibBlue")
 						CurDrawableHideSubObject("Tib_StopBlue")
 						CurDrawableHideSubObject("Tib_Stop")
-					</Script>	
+					</Script>
 					<ParticleSysBone
 						BoneName="NONE"
 						FXParticleSystemTemplate="HarvesterDustBlue"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="HARVEST_ACTION">
@@ -269,7 +269,7 @@
 						FXParticleSystemTemplate="HarvesterDust"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_LEFT USER_26">
@@ -288,7 +288,7 @@
 						FXParticleSystemTemplate="HarvesterDustBlue"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_LEFT">
@@ -303,7 +303,7 @@
 						CurDrawableShowSubObject("Tib_Stop")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_RIGHT USER_26">
@@ -322,7 +322,7 @@
 						FXParticleSystemTemplate="HarvesterDustBlue"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_RIGHT">
@@ -341,7 +341,7 @@
 						FXParticleSystemTemplate="HarvesterDust"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING USER_26">
@@ -360,7 +360,7 @@
 						FXParticleSystemTemplate="HarvesterDustBlue"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING">
@@ -379,7 +379,7 @@
 						FXParticleSystemTemplate="HarvesterDust"
 						FollowBone="true" />
 				</AnimationState>
-							
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_26">
@@ -394,7 +394,7 @@
 						CurDrawableHideSubObject("Tib_Stop")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING">
@@ -409,7 +409,7 @@
 						CurDrawableShowSubObject("Tib_Stop")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_26">
@@ -425,9 +425,9 @@
 					</Script>
 				</AnimationState>
 			</ScriptedModelDraw>
-			
+
 			<!-- harvester rocks -->
-			
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_FXLeft"
 				OkToChangeModelColor="true"
@@ -448,7 +448,7 @@
 						FXParticleSystemTemplate="HarvesterRocksBlue"
 						FollowBone="true" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="HARVEST_ACTION">
@@ -458,7 +458,7 @@
 						FollowBone="true" />
 				</AnimationState>
 			</ScriptedModelDraw>
-			
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_FXRight"
 				OkToChangeModelColor="true"
@@ -488,9 +488,9 @@
 						FollowBone="true" />
 				</AnimationState>
 			</ScriptedModelDraw>
-			
+
 			<!-- end harvester rocks -->
-			
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_TIB1"
 				OkToChangeModelColor="false">
@@ -499,7 +499,7 @@
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_16">
@@ -507,7 +507,7 @@
 						Name="W3DContainer:GUHrvstr_TIB1" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />		
+						New="GBRefineryBlue" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
@@ -516,16 +516,16 @@
 						Name="W3DContainer:GUHrvstr_TIB1" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />	
+						New="GBRefineryBlue" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_16">
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_20">
@@ -536,16 +536,16 @@
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED USER_20">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB1" />	
+						Name="W3DContainer:GUHrvstr_TIB1" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_20">
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_16">
@@ -553,19 +553,19 @@
 						Name="W3DContainer:GUHrvstr_TIB1" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />	
-				</ModelConditionState>	
-				
+						New="GBRefineryBlue" />
+				</ModelConditionState>
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_20">
 					<Model
 						Name="W3DContainer:GUHrvstr_TIB1" />
-				</ModelConditionState>	
-				
+				</ModelConditionState>
+
 			</ScriptedModelDraw>
-			
-			
+
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_TIB2"
 				OkToChangeModelColor="false">
@@ -574,7 +574,7 @@
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_17">
@@ -582,7 +582,7 @@
 						Name="W3DContainer:GUHrvstr_TIB2" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />	
+						New="GBRefineryBlue" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
@@ -591,16 +591,16 @@
 						Name="W3DContainer:GUHrvstr_TIB2" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />		
+						New="GBRefineryBlue" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_17">
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_21">
@@ -611,16 +611,16 @@
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED USER_21">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB2" />	
+						Name="W3DContainer:GUHrvstr_TIB2" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_21">
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_17">
@@ -628,19 +628,19 @@
 						Name="W3DContainer:GUHrvstr_TIB2" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />			
-				</ModelConditionState>	
-				
+						New="GBRefineryBlue" />
+				</ModelConditionState>
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_21">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB2" />		
+						Name="W3DContainer:GUHrvstr_TIB2" />
 				</ModelConditionState>
-				
+
 			</ScriptedModelDraw>
-			
-			
+
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_TIB3"
 				OkToChangeModelColor="false">
@@ -649,7 +649,7 @@
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_18">
@@ -657,7 +657,7 @@
 						Name="W3DContainer:GUHrvstr_TIB3" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />	
+						New="GBRefineryBlue" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
@@ -666,16 +666,16 @@
 						Name="W3DContainer:GUHrvstr_TIB3" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />		
+						New="GBRefineryBlue" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_18">
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_22">
@@ -686,16 +686,16 @@
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED USER_22">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB3" />	
+						Name="W3DContainer:GUHrvstr_TIB3" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_22">
 					<Model
 						Name="" />
 				</ModelConditionState>
-			
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_18">
@@ -703,18 +703,18 @@
 						Name="W3DContainer:GUHrvstr_TIB3" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />		
-				</ModelConditionState>	
-				
+						New="GBRefineryBlue" />
+				</ModelConditionState>
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_22">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB3" />		
+						Name="W3DContainer:GUHrvstr_TIB3" />
 				</ModelConditionState>
-				
+
 			</ScriptedModelDraw>
-			
+
 			<ScriptedModelDraw
 				id="ModuleTag_Draw_TIB4"
 				OkToChangeModelColor="false">
@@ -723,7 +723,7 @@
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_19">
@@ -731,7 +731,7 @@
 						Name="W3DContainer:GUHrvstr_TIB4" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />	
+						New="GBRefineryBlue" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
@@ -740,16 +740,16 @@
 						Name="W3DContainer:GUHrvstr_TIB4" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />		
+						New="GBRefineryBlue" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_19">
 					<Model
 						Name="" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED USER_23">
@@ -760,16 +760,16 @@
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED USER_23">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB4" />	
+						Name="W3DContainer:GUHrvstr_TIB4" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DYING USER_23">
 					<Model
 						Name="" />
 				</ModelConditionState>
-	
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_19">
@@ -777,17 +777,17 @@
 						Name="W3DContainer:GUHrvstr_TIB4" />
 					<Texture
 						Original="GBRefinery"
-						New="GBRefineryBlue" />			
-				</ModelConditionState>	
-				
+						New="GBRefineryBlue" />
+				</ModelConditionState>
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_23">
 					<Model
-						Name="W3DContainer:GUHrvstr_TIB4" />		
-				</ModelConditionState>					
+						Name="W3DContainer:GUHrvstr_TIB4" />
+				</ModelConditionState>
 			</ScriptedModelDraw>
-	
+
 			<TracerModelDraw
 				id="ModuleTag_TracerModelDraw"
 				MinLength="50.0"
@@ -845,13 +845,13 @@
 					a="0.0" />
 				<ObjectStatusValidation
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</TracerModelDraw>			
+			</TracerModelDraw>
 		</Draws>
 		<Behaviors>
-			
-			<AttributeModifierPoolUpdate 
+
+			<AttributeModifierPoolUpdate
 				id="DefaultAttributeModifierPoolUpdate"/>
-				
+
 			<SquishCollide
 				id ="DefaultSquishCollide"/>
 			<FireWeaponWhenDead
@@ -877,7 +877,7 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>
 			</AttributeModifierUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeBlueOne"
 				RequiresAllTriggers="False"
@@ -891,7 +891,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeBlueOne</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeBlueTwo"
 				RequiresAllTriggers="False"
@@ -905,7 +905,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeBlueTwo</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeBlueThree"
 				RequiresAllTriggers="False"
@@ -919,7 +919,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeBlueThree</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeBlueFour"
 				RequiresAllTriggers="False"
@@ -933,7 +933,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeBlueFour</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeGreenOne"
 				RequiresAllTriggers="False"
@@ -947,7 +947,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeGreenOne</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeGreenTwo"
 				RequiresAllTriggers="False"
@@ -961,7 +961,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeGreenTwo</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeGreenThree"
 				RequiresAllTriggers="False"
@@ -975,7 +975,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeGreenThree</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeGreenFour"
 				RequiresAllTriggers="False"
@@ -989,7 +989,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeGreenFour</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeBlueTib"
 				RequiresAllTriggers="False"
@@ -1003,10 +1003,10 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_UpgradeBlueTib</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<!-- end of upgrades for tib -->
-			
-			
+
+
 			<AttributeModifierUpgrade
 				id="ModuleTag_AttributeModifierUpgradeMUCDamage"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">
@@ -1016,6 +1016,12 @@
 				id="ModuleTag_AttributeModifierUpgradeMUCArmor"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="ModuleTag_Stance"
@@ -1050,7 +1056,7 @@
 			<ReturnToDockSpecialPower
 				id="ModuleTag_ReturnToDock"
 				SpecialPowerTemplate="SpecialPower_ReturnToDock" />
-				
+
 			<WeaponSetUpdate
 				id="ModuleTag_WeaponSetUpdate">
 				<WeaponSlotTurret
@@ -1110,14 +1116,14 @@
 				id="ModuleTag_VeterancyUpgrade"
 				StatusToSet="WEAPON_UPGRADED_01">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
-			</StatusBitsUpgrade> 	
+			</StatusBitsUpgrade>
 		</Behaviors>
 		<AI>
 			<SupplyTruckAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
 				MaxBoxes="200"
-				AILuaEventsList="GDIHarvesterFunctions_R21g"
+				AILuaEventsList="GDIHarvesterFunctions_R24"
 				SupplyWarehouseScanDistance="5000"
 				SupplyCenterActionDelay="100ms"
 				DepletedAnnounceDistance="600"
@@ -1197,18 +1203,18 @@
 		</AudioArraySound>
 		<EvaEvents
 			EvaEventDieOwner="HarvesterLost"
-			EvaEventProductionStarted="UnitConstructionStarted" 
-			EvaEventDamagedOwner="HarvesterUnderAttack" 	
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventDamagedOwner="HarvesterUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
-			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"  
-			EvaEventAmbushed="UnitAmbushed" 
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
-			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted" 
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
 			EvaEventAvailableForProduction="NewConstructionOptions"
 			EvaEventBuildOnHold="BuildOnHold"
-			EvaEventBuildCancelled="BuildCancelled" 
+			EvaEventBuildCancelled="BuildCancelled"
 			EvaEventPromotedOwner="UnitPromoted" />
 		<ShadowInfo
 			Type="VOLUME" />
@@ -1216,7 +1222,7 @@
 			VisionRange="150"
 			ShroudClearingRange="320" />
 		<CrusherInfo
-			CrusherLevel="1" 
+			CrusherLevel="1"
 			CrushableLevel="2" />
 	</GameObject>
 </AssetDeclaration>

@@ -281,7 +281,8 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				MaxCowerTime="5.0s"
 				MinCowerTime="3.0s"
-				CanAttackWhileContained="true">
+				CanAttackWhileContained="true"
+				AILuaEventsList="BHConfessorSquadFunctions_R24">
 				<UnitAITargetChooserData
 					SympathyRange="100.0" />
 			</HordeAIUpdate>
@@ -318,3 +319,4 @@
 			CrusherLevel="0" />
 	</GameObject>
 </AssetDeclaration>
+

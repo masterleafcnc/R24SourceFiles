@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 <!-- Changed KindOf to that of most if not all infantry units (NOT Squads) -->
 <!-- Removed Charged Particle Beams Upgrade -->
@@ -661,7 +661,8 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="YES">
+				AutoAcquireEnemiesWhenIdle="YES"
+	AILuaEventsList="NODConfessorFunctions_R24">
 				<UnitAITargetChooserData
 					SympathyRange="100.0" />
 			</AIUpdate>
@@ -723,3 +724,4 @@
 			ShroudClearingRange="400" />
   </GameObject>
 </AssetDeclaration>
+

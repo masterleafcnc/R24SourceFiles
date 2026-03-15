@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="GDIHammerhead"
@@ -1773,7 +1773,7 @@
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
-				AILuaEventsList=""
+				AILuaEventsList="GDIHammerheadFunctions_R24"
 				BurningDeathTime="0s"
 				TimeToEjectPassengersOnRampage="0"
 				ComboLocomotorSet="NORMAL"
@@ -1976,3 +1976,4 @@
 		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

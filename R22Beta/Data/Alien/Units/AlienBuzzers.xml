@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="AlienBuzzers"
@@ -869,7 +869,8 @@
 				StandGround="False"
 				CanAttackWhileContained="True"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False">
+				FadeOnPortals="False"
+	AILuaEventsList="AlienBuzzersFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.3s"
 					ReacquireDelay="0.3s"
@@ -1022,3 +1023,4 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+

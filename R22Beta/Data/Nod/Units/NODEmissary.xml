@@ -115,6 +115,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="ModuleTag_Stance"
 				StanceTemplate="Generic"
@@ -223,7 +229,8 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_03"
-				AutoAcquireEnemiesWhenIdle="YES"></AIUpdate>
+				AutoAcquireEnemiesWhenIdle="YES"
+				AILuaEventsList="EmissaryFunctions_R24"></AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="Traveler59RazorDrone"
@@ -1536,7 +1536,8 @@
 				StandGround="False"
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False">
+				FadeOnPortals="False"
+	AILuaEventsList="Traveler59RazorDroneFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -1669,3 +1670,4 @@
 		<DisplayUpgrade>Upgrade_Traveler59AdvancedArticulators</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

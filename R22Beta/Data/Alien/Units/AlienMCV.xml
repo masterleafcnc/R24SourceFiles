@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<GameObject
 		id="AlienMCV"
@@ -304,7 +304,8 @@
 		</Behaviors>
 		<AI>
 			<AIUpdate
-				id="ModuleTag_AI" />
+				id="ModuleTag_AI" 
+	AILuaEventsList="AlienMCVFunctions_R24"/>
 		</AI>
 		<Body>
 			<!-- if this value changes, make sure the health of the AlienMCVUnpacking is updated too... -->
@@ -388,3 +389,4 @@
 			CrushableLevel="3" />
 	</GameObject>
 </AssetDeclaration>
+

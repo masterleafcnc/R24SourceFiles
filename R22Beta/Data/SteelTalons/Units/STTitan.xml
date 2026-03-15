@@ -4664,7 +4664,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="SteelTalonsTitanFunctions_103"
+				AILuaEventsList="SteelTalonsTitanFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -4765,7 +4765,7 @@
 			IsSmall="true">
 			<Shape 
 				Type="CYLINDER"
-				MajorRadius="21.0"
+				MajorRadius="20.0"
 				Height = "40.0" 
 				ContactPointGeneration="INFANTRY">
 				<Offset
@@ -4860,3 +4860,4 @@
 		<DisplayUpgrade>Upgrade_AdaptiveArmor</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

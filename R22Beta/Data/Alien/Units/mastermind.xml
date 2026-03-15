@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="AlienMastermind"
@@ -1431,7 +1431,7 @@ try chaining commands here to fire a weapon in a radius of 1 that unemps units f
 				AutoAcquireEnemiesWhenIdle="NO"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList=""
+				AILuaEventsList="AlienMastermindFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1583,3 +1583,4 @@ try chaining commands here to fire a weapon in a radius of 1 that unemps units f
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+

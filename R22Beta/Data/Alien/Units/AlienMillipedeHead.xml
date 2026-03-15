@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<GameObject
 		id="AlienMillipedeHead"
@@ -411,7 +411,8 @@
 			<AIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				>
+				
+	AILuaEventsList="AlienMillipedeHeadFunctions_R24">
 				<UnitAITargetChooserData
 					CanPickDynamicTargets="false"
 					RotateToTargetWhenAiming="false"
@@ -486,3 +487,5 @@
 			CrushDecelerationPercent="40%" />
 	</GameObject>
 </AssetDeclaration>
+
+

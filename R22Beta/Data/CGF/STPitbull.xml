@@ -276,7 +276,7 @@
 					AnimationName="GUPITBULL_ATKA"
 					AnimationBlendTime="15"
 					AnimationMode="LOOP"/>
-				</AnimationState>		
+				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_LEFT_HIGH_SPEED"
@@ -483,6 +483,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -594,7 +600,7 @@
 						Template="GDIPitbullMortar2"
 						Upgrade=""
 						ObjectStatus="WEAPON_UPGRADED_01 RIDER4"
-						IsPlayerUpgradePermanent="False" />				
+						IsPlayerUpgradePermanent="False" />
 				</WeaponSlotHardpoint>
 				<WeaponSlotTurret
 					ID="1"
@@ -841,14 +847,14 @@
 					y="0"
 					z="0" />
 			</CreateAndEnterObjectSpecialPower>
-			
-			
+
+
 			<!-- Mortar toggle enabled at start -->
 			<GrantUpgradeCreate
-				id="ModuleTag_GrantUpgradeCreate" 
+				id="ModuleTag_GrantUpgradeCreate"
 				UpgradeToGrant="Upgrade_SelectLoad_04"
 			/>
-			
+
 			<!-- Mortar Toggle -->
 			<RemoveUpgradeUpgrade
 				id="ModuleTag_CommandSet_RemoveFor_01">
@@ -872,7 +878,7 @@
 				StatusToClear="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_SelectLoad_04</TriggeredBy>
 			</StatusBitsUpgrade>
-			
+
 			<!-- Mortar upgrade status -->
 			<StatusBitsUpgrade
 				id="85B2DF85"
@@ -925,7 +931,7 @@
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_GDIArmoryPitbullMortar</TriggeredBy>
 			</AudioLoopUpgrade>
-			
+
 		</Behaviors>
 		<AI>
 			<AIUpdate
@@ -933,7 +939,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIPitbullFunctions"
+				AILuaEventsList="GDIPitbullFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1054,8 +1060,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -1111,7 +1117,7 @@
 		<DisplayUpgrade>Upgrade_GDIArmoryPitbullMortar</DisplayUpgrade>
 		</GameObject>
 
-		
+
 		<!-- //////////////////////////////////////////////////////////////////////////////////////////// VET PITBULL //////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<GameObject
 		id="SteelTalonsPitbull_Veteran"
@@ -1199,7 +1205,7 @@
 		CanPathThroughGates="True"
 		ShouldClearShotsOnIdle="False"
 		BuildInProximityToSamePlayerStucture="True">
-		<EquivalentTo>SteelTalonsPitbull</EquivalentTo>		
+		<EquivalentTo>SteelTalonsPitbull</EquivalentTo>
 		<DisplayName>Name:GDIPitbull</DisplayName>
 		<ArmorSet
 			Armor="GDIPitbullArmor"
@@ -1390,7 +1396,7 @@
 					AnimationName="GUPITBULL_ATKA"
 					AnimationBlendTime="15"
 					AnimationMode="LOOP"/>
-				</AnimationState>		
+				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_LEFT_HIGH_SPEED"
@@ -1597,6 +1603,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -1708,7 +1720,7 @@
 						Template="GDIPitbullMortar2"
 						Upgrade=""
 						ObjectStatus="WEAPON_UPGRADED_01 RIDER4"
-						IsPlayerUpgradePermanent="False" />						
+						IsPlayerUpgradePermanent="False" />
 				</WeaponSlotHardpoint>
 				<WeaponSlotTurret
 					ID="1"
@@ -1955,14 +1967,14 @@
 					y="0"
 					z="0" />
 			</CreateAndEnterObjectSpecialPower>
-			
-			
+
+
 			<!-- Mortar toggle enabled at start -->
 			<GrantUpgradeCreate
-				id="ModuleTag_GrantUpgradeCreate" 
+				id="ModuleTag_GrantUpgradeCreate"
 				UpgradeToGrant="Upgrade_SelectLoad_04"
 			/>
-			
+
 			<!-- Mortar Toggle -->
 			<RemoveUpgradeUpgrade
 				id="ModuleTag_CommandSet_RemoveFor_01">
@@ -1986,7 +1998,7 @@
 				StatusToClear="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_SelectLoad_04</TriggeredBy>
 			</StatusBitsUpgrade>
-			
+
 			<!-- Mortar upgrade status -->
 			<StatusBitsUpgrade
 				id="85B2DF85"
@@ -2039,7 +2051,7 @@
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_GDIArmoryPitbullMortar</TriggeredBy>
 			</AudioLoopUpgrade>
-			
+
 			<!-- Veterancy grant -->
 			<LevelUpUpgrade
 				id="D0BB7535"
@@ -2058,7 +2070,7 @@
 				UpgradeToGrant="Upgrade_CallSupportUpgrade"
 				ExemptStatus=""
 				GiveOnBuildComplete="False" />
-			
+
 		</Behaviors>
 		<AI>
 			<AIUpdate
@@ -2066,7 +2078,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIPitbullFunctions"
+				AILuaEventsList="GDIPitbullFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -2187,8 +2199,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -2242,9 +2254,9 @@
 			CrushOnlyWhileCharging="False"
 			CrushAllies="False" />
 		<DisplayUpgrade>Upgrade_GDIArmoryPitbullMortar</DisplayUpgrade>
-	</GameObject>		
-		
-		
-		
-		
+	</GameObject>
+
+
+
+
 </AssetDeclaration>

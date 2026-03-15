@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<GameObject
 		id="Reaper17CustomizableVehicle"
@@ -383,7 +383,8 @@
 				AutoAcquireEnemiesWhenIdle="YES ATTACK_BUILDINGS"
 				MaxCowerTime="5.0s"
 				MinCowerTime="3.0s"
-				CanAttackWhileContained="true">
+				CanAttackWhileContained="true"
+	AILuaEventsList="Reaper17CustomizableVehicleFunctions_R24">
 				<UnitAITargetChooserData
 					SympathyRange="25.0" />
 			</HordeAIUpdate>
@@ -424,3 +425,4 @@
 			/>
 	</GameObject>
 </AssetDeclaration>
+

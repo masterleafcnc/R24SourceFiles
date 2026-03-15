@@ -323,7 +323,7 @@
 						New="GUMammUG_SPM" />
 					<Texture
 						Original="HC_GUMamm"
-						New="HC_GUMammUG" />			
+						New="HC_GUMammUG" />
 					<ParticleSysBone
 						BoneName="FXTracksRF"
 						FXParticleSystemTemplate="GDIPPDamagedSmoke"
@@ -762,7 +762,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableShowSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")				
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -782,7 +782,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableShowSubObject("TREADSMOVE")					
+						CurDrawableShowSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -862,7 +862,7 @@
 						CurDrawableShowSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")		
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -882,7 +882,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableShowSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")				
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -902,7 +902,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableShowSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")			
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -922,7 +922,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableShowSubObject("TREADSMOVE")			
+						CurDrawableShowSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -942,7 +942,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")				
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<LeftTread>TreadsL1</LeftTread>
@@ -1365,6 +1365,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffMammoth">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="41CCDAEF"
@@ -1929,7 +1935,7 @@
 			<AIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="GDIMammothFunctions">
+				AILuaEventsList="GDIMammothFunctions_R24">
 				<UnitAITargetChooserData
 					CanPickDynamicTargets="false"
 					SympathyRange="100.0" />
@@ -2025,7 +2031,7 @@
 			<AudioEntry
 				Sound="AudioEvent:MammothIdleLoop"
 				AudioType="soundAmbient" />
-			<AudioEntry 
+			<AudioEntry
 				Sound="AudioEvent:MammothTankTurretMoveLoop" AudioType="soundTurretMoveLoop" />
 		</AudioArraySound>
 		<EvaEvents
@@ -2033,8 +2039,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"

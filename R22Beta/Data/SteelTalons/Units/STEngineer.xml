@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="SteelTalonsCombatEngineer"
@@ -1131,7 +1131,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="CombatEngineerFunctions_R23"
+				AILuaEventsList="CombatEngineerFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1401,3 +1401,4 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+

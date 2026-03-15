@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
     <GameObject
         id="NODRaiderTank"
         SelectPortrait="Portrait_NODScorpionTank"
@@ -639,7 +639,7 @@
                 DefectionFrameCount="300" />
             <AttributeModifierUpgrade
                 id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
-                AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+                AttributeModifier="Modifier_ReverseMoveSpeedBuffScorp">
                 <TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
             </AttributeModifierUpgrade>
         </Behaviors>

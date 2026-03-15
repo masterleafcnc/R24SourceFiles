@@ -1,51 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration>
-    <Tags></Tags>
-    <Includes>
-        <Include
-            type="all"
-            source="DATA:GlobalData/GlobalDefines.xml" />
-        <Include
-            type="all"
-            source="ART:AUSRider_SKL.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRider_SKN.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRider_FP.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRider_FLYA.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRider_TRNL.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRider_TRNR.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRiderR_SKN.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRiderIon.W3X" />
-        <Include
-            type="all"
-            source="ART:AUSRider_K.xml" />
-        <Include
-            type="all"
-            source="ART:AUSRiderD_K.xml" />
-        <Include
-            type="all"
-            source="ART:FXTracerAlien.xml" />
-        <Include
-            type="all"
-            source="ART:FXTracerAlienHeroic.xml" />
-        <Include
-            type="all"
-            source="ART:AUSRiderBones.w3x" />
-        <!-- Base Object -->
-    </Includes>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
     <GameObject
         id="AlienStormrider"
         SelectPortrait="Portrait_ALIENStormrider"
@@ -70,8 +24,7 @@
         TypeDescription="Type:AlienStormrider"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
-        <DisplayName>
-			NAME:ALIENStormrider</DisplayName>
+        <DisplayName>NAME:ALIENStormrider</DisplayName>
         <ArmorSet
             Armor="AlienStormriderArmor"
             DamageFX="VehicleDamageFX" />
@@ -172,6 +125,42 @@
                         FXParticleSystemTemplate="AlienFlyingDamageFireGlow02"
                         FollowBone="true" />
                 </ModelConditionState>
+
+                <ModelConditionState
+                    ParseCondStateType="PARSE_NORMAL"
+                    ConditionsYes="DAMAGED USER_6">
+                    <Model
+                        Name="W3DContainer:AUSRIDER_SKN" />
+                     <Texture
+                        Original="AUSRider"
+                        New="AUSRider_K" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFire01"
+                        FollowBone="true" />
+                </ModelConditionState>
+                <ModelConditionState
+                    ParseCondStateType="PARSE_NORMAL"
+                    ConditionsYes="REALLYDAMAGED USER_6">
+                    <Model
+                        Name="W3DContainer:AUSRIDER_SKN" />
+                      <Texture
+                        Original="AUSRider"
+                        New="AUSRiderD_K" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFire01"
+                        FollowBone="true" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFireGlow01"
+                        FollowBone="true" />
+                    <ParticleSysBone
+                        BoneName="FX_Flame_03"
+                        FXParticleSystemTemplate="AlienFlyingDamageFireGlow02"
+                        FollowBone="true" />
+                </ModelConditionState>
+
                 <ModelConditionState
                     ParseCondStateType="PARSE_NORMAL"
                     ConditionsYes="DAMAGED">

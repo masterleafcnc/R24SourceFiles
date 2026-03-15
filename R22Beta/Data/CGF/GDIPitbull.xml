@@ -276,7 +276,7 @@
 					AnimationName="GUPITBULL_ATKA"
 					AnimationBlendTime="15"
 					AnimationMode="LOOP"/>
-				</AnimationState>		
+				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_LEFT_HIGH_SPEED"
@@ -483,6 +483,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -594,7 +600,7 @@
 						Template="GDIPitbullMortar2"
 						Upgrade=""
 						ObjectStatus="WEAPON_UPGRADED_01 RIDER4"
-						IsPlayerUpgradePermanent="False" />					
+						IsPlayerUpgradePermanent="False" />
 				</WeaponSlotHardpoint>
 				<WeaponSlotTurret
 					ID="1"
@@ -841,14 +847,14 @@
 					y="0"
 					z="0" />
 			</CreateAndEnterObjectSpecialPower>
-			
-			
+
+
 			<!-- Mortar toggle enabled at start -->
 			<GrantUpgradeCreate
-				id="ModuleTag_GrantUpgradeCreate" 
+				id="ModuleTag_GrantUpgradeCreate"
 				UpgradeToGrant="Upgrade_SelectLoad_04"
 			/>
-			
+
 			<!-- Mortar Toggle -->
 			<RemoveUpgradeUpgrade
 				id="ModuleTag_CommandSet_RemoveFor_01">
@@ -872,7 +878,7 @@
 				StatusToClear="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_SelectLoad_04</TriggeredBy>
 			</StatusBitsUpgrade>
-			
+
 			<!-- Mortar upgrade status -->
 			<StatusBitsUpgrade
 				id="85B2DF85"
@@ -932,7 +938,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIPitbullFunctions"
+				AILuaEventsList="GDIPitbullFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1002,7 +1008,7 @@
 <!--
 		<Geometry
 			IsSmall="True">
-	
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1032,7 +1038,7 @@
 					y="0.0"
 					z="0.0" />
 			</Shape>
-	
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1047,7 +1053,7 @@
 					y="3.5"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1062,7 +1068,7 @@
 					y="7.0"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1077,7 +1083,7 @@
 					y="-3.5"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1089,51 +1095,6 @@
 				UsedForHealthBox="True">
 				<Offset
 					x="14.0"
-					y="-7.0"
-					z="0.0" />
-			</Shape>
-			
-			<Shape
-				Type="BOX"
-				MajorRadius="0.18"
-				MinorRadius="0.18"
-				Height="11.5"
-				FrontAngle="0d"
-				Active="True"
-				ContactPointGeneration="VEHICLE"
-				UsedForHealthBox="True">
-				<Offset
-					x="0.0"
-					y="7.0"
-					z="0.0" />
-			</Shape>
-
-			<Shape
-				Type="BOX"
-				MajorRadius="0.18"
-				MinorRadius="0.18"
-				Height="11.5"
-				FrontAngle="0d"
-				Active="True"
-				ContactPointGeneration="VEHICLE"
-				UsedForHealthBox="True">
-				<Offset
-					x="0.0"
-					y="3.5"
-					z="0.0" />
-			</Shape>
-
-			<Shape
-				Type="BOX"
-				MajorRadius="0.18"
-				MinorRadius="0.18"
-				Height="11.5"
-				FrontAngle="0d"
-				Active="True"
-				ContactPointGeneration="VEHICLE"
-				UsedForHealthBox="True">
-				<Offset
-					x="0.0"
 					y="-7.0"
 					z="0.0" />
 			</Shape>
@@ -1149,10 +1110,55 @@
 				UsedForHealthBox="True">
 				<Offset
 					x="0.0"
+					y="7.0"
+					z="0.0" />
+			</Shape>
+
+			<Shape
+				Type="BOX"
+				MajorRadius="0.18"
+				MinorRadius="0.18"
+				Height="11.5"
+				FrontAngle="0d"
+				Active="True"
+				ContactPointGeneration="VEHICLE"
+				UsedForHealthBox="True">
+				<Offset
+					x="0.0"
+					y="3.5"
+					z="0.0" />
+			</Shape>
+
+			<Shape
+				Type="BOX"
+				MajorRadius="0.18"
+				MinorRadius="0.18"
+				Height="11.5"
+				FrontAngle="0d"
+				Active="True"
+				ContactPointGeneration="VEHICLE"
+				UsedForHealthBox="True">
+				<Offset
+					x="0.0"
+					y="-7.0"
+					z="0.0" />
+			</Shape>
+
+			<Shape
+				Type="BOX"
+				MajorRadius="0.18"
+				MinorRadius="0.18"
+				Height="11.5"
+				FrontAngle="0d"
+				Active="True"
+				ContactPointGeneration="VEHICLE"
+				UsedForHealthBox="True">
+				<Offset
+					x="0.0"
 					y="-3.5"
 					z="0.0" />
 			</Shape>
-	
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1167,7 +1173,7 @@
 					y="0.0"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1182,7 +1188,7 @@
 					y="3.5"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1197,7 +1203,7 @@
 					y="7.0"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1212,7 +1218,7 @@
 					y="-3.5"
 					z="0.0" />
 			</Shape>
-		
+
 			<Shape
 				Type="BOX"
 				MajorRadius="0.18"
@@ -1226,23 +1232,23 @@
 					x="-14.0"
 					y="-7.0"
 					z="0.0" />
-			</Shape>	
-	
+			</Shape>
+
 		</Geometry>
 -->
 
 		<Geometry
 			IsSmall="true">
-			
-			
+
+
 			<Shape
 				Type="BOX"
 				MajorRadius="14.0"
 				MinorRadius="7.0"
 				Height="11.5"
 				ContactPointGeneration="VEHICLE" />
-			
-				
+
+
 				<!-- PITBULL SHAPES -->
 				<!--
 			<Shape
@@ -1259,7 +1265,7 @@
 					y="0.0"
 					z="0.0" />
 			</Shape>
-			
+
 			<Shape
 				Type="BOX"
 				MajorRadius="8"
@@ -1274,7 +1280,7 @@
 					y="9"
 					z="0.0" />
 			</Shape>
-			
+
 			<Shape
 				Type="BOX"
 				MajorRadius="8"
@@ -1334,8 +1340,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -1390,11 +1396,11 @@
 			CrushAllies="False" />
 		<DisplayUpgrade>Upgrade_GDIArmoryPitbullMortar</DisplayUpgrade>
 	</GameObject>
-	
-	
+
+
 	<!-- /////////////////////////////////////////////////////////// VET PITBULL //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-	
+
 	<GameObject
 		id="GDIPitbull_Veteran"
 		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS PRELOAD SCORE ATTACK_NEEDS_LINE_OF_SIGHT CAN_REVERSE_MOVE VEHICLE CAN_BE_FAVORITE_UNIT"
@@ -1481,7 +1487,7 @@
 		CanPathThroughGates="True"
 		ShouldClearShotsOnIdle="False"
 		BuildInProximityToSamePlayerStucture="True">
-		<EquivalentTo>GDIPitbull</EquivalentTo>				
+		<EquivalentTo>GDIPitbull</EquivalentTo>
 		<DisplayName>Name:GDIPitbull</DisplayName>
 		<ArmorSet
 			Armor="GDIPitbullArmor"
@@ -1672,7 +1678,7 @@
 					AnimationName="GUPITBULL_ATKA"
 					AnimationBlendTime="15"
 					AnimationMode="LOOP"/>
-				</AnimationState>		
+				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="MOVING TURN_LEFT_HIGH_SPEED"
@@ -1879,6 +1885,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -1990,7 +2002,7 @@
 						Template="GDIPitbullMortar2"
 						Upgrade=""
 						ObjectStatus="WEAPON_UPGRADED_01 RIDER4"
-						IsPlayerUpgradePermanent="False" />					
+						IsPlayerUpgradePermanent="False" />
 				</WeaponSlotHardpoint>
 				<WeaponSlotTurret
 					ID="1"
@@ -2237,14 +2249,14 @@
 					y="0"
 					z="0" />
 			</CreateAndEnterObjectSpecialPower>
-			
-			
+
+
 			<!-- Mortar toggle enabled at start -->
 			<GrantUpgradeCreate
-				id="ModuleTag_GrantUpgradeCreate" 
+				id="ModuleTag_GrantUpgradeCreate"
 				UpgradeToGrant="Upgrade_SelectLoad_04"
 			/>
-			
+
 			<!-- Mortar Toggle -->
 			<RemoveUpgradeUpgrade
 				id="ModuleTag_CommandSet_RemoveFor_01">
@@ -2327,8 +2339,8 @@
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_GDIArmoryPitbullMortar</TriggeredBy>
 			</AudioLoopUpgrade>
-			
-			
+
+
 									<!-- Veterancy grant -->
 			<LevelUpUpgrade
 				id="D0BB7535"
@@ -2354,7 +2366,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIPitbullFunctions"
+				AILuaEventsList="GDIPitbullFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"

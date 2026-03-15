@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<GameObject
 		  id="BlackHandCommando"
@@ -812,7 +812,8 @@
 		<AI>
 			<AIUpdate
 					  id="ModuleTag_AI"
-					  AutoAcquireEnemiesWhenIdle="YES">
+					  AutoAcquireEnemiesWhenIdle="YES"
+	AILuaEventsList="BlackHandCommandoFunctions_R24">
 				<UnitAITargetChooserData
 							SympathyRange="40.0"
 							IdleScanDelay="0.01s" />
@@ -936,3 +937,5 @@
 			CrushAllies="False" />	
 	</GameObject>
 </AssetDeclaration>
+
+

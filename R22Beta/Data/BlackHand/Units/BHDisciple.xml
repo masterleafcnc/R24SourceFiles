@@ -1889,7 +1889,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GenericRagedFunctions_103"
+				AILuaEventsList="GenericRagedFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -2066,3 +2066,4 @@
 		<DisplayUpgrade>Upgrade_BlackHandSecretShrinePurifyingFlame</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

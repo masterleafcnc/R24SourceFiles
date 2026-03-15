@@ -411,7 +411,7 @@
 		ForwardAccelerationPitchFactor="0.5"
 		LateralAccelerationRollFactor="0.0"
 		WheelTurnAngle="18d"
-		ClampOrientationToPathTangent="true"
+		ClampOrientationToPathTangent="false"
 		/>
 
 	<LocomotorTemplate
@@ -579,7 +579,7 @@
 		LateralAccelerationRollFactor="0.75"
 		HasSuspension="true"
 
-		ClampOrientationToPathTangent="true"
+		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
 
 		MaximumWheelExtension="-2.3"
@@ -616,7 +616,7 @@
 		LateralAccelerationRollFactor="0.75"
 		HasSuspension="true"
 
-		ClampOrientationToPathTangent="true"
+		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
 
 		MaximumWheelExtension="-2.3"
@@ -726,20 +726,23 @@
 		id="AlienGunWalkerLocomotor"
 		Name="AlienGunWalkerLocomotor"
 		Surfaces="GROUND RUBBLE CRUSHABLE_OBSTACLE" 
-		TurnTimeSeconds="0.5s" 
-		TurnTimeDamagedSeconds="0.5s" 
+		TurnTimeSeconds="0.75s" 
+		TurnTimeDamagedSeconds="0.75s" 
 		MaxSpeedDamaged="75%"
 		AccelerationSeconds="0.3s"
 		BrakingSeconds="0.01s"
 		SlowTurnRadius="0.0" 
 		FastTurnRadius="5.0" 
 		BehaviorZ="NO_MOTIVE_FORCE"	
-		Appearance="TREADS" 
+		Appearance="FOUR_WHEELS" 
 		UseTerrainSmoothing="true"
 		ForwardAccelerationPitchFactor="0.0"
 		LateralAccelerationRollFactor="0.0"
 		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
+
+		MinTurnSpeed="0%"
+		TurnPivotOffset="-0.1"
 		/>		
 		
 	<LocomotorTemplate
@@ -792,6 +795,36 @@
 		ClampOrientationToPathTangent="false"
 		ReorientIfTurnTooSharp="true"
 		/>		
+
+	<LocomotorTemplate
+		id="NODMobileArtilleryLocomotor"
+		Name="NODMobileArtilleryLocomotor"
+		Surfaces="GROUND CRUSHABLE_OBSTACLE"
+		TurnTimeSeconds="2.0s"
+		TurnTimeDamagedSeconds="4.0s"
+		MaxSpeedDamaged="75%"
+		AccelerationSeconds="0.8s"
+		BrakingSeconds="0.8s"
+		SlowTurnRadius="0.0"
+		FastTurnRadius="20.0"
+		BehaviorZ="NO_MOTIVE_FORCE"
+		Appearance="TREADS"
+		UseTerrainSmoothing="true"
+
+		AccelPitchLimit="5d"
+		BounceKick="1d"
+		PitchStiffness="0.15"
+		RollStiffness="0.25"
+		PitchDamping="0.5"
+		RollDamping="0.5"
+		ForwardAccelerationPitchFactor="0.1"
+		LateralAccelerationRollFactor="0.0"
+
+		HasSuspension="true"
+		CanMoveBackward="false"
+		ClampOrientationToPathTangent="false"
+		ReorientIfTurnTooSharp="true"
+		/>
 		
 	<LocomotorTemplate
 		id="GDIPredatorTankLocomotor"

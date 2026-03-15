@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="us-ascii" ?>
+﻿<?xml version="1.0" encoding="us-ascii" ?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="NODShadow"
@@ -2537,7 +2537,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList=""
+				AILuaEventsList="NODShadowFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -5289,7 +5289,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList=""
+				AILuaEventsList="MarkedOfKaneShadowFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -5504,3 +5504,4 @@
 	
 	
 </AssetDeclaration>
+

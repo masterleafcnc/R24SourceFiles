@@ -286,7 +286,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 					<FXEvent
 						Frame="76"
@@ -385,7 +385,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 			</TruckDraw>
@@ -459,7 +459,7 @@
 						CurDrawableShowSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -474,7 +474,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -489,7 +489,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableShowSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -504,7 +504,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableShowSubObject("TreadsTurnRight")						
+						CurDrawableShowSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -519,7 +519,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableShowSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -534,7 +534,7 @@
 						CurDrawableShowSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -549,7 +549,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableShowSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -564,7 +564,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableShowSubObject("TreadsTurnRight")						
+						CurDrawableShowSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -579,7 +579,7 @@
 						CurDrawableHideSubObject("TreadsStop")
 						CurDrawableShowSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsTurnLeft")
-						CurDrawableHideSubObject("TreadsTurnRight")						
+						CurDrawableHideSubObject("TreadsTurnRight")
 					</Script>
 				</AnimationState>
 				<LeftTread>"TreadsL"</LeftTread>
@@ -745,6 +745,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -1423,7 +1429,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="NodBunkerTruckFunctions"
+				AILuaEventsList="NodBunkerTruckFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"

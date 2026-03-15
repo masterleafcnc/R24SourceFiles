@@ -54,9 +54,7 @@
 				CampnessValueRadius="300"
 				UnitCategory="STRUCTURE"
 				xmlns="uri:ea.com:eala:asset">
-		<DisplayName>
-			Name:GDIWatchTower
-		</DisplayName>
+		<DisplayName>Name:GDIWatchTower</DisplayName>
 		<GameDependency>
 			<RequiredObject>GDIPowerPlant</RequiredObject>
 		</GameDependency>

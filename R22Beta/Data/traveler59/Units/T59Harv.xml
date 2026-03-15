@@ -920,7 +920,7 @@
 				MaxCowerTime="0s"
 				RampageTime="0s"
 				BurningDeathTime="0s"
-				AILuaEventsList="AlienHarvesterFunctions_R21b"
+				AILuaEventsList="AlienHarvesterFunctions_R24"
 				TimeToEjectPassengersOnRampage="0"
 				ComboLocomotorSet="NORMAL"
 				ComboLocoAttackDistance="80"

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="BlackHandConfessor"
@@ -671,7 +671,8 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="YES">
+				AutoAcquireEnemiesWhenIdle="YES"
+	AILuaEventsList="BlackHandConfessorFunctions_R24">
 				<UnitAITargetChooserData
 					SympathyRange="100.0" />
 			</AIUpdate>
@@ -733,3 +734,4 @@
 			ShroudClearingRange="400" />
   </GameObject>
 </AssetDeclaration>
+

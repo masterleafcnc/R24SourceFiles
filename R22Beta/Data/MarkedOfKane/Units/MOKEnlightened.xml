@@ -1608,7 +1608,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="NodImprovedCyborgFunctions_103"
+				AILuaEventsList="NodImprovedCyborgFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1792,3 +1792,4 @@
 		<DisplayUpgrade>Upgrade_MarkedOfKaneTechCenterSuperChargedParticleBeam</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

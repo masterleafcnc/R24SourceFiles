@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<GameObject
 		id="Traveler59AnnihilatorTripod"
@@ -1148,7 +1148,7 @@
 			<DeployStyleAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="TripodFunctions_R23"
+				AILuaEventsList="TripodFunctions_R24"
 				MustDeployToAttack="false">
 				<UnitAITargetChooserData
 					CanPickDynamicTargets="false"
@@ -1291,3 +1291,6 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+
+
+

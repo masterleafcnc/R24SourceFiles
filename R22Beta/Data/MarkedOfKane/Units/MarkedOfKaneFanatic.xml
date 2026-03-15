@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="MarkedOfKaneFanatic"
@@ -1669,7 +1669,8 @@
 				StandGround="False"
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False">
+				FadeOnPortals="False"
+	AILuaEventsList="MarkedOfKaneFanaticFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -1823,3 +1824,4 @@
 		<DisplayUpgrade>Upgrade_MoKTiberiumInfusion</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

@@ -1,0 +1,8 @@
+Issues
+1. UNIT_GUARD_OBJECT is potentially triggering multiple times on units that are already fixed.
+2. Buggy locomotor turn behaviour changes significantly when selected count is over 30.
+3. If a unit is destroyed checksDone > threshold might never be met. Track destroyed units and update the snapshot, or create a new table of units that are destroyed. 
+
+Optimization
+If its possible to find an event handler for UNIT_GUARD_OBJECT, it would be possible to successively push NEXT_MOVE_IS_REVERSE.
+

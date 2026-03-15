@@ -58,12 +58,12 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DMesh:GUSUV_FP" />
-				</ModelConditionState>					
+				</ModelConditionState>
 			</TruckDraw>
 		</Draws>
 		<Behaviors>
 
-			<AttributeModifierPoolUpdate 
+			<AttributeModifierPoolUpdate
 				id="DefaultAttributeModifierPoolUpdate"/>
 			<SquishCollide
 				id ="DefaultSquishCollide"/>
@@ -99,6 +99,12 @@
 				id="ModuleTag_AttributeModifierUpgradeMUCArmor"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="ModuleTag_Stance"
@@ -165,7 +171,7 @@
 					Index="onDeath"
 					FX="FX_GDIVehicleExplode" />
 			</FXListBehavior>
-			<SpecialPower 
+			<SpecialPower
 				id="ModuleTag_GiveUnpackUpgradeSpecialPowerTrigger"
 				SpecialPowerTemplate="SpecialPower_GrantUnpackUpgrade"
 				UpdateModuleStartsAttack="true"
@@ -187,7 +193,7 @@
 				CommandButtonName="Command_UnPackSurveyor"
 				SpecialPowerAIType="SPECIAL_POWER_BUILD_CONYARD" />
 			<!-- No stances because there's no weapon -->
-			<CreateAndEnterObjectSpecialPower 
+			<CreateAndEnterObjectSpecialPower
 				id="ModuleTag_CallForTransport"
 				SpecialPowerTemplate="SpecialPowerCallForTransportSteelTalons"
 				OCL="OCL_SteelTalonsCallForTransportForVehicle"
@@ -197,13 +203,14 @@
 				IdleWhenStartingPower="true">
 				<FXOffset x="25" y="0" z="0"></FXOffset>
 			</CreateAndEnterObjectSpecialPower>
-			
-	
+
+
 		</Behaviors>
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="NO"></AIUpdate>
+				AutoAcquireEnemiesWhenIdle="NO"
+				AILuaEventsList="SurveyorFunctions_R24"></AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody
@@ -245,22 +252,22 @@
 		</AudioArraySound>
 		<EvaEvents
 			EvaEventDieOwner="UnitLost"
-			EvaEventProductionStarted="UnitConstructionStarted" 
-			EvaEventDamagedOwner="UnitUnderAttack" 	
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
-			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"  
-			EvaEventAmbushed="UnitAmbushed" 
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
-			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted" 
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
 			EvaEventAvailableForProduction="NewConstructionOptions"
 			EvaEventBuildOnHold="BuildOnHold"
-			EvaEventBuildCancelled="BuildCancelled" 
+			EvaEventBuildCancelled="BuildCancelled"
 			EvaEventPromotedOwner="UnitPromoted" />
 			<!-- EvaEventSecondDamageFarFromFirstOwner="UnitUnderAttackAgain"  -->
 		<CrusherInfo
-			CrusherLevel="1" 
+			CrusherLevel="1"
 			CrushableLevel="2" />
 		<ShadowInfo
 			Type="VOLUME" />

@@ -247,7 +247,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -296,7 +296,7 @@
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -390,8 +390,8 @@
 						FollowBone="True"
 						OnlyIfOnWater="False"
 						OnlyIfOnLand="False" />
-				</ModelConditionState>				
-				
+				</ModelConditionState>
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -425,10 +425,10 @@
 					<Model
 						Name="W3DMesh:GUPREDTANK_FP"
 						ExtraMesh="False" />
-				</ModelConditionState>				
-				
+				</ModelConditionState>
+
 	<!-- **********************************************************************************  ANIMATIONS ********************************************************* -->
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT"
 					AnimNickName=""
@@ -446,7 +446,7 @@
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsLeft")
 						CurDrawableHideSubObject("TreadsRight")
-						CurDrawableHideSubObject("UGRailAccelerator_01")						
+						CurDrawableHideSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -466,7 +466,7 @@
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableShowSubObject("TreadsLeft")
 						CurDrawableHideSubObject("TreadsRight")
-						CurDrawableShowSubObject("UGRailAccelerator_01")						
+						CurDrawableShowSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -486,7 +486,7 @@
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsLeft")
 						CurDrawableShowSubObject("TreadsRight")
-						CurDrawableShowSubObject("UGRailAccelerator_01")						
+						CurDrawableShowSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -506,7 +506,7 @@
 						CurDrawableShowSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsLeft")
 						CurDrawableHideSubObject("TreadsRight")
-						CurDrawableShowSubObject("UGRailAccelerator_01")						
+						CurDrawableShowSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -526,7 +526,7 @@
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableShowSubObject("TreadsLeft")
 						CurDrawableHideSubObject("TreadsRight")
-						CurDrawableHideSubObject("UGRailAccelerator_01")						
+						CurDrawableHideSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -546,10 +546,10 @@
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsLeft")
 						CurDrawableShowSubObject("TreadsRight")
-						CurDrawableHideSubObject("UGRailAccelerator_01")						
+						CurDrawableHideSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
-			
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -567,10 +567,10 @@
 						CurDrawableShowSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsLeft")
 						CurDrawableHideSubObject("TreadsRight")
-						CurDrawableHideSubObject("UGRailAccelerator_01")						
+						CurDrawableHideSubObject("UGRailAccelerator_01")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -588,10 +588,10 @@
 						CurDrawableHideSubObject("TreadsMove")
 						CurDrawableHideSubObject("TreadsLeft")
 						CurDrawableHideSubObject("TreadsRight")
-						CurDrawableShowSubObject("UGRailAccelerator_01")						
+						CurDrawableShowSubObject("UGRailAccelerator_01")
 					</Script>
-				</AnimationState>	
-				
+				</AnimationState>
+
 				<LeftTread>"TreadsL"</LeftTread>
 				<RightTread>"TreadsR"</RightTread>
 			</TankDraw>
@@ -859,6 +859,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffScorp">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -1233,7 +1239,7 @@
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_AllFactionUpgrade</TriggeredBy>
 			</ModelConditionUpgrade>
-			
+
 			<!--
 			<AudioLoopUpgrade
 				id="96024CFB"
@@ -1254,7 +1260,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIPredatorFunctions"
+				AILuaEventsList="GDIPredatorFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1371,8 +1377,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"

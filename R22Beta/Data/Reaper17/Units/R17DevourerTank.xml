@@ -12,7 +12,7 @@
 		ShockwaveResistance="100"
 		ReinvisibilityDelay="7s"
 		CommandSet="AlienDevourerTankCommandSet"
-		CommandPoints="100" 
+		CommandPoints="100"
 		KindOf="PRELOAD SELECTABLE CAN_ATTACK ATTACK_NEEDS_LINE_OF_SIGHT CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_REVERSE_MOVE CAN_BE_FAVORITE_UNIT"
 		RadarPriority="UNIT"
 		ProductionQueueType="VEHICLE"
@@ -208,9 +208,9 @@
 					</Constants>
 				</FXShader>
 				<ObjectStatusValidation
-					ForbiddenStatus="HAS_TIBERIUM_AMMO" 
+					ForbiddenStatus="HAS_TIBERIUM_AMMO"
 					RequiredStatus="WEAPON_UPGRADED_01" />
-			</LaserDraw>			
+			</LaserDraw>
 			<TruckDraw
 				id="ModuleTag_Draw"
 				OkToChangeModelColor="true"
@@ -247,7 +247,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DMesh:AU_Devourer_FP" />
-				</ModelConditionState>					
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED">
@@ -345,12 +345,12 @@
 					<ParticleSysBone
 						BoneName="NONE"
 						FollowBone="true"
-						FXParticleSystemTemplate="AUBuzzerCombineGlow" />						
+						FXParticleSystemTemplate="AUBuzzerCombineGlow" />
 				</ModelConditionState>
 			</ScriptedModelDraw>
 		</Draws>
 		<Behaviors>
-			<AttributeModifierPoolUpdate 
+			<AttributeModifierPoolUpdate
 				id="DefaultAttributeModifierPoolUpdate"/>
 			<SquishCollide
 				id ="DefaultSquishCollide"/>
@@ -386,6 +386,12 @@
 				id="ModuleTag_AttributeModifierUpgradeMUCArmor"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="ModuleTag_Stance"
@@ -433,11 +439,11 @@
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="AlienDevourerBeamLaser_TiberiumEnhanced"
-						ObjectStatus="HAS_TIBERIUM_AMMO" />		
+						ObjectStatus="HAS_TIBERIUM_AMMO" />
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="AlienDevourerBeamLaser_SuperDuperTiberiumEnhanced"
-						ObjectStatus="HAS_TIBERIUM_AMMO WEAPON_UPGRADED_02" />	
+						ObjectStatus="HAS_TIBERIUM_AMMO WEAPON_UPGRADED_02" />
 					<TurretSettings
 						TurretTurnRate="200"
 						TurretPitchRate="40"
@@ -451,13 +457,13 @@
 							CanAcquireDynamicIfAssignedOutOfRange="true" />
 					</TurretSettings>
 				</WeaponSlotTurret>
-			</WeaponSetUpdate>	
-			
+			</WeaponSetUpdate>
+
 			<SpecialPower
 				id="ModuleTag_TiberiumThiefSpecialPower"
 				SpecialPowerTemplate="SpecialPower_ConversionBeam"
 				UpdateModuleStartsAttack="true" />
-		
+
 			<TiberiumThiefSpecialAbilityUpdate
 				id="ModuleTag_TiberiumThiefSpecialAbilityUpdate"
 				SpecialPowerTemplate="SpecialPower_ConversionBeam"
@@ -471,8 +477,8 @@
 				Options="CHECK_SPECIALPOWER_REQUIREMENTS_DURING_UPDATE"
 				ObjectStatusWhenNotEmpty="HAS_TIBERIUM_AMMO DOES_CONTAIN_TIBERIUM"
 				ModelConditionWhenNotEmpty="USER_2"
-				StartRechargeOnExit="true" />		
-		
+				StartRechargeOnExit="true" />
+
 			<Physics
 				id="ModuleTag_Physics" />
 			<SlowDeath
@@ -502,7 +508,7 @@
 				Radius="15.0"
 				SweepFXList="FX_AlienLaserSweepHit"
 				VeteranSweepFXList="FX_AlienLaserSweepHitHeroic"
-				SweepFXTimeout="0.25s" 
+				SweepFXTimeout="0.25s"
 				LaserId="1" />
 			<LaserState
 				id="ModuleTag_LaserState"
@@ -514,42 +520,42 @@
 				id="ModuleTag_AlienDevourerConversionAI"
 				CommandButtonName="Command_DevourerTankConversionBeam"
 				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
-				SpecialPowerRadius="100" 
-				MinimumCutoff="5" />						
-				
+				SpecialPowerRadius="100"
+				MinimumCutoff="5" />
+
 			<SubObjectsUpgrade
 				id="ModuleTag_ShowDevourerConversionReserveTanks"
 				ShowSubObjects="AU_DEVOURER_UPGR01">
 				<TriggeredBy>Upgrade_Reaper17ConversionReserves</TriggeredBy>
 			</SubObjectsUpgrade>
-			
+
 			<StatusBitsUpgrade
 				id="ModuleTag_VeterancyUpgrade"
 				StatusToSet="WEAPON_UPGRADED_01">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
 			</StatusBitsUpgrade>
-	
+
 			<StatusBitsUpgrade
 				id="ModuleTag_UpgradeWeapon"
 				StatusToSet="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_Reaper17ConversionReserves</TriggeredBy>
 			</StatusBitsUpgrade>
-		
+
 			<AISpecialPowerUpdate
 				id="ModuleTag_AlienDevourerUpgradedConversionAI"
 				CommandButtonName="Command_UpgradedConversionBeam"
 				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
 				SpecialPowerRadius="100"
 				MinimumCutoff="5" />
-			<AudioLoopUpgrade id="ALI_ConversionReserves_Upgrade" SoundToPlay="AudioEvent:ALI_ConversionReserves_Upgrade"> 
-				<TriggeredBy>Upgrade_Reaper17ConversionReserves</TriggeredBy> 
+			<AudioLoopUpgrade id="ALI_ConversionReserves_Upgrade" SoundToPlay="AudioEvent:ALI_ConversionReserves_Upgrade">
+				<TriggeredBy>Upgrade_Reaper17ConversionReserves</TriggeredBy>
 			</AudioLoopUpgrade>
 		</Behaviors>
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="Reaper17DevourerFunctions">
+				AILuaEventsList="Reaper17DevourerFunctions_R24">
 				<UnitAITargetChooserData
 					CanPickDynamicTargets="false"
 					SympathyRange="25.0" />
@@ -603,18 +609,18 @@
 		</AudioArraySound>
 		<EvaEvents
 			EvaEventDieOwner="UnitLost"
-			EvaEventProductionStarted="UnitConstructionStarted" 
-			EvaEventDamagedOwner="UnitUnderAttack" 	
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
-			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"  
-			EvaEventAmbushed="UnitAmbushed" 
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
-			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted" 
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
 			EvaEventAvailableForProduction="NewConstructionOptions"
 			EvaEventBuildOnHold="BuildOnHold"
-			EvaEventBuildCancelled="BuildCancelled" 
+			EvaEventBuildCancelled="BuildCancelled"
 			EvaEventPromotedOwner="UnitPromoted" />
 			<!-- EvaEventSecondDamageFarFromFirstOwner="UnitUnderAttackAgain"  -->
 		<ShadowInfo
@@ -623,7 +629,7 @@
 			VisionRange="350"
 			ShroudClearingRange="400" />
 		<CrusherInfo
-			CrusherLevel="1" 
-			CrushableLevel="2" />	
+			CrusherLevel="1"
+			CrushableLevel="2" />
 	</GameObject>
 </AssetDeclaration>

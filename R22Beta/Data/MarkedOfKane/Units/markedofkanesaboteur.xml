@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="MarkedOfKaneSaboteur"
@@ -2081,7 +2081,7 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AILuaEventsList="EngineerFunctions_R23"
+				AILuaEventsList="EngineerFunctions_R24"
 				AutoAcquireEnemiesWhenIdle="YES">
 				<UnitAITargetChooserData
 					SympathyRange="100.0" />
@@ -2274,3 +2274,6 @@
 		<DisplayUpgrade>Upgrade_MarkedOfKaneCyberneticLegs</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+
+
+

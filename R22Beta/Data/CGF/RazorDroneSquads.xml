@@ -590,7 +590,7 @@
 				AutoAcquireEnemiesWhenIdle="YES ATTACK_BUILDINGS"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GenericSquadFunctions_103"				
+				AILuaEventsList="GenericSquadFunctions_R24"				
 				MinCowerTime="3s"
 				MaxCowerTime="5s"
 				RampageTime="0s"
@@ -1295,7 +1295,7 @@
 				AutoAcquireEnemiesWhenIdle="YES ATTACK_BUILDINGS"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GenericSquadFunctions_103"								
+				AILuaEventsList="GenericSquadFunctions_R24"								
 				MinCowerTime="3s"
 				MaxCowerTime="5s"
 				RampageTime="0s"
@@ -1396,3 +1396,4 @@
 	</GameObject>	
 		
 </AssetDeclaration>
+

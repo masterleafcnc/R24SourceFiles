@@ -770,7 +770,8 @@
 				StandGround="False"
 				CanAttackWhileContained="True"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False">
+				FadeOnPortals="False"
+				AILuaEventsList="GenericSquadFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -857,3 +858,4 @@
 		<DisplayUpgrade>Upgrade_AlienShockTrooperBlinkPack</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

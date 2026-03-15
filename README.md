@@ -1,5 +1,7 @@
 # 1.02+ XML files
-1.02+ R23 source files for reference. Assets may be used but credit would be appreciated.
+Due to the amount of time and effort I’ve invested in R24, I’m asking that other patches do not use or incorporate my work for the next few months. I’d like the focus to remain on 1.02+ during this period.
+In the future, I’m open to sharing, but I want to avoid situations where my work is reused immediately after release. Given the level of investment involved, I believe this is a reasonable request.
+
 This cannot be compiled as a standalone mod as it does not contain all of the 1.02+ files, only the ones I have modified or added over the years.
 
 # R23x Changelog

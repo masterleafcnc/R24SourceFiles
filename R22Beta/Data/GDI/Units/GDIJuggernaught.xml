@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<GameObject
@@ -753,7 +753,7 @@
 			<DeployStyleAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="GDIJuggernaughtFunctions_R23"
+				AILuaEventsList="GDIJuggernaughtFunctions_R24"
 				UnpackTime="1s"
 				PackTime="1s"
 				MustDeployToAttack="true">
@@ -899,3 +899,5 @@
 			CrushDecelerationPercent="0%" />
 	</GameObject>
 </AssetDeclaration>
+
+

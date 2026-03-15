@@ -56,16 +56,170 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 "SkirmishBlackHand", "SkirmishCivilian", "SkirmishCommentator", "SkirmishGDI", "SkirmishMarkedOfKane",
 "SkirmishNeutral", "SkirmishNod", "SkirmishNull", "SkirmishObserver", "SkirmishReaper17","SkirmishSteelTalons", "SkirmishTraveler59", "SkirmishZOCOM", "PlyrCreeps", "PlyrCivilian"}
 
-harvbluetib = {} -- for counting blue tiberium in harvester
-harvgreentib = {} -- for counting green tiberium harvester
--- 1 is green tiberium 0 is for blue 
-bar1 = {} -- for tracking the bar one of the harvester.
-bar2 = {} -- for tracking the bar two of the harvester.
-bar3 = {} -- for tracking the bar three of the harvester.
-bar4 = {} -- for tracking the bar four of the harvester.
+function flushPlayerTeams() 
+	for i = 1, getn(playerTable), 1 do
+		if i <= 8 then
+			local player = tostring("team" .. playerTable[i])
+			setglobal(player, nil)
+		else
+			break
+		end
+	end
+end
+
+flushPlayerTeams() 
 
 harvesterData = {}
 crystalData = {}
+unitsReversing = {}
+
+TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
+NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
+REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
+CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
+BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
+BUG_THRESHOLD_SMALL_GROUP = 0.50 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
+LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
+UNITS_STILL_MOVING_THRESHOLD = 0.75 -- ratio of units still moving before clearing movement flag
+
+unitBugDataTable = {
+	-- PARAMETER DOCUMENTATION:
+	--
+	-- frameCount:                How long a unit's reverse-bug lasts in frames (calculated as 7 * turn speed in seconds).
+	--                            Faster-turning units have shorter durations, slower units have longer ones.
+	--
+	-- reallyDamagedDurationMult: Multiplier applied to frameCount when the unit has the REALLYDAMAGED status.
+	--                            Damaged units turn slower, so the bug lasts longer (e.g. 1.5 = 50% longer duration).
+	--
+	-- avgTurnCountOffset:        Offset subtracted from bugDuration when comparing the average third-turn frame count.
+	--                            Used to distinguish a legitimate 180-degree turn (whole group turning) from a bug
+	--                            (only a few units stuck turning). Lower values = more sensitive detection (more false
+	--                            positives). Higher values = less sensitive (fewer false positives). 
+	--							  Used in: 1st false positive filter
+	--
+	-- bugCheckLowerLimit:        Lower bound of the frame window used to detect if a unit is reverse-bugging.
+	--                            Lower values detect more units but may increase false positives.
+	--
+	-- bugCheckUpperLimit:        Upper bound of the frame window used to detect if a unit is reverse-bugging.
+	--                            Lower values detect more units but may increase false positives.
+	--
+	-- thirdTurnMinRatio:         Minimum proportion of the group that must have performed a third turn for the fix
+	--                            to apply. If fewer than this ratio turned 3 times, the group is likely doing a normal
+	--                            turn, not bugging. 
+	-- 							  Used in: 3rd false positive filter
+	--
+	-- notMovingBackupRatio:      Proportion of units that were stationary before backing up. If this ratio is exceeded,
+	--                            the fix is allowed even when thirdTurnMinRatio is not met (handles units that were
+	--                            attacking and then reverse-moved).
+	-- 							  Used in: 3rd false positive filter
+	--
+	-- avgFirstTurnRatio:         Multiplier applied to bugDuration when checking the average first-turn frame count.
+	--                            If the average is at or above this ratio of bugDuration, only units whose frameDiff
+	--                            equals bugDuration are fixed. Higher values = less aggressive filtering.
+	--							  Used in: 2nd false positive filter
+
+	-- NOD UNITS --
+	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Mok Raider Buggy
+	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Black Hand Raider Buggy
+	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Nod Raider Buggy
+	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Nod Raider Buggy
+
+	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
+	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
+	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
+	
+	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Stealth Tank
+	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Stealth Tank
+
+	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
+
+	["FD8822B1"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Flame Tank
+	["1E1AEEBE"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Flame Tank
+
+	["4F9DF943"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Beam Cannon
+	["3D143A57"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Beam Cannon
+	["7F5C5CDA"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Beam Cannon
+
+	["53024F73"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Reckoner
+	["3000821A"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Reckoner
+	["198BF501"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Reckoner
+
+	["12CEBD57"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Emissary
+	["BDC39D7D"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Emissary
+	["7D560AEC"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Emissary
+
+	["3A3D109A"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Harvester
+	["C3785BFE"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Harvester
+	["21661DFB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Harvester
+
+	["4D1CFBBD"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Specter
+	["9A533FC7"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Specter
+	["7A639A9A"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Specter
+
+	-- SCRIN UNITS --
+	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Seeker
+	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Seeker
+	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Traveler-59 Seeker
+
+	["AF991372"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Devourer Tank
+	["416EFDFF"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Devourer Tank
+
+	["77A0E8A9"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Corruptor
+	["B187F87A"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Corruptor
+	["91B5B69D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Traveler-59 Corruptor
+
+	["1A54C1B"]  = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -6, bugCheckLowerLimit = 3, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.05, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Scrin Gunwalker
+	["7FCCFDE3"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -6, bugCheckLowerLimit = 3, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.05, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Reaper-17 Shard Walker
+	["51430053"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -6, bugCheckLowerLimit = 3, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.05, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Traveler-59 Gunwalker
+
+	-- GDI UNITS --
+	["D01CFD88"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI APC
+	["7CC56843"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Steel Talons APC
+	["64BCB106"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM APC
+	["AF462A8F"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI Veteran APC
+	["BD7701CB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM Veteran APC
+
+	["F714BBD3"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Predator Tank
+	["E6EAD02C"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Predator Tank
+
+	["AE73138F"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Zone Shatterer
+	["2144BD64"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Shatterer
+
+	["12E1C8C8"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 10, bugCheckUpperLimit = 12, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Mammoth Tank
+	["BC0A0849"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 10, bugCheckUpperLimit = 12, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Mammoth Tank
+	["C1B5AB13"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 10, bugCheckUpperLimit = 12, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Mammoth Tank
+	
+	["5A6044BC"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Slingshot
+	["B54034FF"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Slingshot
+	["4AFAC6E8"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Slingshot
+
+	["ZOCOMMCV"] = { frameCount = 20,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM MCV
+	["GDIMCV"] = { frameCount = 20,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI MCV
+	["SteelTalonsMCV"] = { frameCount = 20,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons MCV
+
+	["30354418"] = { frameCount = 35,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM MARV
+	["GDIMARV"] = { frameCount = 35,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI MARV
+	["565BE825"] = { frameCount = 35,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons MARV
+
+	["FD890B01"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Surveyor
+	["921C06CC"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Surveyor
+	["F3F183DD"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Surveyor
+
+	["AD5F0217"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.38 }, -- ZOCOM Pitbull
+	["6FF52808"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.38 }, -- GDI Pitbull
+	["C6387E0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.38 }, -- Steel Talons Pitbull
+	["AABD1C1F"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.38 }, -- ZOCOM Veteran Pitbull
+	["D9E0C318"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.38 }, -- GDI Veteran Pitbull
+	["90BA3D4D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.38 }, -- Steel Talons Veteran Pitbull
+
+	["6FCB2318"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Rig
+	["B48BEDD2"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Rig
+	["82D6E5D8"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Rig
+
+	["D258354"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Harvester
+	["F52AEEDF"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Heavy Harvester
+	["C23B3A15"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 } -- ZOCOM Harvester
+}
 
 MAX_FRAMES_WHEN_NOT_HARVESTED = 900 -- 60s
 MAX_FRAMES_BEING_HARVESTED = 50 -- 15 frames is 1s (gdi/scrin harvest action time)
@@ -168,170 +322,200 @@ function OnSteelTalonsMammothCreated(self)
 	ObjectHideSubObjectPermanently( self, "MuzzleFlash_02", true )
 end
 
-function OnHarvesterCreated(self)
-	local a = getObjectId(self)
-	harvbluetib[a] = 0
-	harvgreentib[a] = 0
-end
-
 function OnMoney1(self)
-	local a = getObjectId(self)
+	local a, hData = GetHarvesterData(self)
 
 	if ObjectTestModelCondition(self, "DOCKING") == false then
-		if  harvesterData[a].isHarvestingBlue then 
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueOne")
-			harvbluetib[a] = harvbluetib[a] + 1
-			bar1[a] = 0
+		if hData.isHarvestingBlue then
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueOne") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueOne")
+			end
+			hData.harvbluetib = hData.harvbluetib + 1
+			hData.bar1 = 0
 		else
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenOne")
-			harvgreentib[a] = harvgreentib[a] + 1
-			bar1[a] = 1			
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenOne") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenOne")
+			end
+			hData.harvgreentib = hData.harvgreentib + 1
+			hData.bar1 = 1
 		end
-		
-		if harvesterData[a].lastCrystalHarvested ~= nil then 
-			HarvestedCrystalCheck(harvesterData[a].lastCrystalHarvested, GetFrame())
+		if hData.lastCrystalHarvested ~= nil then
+			HarvestedCrystalCheck(hData.lastCrystalHarvested, GetFrame())
 		end
 	end
 end
 
 function OnMoney2(self)
-	local a = getObjectId(self)
-	if ObjectTestModelCondition(self, "DOCKING") == false then
-		if  harvesterData[a].isHarvestingBlue then 
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueTwo")
-			harvbluetib[a] = harvbluetib[a] + 1
-			bar2[a] = 0
-		else
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenTwo")
-			harvgreentib[a] = harvgreentib[a] + 1 
-			bar2[a] = 1
-		end
+	local a, hData = GetHarvesterData(self)
 
-		if harvesterData[a].lastCrystalHarvested ~= nil then 
-			HarvestedCrystalCheck(harvesterData[a].lastCrystalHarvested, GetFrame())
+	if ObjectTestModelCondition(self, "DOCKING") == false then
+		if hData.isHarvestingBlue then
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueTwo") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueTwo")
+			end
+			hData.harvbluetib = hData.harvbluetib + 1
+			hData.bar2 = 0
+		else
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenTwo") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenTwo")
+			end
+			hData.harvgreentib = hData.harvgreentib + 1
+			hData.bar2 = 1
+		end
+		if hData.lastCrystalHarvested ~= nil then
+			HarvestedCrystalCheck(hData.lastCrystalHarvested, GetFrame())
 		end
 	end
 end
 
 function OnMoney3(self)
-	local a = getObjectId(self)
+	local a, hData = GetHarvesterData(self)
 
 	if ObjectTestModelCondition(self, "DOCKING") == false then
-		if  harvesterData[a].isHarvestingBlue then 
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueThree")
-			harvbluetib[a] = harvbluetib[a] + 1
-			bar3[a] = 0
+		if hData.isHarvestingBlue then
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueThree") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueThree")
+			end
+			hData.harvbluetib = hData.harvbluetib + 1
+			hData.bar3 = 0
 		else
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenThree")
-			harvgreentib[a] = harvgreentib[a] + 1 
-			bar3[a] = 1
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenThree") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenThree")
+			end
+			hData.harvgreentib = hData.harvgreentib + 1
+			hData.bar3 = 1
 		end
 		UpdateMoney3Frames(self)
 
-		if harvesterData[a].lastCrystalHarvested ~= nil then 
-			HarvestedCrystalCheck(harvesterData[a].lastCrystalHarvested, GetFrame())
+		if hData.lastCrystalHarvested ~= nil then
+			HarvestedCrystalCheck(hData.lastCrystalHarvested, GetFrame())
 		end
 	end
 end
 
 function OnMoney4(self)
-	local a = getObjectId(self)
+	local a, hData = GetHarvesterData(self)
 	if ObjectTestModelCondition(self, "DOCKING") == false then
-		if  harvesterData[a].isHarvestingBlue then 
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueFour")
-			harvbluetib[a] = harvbluetib[a] + 1
-			bar4[a] = 0
+		if hData.isHarvestingBlue then
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueFour") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeBlueFour")
+			end
+			hData.harvbluetib = hData.harvbluetib + 1
+			hData.bar4 = 0
 		else
-			ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenFour")	
-			harvgreentib[a] = harvgreentib[a] + 1 
-			bar4[a] = 1
+			if not EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenFour") then
+				ObjectGrantUpgrade(self, "Upgrade_UpgradeGreenFour")
+			end
+			hData.harvgreentib = hData.harvgreentib + 1
+			hData.bar4 = 1
 		end
 	end
 end
 
 function OnMoneyScrin(self)
-	local a = getObjectId(self)
+	local _, hData = GetHarvesterData(self)
 	if ObjectTestModelCondition(self, "DOCKING") == false then
 		-- only do thiis when 75% full
-		if ObjectTestModelCondition(self, "MONEY_STORED_AMOUNT_3") then 
+		if ObjectTestModelCondition(self, "MONEY_STORED_AMOUNT_3") then
 			UpdateMoney3Frames(self)
 		end
-		if harvesterData[a].lastCrystalHarvested ~= nil then 
-			HarvestedCrystalCheck(harvesterData[a].lastCrystalHarvested, GetFrame())
+		if hData.lastCrystalHarvested ~= nil then
+			HarvestedCrystalCheck(hData.lastCrystalHarvested, GetFrame())
 		end
 	end
 end
 
-function OffMoney1(self) 
-	local a = getObjectId(self)		
-	if ObjectTestModelCondition(self, "DOCKING") then 
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeBlueOne") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueOne") end 
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeGreenOne") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenOne") end
-		if bar1[a] == 0 then harvbluetib[a] = harvbluetib[a] - 1
-			elseif bar1[a] == 1 then harvgreentib[a] = harvgreentib[a] - 1
+function OffMoney1(self)
+	local a, hData = GetHarvesterData(self)
+
+	if ObjectTestModelCondition(self, "DOCKING") then
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueOne") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueOne")
+		end
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenOne") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenOne")
+		end
+		if hData.bar1 == 0 then
+			hData.harvbluetib = hData.harvbluetib - 1
+		elseif hData.bar1 == 1 then
+			hData.harvgreentib = hData.harvgreentib - 1
 		end
 	end
 end
 
 function OffMoney2(self)
-	local a = getObjectId(self)
-	if ObjectTestModelCondition(self, "DOCKING") then 
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeBlueTwo") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueTwo") end 
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeGreenTwo") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenTwo") end	
-		if bar2[a] == 0 then harvbluetib[a] = harvbluetib[a] - 1
-			elseif bar2[a] == 1 then harvgreentib[a] = harvgreentib[a] - 1
+	local a, hData = GetHarvesterData(self)
+
+	if ObjectTestModelCondition(self, "DOCKING") then
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueTwo") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueTwo")
+		end
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenTwo") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenTwo")
+		end
+		if hData.bar2 == 0 then
+			hData.harvbluetib = hData.harvbluetib - 1
+		elseif hData.bar2 == 1 then
+			hData.harvgreentib = hData.harvgreentib - 1
 		end
 	end
 end
 
 function OffMoney3(self)
-	local a = getObjectId(self)
+	local a, hData = GetHarvesterData(self)
+
 	-- clear the amount of frames when docked and unloading tib
-	harvesterData[a].totalFramesHarvested75Full = 0
-	
-	if ObjectTestModelCondition(self, "DOCKING") then 
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeBlueThree") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueThree") end
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeGreenThree") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenThree") end		
-		if bar3[a] == 0 then harvbluetib[a] = harvbluetib[a] - 1
-			elseif bar3[a] == 1 then harvgreentib[a] = harvgreentib[a] - 1
+	hData.totalFramesHarvested75Full = 0
+
+	if ObjectTestModelCondition(self, "DOCKING") then
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueThree") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueThree")
+		end
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenThree") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenThree")
+		end
+		if hData.bar3 == 0 then
+			hData.harvbluetib = hData.harvbluetib - 1
+		elseif hData.bar3 == 1 then
+			hData.harvgreentib = hData.harvgreentib - 1
 		end
 	end
 end
 
 function OffMoney4(self)
-	local a = getObjectId(self)
+	local a, hData = GetHarvesterData(self)
 
-	if ObjectTestModelCondition(self, "DOCKING") then 
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeBlueFour") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueFour") end
-		if ObjectHasUpgrade(self, "Upgrade_UpgradeGreenFour") then ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenFour") end	
-		if bar4[a] == 0 then harvbluetib[a] = harvbluetib[a] - 1
-			elseif bar4[a] == 1 then harvgreentib[a] = harvgreentib[a] - 1
+	if ObjectTestModelCondition(self, "DOCKING") then
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeBlueFour") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeBlueFour")
+		end
+		if EvaluateCondition("UNIT_HAS_UPGRADE",hData.harvesterObjectRef, "Upgrade_UpgradeGreenFour") then
+			ObjectRemoveUpgrade(self, "Upgrade_UpgradeGreenFour")
+		end
+		if hData.bar4 == 0 then
+			hData.harvbluetib = hData.harvbluetib - 1
+		elseif hData.bar4 == 1 then
+			hData.harvgreentib = hData.harvgreentib - 1
 		end
 	end
 end
 
 function OnHarvesterDeath(self)
-	local a = getObjectId(self)
-	if harvbluetib[a] >= 2 then	
+	local a, hData = GetHarvesterData(self)
+	if hData.harvbluetib >= 2 then
 		ObjectCreateAndFireTempWeapon(self, "DeployBlueTiberium")
-	elseif harvbluetib[a] == 1 or harvgreentib[a] > 0 then
+	elseif hData.harvbluetib == 1 or hData.harvgreentib > 0 then
 		ObjectCreateAndFireTempWeapon(self, "DeployGreenTiberium")
 	end
-	
-	harvbluetib[a] = nil
-	harvgreentib[a] = nil
-	bar1[a] = nil
-	bar2[a] = nil
-	bar3[a] = nil 
-	bar4[a] = nil	
-	-- new for tib exploit fix
 	harvesterData[a] = nil
+	GroupUnitOnDeath(self)
 end
 
 function OnHarvesterDeathScrin(self)
 	local a = getObjectId(self)
 	-- new for tib exploit fix
 	harvesterData[a] = nil
+	GroupUnitOnDeath(self)
 end
 
 function OnCyborgSquadCreated_R21g(self)
@@ -475,10 +659,18 @@ function GetHarvesterData(self)
 		local a = getObjectId(self)
 		harvesterData[a] = harvesterData[a] or {
 			totalFramesHarvested75Full = 0, -- total number of frames harvested since becoming >= 75% full of tiberium
-			frameOnHarvest75 = 0, -- the frame since becoming >= 75% full of tiberium 
+			frameOnHarvest75 = 0, -- the frame since becoming >= 75% full of tiberium
 			isHarvestingBlue = false, -- is harvesting blue tiberium or not
-			isAlreadyHarvesting = false, -- the harvester is already harvesting 
-			lastCrystalHarvested = nil -- object reference to the last crystal harvested
+			isAlreadyHarvesting = false, -- the harvester is already harvesting
+			lastCrystalHarvested = nil, -- object reference to the last crystal harvested
+			harvbluetib = 0, -- for counting blue tiberium in harvester
+			harvgreentib = 0, -- for counting green tiberium in harvester
+			harvesterObjectRef = SetObjectReference(self), -- set the object reference once instead of relying on GetRandomNumber()
+			-- 1 is green tiberium 0 is for blue
+			bar1 = nil, -- for tracking the bar one of the harvester
+			bar2 = nil, -- for tracking the bar two of the harvester
+			bar3 = nil, -- for tracking the bar three of the harvester
+			bar4 = nil -- for tracking the bar four of the harvester
 		}
 		return a, harvesterData[a]
 	end
@@ -495,7 +687,8 @@ function GetCrystalData(self)
 			framesBeingHarvested = 0, -- the amount of frames the crystal has been harvested
 			crystalHasBeenReset = false, -- the crystal has undergone a reset
 			dontKillCrystal = false, -- flag to prevent the crystal from being killed with NAMED_KILL
-			beingHarvestedBy = nil -- harvester thats currently harvesting this crystal
+			beingHarvestedBy = nil, -- harvester thats currently harvesting this crystal
+			crystalObjectRef = SetObjectReference(self) -- set the object reference once instead of relying on GetRandomNumber()
 		}
 		return a, crystalData[a]
 	end
@@ -506,12 +699,13 @@ end
 -- self is the crystal, other is the harvester
 function TiberiumEvent(self, other)
 	if self ~= nil and other ~= nil then
-		local ObjectStringRef = "object_" .. floor(GetRandomNumber()*99999999)
-		ExecuteAction("SET_UNIT_REFERENCE", ObjectStringRef , self)
+		-- replace with a less costly method
+		local _, crystal = GetCrystalData(self)
+		-- local ObjectStringRef = "object_" .. floor(GetRandomNumber()*99999999)
+		-- ExecuteAction("SET_UNIT_REFERENCE", crystal.crystalObjectRef, self)
 		-- if IS_BEING_HARVESTED is true
-		if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", ObjectStringRef , 116) then
+		if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", crystal.crystalObjectRef , 116) then
 			local _, data = GetHarvesterData(other)
-			local _, crystal = GetCrystalData(self)
 			--  the harvester is not already harvesting nor crystal is the crystal also being harvested (prevents nearby crystals in the 75 radius from triggering the same event on the same harvester)
 			if not data.isAlreadyHarvesting and crystal.beingHarvestedBy == nil then
 				-- assign the crystal this harvester is currently harvesting to the table 
@@ -520,15 +714,17 @@ function TiberiumEvent(self, other)
 				if strfind(ObjectDescription(self), "BA9F66AB") ~= nil or strfind(ObjectDescription(self), "TiberiumCrystalBlue") ~= nil then
 					data.isHarvestingBlue = true
 					-- show the blue tib fx
-					if ObjectHasUpgrade(other, "Upgrade_UpgradeBlueTib") == 0 then 
-						ObjectGrantUpgrade(other, "Upgrade_UpgradeBlueTib") 
-					end		
+					if not EvaluateCondition("UNIT_HAS_UPGRADE",data.harvesterObjectRef, "Upgrade_UpgradeBlueTib") then
+						--ExecuteAction("SHOW_MILITARY_CAPTION", "granting the blue tib upgrade", 2)
+						ObjectGrantUpgrade(other, "Upgrade_UpgradeBlueTib")
+					end
 				else
 					data.isHarvestingBlue = false
 					-- hide the blue tib fx
-					if ObjectHasUpgrade(other, "Upgrade_UpgradeBlueTib") then 
-						ObjectRemoveUpgrade(other, "Upgrade_UpgradeBlueTib") 
-					end 
+					if EvaluateCondition("UNIT_HAS_UPGRADE",data.harvesterObjectRef, "Upgrade_UpgradeBlueTib") then
+						--ExecuteAction("SHOW_MILITARY_CAPTION", "removing the blue tib upgrade", 2)
+						ObjectRemoveUpgrade(other, "Upgrade_UpgradeBlueTib")
+					end
 				end
 				data.isAlreadyHarvesting = true
 				crystal.beingHarvestedBy = other
@@ -674,7 +870,9 @@ function DelayHuskHide(self)
 	-- ObjectPlaySound(self, "BuildingCaptured")	
 	ObjectPlaySound(self, "BuildingRepaired")	
 
-	if ObjectHasUpgrade(self, "Upgrade_EngineerCapture") then
+	local a = getObjectId(self)
+	-- checks if it has the status bit RIDER1 (41) assigned in the husk xml
+	if EvaluateCondition("UNIT_HAS_UPGRADE",SetObjectReference(self), "Upgrade_EngineerCapture") then
 		ObjectRemoveUpgrade(self, "Upgrade_EngineerCapture")
 	end
 
@@ -702,25 +900,25 @@ end
 function OnHuskCapture(self, slaughterer)
 	if self ~= nil and slaughterer ~= nil then
 		-- upgrade the husk and apply status to it
-		if not ObjectHasUpgrade(slaughterer, "Upgrade_EngineerCapture") then
+		if not EvaluateCondition("UNIT_HAS_UPGRADE",SetObjectReference(slaughterer), "Upgrade_EngineerCapture") then
 			ObjectGrantUpgrade(slaughterer, "Upgrade_EngineerCapture")
 		end
 	
 		local unitType = tostring(ObjectTemplateName(slaughterer))
 		
-		-- gdi marv 30354418                  GDI CCA0AB62
-		-- zocom marv 37F0A5F5                ZOCOM 8E3D36F8
-		-- steel talons marv 565BE825		  STEEL TALONS 38EA5BC0
-		-- nod redeemer D8BE0529              NOD ED46C05A
-		-- black hand redeeemer CD5A5360      BLACK HAND 5D10A932
-		-- mok redeemer 711A18DF              MARKED OF KANE FB53CCFD
-		-- scrin hexapod 1D137C85             SCRIN 5B7BAA66
-		-- reaper hexapod 146C2890            REAPER17 30883A9F
-		-- t59 hexapod A4FD281B               TRAVELER59 92CC2C04
+		-- GDI MARV 30354418                  GDI CCA0AB62
+		-- ZOCOM MARV 37F0A5F5                ZOCOM 8E3D36F8
+		-- STEEL TALONS MARV 565BE825		  STEEL TALONS 38EA5BC0
+		-- NOD REDEEMER D8BE0529              NOD ED46C05A
+		-- BLACK HAND REDEEEMER CD5A5360      BLACK HAND 5D10A932
+		-- MOK REDEEMER 711A18DF              MARKED OF KANE FB53CCFD
+		-- SCRIN HEXAPOD 1D137C85             SCRIN 5B7BAA66
+		-- REAPER HEXAPOD 146C2890            REAPER17 30883A9F
+		-- T59 HEXAPOD A4FD281B               TRAVELER59 92CC2C04
 		
 		local isEpicUnit = false
 		
-		for key, epicUnit in epicUnits do 
+		for _, epicUnit in epicUnits do 
 		   if strfind(unitType, epicUnit) then
 			 isEpicUnit = true
 			 break
@@ -783,7 +981,6 @@ function OnHuskCapture(self, slaughterer)
 			else
 				for i = 1, getn(playerTable), 1 do
 					local teamStr = "team" .. playerTable[i]
-
 					if strfind(huskOwner, teamStr) and strfind(engiOwner, teamStr) == nil and i <= 8 then
 						ObjectCreateAndFireTempWeapon(slaughterer, "AlertHuskPlayer" .. i)
 						break
@@ -827,12 +1024,969 @@ end
 
 -- ###################################################################
 
--- lua specter / juggernaut undeploy fix
---function OnArtilleryUndeploy(self)
---	 if ObjectTestModelCondition(self, "ATTACKING") then
---		 ExecuteAction("NAMED_STOP", self)
---	end
---end
+-- ####################### REVERSE MOVE WORKAROUND ############################
+
+function GetUnitReversingData(self)
+	if self ~= nil then
+		local a = getObjectId(self)
+		unitsReversing[a] = unitsReversing[a] or {
+			firstFrame = 0, -- first frame after reversing while turning fast
+			isReverseMoving = false, -- flag to stop the re-assignment of firstFrame
+			timesTriggeredFast = 0, 
+			timesTriggeredNormal = 0, 
+			hasBeenFixed = false,
+			stringReference = SetObjectReference(self),
+			selfReference = self,
+			groupId = nil,
+			isMovingFlag = true,
+			lastMoveWasReverse = false,
+			lastReverseMoveFrame = 0,
+			hasAlreadyReversed = false,
+			wasAttackingBeforeReverse = false,
+			hasBeenCounted = false,
+			groupIdAssigned = false,
+			fastTurnWas0Frames = false,
+			hasCameToAStop = false,
+			unitAnchor = nil, -- can be an array from closest to farthest
+			bugFrameDiff = 0,
+			expectedChecksFlag = false
+		}
+		return a, unitsReversing[a]
+	end
+	return nil, nil
+end
+
+-- Set the reference of an object in order to assign object status successfully.
+function SetObjectReference(self)
+	local ObjectStringRef = "object_" .. getObjectId(self) .. tostring(GetFrame())
+	ExecuteAction("SET_UNIT_REFERENCE", ObjectStringRef, self)
+	return ObjectStringRef
+end
+
+-- Sets the initial frame when a unit fast turns while backing up, triggered by +BACKING_UP +TURN_LEFT_HIGH_SPEED
+function BackingUpFast(self)
+	local _,unitReversing = GetUnitReversingData(self)
+	--local curFrame = GetFrame()
+end
+
+function GetNumberOfUnitsMoving(selectedUnitList)
+	if selectedUnitList == nil then return 0 end
+	local unitsMoving = 0
+	for _, unitRef in selectedUnitList do
+		if unitsReversing[unitRef] ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "MOVING") then
+			unitsMoving = unitsMoving + 1
+		end
+	end
+	return unitsMoving
+end
+
+-- returns the size of a a key/value pair table
+function getTableSize(t)
+	if t == nil then return end
+	local size = 0
+	for k, _ in t do
+		if k ~= nil then 
+			size = size + 1 
+		end
+	end
+	return size
+end
+
+function UnitIsMoving(self)
+	if self == nil then return end
+	local a = getObjectId(self)
+	if unitsReversing[a] == nil then return end
+	local _,unitReversing = GetUnitReversingData(self)
+	if ObjectTestModelCondition(self, "BACKING_UP") == false and unitReversing.hasCameToAStop then
+		unitReversing.isMovingFlag = true
+		unitReversing.hasCameToAStop = false
+	end
+end
+
+-- checks if most units are moving and if the number returned exceeds the threshold then assign the isMovingFlag to false
+function UnitNoLongerMoving(self)
+	if self == nil then return end
+	local a = getObjectId(self)
+	if unitsReversing[a] == nil then return end
+	local _,unitReversing = GetUnitReversingData(self)
+	--if unitReversing.hasCameToAStop then return end
+	-- check if most units selected are not moving
+	if not unitReversing.hasBeenFixed and unitReversing.groupId ~= nil then
+		local group = getglobal(unitReversing.groupId)
+		if group ~= nil and group.reverseUnits ~= nil and group.reverseUnitCount ~= nil then
+			-- if a few units are moving now but originally before backing up most units were not moving then set moving flag to true
+			local numberOfUnitsMoving = GetNumberOfUnitsMoving(group.reverseUnits)
+			--unitReversing.isMovingFlag = true
+			for _, unitRef in group.reverseUnits do
+				if unitsReversing[unitRef] ~= nil then
+					if numberOfUnitsMoving <= floor(group.reverseUnitCount * UNITS_STILL_MOVING_THRESHOLD)
+					and ((group.unitsNotMovingBeforeBackingUp or 0) >= group.reverseUnitCount * 0.35) and unitsReversing[unitRef].wasAttackingBeforeReverse then
+						unitsReversing[unitRef].isMovingFlag = true
+						unitsReversing[unitRef].hasCameToAStop = false
+					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
+						unitsReversing[unitRef].isMovingFlag = false
+						unitsReversing[unitRef].hasCameToAStop = true
+						--unitsReversing[unitRef].lastMoveWasReverse = false
+						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+					end					
+				end
+			end
+		end
+	-- The player issued a stop (group no longer exists) --
+	elseif not unitReversing.hasBeenFixed and unitReversing.groupId == nil then
+		local playerTeam = tostring(ObjectTeamName(self))
+		local teamTable = getglobal(playerTeam) or nil
+		if teamTable ~= nil and teamTable.reverseUnits ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 then
+			local numberOfUnitsMoving = GetNumberOfUnitsMoving(teamTable.reverseUnits)
+			--WriteToFile("numberOfUnitsMoving.txt",  "units not moving: " .. tostring(numberOfUnitsMoving) .. "teamTable units size: " .. getTableSize(teamTable.reverseUnits) .. "\n")
+			if numberOfUnitsMoving <= floor(teamTable.reverseUnitCount * 0.15) then
+				-- assign isMovingFlag as false only if the last move was a reverse move
+				for _, unitRef in teamTable.reverseUnits do
+					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].wasAttackingBeforeReverse then
+						unitsReversing[unitRef].isMovingFlag = false
+						--unitsReversing[unitRef].lastMoveWasReverse = false
+						unitsReversing[unitRef].hasCameToAStop = true
+						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+					end
+				end
+			end
+		else
+			-- team table is empty (player has deselected it), so clear flags for this unit directly
+			if not unitReversing.wasAttackingBeforeReverse then
+				unitReversing.isMovingFlag = false
+				--unitReversing.lastMoveWasReverse = false
+				unitReversing.hasCameToAStop = true
+				--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+			end
+		end
+	end
+end
+
+function UnitIsAttacking(self)
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+	unitReversing.wasAttackingBeforeReverse = true
+end
+
+function UnitIsNotAttacking(self)
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+	if not EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 1)   
+	end
+end
+
+-- Triggered by +BACKING_UP -TURN_LEFT_HIGH_SPEED and +BACKING_UP -TURN_RIGHT_HIGH_SPEED
+function BackingUpFastTurnEnd(self)
+    local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+	-- prevents this from executing when the unit is not moving or has already reverse moved 
+	if not unitReversing.isMovingFlag or unitReversing.hasAlreadyReversed or unitReversing.timesTriggeredFast > TURN_TRIGGER_COUNT then return end
+	local curFrame = GetFrame()
+	local frameDiff = curFrame - unitReversing.firstFrame
+	local group = getglobal(unitReversing.groupId)
+
+	-- track units that have backedup after receiving a groupId
+	if not unitReversing.expectedChecksFlag then
+		group.expectedChecks = (group.expectedChecks or 0) + 1
+		unitReversing.expectedChecksFlag = true
+	end
+
+	if unitReversing.timesTriggeredFast == 1 then
+		--WriteToFile("backingupfastend.txt",  "object went this long with 1 trigger: " .. tostring(frameDiff) .. "\n")
+		if group ~= nil then
+			local objName = getObjectName(self)
+			group.firstTurnFrameCountByType = group.firstTurnFrameCountByType or {}
+			group.firstTurnUnitCountByType = group.firstTurnUnitCountByType or {}
+			group.firstTurnFrameCountByType[objName] = (group.firstTurnFrameCountByType[objName] or 0) + frameDiff
+			group.firstTurnUnitCountByType[objName] = (group.firstTurnUnitCountByType[objName] or 0) + 1
+		end
+		CheckForObjReverseBugging(self, frameDiff)
+	end
+	
+	if unitReversing.timesTriggeredFast == 2 and unitReversing.groupId ~= nil then
+		--WriteToFile("backingupfastend2.txt",  "object went this long with 2 trigger: " .. tostring(frameDiff) .. "\n")	
+		if group ~= nil then
+			-- objName is the type of unit such as Scorpion Tank, Raider Buggy, Seeker Tank
+			local objName = getObjectName(self)
+			group.thirdTurnFrameCountByType = group.thirdTurnFrameCountByType or {}
+			group.thirdTurnUnitCountByType = group.thirdTurnUnitCountByType or {}
+			group.thirdTurnFrameCountByType[objName] = (group.thirdTurnFrameCountByType[objName] or 0) + frameDiff
+			group.thirdTurnUnitCountByType[objName] = (group.thirdTurnUnitCountByType[objName] or 0) + 1
+		end
+	end
+	unitReversing.timesTriggeredFast = unitReversing.timesTriggeredFast + 1
+end	
+
+-- Triggered by +BACKING_UP -TURN_LEFT and +BACKING_UP -TURN_RIGHT
+function BackingUpTurnEnd(self)
+    local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+	if not unitReversing.isMovingFlag or unitReversing.hasAlreadyReversed then return end
+	local timesToTrigger = TURN_TRIGGER_COUNT
+	local frameDiff = GetFrame() - unitReversing.firstFrame
+
+   if unitReversing ~= nil and unitReversing.timesTriggeredNormal < timesToTrigger then
+		unitReversing.timesTriggeredNormal = unitReversing.timesTriggeredNormal + 1
+		if unitReversing.fastTurnWas0Frames then
+			--WriteToFile("backingupfastendthree.txt",  "object went this long with 3 triggers: " .. tostring(frameDiff) .. "\n")
+			CheckForObjReverseBugging(self, frameDiff)
+		end
+	end
+end
+
+function CheckForObjReverseBugging(self, frameDiff)
+	local a, unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil or unitReversing.groupId == nil then return end
+	local unitBugData = unitBugDataTable[getObjectName(self)]
+	if unitBugData == nil then return end
+	local bugDuration = unitBugData.frameCount
+	-- check if unit is really damaged
+	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and bugDuration*unitBugData.reallyDamagedDurationMult or bugDuration
+	local group = getglobal(unitReversing.groupId)
+	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return end
+	group.checksDone = group.checksDone or 0
+	group.unitsToFixByType = group.unitsToFixByType or {}
+	group.fixCancelled = group.fixCancelled or false
+	group.fixCancelledByType = group.fixCancelledByType or {}
+	group.thirdTurnFrameCountByType = group.thirdTurnFrameCountByType or {}
+	group.thirdTurnUnitCountByType = group.thirdTurnUnitCountByType or {}
+	group.firstTurnFrameCountByType = group.firstTurnFrameCountByType or {}
+	group.firstTurnUnitCountByType = group.firstTurnUnitCountByType or {}
+	group.expectedChecks = group.expectedChecks or 0
+	group.unitsNotMovingBeforeBackingUp = group.unitsNotMovingBeforeBackingUp or 0
+	local selectedUnitList = group.reverseUnits
+	local selectedCount = group.reverseUnitCount
+	if selectedCount <= 0 then return end
+	--WriteToFile("groupId.txt",  tostring(groupId) .. "\n")
+	-- edge case for when units are attacking to permit an extended range check (disabled for now)
+	--local enableExtendedCheck = unitReversing.wasAttackingBeforeReverse and (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*0.50))
+	unitReversing.wasAttackingBeforeReverse = false
+	-- when units attack they always stop moving before a reverse move is issued
+	--if (unitReversing.wasAttackingBeforeReverse and enableExtendedCheck) then print("attacking") end
+	--local lowerLimit = enableExtendedCheck and unitBugData.bugCheckLowerLimit+1 or unitBugData.bugCheckLowerLimit
+	--local upperLimit = enableExtendedCheck and unitBugData.bugCheckUpperLimit+1 or unitBugData.bugCheckUpperLimit
+	local lowerLimit = unitBugData.bugCheckLowerLimit
+	local upperLimit = unitBugData.bugCheckUpperLimit
+	-- WriteToFile("upperLimit.txt",  tostring(upperLimit) .. "\n")
+
+	-- lowerLimit causes false positives when units are ordered to move at more than screen distance
+	if frameDiff > bugDuration + upperLimit then frameDiff = bugDuration end
+	local inBugRange = frameDiff >= bugDuration - lowerLimit and frameDiff <= bugDuration + upperLimit
+	-- if the average first turn frameDiff for this unit type equals bugDuration, override inBugRange
+	local selfObjName = getObjectName(self)
+	group.unitsToFixByType[selfObjName] = group.unitsToFixByType[selfObjName] or {}
+	local unitsToFixForType = group.unitsToFixByType[selfObjName]
+	local isBugging = false
+	if unitReversing.fastTurnWas0Frames then
+		-- if two fast turns yields framediff of 0, it can be assumed the number of frames in -TURN_LEFT or -TURN_RIGHT is 7 (for buggies)
+		if inBugRange then
+			isBugging = true
+		end
+		 --ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+	elseif frameDiff == 0 then
+		unitReversing.fastTurnWas0Frames = true
+	elseif inBugRange then
+		isBugging = true
+	end
+
+    --if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
+	-- checksDone is more than ceil(unitReversing.groupId.selectedCount*0.5)
+	if not unitReversing.hasBeenCounted then
+		group.checksDone = group.checksDone + 1
+		unitReversing.hasBeenCounted = true
+	end
+	-- First determine if this unit is bugging and add it to the list, dont fix units that are being already fixed
+	if isBugging then
+		-- unitReversing.hasBeenFixed = true
+		-- cache the units if they are to be fixed in this table
+		unitReversing.bugFrameDiff = frameDiff
+		--ExecuteAction("NAMED_FLASH", self, 2)
+		-- verify the unit doesnt already exist in the table to prevent duplicate entries
+		local alreadyExists = false
+		for _, v in unitsToFixForType do
+			if v == a then
+				alreadyExists = true
+				break
+			end
+		end
+		if not alreadyExists then
+			tinsert(unitsToFixForType, a)
+			--ExecuteAction("NAMED_FLASH", self, 2)
+		end
+	end
+
+	-- WriteToFile("checksDoneInt.txt",  tostring(checksDone) .. " num of units bugging: " .. tostring(getn(unitsToFixForType)) "\n")
+	-- Now check threshold after unitsToFixByType has been updated
+
+	-- FALSE POSITIVE FILTERS -- 
+	local fixUnits = false
+	-- WriteToFile("data.txt", "this unit has three turn count: " .. tostring(thirdTurnUnitCount) .. "\n")
+	-- this prevents fixing a group of units that are doing a 180 degree turn.
+	--local fixCancelledForType = group.fixCancelledByType and group.fixCancelledByType[objName]
+
+	if not group.fixCancelled then
+		-- WriteToFile("checksDone.txt", "checks done: " .. tostring(group.checksDone) .. " expected checks: " .. tostring(group.expectedChecks) .. "\n")
+		if group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+			-- if number of units bugging is less than the count * BUG_THRESHOLD_SMALL_GROUP
+			-- if more than LARGE_GROUP_SIZE units are selected, make the detection more forgiving
+
+			local bugThreshold = selectedCount > LARGE_GROUP_SIZE and BUG_THRESHOLD_LARGE_GROUP or BUG_THRESHOLD_SMALL_GROUP
+			local maxBugging = ceil(selectedCount*bugThreshold)
+			local totalBugging = 0	
+
+			for _, unitType in group.unitsToFixByType do totalBugging = totalBugging + getn(unitType) end
+			--ExecuteAction("SHOW_MILITARY_CAPTION", tostring(totalBugging), 2)	
+			--WriteToFile("totalBugging.txt", tostring(totalBugging) .. "\n")
+			if totalBugging <= maxBugging then
+				-- proceed to fix the units
+				fixUnits = true
+			else
+				group.fixCancelled = true
+			end
+
+			-- key is the object name, value is the count of the units of that object name in this group
+			for objName,_ in group.reverseUnitsByType do
+				local unitBugDataType = unitBugDataTable[objName]
+				bugDuration = unitBugDataType.frameCount
+				-- WriteToFile("objName.txt",  tostring(objName) .. "\n")
+				-- per-type counts for avg third turn cancellation
+				local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
+				-- local thirdTurnUnitCount = group.unitsThatPerformedThirdTurn
+				-- if the average amount of third turns exceeds the threshold for this unit type, cancel the fix for the entire group of that unit type.
+				if thirdTurnUnitCountForType > 1 then
+					local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType[objName]) or 0
+					local avgThirdTurnCount = ceil(thirdTurnFrameCountForType / thirdTurnUnitCountForType)
+					--WriteToFile("average.txt",  tostring(avgThirdTurnCount) .. "\n")
+					-- (disabled for now)
+					--local avgTurnCountOffset  = enableExtendedCheck and unitBugData.avgTurnCountOffset-1 or unitBugData.avgTurnCountOffset-1
+					if avgThirdTurnCount >= bugDuration-unitBugDataType.avgTurnCountOffset-1 then
+						group.fixCancelledByType = group.fixCancelledByType or {}
+						-- objName is currently only just this object
+						group.fixCancelledByType[objName] = true
+						-- fixUnits = false
+						--print("1st false positive filter")
+						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+					end
+				end
+
+				local firstTurnUnitCountForType = (group.firstTurnUnitCountByType and group.firstTurnUnitCountByType[objName]) or 0
+				-- if the average first turn frameDiff for this unit type is within bug range, only fix units whose frameDiff == bugDuration
+				if firstTurnUnitCountForType > 0 then
+					local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or 0
+					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
+					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
+					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
+						--print("2nd false positive filter")
+						for i = getn(unitsToFixForType), 1, -1 do
+							local unit = unitsReversing[unitsToFixForType[i]]
+							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
+								--print("removing")
+								--tremove(unitsToFixForType, i)
+								group.fixCancelledByType[objName] = true
+							end
+						end
+					end
+				end
+			end
+
+			-- FOR ADDING NEW UNITS 
+			-- A high thirdTurnUnitCount indicates units have performed the reverse move bug.
+			-- A low value (0-2) means units are turning normally and not bugging, so cancel the fix.
+			-- Exception: when most units were not moving before backing up (e.g. units that stopped to attack),
+			-- used to prevent false detections when reversing in the direction it was oriented in before reverse moving.
+			if not group.thirdTurnCountChecked then
+				group.thirdTurnCountChecked = true
+				-- total across all types for thirdTurnMinRatio check
+				local notAllTypesAreBugging = false
+				for objName,count in group.reverseUnitsByType do
+					unitBugDataType = unitBugDataTable[objName]
+					local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
+					-- WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. "\n")
+					if not (thirdTurnUnitCountForType < ceil(count*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(count*unitBugDataType.notMovingBackupRatio))) then
+						notAllTypesAreBugging = true
+						--group.fixCancelledByType[objName] = true
+						-- group.fixCancelled = true
+						--ExecuteAction("NAMED_FLASH", self, 2)
+					end
+				end
+				if not notAllTypesAreBugging then
+					--print("3rd false positive filter")
+					fixUnits = false
+				end
+			end
+		end
+
+
+		-- Apply fixes if threshold was met
+		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
+		-- checksDone over the threshold can still fix earlier-detected bugging units
+		if fixUnits then
+			local totalToFix = 0
+			for _, unitType in group.unitsToFixByType do totalToFix = totalToFix + getn(unitType) end
+			if totalToFix > 0 then
+				--WriteToFile("fixUnits.txt", "fixing " .. tostring(totalToFix) .. " units\n\n\n" .. "------------------------------------------------")
+				for k, unitType in group.unitsToFixByType do
+					if not group.fixCancelledByType[k] then
+						for i = getn(unitType), 1, -1 do
+							local buggingUnit = unitsReversing[unitType[i]]
+							if buggingUnit ~= nil then
+								local buggingRef = buggingUnit.selfReference
+								--ExecuteAction("NAMED_FLASH_WHITE", buggingRef, 2)
+								FixBuggingUnit(buggingRef, true)
+							else
+								if unitType[i] ~= nil then
+									tremove(unitType, i)
+								end
+							end
+						end
+					end
+				end
+			elseif isBugging then
+				--ExecuteAction("NAMED_FLASH", self, 2)
+				FixBuggingUnit(self, true)
+			end
+		elseif isBugging and group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+			-- Only clear bugging state when threshold was reached and we decided not to fix
+			-- (too many bugging = likely false positive). Before threshold is reached,
+			-- keep the state so the unit can still be fixed when slower types finish checking.
+			if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+				ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)
+			end
+			--unitReversing.hasBeenFixed = false
+		end
+	end
+end
+		
+-- Fixes a unit detected to be bugging and then checks if any selected unit has the bugged unit assigned as unitAnchor
+function FixBuggingUnit(self, applySpeedBuff)
+	local a,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil or unitReversing.groupId == nil then return end
+	local group = getglobal(unitReversing.groupId)
+	if group == nil or group.units == nil then return end
+	local selectedUnitList = group.units
+
+	if group.unitCount == 1 then 
+		-- only one unit selected, so stop this unit and end the function
+		-- WriteToFile("only one unit selected.txt",  tostring(group.unitCount) .. "\n")
+		ExecuteAction("NAMED_STOP", self)
+		return 
+	end
+
+	-- check if unitAnchor is destroyed or is nil
+	if unitReversing.unitAnchor ~= nil then
+		if not EvaluateCondition("NAMED_NOT_DESTROYED",unitReversing.unitAnchor) then 
+			unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+		end
+	else
+		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+	end
+	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
+	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
+		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
+		unitReversing.hasBeenFixed = true
+	end
+
+	if ObjectTestModelCondition(self, "USER_72") == false then
+		ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", self, "USER_72", NO_COLLISION_DURATION, 100)
+	end
+	-- temporarily remove collisions to facilitate the reverse move, assign this on backing up
+	if not EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 1)
+	end
+	-- apply upgrade 
+	if not EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") and applySpeedBuff then
+		ObjectGrantUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
+	end
+
+	for _, unitRef in selectedUnitList do
+		--  this unit is bugging so lets go through all the closest units and see if it coincides with this one
+		-- 	WriteToFile("closeunit.txt",  "object 1:  " .. tostring(unitsReversing[unitRef].stringReference)  .. "  " .. "object 2: " .. tostring(unitsReversing[unitRef].unitAnchor) .. "\n")
+		if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].unitAnchor == unitReversing.stringReference then
+			-- get a unit that hasnt bugged that isnt itself
+			local nonBuggingUnit = GetANonBuggingUnit(group.units, unitsReversing[unitRef].selfReference)
+			-- only proceed if we found a non-bugging unit
+			if nonBuggingUnit ~= nil then
+				-- assign the new closeestUnit to a unit not flagged as being bugged
+				unitsReversing[unitRef].unitAnchor = nonBuggingUnit
+				-- move this unit to the previously assigned non bugging unit
+				if unitsReversing[unitRef].hasBeenFixed and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") then
+					--print("assigning to different unit")
+					ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[unitRef].stringReference, unitsReversing[unitRef].unitAnchor)
+				end
+			end
+		end
+		-- WriteToFile("closeunit.txt",  "object 1:  " .. tostring(unitsReversing[unitRef].stringReference)  .. "  " .. "object 2: " .. tostring(unitsReversing[unitRef].unitAnchor) .. "\n")
+	end
+end
+
+-- if the unitAnchor has bugged during the reverse move, seek out a unit that hasnt of that players selection.
+-- selectedUnitsOfPlayer is the array of units whose value is ObjectId
+-- unit is the string reference of the unit that called this function
+function GetANonBuggingUnit(selectedUnitsOfPlayer, unit)
+	if selectedUnitsOfPlayer == nil then return nil end
+	local candidates = {}
+	for _, unitRef in selectedUnitsOfPlayer do
+		if unitsReversing[unitRef] ~= nil then
+			if unitsReversing[unitRef].selfReference ~= unit then
+				-- check to see if unit is bugging and isnt destroyed
+				if EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitRef].stringReference) and not unitsReversing[unitRef].hasBeenFixed and not EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") == false then
+					tinsert(candidates, unitsReversing[unitRef].stringReference)
+				end
+			end
+		end
+	end
+	if getn(candidates) > 0 then
+		return candidates[random(1, getn(candidates))]
+	end
+end
+
+-- copies a snapshot and recursively snapshots nested tables within.
+function DeepCopyTable(original)
+    if type(original) ~= "table" then
+        return original
+    end
+
+    local copy = {}
+    for k, v in original do
+        copy[k] = DeepCopyTable(v)
+    end
+    
+    return copy
+end
+
+-- Triggered by +BACKING_UP
+function BackingUp(self)
+    local a, unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
+    local curFrame = GetFrame()
+	unitReversing.lastMoveWasReverse = true
+
+	--WriteToFile("wasAttackingBeforeReverse.txt",  tostring(unitReversing.wasAttackingBeforeReverse) .. "\n")
+	if EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") then
+		--print("removing upgrade")
+		ObjectRemoveUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
+	end	
+	if ObjectTestModelCondition(self, "USER_72") then
+		ExecuteAction("UNIT_SET_MODELCONDITION_FOR_DURATION", self, "USER_72", 0, 100)
+	end
+
+	-- Reset the flags here to ensure we don't carry over bugs from previous moves
+	local resetFlags = function()
+		%unitReversing.hasBeenFixed = false
+		%unitReversing.unitAnchor = nil
+		%unitReversing.timesTriggeredFast = 0
+		%unitReversing.timesTriggeredNormal = 0
+		%unitReversing.hasBeenCounted = false
+		%unitReversing.firstFrame = %curFrame
+		%unitReversing.isReverseMoving = true
+		%unitReversing.hasBeenCounted = false
+		%unitReversing.expectedChecksFlag = false
+		--%unitReversing.isMovingFlag = true
+	end
+
+	 -- Check if this is a spam/repeat command (within 2 frames) or a generic new command
+    if curFrame - unitReversing.lastReverseMoveFrame <= REVERSE_SPAM_FRAME_WINDOW then
+        unitReversing.hasAlreadyReversed = true
+        return resetFlags()
+	end 
+
+	if unitReversing.hasCameToAStop then
+		unitReversing.hasCameToAStop = false
+		-- Only skip if the unit still belongs to an active group (mid-group re-trigger).
+		-- If groupId is nil, the previous group ended and this is a new reverse move.
+		if unitReversing.groupId ~= nil then
+			return resetFlags()
+		end
+	end
+
+	-- Reset the flags here to ensure we don't carry over bugs from previous moves
+	resetFlags()
+	unitReversing.isMovingFlag = true
+	unitReversing.hasAlreadyReversed = false
+
+	if not unitReversing.groupIdAssigned then
+		AssignGroupId(unitReversing, a, curFrame, self)
+	end
+
+	AssignRandomAnchor(self)
+end
+
+function AssignGroupId(unitReversing, a, curFrame, self)
+	if unitReversing == nil then return end
+	-- print("assigning group again")
+	local groupId = unitReversing.groupId
+	-- unit was already tagged in the else block for loop.
+	if groupId == nil then
+		local playerTeam = tostring(ObjectTeamName(self))
+		local teamTable = getglobal(playerTeam)
+		if teamTable == nil or teamTable.units == nil then return end
+		-- first unit in the group, create snapshot and tag all units currently selected, this will also copy the unitsCount over to teamSnapshot.
+		local teamSnapshot = DeepCopyTable(teamTable)
+		-- the table contains a unique id that all units share when selected during this reverse move
+		groupId = "group_" .. tostring(curFrame) .. "_" .. tostring(a)
+		-- store a global variable with the id generated for this group containing all selected units (obtained by DeepCopyTable)
+		teamSnapshot.unitsToFixByType = {}
+		teamSnapshot.checksDone = 0
+		teamSnapshot.fixCancelled = false
+		teamSnapshot.thirdTurnCountChecked = false
+		teamSnapshot.fixCancelledByType = {}
+		teamSnapshot.thirdTurnFrameCountByType = {}
+		teamSnapshot.thirdTurnUnitCountByType = {}
+		teamSnapshot.firstTurnFrameCountByType = {}
+		teamSnapshot.firstTurnUnitCountByType = {}
+		teamSnapshot.expectedChecks = 0
+		teamSnapshot.unitsNotMovingBeforeBackingUp = 0
+		setglobal(groupId, teamSnapshot)
+		-- assign every unit the same groupId
+		local unitsNotMovingBeforeBackingUp = 0
+		for _, unitRef in teamSnapshot.units do
+			 -- WriteToFile("groupId.txt",  tostring(groupId) .. "\n")
+			if unitsReversing[unitRef] ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) then
+				unitsReversing[unitRef].groupId = groupId
+				unitsReversing[unitRef].groupIdAssigned = true
+				if teamSnapshot.reverseUnits ~= nil and teamSnapshot.reverseUnits[unitRef] ~= nil
+				and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "MOVING") == false then
+					unitsNotMovingBeforeBackingUp = unitsNotMovingBeforeBackingUp + 1
+				end
+			end
+		end
+		local assignedGroup = getglobal(groupId)
+		if assignedGroup ~= nil then
+			assignedGroup.unitsNotMovingBeforeBackingUp = unitsNotMovingBeforeBackingUp
+		end
+		-- WriteToFile("groupId.txt",  "------------------------------------" .. "\n")
+		-- assign the snapshot to groupId
+		-- unitReversing.groupId = teamSnapshot
+	end
+end
+
+-- Gets a random selected unit of this players selection and assigns it to unitReversing.unitAnchor = unitAnchor
+function AssignRandomAnchor(self)
+    if self ~= nil then
+        local a,unitReversing = GetUnitReversingData(self)
+		if unitReversing == nil or unitReversing.groupId == nil then return end
+		local group = getglobal(unitReversing.groupId)
+		if group == nil or group.units == nil then return end
+		-- list of ids
+        local selectedUnitList = group.units
+		-- Check if we have at least 2 units in the selection (self + at least one other)
+		if next(selectedUnitList) ~= nil and next(selectedUnitList, next(selectedUnitList)) ~= nil then	
+			-- gets a unit that isnt self randomly.
+			local randomUnitId = GetRandomKey(selectedUnitList, a)
+			if randomUnitId ~= nil and unitsReversing[randomUnitId] ~= nil then
+				unitReversing.unitAnchor = unitsReversing[randomUnitId].stringReference
+			end
+		end
+    end
+end
+
+-- Gets the random key to assign to the unit for anchor purposes.
+function GetRandomKey(t, unitId)
+    if t == nil then return nil end
+    local keys = {}
+    for k, v in t do
+		-- insert every unitid into the table except the unit that called this function
+        if k ~= unitId then
+            tinsert(keys, k)
+        end
+    end
+    local count = getn(keys)
+    if count == 0 then 
+        return nil 
+    end    
+	-- WriteToFile("random units.txt",  "unit being assigned: " .. tostring(unitId) .. "   random unit assigned to it: "  .. tostring(keys[randomIndex]) .. "\n")
+    return keys[random(1, count)]
+end
+
+function random(...) --overwritting lua native function for multiplayer compatibility 
+    local randomNumber = function(a,b) return floor(a+((b-a)*GetRandomNumber())+0.5) end
+    if getn(arg) == 0 then 
+        return floor(GetRandomNumber()+0.5)
+    elseif getn(arg) == 1 then 
+        return randomNumber(1,arg[1])
+    elseif getn(arg) == 2 then 
+        return randomNumber(arg[1],arg[2])
+    else 
+        return arg[randomNumber(1,getn(arg))] 
+    end
+end 
+
+-- Triggered by +SELECTED
+function AddToUnitSelection(self)
+	if self == nil then return end
+	-- initialized here to prevent first instance of BACKING_UP having a cascading effect.
+	local _, unitReversing = GetUnitReversingData(self)
+    local playerTeam = tostring(ObjectTeamName(self))
+    local unitId = getObjectId(self)
+    local teamTable = getglobal(playerTeam) or nil
+
+    if teamTable == nil then
+        teamTable = {}
+		setglobal(playerTeam, teamTable)
+    end
+
+    if teamTable.units == nil then
+        teamTable.units = {}
+    end
+
+    if teamTable.reverseUnits == nil then
+        teamTable.reverseUnits = {}
+    end
+
+	if teamTable.reverseUnitsByType == nil then
+        teamTable.reverseUnitsByType = {}
+    end
+
+    if teamTable.units[unitId] == nil then
+        teamTable.units[unitId] = unitId
+        teamTable.unitCount = (teamTable.unitCount or 0) + 1
+		-- if this units hash exists in the unitBugDataTable, it can reverse move therefore we count it
+		local objName = getObjectName(self)
+		if unitBugDataTable[objName] ~= nil then
+			teamTable.reverseUnits[unitId] = unitId
+			teamTable.reverseUnitCount = (teamTable.reverseUnitCount or 0) + 1
+			-- store a table of current selected unit types
+			--if teamTable.reverseUnitsByType[objName] == nil then
+			teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1
+			--end
+		end
+    end
+end
+-- Triggered by -SELECTED
+function RemoveFromUnitSelection(self)
+	if self == nil then return end
+    local playerTeam = tostring(ObjectTeamName(self))
+    local unitId = getObjectId(self)
+	local teamTable = getglobal(playerTeam) or nil
+    
+    if unitId ~= nil and teamTable ~= nil and teamTable.units ~= nil then
+        -- distinct check using the Key
+        if teamTable.units[unitId] ~= nil then
+            -- Set to nil to remove
+            teamTable.units[unitId] = nil
+            teamTable.unitCount = (teamTable.unitCount or 1) - 1
+			if teamTable.reverseUnits ~= nil and teamTable.reverseUnits[unitId] ~= nil then
+				teamTable.reverseUnits[unitId] = nil
+				teamTable.reverseUnitCount = (teamTable.reverseUnitCount or 1) - 1
+
+				local objName = getObjectName(self)
+				if teamTable.reverseUnitsByType[objName] ~= nil then
+					teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 1) - 1
+					if teamTable.reverseUnitsByType[objName] <= 0 then 
+						teamTable.reverseUnitsByType[objName] = nil
+					end
+				end
+			end
+			--print("unit deselected")
+        end
+    end
+end
+
+-- Clears the unitsReversing table of this unit. If it belongs in a group, remove it. 
+function GroupUnitOnDeath(self)
+	if self == nil then return end
+	local a,unitReversing = GetUnitReversingData(self)	
+    RemoveFromUnitSelection(self)
+    if unitsReversing[a] ~= nil then
+		-- remove from the group its part of
+		if unitReversing.groupId ~= nil then
+			local group = getglobal(unitReversing.groupId)
+			-- remove this unit from the group snapshot
+			if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
+				group.units[a] = nil
+				group.unitCount = (group.unitCount or 1) - 1
+				if group.reverseUnits ~= nil and group.reverseUnits[a] ~= nil then
+					group.reverseUnits[a] = nil
+					group.reverseUnitCount = (group.reverseUnitCount or 1) - 1
+					if group.expectedChecks > 0 then
+						group.expectedChecks = group.expectedChecks - 1
+					end
+				end
+				-- check if theres no units left in the group and if so , clear the global.
+				if group.unitCount <= 0 or next(group.units) == nil then
+					setglobal(unitReversing.groupId, nil)
+					--print("clearing global on death")
+				end
+			end
+		end
+        unitsReversing[a] = nil
+    end
+end
+
+-- checks if the group still exists if most units are still moving, and if this one has stopped then call FixBuggingUnit to fix it
+function SuddenStopCheck(self)
+	local a = getObjectId(self)
+	if unitsReversing[a] == nil then return end
+	local _,unitReversing = GetUnitReversingData(self)
+	local resetGroupId = function()
+		%unitReversing.groupId = nil
+		%unitReversing.groupIdAssigned = false
+	end
+	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or not unitReversing.isMovingFlag or not unitReversing.lastMoveWasReverse then return resetGroupId() end
+	unitReversing.lastMoveWasReverse = false
+	if unitReversing.groupId == nil then return resetGroupId() end
+	--unitReversing.isReverseMoving = false
+	local group = getglobal(unitReversing.groupId)
+	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return resetGroupId() end
+	local curFrame = GetFrame()
+	-- the duration of the reverse move since this unit came to an abrupt stop
+	-- if most units are still moving but this one suddenly stopped, it bugged
+
+	local frameDiff = curFrame - unitReversing.firstFrame
+	--WriteToFile("SuddenStopAfterBackingUp.txt",  "this reverse move lasted: " .. tostring(frameDiff) .. " frames" .. "\n")
+
+	-- look up this units bug duration and scale the threshold proportionally
+	-- 15 frames works for Seeker (frameCount=12), ratio: 15/12 = 1.25
+	-- This is necessary to prevent tagging units that never backed up but got the model state somehow.
+	local unitBugData = unitBugDataTable[getObjectName(self)]
+	if unitBugData == nil then return resetGroupId() end
+	local bugDuration = unitBugData.frameCount
+	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and bugDuration * unitBugData.reallyDamagedDurationMult or bugDuration
+	local maxFrameDiff = floor(bugDuration * 1.25)
+
+	if GetNumberOfUnitsMoving(group.reverseUnits) >= floor(group.reverseUnitCount * 0.80) and frameDiff <= maxFrameDiff then
+		local fixUnit = true
+		local playerTeam = tostring(ObjectTeamName(self))
+		local teamTable = getglobal(playerTeam) or nil
+		if teamTable ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 and teamTable.reverseUnits ~= nil then
+			-- only fix the unit if the current selection is the same as the snapshot selection count. Also when teamTable.unitCount is 0 it means there are no units selected.
+			if GetCurrentSelectionCountOfGroup(teamTable, group) < ceil(group.reverseUnitCount * 0.50) then
+				fixUnit = false
+			end
+		end
+
+		if fixUnit then
+			--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+			FixBuggingUnit(self, false)
+		end
+	end
+	resetGroupId()
+end
+
+-- gets the current selection count of units that are within a group of units
+-- @param teamTable: the current selection of a player
+-- @param group: the unit group to be compared against
+-- @return the number of units that are currently selected that are within the unit group
+function GetCurrentSelectionCountOfGroup(teamTable, group)
+	if teamTable == nil or teamTable.units == nil or group == nil or group.reverseUnits == nil then return 0 end
+	local count = 0
+	for unitRef,_ in group.reverseUnits do
+		if teamTable.units[unitRef] ~= nil then
+			count = count + 1
+		end
+	end
+	--WriteToFile("GetCurrentSelectionCountOfGroup.txt",  "# of units that are selected and also belong to the group: " .. tostring(count) .. "\n")
+	return count
+end
+
+-- Triggered by -BACKING_UP, this triggers when multiple reverse move commands.
+-- Removes groupId of this unit and then checks if the global of that group is empty and if it is, removes it.
+function BackingUpEnd(self)
+	local a = getObjectId(self)
+	if unitsReversing[a] == nil then return end
+	local _,unitReversing = GetUnitReversingData(self)	
+	unitReversing.lastReverseMoveFrame =  GetFrame()
+	local group = unitReversing.groupId ~= nil and getglobal(unitReversing.groupId) or nil
+	local reverseUnitList = {}
+	if group ~= nil and group.reverseUnits ~= nil then
+		reverseUnitList = group.reverseUnits
+	end
+	-- prevents stale group state on non-reverse units
+	local groupUnitList = {}
+	if group ~= nil and group.units ~= nil then
+		groupUnitList = group.units
+	end
+
+	if unitReversing ~= nil and not unitReversing.hasBeenFixed then
+		-- need to prevent this when guarding
+		if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+			ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)
+		end
+	end
+
+	--unitReversing.firstFrame = 0 
+	unitReversing.isReverseMoving = false
+	unitReversing.timesTriggeredFast = 0
+	unitReversing.timesTriggeredNormal = 0
+	unitReversing.fastTurnWas0Frames = false
+
+	--if checksDone == unitReversing.groupId.selectedCount-1 then
+	local clearList = true
+	for _, unitRef in reverseUnitList do
+		if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].isReverseMoving then
+			-- if a unit is reverse moving, dont clear the list
+			clearList = false
+			break
+		end
+	end
+
+	local groupId  = unitReversing.groupId
+	-- necessary if units stop 
+	SuddenStopCheck(self)
+	
+	if clearList and group ~= nil then
+		-- clear groupId for all units in this group including the current one.
+		for _, unitRef in groupUnitList do
+			-- if the id is the same as the id in current index clear it
+			if unitsReversing[unitRef] ~= nil then
+				unitsReversing[unitRef].groupId = nil
+				unitsReversing[unitRef].groupIdAssigned = false
+				unitsReversing[unitRef].expectedChecksFlag = false
+				unitsReversing[unitRef].hasBeenCounted = false
+				--if EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") then
+				--	ObjectRemoveUpgrade(unitsReversing[unitRef].selfReference, "Upgrade_ReverseMoveSpeedBuff")
+				--end
+			end
+		end
+		--WriteToFile("cleared list.txt", tostring(unitReversing.groupId) .. " " ..  tostring(unitReversing.groupIdAssigned) .. "\n")
+		-- free the global snapshot since all units have been cleared
+		if groupId  ~= nil then
+			setglobal(groupId, nil)
+			--print("clearing global")
+		end
+	end
+end
+
+-- USER_72 has ended, remove NO_COLLISIONS and speed buff if this unit has it.
+function BuggedUnitTimeoutEnd(self)
+	if self == nil then return end
+	local a = getObjectId(self)
+	if unitsReversing[a] == nil then return end
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing ~= nil then
+		unitReversing.hasBeenFixed = false
+		unitReversing.unitAnchor = nil
+		if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+			ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)	
+		end
+	end
+
+	if EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") then
+		ObjectRemoveUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
+	end		
+end
+
+function WriteToFile(file, content) 
+	local file = openfile("C:\\Users\\Public\\Documents\\" .. file, "a")
+	if file then
+		write(file, content)
+		closefile(file)
+	end
+end
+
+-- ###################################################################
+
+-- EMP EXPLOIT FIX --
+
+function OnUnpackingDisableCommands(self)
+	ObjectForbidPlayerCommands( self, true )
+end
+
+function OnUnpackingDisableCommandsEnd(self)
+	ObjectForbidPlayerCommands( self, false )
+end
+
 
 function OnGDIWatchTowerCreated(self)
 	ObjectHideSubObjectPermanently( self, "MuzzleFlash_01", true )
@@ -968,6 +2122,7 @@ end
 
 function OnNODScorpionBuggyCreated(self)
 	ObjectHideSubObjectPermanently( self, "EMP", true )
+	--UnitCreated(self)
 end
 
 function OnNODVenomCreated(self)
@@ -4875,7 +6030,13 @@ function getObjectId(x)
 end
 
 function getObjectName(x)
-	return strsub(ObjectDescription(x),strfind(ObjectDescription(x),'%[')+1,strfind(ObjectDescription(x),', ')-1) -- Object name
+	-- Object name
+	-- print(tostring(ObjectDescription(x)))
+	if strfind(ObjectDescription(x),"%[%{%d+,%d+") ~= nil then
+		return strsub(ObjectDescription(x),strfind(ObjectDescription(x),'%[')+6,strfind(ObjectDescription(x),', ')-1)
+	else 
+		return strsub(ObjectDescription(x),strfind(ObjectDescription(x),'%[')+1,strfind(ObjectDescription(x),', ')-1)
+	end
 end
 
 function getPlayerId(x)

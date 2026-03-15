@@ -858,7 +858,7 @@
 				AutoAcquireEnemiesWhenIdle=""
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIV35Ox_SummonedFunctions_103"					
+				AILuaEventsList="GDIV35Ox_SummonedFunctions_R24"					
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1033,3 +1033,4 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="MarkedOfKaneAttackBike"
@@ -1123,7 +1123,8 @@
 				StandGround="False"
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False">
+				FadeOnPortals="False"
+	AILuaEventsList="MarkedOfKaneAttackBikeFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -1268,3 +1269,4 @@
 		<DisplayUpgrade>Upgrade_NODTechCenterTibCoreMissiles</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

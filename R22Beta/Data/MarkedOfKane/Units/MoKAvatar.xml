@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="MarkedOfKaneAvatar"
@@ -4262,7 +4262,7 @@
 			<DeployStyleAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="NODAvatarFunctions_R23"
+				AILuaEventsList="NODAvatarFunctions_R24"
 				MustDeployToAttack="false">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
@@ -4536,3 +4536,5 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
+
+

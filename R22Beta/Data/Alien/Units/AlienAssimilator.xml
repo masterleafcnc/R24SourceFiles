@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<GameObject
 		id="AlienAssimilator"
@@ -388,7 +388,7 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AILuaEventsList="EngineerFunctions_R23" />
+				AILuaEventsList="EngineerFunctions_R24" />
 		</AI>
 		<Body>
 			<ActiveBody
@@ -502,3 +502,5 @@
 			CrushableLevel="0" />
 	</GameObject>
 </AssetDeclaration>
+
+

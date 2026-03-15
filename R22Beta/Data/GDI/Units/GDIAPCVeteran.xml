@@ -487,6 +487,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -768,7 +774,7 @@
 					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
 				<MemberTemplateStatusInfo
 					ThingTemplate="GDISniperSquad_Veteran"
-					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />					
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
 			</HordeTransportContain>
 			<MoveToPositionAndEvacuateSpecialPower
 				id="DBDCABC7"
@@ -1249,7 +1255,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIAPCFunctions"
+				AILuaEventsList="GDIAPCFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1412,5 +1418,5 @@
 			CrushOnlyWhileCharging="False"
 			CrushAllies="False" />
 		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>
-	</GameObject>	
+	</GameObject>
 </AssetDeclaration>

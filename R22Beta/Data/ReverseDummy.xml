@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<GameObject
+		id="ReverseDummy"
+		Side="Neutral"
+		EditorSorting="MISC_MAN_MADE"
+		RadarPriority="NOT_ON_RADAR"
+		KindOf="NO_COLLIDE HIDE_IF_FOGGED IMMOBILE UNATTACKABLE NOT_AUTOACQUIRABLE"
+		EditorName="ReverseDummy">
+		<DisplayName>ReverseDummy</DisplayName>
+		<ArmorSet
+			Armor="NoArmor" />
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw"
+				OkToChangeModelColor="true">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<LifetimeUpdate
+				id="ModuleTag_Lifetime"
+				MinLifetime="0.1s"
+				MaxLifetime="0.1s" />
+			<DestroyDie
+				id="ModuleTag_DestroyDie">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+			<!-- could be even faster doing this on create with lua
+			<FireWeaponWhenDead
+				id="ModuleTag_FireWeaponWhenDead"
+				DeathWeapon="DelayHuskHide"
+				InitiallyActive="true">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</FireWeaponWhenDead>  
+
+			<FireWeaponUpdate
+				id="ModuleTag_FireWeaponUpdate">
+				<FireWeaponNugget
+					WeaponName="DelayHuskHide"
+					OneShot="True"
+				/>
+			</FireWeaponUpdate>
+			-->
+		</Behaviors>
+		<AI>
+			<AIUpdate
+				id="ModuleTag_AI"
+				AutoAcquireEnemiesWhenIdle="YES"
+				AILuaEventsList="ReverseMoveDummy_R23">
+				<UnitAITargetChooserData />
+			</AIUpdate>
+		</AI>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="100.0"
+				InitialHealth="100.0" />
+		</Body>
+	</GameObject>
+</AssetDeclaration>

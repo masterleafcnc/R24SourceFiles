@@ -16,6 +16,11 @@
 		Type="OBJECT"
 	/>
 -->
+	<!-- new upgrade for bugging units while reverse moving -->
+	<UpgradeTemplate id="Upgrade_ReverseMoveSpeedBuff"
+		Type="OBJECT"
+	/>
+
 	<!-- new upgrade for husks-->
 	<UpgradeTemplate id="Upgrade_HuskCaptureFX"
 		DisplayName="APT:UnitsLost"

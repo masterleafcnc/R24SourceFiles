@@ -236,8 +236,8 @@
 						TurretPitch="Bone_Rails"
 						TurretArtPitch="0d"
 						TurretID="3" />
-				</ModelConditionState>			
-	
+				</ModelConditionState>
+
 
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
@@ -316,8 +316,8 @@
 						New="GUMammD" />
 
 				</ModelConditionState>
-	
-	
+
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -394,7 +394,7 @@
 						Original="GUMamm"
 						New="GUMammD" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -412,7 +412,7 @@
 					<Texture
 						Original="GUMamm"
 						New="GUMamm_K" />
-				</ModelConditionState>	
+				</ModelConditionState>
 
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
@@ -428,10 +428,10 @@
 					<Model
 						Name="W3DMesh:GUMAMM_FP"
 						ExtraMesh="False" />
-				</ModelConditionState>				
-				
+				</ModelConditionState>
+
 	<!-- **********************************************************************************  ANIMATIONS ********************************************************* -->
-	
+
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT"
 					AnimNickName=""
@@ -452,7 +452,7 @@
 						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -483,7 +483,7 @@
 						UseWeaponTiming="False"
 						FadingIn="False" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -514,7 +514,7 @@
 						UseWeaponTiming="False"
 						FadingIn="False" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -532,10 +532,10 @@
 						CurDrawableShowSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")						
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -553,7 +553,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableShowSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")						
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 
 				</AnimationState>
@@ -574,7 +574,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableShowSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")						
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 
 				</AnimationState>
@@ -595,14 +595,14 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableShowSubObject("TREADSMOVE")						
+						CurDrawableShowSubObject("TREADSMOVE")
 					</Script>
 
 				</AnimationState>
 
-				
+
 				<!-- REGULAR STATES -->
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -631,9 +631,9 @@
 						FadeEndFrame="-1"
 						AnimationMustCompleteBlend="False"
 						UseWeaponTiming="False"
-						FadingIn="False" />				
+						FadingIn="False" />
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -663,8 +663,8 @@
 						AnimationMustCompleteBlend="False"
 						UseWeaponTiming="False"
 						FadingIn="False" />
-				</AnimationState>					
-				
+				</AnimationState>
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -682,7 +682,7 @@
 						CurDrawableShowSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")						
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 
@@ -703,7 +703,7 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableShowSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")					
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
 				<AnimationState
@@ -723,10 +723,10 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableShowSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")					
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -744,9 +744,9 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableShowSubObject("TREADSMOVE")					
+						CurDrawableShowSubObject("TREADSMOVE")
 					</Script>
-				</AnimationState>				
+				</AnimationState>
 
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
@@ -765,10 +765,10 @@
 						CurDrawableHideSubObject("TREADSBACK")
 						CurDrawableHideSubObject("TREADSLEFT")
 						CurDrawableHideSubObject("TREADSRIGHT")
-						CurDrawableHideSubObject("TREADSMOVE")					
+						CurDrawableHideSubObject("TREADSMOVE")
 					</Script>
 				</AnimationState>
-				
+
 				<LeftTread>TreadsL1</LeftTread>
 				<LeftTread>TreadsL2</LeftTread>
 				<RightTread>TreadsR1</RightTread>
@@ -786,7 +786,7 @@
 					ArticulationBoneName="Bone_TreadLR"
 					ArticulationHelperBoneName="FXTracksLR" />
 			</TankDraw>
-	
+
 			<ScriptedModelDraw
 				id="B4CD3005"
 				Name=""
@@ -854,7 +854,7 @@
 						Name="W3DContainer:GUMAMM_FX"
 						ExtraMesh="False" />
 				</ModelConditionState>
-				
+
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					Name=""
@@ -912,7 +912,7 @@
 						OnlyIfOnLand="False" />
 						-->
 				</ModelConditionState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT"
 					AnimNickName=""
@@ -926,7 +926,7 @@
 					AllowRepeatInRandomPick="False"
 					SimilarRestart="False">
 				</AnimationState>
-				
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
 					AnimNickName=""
@@ -1073,8 +1073,8 @@
 					</Script>
 				</AnimationState>
 			</ScriptedModelDraw>
-			
-			
+
+
 			<LaserDraw
 				id="5FC0AD86"
 				Texture1_UTile="1"
@@ -1194,6 +1194,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffMammoth">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -1563,18 +1569,18 @@
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
 			</StatusBitsUpgrade>
-			
+
 			<!--
 			<AttributeModifierUpgrade
 				id="LocoUpgrade"
 				WaypointModeTerminal="False"
 				Permanent="False"
 				AttributeModifier="AttributeModifier_HighSpeedTurn" >
-				<TriggeredBy>Upgrade_HighSpeed1</TriggeredBy>				
+				<TriggeredBy>Upgrade_HighSpeed1</TriggeredBy>
 			</AttributeModifierUpgrade>
 			-->
-			
-			
+
+
 			<SubObjectsUpgrade
 				id="BBDDAE76"
 				RequiresAllTriggers="False"
@@ -1626,7 +1632,7 @@
 				SoundToPlay="AudioEvent:GDI_RailCannon_Upgrade"
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
-			</AudioLoopUpgrade> 
+			</AudioLoopUpgrade>
 		</Behaviors>
 		<AI>
 			<AIUpdate
@@ -1635,7 +1641,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="SteelTalonsMammothFunctions"
+				AILuaEventsList="SteelTalonsMammothFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1751,8 +1757,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"

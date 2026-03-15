@@ -449,7 +449,7 @@
 			<HordeAIUpdate
 				id="ModuleTag_HordeAIUpdate"
 				AutoAcquireEnemiesWhenIdle="YES ATTACK_BUILDINGS"
-				AILuaEventsList="GenericSquadFunctions_103"
+				AILuaEventsList="GenericSquadFunctions_R24"
 				MaxCowerTime="5.0s"
 				MinCowerTime="3.0s"
 				CanAttackWhileContained="true">
@@ -489,3 +489,4 @@
 			CrusherLevel="0" />
 	</GameObject>
 </AssetDeclaration>
+

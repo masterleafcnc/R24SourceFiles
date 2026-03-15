@@ -16,7 +16,7 @@
 		BuildTime="35"
 		BuildFadeInOnCreateTimeSeconds="0.25s"
 		CommandSet="SteelTalonsMCVCommandSet"
-		CommandPoints="100" 
+		CommandPoints="100"
 		KindOf="PRELOAD SELECTABLE CAN_CAST_REFLECTIONS SCORE VEHICLE FS_FACTORY CAN_REVERSE_MOVE EXPANSION_UNIT CAN_BE_FAVORITE_UNIT MCV IGNORES_SELECT_ALL"
 		RadarPriority="UNIT"
 		PlacementViewAngle="315d"
@@ -107,7 +107,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DMesh:GUMCV_FP" />
-				</ModelConditionState>					
+				</ModelConditionState>
 				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT">
 				</AnimationState>
@@ -119,7 +119,7 @@
 						if Prev == "STATE_built" then
 						CurDrawableSetTransitionAnimState("TRANS_built")
 						end
-					</Script>					
+					</Script>
 				</AnimationState>
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
@@ -136,7 +136,7 @@
 					<Animation
 						AnimationName="GUMCV_BLDA"
 						AnimationMode="ONCE" />
-				</AnimationState>	
+				</AnimationState>
 				<!--   Transitions -->
 				<AnimationState
 					ParseCondStateType="PARSE_TRANSITION"
@@ -144,7 +144,7 @@
 					<Animation
 						AnimationName="GUMCV_BLDA"
 						AnimationMode="ONCE"></Animation>
-				</AnimationState>							
+				</AnimationState>
 			</TruckDraw>
 			<ScriptedModelDraw
 				id="ModuleTag_FX"
@@ -177,7 +177,7 @@
 			</ScriptedModelDraw>
 		</Draws>
 		<Behaviors>
-			<AttributeModifierPoolUpdate 
+			<AttributeModifierPoolUpdate
 				id="DefaultAttributeModifierPoolUpdate"/>
 			<SquishCollide
 				id ="DefaultSquishCollide"/>
@@ -292,7 +292,7 @@
 				CommandButtonName="Command_UnPackGDIMCV"
 				SpecialPowerAIType="SPECIAL_POWER_BUILD_CONYARD" />
 			<!-- No stances because there's no weapon -->
-			
+
 			<ReplaceSelfUpgrade
 				id="ModuleTag_ReplaceSelf"
 				NewObjectUnpackTime="5s"
@@ -301,12 +301,18 @@
 				<TriggeredBy>Upgrade_UnPack</TriggeredBy>
 				<ReplacementTemplate>SteelTalonsConstructionYard</ReplacementTemplate>
 			</ReplaceSelfUpgrade>
-			
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
+
 		</Behaviors>
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="NO"></AIUpdate>
+				AutoAcquireEnemiesWhenIdle="NO"
+				AILuaEventsList="MCVFunctions_R24"></AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody
@@ -343,7 +349,7 @@
 					Sound="AudioEvent:GDI_MCVPack5"
 					Animation="GUMCVUPAK_AN"
 					Frame="1" />
-			</AnimationSoundClientBehavior>				
+			</AnimationSoundClientBehavior>
 		</ClientBehaviors>
 		<Geometry
 			IsSmall="true">
@@ -399,18 +405,18 @@
 		</AudioArraySound>
 		 <EvaEvents
 			EvaEventDieOwner="UnitLost"
-			EvaEventProductionStarted="UnitConstructionStarted" 
-			EvaEventDamagedOwner="UnitUnderAttack" 	
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
-			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"  
-			EvaEventAmbushed="UnitAmbushed" 
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
-			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted" 
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
 			EvaEventAvailableForProduction="NewConstructionOptions"
 			EvaEventBuildOnHold="BuildOnHold"
-			EvaEventBuildCancelled="BuildCancelled" 
+			EvaEventBuildCancelled="BuildCancelled"
 			EvaEventPromotedOwner="UnitPromoted" />
 		<ShadowInfo
 			Type="VOLUME" />
@@ -418,7 +424,7 @@
 			VisionRange="100"
 			ShroudClearingRange="200" />
 		<CrusherInfo
-			CrusherLevel="1" 
+			CrusherLevel="1"
 			CrushableLevel="2" />
 	</GameObject>
 </AssetDeclaration>

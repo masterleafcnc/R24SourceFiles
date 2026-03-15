@@ -1,1 +1,2836 @@
-<?xml version="1.0" encoding="utf-8"?><AssetDeclaration xmlns="uri:ea.com:eala:asset">	<!-- ********************************************************  ZOCOM APC ************************************************************************ -->		<GameObject		id="ZOCOMAPC"		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS TRANSPORT PRELOAD SCORE ATTACK_NEEDS_LINE_OF_SIGHT CAN_REVERSE_MOVE VEHICLE CAN_BE_FAVORITE_UNIT"		Description="Desc:GDIAPC"		TypeDescription="Type:GDIAPC"		RadarPriority="UNIT"		BuildCompletion="INVALID"		FenceWidth="0"		FenceXOffset="0"		RemoveTerrainRadius="0"		EmotionRange="0"		PlacementViewAngle="0d"		BuildFadeInOnCreateTimeSeconds="0s"		FactoryExitWidth="0"		FactoryExtraBibWidth="0"		Side="ZOCOM"		EditorName="ZOCOMAPC"		EditorSorting="UNIT"		BountyValue="0"		BuildTime="7"		BuildFadeInOnCreateTime="0"		EnergyProduction="0"		EnergyBonus="0"		CommandSet="ZOCOMAPCCommandSet"		SelectPortrait="Portrait_GDIAPC"		ButtonImage="Portrait_GDIAPC"		VoicePriority="176"		MinZIncreaseForVoiceMoveToHigherGround="-1"		CrowdResponse=""		CampnessValue="0"		CampnessValueRadius="600"		Scale="1"		HealthBoxScale="1.5"		HealthBoxHeightOffset="10"		OcclusionDelay="0"		LiveCameraPitch="0"		FormationWidth="1"		FormationDepth="1"		InstanceScaleFuzziness="0"		ThreatRadius="-1"		RamPower="0"		RamZMult="1"		ShockwaveResistance="100"		CommandPoints="100"		CommandPointBonus="0"		VoiceAttackChargeTimeout="0"		MaxDistanceForEngaged="0"		EngagedStateTimeout="0"		ThreatLevel="10"		SlopeLimitIndex="0"		PathfindDiameter="-1"		SupplyOverride="0"		DisplayMeleeDamage="-1"		DisplayRangedDamage="-1"		HeroSortOrder="2147483647"		FiringArc="360"		CamouflageDetectionMultiplier="1"		SelectionPriority="2147483647"		ProductionQueueType="VEHICLE"		BuildPlacementTypeFlag="INVALID"		BuildOnRequiredObjectKindOf=""		UnitCategory="VEHICLE"		WeaponCategory="GUN"		HasFiredRecentlyTime="2s"		UnitTypeIcon=""		ReinvisibilityDelay="7s"		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"		CaptureTime="0s"		BuildCost="700"		RefundValue="0"		ThreatValue="0"		MaxSimultaneousOfType="0"		TransportSlotCount="1"		IsTrainable="True"		IsForbidden="False"		IsPrerequisite="False"		IsGrabbable="False"		IsHarvestable="False"		StructureRubbleHeight="0"		ForceLuaRegistration="False"		ShowHealthInSelectionDecal="False"		KeepSelectableWhenDead="False"		IsAutoBuilt="False"		CanPathThroughGates="True"		ShouldClearShotsOnIdle="False"		BuildInProximityToSamePlayerStucture="True">		<DisplayName>Name:GDIAPC</DisplayName>		<ArmorSet			Armor="GDIGuardianAPCArmor"			DamageFX="VehicleDamageFX"			Conditions="" />		<LocomotorSet			Speed="72"			Condition="NORMAL"			Locomotor="GDIAPCLocomotor" />		<SkirmishAIInformation			BaseBuildingLocation="FRONT"			ConquerMetricsOverrideDamageType="UNDEFINED"			ConquerMetricsOverrideAntiMask="ANTI_GROUND"			UnitBuilderStandardCombatUnit="True" />		<Draws>			<TruckDraw				id="50DF2C46"				RecoilDamping="0.02"				MaxRecoilDistance="0.1"				InitialRecoilSpeed="10"				RecoilSettleSpeed="3"				MinLODRequired="LOW"				ProjectileBoneFeedbackEnabledSlots=""				TrackMarks="EXTireTrack2"				ExtraPublicBone="FXWeapon BoneGarrison01 BoneGarrison02 BoneGarrison03 BoneGarrison04 BoneGarrison05 BoneGarrison06 BoneGarrison07 BoneGarrison08 BoneGarrison09 BoneGarrison10"				DependencySharedModelFlags=""				TrackMarksLeftBone="Bone_TireLR"				TrackMarksRightBone="Bone_TireRR"				HighDetailLODThreshold="0"				LowDetailLODThreshold="0"				WadingParticleSys=""				AlphaCameraFadeOuterRadius="0"				AlphaCameraFadeInnerRadius="0"				AlphaCameraAtInnerRadius="100%"				StaticSortLevelWhileFading="-1"				BirthFadeTime="0"				OkToChangeModelColor="True"				AnimationsRequirePower="True"				UseYAxisForTurretRotation="False"				TrackMarksOnlyWhenCorneringQuickly="True"				UseProducerTexture="False"				NoRotate="False"				UseFiringArcRotation="False"				Selectable="True"				RandomTextureFixedRandomIndex="False"				ParticlesAttachedToAnimatedBones="False"				ParticleBonesCheckDrawable="False"				ShadowForceDisable="False"				SwitchModelLODMode="False"				StaticModelLODMode="False"				ShowShadowWhileContained="False"				UseStandardModelNames="False"				UseDefaultAnimation="False"				BirthFadeAdditive="False"				ZWriteDisableOverride="False"				MultiPlayerOnly="False"				AffectedByStealth="True"				InvertStealthOpacity="False"				HighDetailOnly="False"				SetAnimsToLastFrameOnConstructionComplete="True"				Dust=""				DirtSpray=""				PowerslideSpray=""				LeftFrontTireBone="Bone_TireLF"				RightFrontTireBone="Bone_TireRF"				LeftRearTireBone="Bone_TireLR1"				RightRearTireBone="Bone_TireRR1"				MidLeftRearTireBone="Bone_TireLR"				MidRightRearTireBone="Bone_TireRR"				TireRotationMultiplier="0.2"				TireRotationMultiplierFront="1"				PowerslideRotationAddition="1.25"				CabRotationMultiplier="1"				TrailerRotationMultiplier="1"				RotationDamping="1">				<ModelConditionState					ParseCondStateType="PARSE_DEFAULT"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DContainer:GUAPC_SKN"						ExtraMesh="False" />					<WeaponFireFXBone						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<WeaponRecoilBone						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<WeaponMuzzleFlash						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<WeaponLaunchBone						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<Turret						TurretNameKey="Turret"						TurretArtAngle="0d"						TurretPitch="Turret_Pitch"						TurretArtPitch="0d"						TurretID="1" />				</ModelConditionState>				<ModelConditionState					ParseCondStateType="PARSE_NORMAL"					ConditionsYes="DYING"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DContainer:GUAPCR"						ExtraMesh="False" />					<ParticleSysBone						BoneName="Bone_Chassis"						FXParticleSystemTemplate="GDIDebrisSmallFire"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="Bone_Chassis"						FXParticleSystemTemplate="GDIDebrisSmallFireDistortion"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="Bone_Chassis"						FXParticleSystemTemplate="GDIDebrisSmallSmoke"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />				</ModelConditionState>				<ModelConditionState					ParseCondStateType="PARSE_NORMAL"					ConditionsYes="REALLYDAMAGED"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DContainer:GUAPC_SKN"						ExtraMesh="False" />					<Texture						Original="GUAPC"						New="GUAPC_D" />					<ParticleSysBone						BoneName="BoneGarrison01"						FXParticleSystemTemplate="GDIPredDamagedFire"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="BoneGarrison01"						FXParticleSystemTemplate="GDIPredDamagedFireDistortion"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="BoneGarrison01"						FXParticleSystemTemplate="GDIPredDamagedSmoke"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />				</ModelConditionState>				<ModelConditionState					ParseCondStateType="PARSE_NORMAL"					ConditionsYes="FORMATION_PREVIEW"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DMesh:GUAPC_FP"						ExtraMesh="False" />				</ModelConditionState>			</TruckDraw>			<TracerModelDraw				id="54201A36"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.2"				MaxTracersPerFrame="0.3"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerGDI"				TracerHitFx="FX_BulletHitGDI"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="1"					b="1"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_01 WEAPON_UPGRADED_03"					RequiredStatus="" />			</TracerModelDraw>			<TracerModelDraw				id="40E1A406"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.5"				MaxTracersPerFrame="0.5"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerHeroic"				TracerHitFx="FX_BulletHitGDIHeroic"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="0"					b="0"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_01"					RequiredStatus="WEAPON_UPGRADED_03" />			</TracerModelDraw>			<TracerModelDraw				id="55661E57"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.2"				MaxTracersPerFrame="0.2"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerGDIAPAmmo"				TracerHitFx="FX_BulletHitGDIAP"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="1"					b="1"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_03"					RequiredStatus="WEAPON_UPGRADED_01" />			</TracerModelDraw>			<TracerModelDraw				id="C0CF1421"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.3"				MaxTracersPerFrame="0.3"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerGDIAPAmmoHeroic"				TracerHitFx="FX_BulletHitGDIAPHeroic"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="1"					b="1"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_02"					RequiredStatus="WEAPON_UPGRADED_01" />			</TracerModelDraw>		</Draws>		<Behaviors>			<AttributeModifierPoolUpdate				id="513BC476" />			<SquishCollide				id="8CCB269A"				CrushAnimTime="1s"				CrushKillDelay="0.5s"				UseDirectionCheck="True" />			<FireWeaponWhenDead				id="DDED328F"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				DelayTime="0s"				DeathWeapon="CatalystInfantryDeathWeapon"				FocusFireKindOfFlag=""				InitiallyActive="True"				ActiveDuringConstruction="False"				ContinueToBezierDestination="False">				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="CATALYST"					DeathTypesForbidden="" />			</FireWeaponWhenDead>			<AutoHealBehavior				id="C07BF5C0"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				HealingAmount="100"				HealingDelay="0.5s"				StartHealingDelay="1s"				Radius="0"				KindOf=""				HealFXList=""				SpawnFXList=""				RespawnMinimumDelay="0s"				InitiallyActive="False"				AffectsWholePlayer="False"				AffectsContained="False"				HealOnlyIfNotUnderAttack="False"				HealOnlyIfNotInCombat="False"				HealOnlyOthers="False"				NonStackable="False"				RespawnNearbyHordeMembers="False">				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>			</AutoHealBehavior>			<AttributeModifierUpgrade				id="AA36A1AA"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>			</AttributeModifierUpgrade>			<AttributeModifierUpgrade				id="81C6F752"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterDamage</TriggeredBy>			</AttributeModifierUpgrade>			<AttributeModifierUpgrade				id="E35F7EC4"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>			</AttributeModifierUpgrade>			<StancesBehavior				id="54CA416E"				StanceTemplate="Generic" />			<LevelUpUpgrade				id="A92BDFEA"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="1"				LevelCap="4"				DoFlash="True">				<TriggeredBy>Upgrade_ProductionVeterancy_VETERAN</TriggeredBy>			</LevelUpUpgrade>			<LevelUpUpgrade				id="5C3F216A"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="2"				LevelCap="4"				DoFlash="True">				<TriggeredBy>Upgrade_ProductionVeterancy_ELITE</TriggeredBy>			</LevelUpUpgrade>			<LevelUpUpgrade				id="379F3CE2"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="3"				LevelCap="4"				DoFlash="True">				<TriggeredBy>Upgrade_ProductionVeterancy_HEROIC</TriggeredBy>			</LevelUpUpgrade>			<InvisibilityUpdate				id="3BD7F2F5"				Options=""				UpdatePeriod="0.5s"				BroadcastRange="0"				OpacityMin="40%"				OpacityMax="100%">				<InvisibilityNugget					ForbiddenConditions="PREATTACK_A FIRING_A FIRING_OR_PREATTACK_A RELOADING_A PREATTACK_B FIRING_B FIRING_OR_PREATTACK_B RELOADING_B PREATTACK_C FIRING_C FIRING_OR_PREATTACK_C RELOADING_C USING_WEAPON_A USING_WEAPON_B USING_WEAPON_C"					ForbiddenConditionExceptions=""					ForbiddenWeaponSets=""					ForbiddenStatus="IS_FIRING_WEAPON USING_ABILITY IS_AIMING_WEAPON SPECIAL_ABILITY_PACKING_UNPACKING_OR_USING"					CamouflageLevel="0"					InvisibilityType="STEALTH"					Options=""					EnteringStealthFX=""					LeavingStealthFX=""					HintDetectableStates="IS_ATTACKING"					NoStealthForAttackWindow="0s" />				<RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>			</InvisibilityUpdate>			<StealthUpgrade				id="F2B9DFBE"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True">				<TriggeredBy>Upgrade_CloakingFieldInvisibility</TriggeredBy>			</StealthUpgrade>			<TemporarilyDefectUpdate				id="3473AFD2"				DefectionFrameCount="300" />			<ProductionUpdate				id="34FE0D85"				MaxQueueEntries="99"				NumDoorAnimations="0"				DoorOpeningTime="0s"				DoorOpeningTimeMetaUnit="0s"				DoorWaitOpenTime="0s"				DoorCloseTime="0s"				ConstructionCompleteDuration="0"				DisabledTypesToProcess=""				UnitInvulnerableTime="0"				SpecialPrepModelconditionTime="0"				BonusForType=""				SpeedBonusAudioLoop=""				Type="INVALID"				ProductionTimeDelayScalar="0s"				GiveNoXP="True"				VeteranUnitsFromVeteranFactory="False"				SetBonusModelConditionOnSpeedBonus="False"				SecondaryQueue="False"				IgnorePreReqs="False" />			<WeaponSetUpdate				id="720F4A50">				<WeaponSlotTurret					ID="1"					InterleavedStyle="INTERLEAVE_RANDOM"					WeaponChoiceCriteria="PREFER_MOST_DAMAGE"					AllowInterleavedFiring="False">					<Weapon						Ordering="PRIMARY_WEAPON"						Template="GDIAPCAutoCannon"						Upgrade=""						ObjectStatus=""						IsPlayerUpgradePermanent="False" />					<Weapon						Ordering="PRIMARY_WEAPON"						Template="GDIAPCAutoCannonAPAmmo"						Upgrade=""						ObjectStatus="WEAPON_UPGRADED_01"						IsPlayerUpgradePermanent="False" />					<TurretSettings						TurretTurnRate="200"						TurretPitchRate="200"						MinimumPitch="-15d"						PitchHeight="50%"						ControlledWeaponSlots=""						MinIdleScanTime="1s"						MaxIdleScanTime="5s"						MinIdleScanAngle="0"						MaxIdleScanAngle="90"						MaxDeflectionClockwise="180d"						MaxDeflectionAntiClockwise="180d"						NaturalTurretAngle="0d"						AllowsPitch="True"						RecenterWhenOutOfTurnRange="True">						<TurretAITargetChooserData							IdleScanDelay="0.8s"							ReacquireDelay="5s"							StartupDelay="0s"							SympathyRange="25"							CheckVisionRange="False"							CanPickDynamicTargets="True"							RotateToTargetWhenAiming="True"							CanAutoAcquireNonAutoAcquirable="False"							TargetingCompareList="DefaultTurretTargetingCompareList"							ActiveWhenPerformingSpecialAbility="False"							CanAcquireDynamicIfAssignedOutOfRange="True"							CanPickTargetsOutOfTurretAngle="False" />					</TurretSettings>				</WeaponSlotTurret>			</WeaponSetUpdate>			<Physics				id="6D41764B"				MaxXRotationVelocity="360"				MaxYRotationVelocity="360"				MaxZRotationVelocity="360"				GravityMultiplier="1"				ShockStunnedTimeLow="5"				ShockStunnedTimeHigh="10"				ShockStandingTime="5"				FirstHeight="1.3"				SecondHeight="1.3"				FirstPercentIndent="33%"				SecondPercentIndent="66%"				BounceCount="2"				BounceDistance="5"				BounceFirstHeight="1.3"				BounceSecondHeight="1.3"				BounceFirstPercentIndent="33%"				BounceSecondPercentIndent="66%"				GroundHitFX=""				GroundBounceFX=""				FirstPercentHeight="33%"				SecondPercentHeight="66%"				CurveFlattenMinDist="0"				TumbleRandomly="False"				AllowBouncing="False"				KillWhenRestingOnGround="False"				OrientToFlightPath="False"				IgnoreTerrainHeight="False" />			<ProductionUpdate				id="2387032B"				MaxQueueEntries="99"				NumDoorAnimations="0"				DoorOpeningTime="0s"				DoorOpeningTimeMetaUnit="0s"				DoorWaitOpenTime="0s"				DoorCloseTime="0s"				ConstructionCompleteDuration="0"				DisabledTypesToProcess=""				UnitInvulnerableTime="0"				SpecialPrepModelconditionTime="0"				BonusForType=""				SpeedBonusAudioLoop=""				Type="INVALID"				ProductionTimeDelayScalar="0s"				GiveNoXP="False"				VeteranUnitsFromVeteranFactory="False"				SetBonusModelConditionOnSpeedBonus="False"				SecondaryQueue="False"				IgnorePreReqs="False" />			<HordeTransportContain				id="9DC593B0"				ContainMax="1"				EnterSound="AudioEvent:VehicleEnter"				ExitSound="AudioEvent:VehicleExit"				DamagePercentToUnits="0%"				PassengersTestCollisionHeight="-1000"				NumberOfExitPaths="1"				DoorOpenTime="1"				ObjectStatusOfContained="CAN_ATTACK UNSELECTABLE ENCLOSED"				ModifierRequiredTime="100"				KillIfEmptyTime="0s"				ModelConditionsWhenNotEmpty=""				PassengersInTurret="False"				AllowOwnPlayerInsideOverride="True"				AllowAlliesInside="True"				AllowEnemiesInside="False"				AllowNeutralInside="False"				ShowPips="True"				CollidePickup="True"				EjectPassengersOnDeath="True"				KillPassengersOnDeath="True"				HasObjectStatusOfContainedEntry="True"				Enabled="True"				Slots="1"				ExitPitchRate="0"				HealthRegenPercentPerSec="0"				ExitDelay="0"				TypeOneForWeaponSet=""				TypeTwoForWeaponSet=""				TypeOneForWeaponState=""				TypeTwoForWeaponState=""				TypeThreeForWeaponState=""				GrabWeapon=""				ConditionForEntry="TOPPLED"				ThrowOutPassengersDelay="0"				ThrowOutPassengersLandingWarhead=""				EnterFadeTime="0"				ExitFadeTime="0"				ReleaseSnappyness="0.7"				ScatterNearbyOnExit="True"				OrientLikeContainerOnExit="False"				DestroyRidersWhoAreNotFreeToExit="False"				ForceOrientationContainer="True"				CanGrabStructure="False"				FireGrabWeaponOnVictim="True"				ShouldThrowOutPassengers="False"				FadePassengerOnEnter="False"				FadePassengerOnExit="False"				FadeReverse="False"				ExtendedExitContainerChecks="False"				FlyOffMapOnEmpty="False">				<PassengerFilter					Rule="ANY"					Relationship=""					Alignment="NONE"					Include="INFANTRY"					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="ALL"					DeathTypesForbidden="" />				<PassengerData					BonePrefix="BONEGARRISON">					<Filter						Rule="NONE"						Relationship=""						Alignment="NONE"						Include="INFANTRY"						Exclude=""						StatusBitFlags=""						RejectStatusBitFlags=""						AcceptModelCondition=""						RejectModelCondition="" />				</PassengerData>				<MemberTemplateStatusInfo					ThingTemplate="GDISniperSquad"					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />				<MemberTemplateStatusInfo					ThingTemplate="GDISniperSquad_Veteran"					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />				<MemberTemplateStatusInfo					ThingTemplate="ZOCOMSniperSquad"					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />				<MemberTemplateStatusInfo					ThingTemplate="ZOCOMSniperSquad_Veteran"					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />									</HordeTransportContain>			<MoveToPositionAndEvacuateSpecialPower				id="DBDCABC7"				SpecialPowerTemplate="SpecialPowerMoveToPositionAndEvacuate"				AntiCategory=""				AntiFX=""				AttributeModifier=""				AttributeModifierRange="0"				AttributeModifierFX=""				WeatherDuration="0"				InitiateFX=""				TriggerFX=""				SetModelCondition="TOPPLED"				SetModelConditionTime="0s"				GiveLevels="0"				ChangeWeather="NORMAL"				OnTriggerRechargeSpecialPower=""				BurnDecayModifier="0"				MaxDistanceFromCommandCenter="0"				UpdateModuleStartsAttack="False"				StartsPaused="False"				ReEnableAntiCategory="False"				AttributeModifierAffectsSelf="False"				AttributeModifierWeatherBased="False"				TargetEnemy="False"				TargetAllSides="False"				DisableDuringAnimDuration="False"				IdleWhenStartingPower="False"				AffectGood="False"				AffectEvil="False"				AffectAllies="True"				AvailableAtStart="True"				AdjustVictim="False"				UseDistanceFromCommandCenter="False"				ChildModuleHandlesFX="False">				<AttributeModifierAffects					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterMP					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterStrategic					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />			</MoveToPositionAndEvacuateSpecialPower>			<SlowDeath				id="73542D4A"				SinkRate="2"				ProbabilityModifier="10"				ModifierBonusPerOverkillPercent="0%"				SinkDelay="3s"				SinkDelayVariance="0s"				DestructionDelay="5s"				DestructionDelayVariance="0s"				DecayBeginTime="0s"				FlingForce="0"				FlingForceVariance="0"				FlingPitch="0d"				FlingPitchVariance="0d"				DeathFlags=""				FadeTime="0s"				FadeDelay="0s"				DeathTypes=""				DeathObjectStatusBits=""				ShadowWhenDead="False"				Fade="False">				<OCL					Type="INITIAL">					<OCL>OCL_GDIAPCDebris</OCL>				</OCL>				<Sound					Type="INITIAL"					List="GDI_Generic_VoiceDieMS" />				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="ALL"					DeathTypesForbidden="TOPPLED" />			</SlowDeath>			<FXListBehavior				id="C74C39D8">				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="ALL"					DeathTypesForbidden="" />				<Event					Index="onDeath"					FX="FX_GDIVehicleExplodeNoScorch"					MinThreshold="0"					MaxThreshold="0"					Direction="Default"					OrientToObject="True"					ForceUseDoFXObj="False" />			</FXListBehavior>			<SpecialPower				id="8493B462"				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"				AntiCategory=""				AntiFX=""				AttributeModifier=""				AttributeModifierRange="0"				AttributeModifierFX=""				WeatherDuration="0"				InitiateFX=""				TriggerFX=""				SetModelCondition="TOPPLED"				SetModelConditionTime="0s"				GiveLevels="0"				ChangeWeather="NORMAL"				OnTriggerRechargeSpecialPower=""				BurnDecayModifier="0"				MaxDistanceFromCommandCenter="0"				UpdateModuleStartsAttack="True"				StartsPaused="False"				ReEnableAntiCategory="False"				AttributeModifierAffectsSelf="False"				AttributeModifierWeatherBased="False"				TargetEnemy="False"				TargetAllSides="False"				DisableDuringAnimDuration="False"				IdleWhenStartingPower="False"				AffectGood="False"				AffectEvil="False"				AffectAllies="True"				AvailableAtStart="True"				AdjustVictim="False"				UseDistanceFromCommandCenter="False"				ChildModuleHandlesFX="False">				<AttributeModifierAffects					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterMP					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterStrategic					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />			</SpecialPower>			<WeaponFireSpecialAbilityUpdate				id="791B627F"				GrabPassengerHealGain="0%"				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"				StartAbilityRange="10"				AbilityAbortRange="1E+07"				PreparationTime="0s"				PersistentPrepTime="0s"				PersistentCount="-1"				PackTime="0s"				UnpackTime="0s"				PreTriggerUnstealthTime="0s"				Options="CHECK_SPECIALPOWER_REQUIREMENTS_DURING_UPDATE"				PackUnpackVariationFactor="0"				ParalyzeDurationWhenCompleted="0s"				ParalyzeDurationWhenAborted="0s"				SpecialObject=""				MaxSpecialObjects="1"				EffectDuration="0s"				EffectValue="1"				EffectRange="0"				FleeRangeAfterCompletion="0"				DisableFXParticleSystem=""				PackSound=""				UnpackSound=""				PrepSoundLoop=""				TriggerSound=""				ActiveLoopSound=""				AwardXPForTriggering="0"				SkillPointsForTriggering="-1"				UnpackingVariation="0"				FreezeAfterTriggerDuration="0s"				RequiredConditions=""				RejectedConditions=""				SetObjectStatusOnTrigger=""				ClearObjectStatusOnExit=""				TriggerAttributeModifier=""				AttributeModifierDuration="0s"				ChainedButton=""				RequireAndSpendTiberiumOnCaster="0"				DisabledTypesToProcess="HELD"				DisabledTypesToContinueSoundsFor="HELD"				StartRechargeOnExit="False"				GoIdleInStartPreparation="True"				FaceTarget="True"				SpecialWeapon="GDIAPCMinefield"				WhichSpecialWeapon="0"				BusyForDuration="0s"				WeaponSlotID="1"				WeaponSlotType="PRIMARY_WEAPON"				SkipContinue="False"				NeedLivingTargets="False"				PlayWeaponPreFireFX="False"				OffsetTargetLocationFromObject="False"				DestealthClosestObjectMatchingFilter="False" />			<AISpecialPowerUpdate				id="DBD07887"				CommandButtonName="Command_APCMinefield"				SecondaryCommandButtonName=""				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"				SpecialPowerRadius="100"				ReinforceDistance="0"				SpellMakesAStructure=""				SpecificUnit=""				UnitKindOf=""				AllyUnitInclude=""				AllyUnitExclude=""				EnemyUnitInclude=""				EnemyUnitExclude=""				MinimumCutoff="0"				UpdateTime="1s"				MaxFrequency="0"				RandomizeTargetLocation="False" />			<CreateAndEnterObjectSpecialPower				id="6D44A823"				SpecialPowerTemplate="SpecialPowerCallForTransportZOCOM"				AntiCategory=""				AntiFX=""				AttributeModifier=""				AttributeModifierRange="0"				AttributeModifierFX=""				WeatherDuration="0"				InitiateFX=""				TriggerFX="FX_GDICallForTransportFlare"				SetModelCondition="TOPPLED"				SetModelConditionTime="0s"				GiveLevels="0"				ChangeWeather="NORMAL"				OnTriggerRechargeSpecialPower=""				BurnDecayModifier="0"				MaxDistanceFromCommandCenter="0"				UpdateModuleStartsAttack="False"				StartsPaused="False"				ReEnableAntiCategory="False"				AttributeModifierAffectsSelf="False"				AttributeModifierWeatherBased="False"				TargetEnemy="False"				TargetAllSides="False"				DisableDuringAnimDuration="False"				IdleWhenStartingPower="True"				AffectGood="False"				AffectEvil="False"				AffectAllies="True"				AvailableAtStart="True"				AdjustVictim="False"				UseDistanceFromCommandCenter="False"				ChildModuleHandlesFX="True"				OCL="OCL_ZOCOMCallForTransportForVehicle"				CreateLocation="CREATE_ABOVE_LOCATION"				MaxCreateCount="0"				NumberToSpawn="1"				DestinationOCL=""				RegisterObjectsWithSpecialAbilityUpdate="False">				<AttributeModifierAffects					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterMP					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterStrategic					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<FXOffset					x="100"					y="0"					z="0" />			</CreateAndEnterObjectSpecialPower>			<StatusBitsUpgrade				id="85B2DF85"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_01"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="1FDD3ADA"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_02"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_GDIFaction</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="323E319E"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_02"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_SteelTalonsFaction</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="CD63B192"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_02"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="D305500E"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_03"				StatusToClear="WEAPON_UPGRADED_02"				ApplyToContained="False">				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>			</StatusBitsUpgrade>			<!--			<AttributeModifierAuraUpdate				id="ModuleTag_AttributeModifier_CrystalShield_Propagate"				InitiallyActive="true"				AttributeModifierName="AttributeModifier_AlienCrystalShield_Propagated"				RefreshDelay="1s"				AllowSelf="false"				AffectContainedOnly="true"				RequiredObjectStatusFlags="IN_STASIS"/>				-->			<AttributeModifierAuraUpdate				id="1E660B36"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifierName="AttributeModifier_AlienPhaseField_Propagated"				RefreshDelay="1s"				Range="0"				RequiredConditions=""				AntiCategory=""				AntiFX=""				MaxActiveRank="0"				RequiredObjectStatusFlags="OUT_OF_PHASE"				TargetEnemy="False"				AllowPowerWhenAttacking="True"				InitiallyActive="True"				AffectGood="False"				AffectEvil="False"				RunWhileDead="False"				AllowSelf="False"				AffectContainedOnly="True"				AffectHordeMembersOnly="False" />			<AudioLoopUpgrade				id="9D4DB7C1"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				SoundToPlay="AudioEvent:GDI_CommandPost_APammoUpgrade"				KillAfterMS="0">				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>			</AudioLoopUpgrade>			<SubObjectsUpgrade				id="C21BE537"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				ShowSubObjects="APC_UGAB APC_UGTURRET"				FadeTimeInSeconds="0.5"				WaitBeforeFadeInSeconds="0"				RecolorHouse="False"				SkipFadeOnCreate="False"				HideSubObjectsOnRemove="False"				UnHideSubObjectsOnRemove="False">				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>			</SubObjectsUpgrade>		</Behaviors>		<AI>			<AIUpdate				id="12FA48BA"				AutoAcquireEnemiesWhenIdle="YES"				StopChaseDistance="500"				HoldGroundCloseRangeDistance="0"				AILuaEventsList="GDIAPCFunctions"				MinCowerTime="0s"				MaxCowerTime="0s"				RampageTime="0s"				BurningDeathTime="0s"				TimeToEjectPassengersOnRampage="0"				ComboLocomotorSet="NORMAL"				ComboLocoAttackDistance="80"				IdleTargetTime="0s"				MaxCombineChildren="1"				SpawnOffsetRadius="0"				StandGround="False"				CanAttackWhileContained="False"				RampageRequiresAflame="False"				FadeOnPortals="False">				<UnitAITargetChooserData					IdleScanDelay="0.8s"					ReacquireDelay="5s"					StartupDelay="0s"					SympathyRange="30"					CheckVisionRange="False"					CanPickDynamicTargets="False"					RotateToTargetWhenAiming="False"					CanAutoAcquireNonAutoAcquirable="False"					TargetingCompareList="DefaultTargetingCompareList" />			</AIUpdate>		</AI>		<Body>			<ActiveBody				id="B313F576"				MaxHealth="2800"				MaxHealthDamaged="0"				MaxHealthReallyDamaged="0"				InitialHealth="-1"				RecoveryTime="0"				DodgePercent="0"				EnteringDamagedTransitionTime="0s"				EnteringReallyDamagedTransitionTime="0s"				GrabFX=""				GrabDamage="200"				HealingBuffFX=""				DamagedAttributeModifier=""				ReallyDamagedAttributeModifier=""				CheerRadius="200"				BurningDeathFX=""				SecondChanceUpgrade=""				SecondChanceHeal="0"				UseDefaultDamageSettings="True"				RemoveUpgradesOnDeath="False"				BurningDeathBehavior="False" />		</Body>		<Geometry			IsSmall="True">			<Shape				Type="BOX"				ContactPointGeneration="VEHICLE"				MajorRadius="20"				MinorRadius="10"				Height="11.5"				FrontAngle="0d"				Active="True"				UsedForHealthBox="True" />		</Geometry>		<AudioArrayVoice>			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceAttack"				AudioType="voiceAttack" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceCreate"				AudioType="voiceCreated" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"				AudioType="voiceMove" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"				AudioType="voiceGuard" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMoveAttack"				AudioType="voiceAttackAfterMoving" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceRetreat"				AudioType="voiceRetreatToCastle" />			<AudioEntry				Sound="Multisound:GDI_GuardianAPC_VoiceSelectMS"				AudioType="voiceSelect" />			<AudioEntry				Sound="Multisound:GDI_GuardianAPC_VoiceSelectBattleMS"				AudioType="voiceSelectBattle" />			<NamedEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMineDrop"				Name="InitiateAPCMinefield" />		</AudioArrayVoice>		<AudioArraySound>			<AudioEntry				Sound="GuardianAPCMoveStart"				AudioType="soundMoveStart" />			<AudioEntry				Sound="PredatorIdleLoop"				AudioType="soundAmbient" />			<AudioEntry				Sound="GDI_GuardianAPC_MoveByLoop"				AudioType="soundMoveLoop" />		</AudioArraySound>		<EvaEvents			EvaEventDieOwner="UnitLost"			EvaEventDamagedOwner="UnitUnderAttack"			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"			EvaEventSecondDamageFarFromFirstScanRange="600"			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"			EvaEventAmbushed="UnitAmbushed"			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"			EvaEventAvailableForProduction="NewConstructionOptions"			EvaEventProductionStarted="UnitConstructionStarted"			EvaEventBuildOnHold="BuildOnHold"			EvaEventBuildCancelled="BuildCancelled"			EvaEventPromotedOwner="UnitPromoted" />		<ShadowInfo			Type="VOLUME"			Texture=""			AdditionalTexture=""			SizeX="0"			SizeY="0"			OffsetX="0"			OffsetY="0"			OpacityStart="0"			OpacityFadeInTime="0s"			OpacityPeak="1"			OpacityFadeOutTime="0s"			OpacityEnd="0"			MaxHeight="20"			SunAngle="0"			OverrideLODVisibility="False"			UseHouseColor="False"			IsRotatingWithObject="True"			LocalPlayerOnly="False" />		<VisionInfo			VisionRange="350"			ShroudClearingRange="400"			VisionSide="100%"			VisionRear="100%"			VisionBonusTestRadius="100"			VisionBonusTestSegments="8"			VisionBonusPercentPerFoot="0%"			MaxVisionBonusPercent="50%"			MinVisionBonusPercent="-50%" />		<CrusherInfo			CrushKnockback="0"			CrushZFactor="1"			MinCrushVelocityPercent="1%"			CrushDecelerationPercent="0%"			CrushWeapon=""			CrushRevengeWeapon=""			CrusherLevel="0"			CrushableLevel="2"			MountedCrusherLevel="255"			MountedCrushableLevel="255"			CrushEqualLevelProps="True"			UseCrushAttack="True"			CrushOnlyWhileCharging="False"			CrushAllies="False" />		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>	</GameObject>				<!-- ********************************************************  VETERAN APC ************************************************************************ -->		<GameObject		id="ZOCOMAPC_Veteran"		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS TRANSPORT PRELOAD SCORE ATTACK_NEEDS_LINE_OF_SIGHT CAN_REVERSE_MOVE VEHICLE CAN_BE_FAVORITE_UNIT"		Description="Desc:GDIAPC"		TypeDescription="Type:GDIAPC"		RadarPriority="UNIT"		BuildCompletion="INVALID"		FenceWidth="0"		FenceXOffset="0"		RemoveTerrainRadius="0"		EmotionRange="0"		PlacementViewAngle="0d"		BuildFadeInOnCreateTimeSeconds="0s"		FactoryExitWidth="0"		FactoryExtraBibWidth="0"		Side="ZOCOM"		EditorName="ZOCOMAPC_Veteran"		EditorSorting="UNIT"		BountyValue="0"		BuildTime="7"		BuildFadeInOnCreateTime="0"		EnergyProduction="0"		EnergyBonus="0"		CommandSet="ZOCOMAPCCommandSet"		SelectPortrait="Portrait_GDIAPC"		ButtonImage="Portrait_GDIAPC"		VoicePriority="176"		MinZIncreaseForVoiceMoveToHigherGround="-1"		CrowdResponse=""		CampnessValue="0"		CampnessValueRadius="600"		Scale="1"		HealthBoxScale="1.5"		HealthBoxHeightOffset="10"		OcclusionDelay="0"		LiveCameraPitch="0"		FormationWidth="1"		FormationDepth="1"		InstanceScaleFuzziness="0"		ThreatRadius="-1"		RamPower="0"		RamZMult="1"		ShockwaveResistance="100"		CommandPoints="100"		CommandPointBonus="0"		VoiceAttackChargeTimeout="0"		MaxDistanceForEngaged="0"		EngagedStateTimeout="0"		ThreatLevel="10"		SlopeLimitIndex="0"		PathfindDiameter="-1"		SupplyOverride="0"		DisplayMeleeDamage="-1"		DisplayRangedDamage="-1"		HeroSortOrder="2147483647"		FiringArc="360"		CamouflageDetectionMultiplier="1"		SelectionPriority="2147483647"		ProductionQueueType="VEHICLE"		BuildPlacementTypeFlag="INVALID"		BuildOnRequiredObjectKindOf=""		UnitCategory="VEHICLE"		WeaponCategory="GUN"		HasFiredRecentlyTime="2s"		UnitTypeIcon=""		ReinvisibilityDelay="7s"		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"		CaptureTime="0s"		BuildCost="700"		RefundValue="0"		ThreatValue="0"		MaxSimultaneousOfType="0"		TransportSlotCount="1"		IsTrainable="True"		IsForbidden="False"		IsPrerequisite="False"		IsGrabbable="False"		IsHarvestable="False"		StructureRubbleHeight="0"		ForceLuaRegistration="False"		ShowHealthInSelectionDecal="False"		KeepSelectableWhenDead="False"		IsAutoBuilt="False"		CanPathThroughGates="True"		ShouldClearShotsOnIdle="False"		BuildInProximityToSamePlayerStucture="True">		<EquivalentTo>ZOCOMAPC</EquivalentTo>					<DisplayName>Name:GDIAPC</DisplayName>		<ArmorSet			Armor="GDIGuardianAPCArmor"			DamageFX="VehicleDamageFX"			Conditions="" />		<LocomotorSet			Speed="72"			Condition="NORMAL"			Locomotor="GDIAPCLocomotor" />		<SkirmishAIInformation			BaseBuildingLocation="FRONT"			ConquerMetricsOverrideDamageType="UNDEFINED"			ConquerMetricsOverrideAntiMask="ANTI_GROUND"			UnitBuilderStandardCombatUnit="True" />		<Draws>			<TruckDraw				id="50DF2C46"				RecoilDamping="0.02"				MaxRecoilDistance="0.1"				InitialRecoilSpeed="10"				RecoilSettleSpeed="3"				MinLODRequired="LOW"				ProjectileBoneFeedbackEnabledSlots=""				TrackMarks="EXTireTrack2"				ExtraPublicBone="FXWeapon BoneGarrison01 BoneGarrison02 BoneGarrison03 BoneGarrison04 BoneGarrison05 BoneGarrison06 BoneGarrison07 BoneGarrison08 BoneGarrison09 BoneGarrison10"				DependencySharedModelFlags=""				TrackMarksLeftBone="Bone_TireLR"				TrackMarksRightBone="Bone_TireRR"				HighDetailLODThreshold="0"				LowDetailLODThreshold="0"				WadingParticleSys=""				AlphaCameraFadeOuterRadius="0"				AlphaCameraFadeInnerRadius="0"				AlphaCameraAtInnerRadius="100%"				StaticSortLevelWhileFading="-1"				BirthFadeTime="0"				OkToChangeModelColor="True"				AnimationsRequirePower="True"				UseYAxisForTurretRotation="False"				TrackMarksOnlyWhenCorneringQuickly="True"				UseProducerTexture="False"				NoRotate="False"				UseFiringArcRotation="False"				Selectable="True"				RandomTextureFixedRandomIndex="False"				ParticlesAttachedToAnimatedBones="False"				ParticleBonesCheckDrawable="False"				ShadowForceDisable="False"				SwitchModelLODMode="False"				StaticModelLODMode="False"				ShowShadowWhileContained="False"				UseStandardModelNames="False"				UseDefaultAnimation="False"				BirthFadeAdditive="False"				ZWriteDisableOverride="False"				MultiPlayerOnly="False"				AffectedByStealth="True"				InvertStealthOpacity="False"				HighDetailOnly="False"				SetAnimsToLastFrameOnConstructionComplete="True"				Dust=""				DirtSpray=""				PowerslideSpray=""				LeftFrontTireBone="Bone_TireLF"				RightFrontTireBone="Bone_TireRF"				LeftRearTireBone="Bone_TireLR1"				RightRearTireBone="Bone_TireRR1"				MidLeftRearTireBone="Bone_TireLR"				MidRightRearTireBone="Bone_TireRR"				TireRotationMultiplier="0.2"				TireRotationMultiplierFront="1"				PowerslideRotationAddition="1.25"				CabRotationMultiplier="1"				TrailerRotationMultiplier="1"				RotationDamping="1">				<ModelConditionState					ParseCondStateType="PARSE_DEFAULT"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DContainer:GUAPC_SKN"						ExtraMesh="False" />					<WeaponFireFXBone						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<WeaponRecoilBone						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<WeaponMuzzleFlash						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<WeaponLaunchBone						WeaponSlotID="1"						WeaponSlotType="PRIMARY_WEAPON"						BoneName="FXWeapon" />					<Turret						TurretNameKey="Turret"						TurretArtAngle="0d"						TurretPitch="Turret_Pitch"						TurretArtPitch="0d"						TurretID="1" />				</ModelConditionState>				<ModelConditionState					ParseCondStateType="PARSE_NORMAL"					ConditionsYes="DYING"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DContainer:GUAPCR"						ExtraMesh="False" />					<ParticleSysBone						BoneName="Bone_Chassis"						FXParticleSystemTemplate="GDIDebrisSmallFire"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="Bone_Chassis"						FXParticleSystemTemplate="GDIDebrisSmallFireDistortion"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="Bone_Chassis"						FXParticleSystemTemplate="GDIDebrisSmallSmoke"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />				</ModelConditionState>				<ModelConditionState					ParseCondStateType="PARSE_NORMAL"					ConditionsYes="REALLYDAMAGED"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DContainer:GUAPC_SKN"						ExtraMesh="False" />					<Texture						Original="GUAPC"						New="GUAPC_D" />					<ParticleSysBone						BoneName="BoneGarrison01"						FXParticleSystemTemplate="GDIPredDamagedFire"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="BoneGarrison01"						FXParticleSystemTemplate="GDIPredDamagedFireDistortion"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />					<ParticleSysBone						BoneName="BoneGarrison01"						FXParticleSystemTemplate="GDIPredDamagedSmoke"						PersistID="0"						FollowBone="True"						OnlyIfOnWater="False"						OnlyIfOnLand="False" />				</ModelConditionState>				<ModelConditionState					ParseCondStateType="PARSE_NORMAL"					ConditionsYes="FORMATION_PREVIEW"					PortraitImage=""					ButtonImage=""					RetainSubObjects="False">					<Model						Name="W3DMesh:GUAPC_FP"						ExtraMesh="False" />				</ModelConditionState>			</TruckDraw>			<TracerModelDraw				id="54201A36"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.2"				MaxTracersPerFrame="0.3"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerGDI"				TracerHitFx="FX_BulletHitGDI"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="1"					b="1"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_01 WEAPON_UPGRADED_03"					RequiredStatus="" />			</TracerModelDraw>			<TracerModelDraw				id="40E1A406"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.5"				MaxTracersPerFrame="0.5"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerHeroic"				TracerHitFx="FX_BulletHitGDIHeroic"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="0"					b="0"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_01"					RequiredStatus="WEAPON_UPGRADED_03" />			</TracerModelDraw>			<TracerModelDraw				id="55661E57"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.2"				MaxTracersPerFrame="0.2"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerGDIAPAmmo"				TracerHitFx="FX_BulletHitGDIAP"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="1"					b="1"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_03"					RequiredStatus="WEAPON_UPGRADED_01" />			</TracerModelDraw>			<TracerModelDraw				id="C0CF1421"				MinLength="50"				MaxLength="50"				Width="3"				MinSpeed="30"				MaxSpeed="30"				SweepSpeed="1"				SpreadAngle="2"				MinTracersPerFrame="0.3"				MaxTracersPerFrame="0.3"				FrameLifeTime="35"				WeaponSlotType="PRIMARY_WEAPON"				WeaponSlotID="1"				Texture="FXTracerGDIAPAmmoHeroic"				TracerHitFx="FX_BulletHitGDIAPHeroic"				TracerEmitFx=""				TextureIndex="0"				UseAdditiveBlending="True">				<HeadColor					r="1"					g="1"					b="1"					a="1" />				<TailColor					r="0"					g="0"					b="0"					a="0" />				<ObjectStatusValidation					ForbiddenStatus="WEAPON_UPGRADED_02"					RequiredStatus="WEAPON_UPGRADED_01" />			</TracerModelDraw>		</Draws>		<Behaviors>			<AttributeModifierPoolUpdate				id="513BC476" />			<SquishCollide				id="8CCB269A"				CrushAnimTime="1s"				CrushKillDelay="0.5s"				UseDirectionCheck="True" />			<FireWeaponWhenDead				id="DDED328F"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				DelayTime="0s"				DeathWeapon="CatalystInfantryDeathWeapon"				FocusFireKindOfFlag=""				InitiallyActive="True"				ActiveDuringConstruction="False"				ContinueToBezierDestination="False">				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="CATALYST"					DeathTypesForbidden="" />			</FireWeaponWhenDead>			<AutoHealBehavior				id="C07BF5C0"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				HealingAmount="100"				HealingDelay="0.5s"				StartHealingDelay="1s"				Radius="0"				KindOf=""				HealFXList=""				SpawnFXList=""				RespawnMinimumDelay="0s"				InitiallyActive="False"				AffectsWholePlayer="False"				AffectsContained="False"				HealOnlyIfNotUnderAttack="False"				HealOnlyIfNotInCombat="False"				HealOnlyOthers="False"				NonStackable="False"				RespawnNearbyHordeMembers="False">				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>			</AutoHealBehavior>			<AttributeModifierUpgrade				id="AA36A1AA"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>			</AttributeModifierUpgrade>			<AttributeModifierUpgrade				id="81C6F752"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterDamage</TriggeredBy>			</AttributeModifierUpgrade>			<AttributeModifierUpgrade				id="E35F7EC4"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>			</AttributeModifierUpgrade>			<StancesBehavior				id="54CA416E"				StanceTemplate="Generic" />			<LevelUpUpgrade				id="A92BDFEA"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="1"				LevelCap="4"				DoFlash="True">				<TriggeredBy>Upgrade_ProductionVeterancy_VETERAN</TriggeredBy>			</LevelUpUpgrade>			<LevelUpUpgrade				id="5C3F216A"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="2"				LevelCap="4"				DoFlash="True">				<TriggeredBy>Upgrade_ProductionVeterancy_ELITE</TriggeredBy>			</LevelUpUpgrade>			<LevelUpUpgrade				id="379F3CE2"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="3"				LevelCap="4"				DoFlash="True">				<TriggeredBy>Upgrade_ProductionVeterancy_HEROIC</TriggeredBy>			</LevelUpUpgrade>			<InvisibilityUpdate				id="3BD7F2F5"				Options=""				UpdatePeriod="0.5s"				BroadcastRange="0"				OpacityMin="40%"				OpacityMax="100%">				<InvisibilityNugget					ForbiddenConditions="PREATTACK_A FIRING_A FIRING_OR_PREATTACK_A RELOADING_A PREATTACK_B FIRING_B FIRING_OR_PREATTACK_B RELOADING_B PREATTACK_C FIRING_C FIRING_OR_PREATTACK_C RELOADING_C USING_WEAPON_A USING_WEAPON_B USING_WEAPON_C"					ForbiddenConditionExceptions=""					ForbiddenWeaponSets=""					ForbiddenStatus="IS_FIRING_WEAPON USING_ABILITY IS_AIMING_WEAPON SPECIAL_ABILITY_PACKING_UNPACKING_OR_USING"					CamouflageLevel="0"					InvisibilityType="STEALTH"					Options=""					EnteringStealthFX=""					LeavingStealthFX=""					HintDetectableStates="IS_ATTACKING"					NoStealthForAttackWindow="0s" />				<RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>			</InvisibilityUpdate>			<StealthUpgrade				id="F2B9DFBE"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True">				<TriggeredBy>Upgrade_CloakingFieldInvisibility</TriggeredBy>			</StealthUpgrade>			<TemporarilyDefectUpdate				id="3473AFD2"				DefectionFrameCount="300" />			<ProductionUpdate				id="34FE0D85"				MaxQueueEntries="99"				NumDoorAnimations="0"				DoorOpeningTime="0s"				DoorOpeningTimeMetaUnit="0s"				DoorWaitOpenTime="0s"				DoorCloseTime="0s"				ConstructionCompleteDuration="0"				DisabledTypesToProcess=""				UnitInvulnerableTime="0"				SpecialPrepModelconditionTime="0"				BonusForType=""				SpeedBonusAudioLoop=""				Type="INVALID"				ProductionTimeDelayScalar="0s"				GiveNoXP="True"				VeteranUnitsFromVeteranFactory="False"				SetBonusModelConditionOnSpeedBonus="False"				SecondaryQueue="False"				IgnorePreReqs="False" />			<WeaponSetUpdate				id="720F4A50">				<WeaponSlotTurret					ID="1"					InterleavedStyle="INTERLEAVE_RANDOM"					WeaponChoiceCriteria="PREFER_MOST_DAMAGE"					AllowInterleavedFiring="False">					<Weapon						Ordering="PRIMARY_WEAPON"						Template="GDIAPCAutoCannon"						Upgrade=""						ObjectStatus=""						IsPlayerUpgradePermanent="False" />					<Weapon						Ordering="PRIMARY_WEAPON"						Template="GDIAPCAutoCannonAPAmmo"						Upgrade=""						ObjectStatus="WEAPON_UPGRADED_01"						IsPlayerUpgradePermanent="False" />					<TurretSettings						TurretTurnRate="200"						TurretPitchRate="200"						MinimumPitch="-15d"						PitchHeight="50%"						ControlledWeaponSlots=""						MinIdleScanTime="1s"						MaxIdleScanTime="5s"						MinIdleScanAngle="0"						MaxIdleScanAngle="90"						MaxDeflectionClockwise="180d"						MaxDeflectionAntiClockwise="180d"						NaturalTurretAngle="0d"						AllowsPitch="True"						RecenterWhenOutOfTurnRange="True">						<TurretAITargetChooserData							IdleScanDelay="0.8s"							ReacquireDelay="5s"							StartupDelay="0s"							SympathyRange="25"							CheckVisionRange="False"							CanPickDynamicTargets="True"							RotateToTargetWhenAiming="True"							CanAutoAcquireNonAutoAcquirable="False"							TargetingCompareList="DefaultTurretTargetingCompareList"							ActiveWhenPerformingSpecialAbility="False"							CanAcquireDynamicIfAssignedOutOfRange="True"							CanPickTargetsOutOfTurretAngle="False" />					</TurretSettings>				</WeaponSlotTurret>			</WeaponSetUpdate>			<Physics				id="6D41764B"				MaxXRotationVelocity="360"				MaxYRotationVelocity="360"				MaxZRotationVelocity="360"				GravityMultiplier="1"				ShockStunnedTimeLow="5"				ShockStunnedTimeHigh="10"				ShockStandingTime="5"				FirstHeight="1.3"				SecondHeight="1.3"				FirstPercentIndent="33%"				SecondPercentIndent="66%"				BounceCount="2"				BounceDistance="5"				BounceFirstHeight="1.3"				BounceSecondHeight="1.3"				BounceFirstPercentIndent="33%"				BounceSecondPercentIndent="66%"				GroundHitFX=""				GroundBounceFX=""				FirstPercentHeight="33%"				SecondPercentHeight="66%"				CurveFlattenMinDist="0"				TumbleRandomly="False"				AllowBouncing="False"				KillWhenRestingOnGround="False"				OrientToFlightPath="False"				IgnoreTerrainHeight="False" />			<ProductionUpdate				id="2387032B"				MaxQueueEntries="99"				NumDoorAnimations="0"				DoorOpeningTime="0s"				DoorOpeningTimeMetaUnit="0s"				DoorWaitOpenTime="0s"				DoorCloseTime="0s"				ConstructionCompleteDuration="0"				DisabledTypesToProcess=""				UnitInvulnerableTime="0"				SpecialPrepModelconditionTime="0"				BonusForType=""				SpeedBonusAudioLoop=""				Type="INVALID"				ProductionTimeDelayScalar="0s"				GiveNoXP="False"				VeteranUnitsFromVeteranFactory="False"				SetBonusModelConditionOnSpeedBonus="False"				SecondaryQueue="False"				IgnorePreReqs="False" />			<HordeTransportContain				id="9DC593B0"				ContainMax="1"				EnterSound="AudioEvent:VehicleEnter"				ExitSound="AudioEvent:VehicleExit"				DamagePercentToUnits="0%"				PassengersTestCollisionHeight="-1000"				NumberOfExitPaths="1"				DoorOpenTime="1"				ObjectStatusOfContained="CAN_ATTACK UNSELECTABLE ENCLOSED"				ModifierRequiredTime="100"				KillIfEmptyTime="0s"				ModelConditionsWhenNotEmpty=""				PassengersInTurret="False"				AllowOwnPlayerInsideOverride="True"				AllowAlliesInside="True"				AllowEnemiesInside="False"				AllowNeutralInside="False"				ShowPips="True"				CollidePickup="True"				EjectPassengersOnDeath="True"				KillPassengersOnDeath="True"				HasObjectStatusOfContainedEntry="True"				Enabled="True"				Slots="1"				ExitPitchRate="0"				HealthRegenPercentPerSec="0"				ExitDelay="0"				TypeOneForWeaponSet=""				TypeTwoForWeaponSet=""				TypeOneForWeaponState=""				TypeTwoForWeaponState=""				TypeThreeForWeaponState=""				GrabWeapon=""				ConditionForEntry="TOPPLED"				ThrowOutPassengersDelay="0"				ThrowOutPassengersLandingWarhead=""				EnterFadeTime="0"				ExitFadeTime="0"				ReleaseSnappyness="0.7"				ScatterNearbyOnExit="True"				OrientLikeContainerOnExit="False"				DestroyRidersWhoAreNotFreeToExit="False"				ForceOrientationContainer="True"				CanGrabStructure="False"				FireGrabWeaponOnVictim="True"				ShouldThrowOutPassengers="False"				FadePassengerOnEnter="False"				FadePassengerOnExit="False"				FadeReverse="False"				ExtendedExitContainerChecks="False"				FlyOffMapOnEmpty="False">				<PassengerFilter					Rule="ANY"					Relationship=""					Alignment="NONE"					Include="INFANTRY"					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="ALL"					DeathTypesForbidden="" />				<PassengerData					BonePrefix="BONEGARRISON">					<Filter						Rule="NONE"						Relationship=""						Alignment="NONE"						Include="INFANTRY"						Exclude=""						StatusBitFlags=""						RejectStatusBitFlags=""						AcceptModelCondition=""						RejectModelCondition="" />				</PassengerData>				<MemberTemplateStatusInfo					ThingTemplate="GDISniperSquad"					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />				<MemberTemplateStatusInfo					ThingTemplate="GDISniperSquad_Veteran"					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />									</HordeTransportContain>			<MoveToPositionAndEvacuateSpecialPower				id="DBDCABC7"				SpecialPowerTemplate="SpecialPowerMoveToPositionAndEvacuate"				AntiCategory=""				AntiFX=""				AttributeModifier=""				AttributeModifierRange="0"				AttributeModifierFX=""				WeatherDuration="0"				InitiateFX=""				TriggerFX=""				SetModelCondition="TOPPLED"				SetModelConditionTime="0s"				GiveLevels="0"				ChangeWeather="NORMAL"				OnTriggerRechargeSpecialPower=""				BurnDecayModifier="0"				MaxDistanceFromCommandCenter="0"				UpdateModuleStartsAttack="False"				StartsPaused="False"				ReEnableAntiCategory="False"				AttributeModifierAffectsSelf="False"				AttributeModifierWeatherBased="False"				TargetEnemy="False"				TargetAllSides="False"				DisableDuringAnimDuration="False"				IdleWhenStartingPower="False"				AffectGood="False"				AffectEvil="False"				AffectAllies="True"				AvailableAtStart="True"				AdjustVictim="False"				UseDistanceFromCommandCenter="False"				ChildModuleHandlesFX="False">				<AttributeModifierAffects					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterMP					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterStrategic					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />			</MoveToPositionAndEvacuateSpecialPower>			<SlowDeath				id="73542D4A"				SinkRate="2"				ProbabilityModifier="10"				ModifierBonusPerOverkillPercent="0%"				SinkDelay="3s"				SinkDelayVariance="0s"				DestructionDelay="5s"				DestructionDelayVariance="0s"				DecayBeginTime="0s"				FlingForce="0"				FlingForceVariance="0"				FlingPitch="0d"				FlingPitchVariance="0d"				DeathFlags=""				FadeTime="0s"				FadeDelay="0s"				DeathTypes=""				DeathObjectStatusBits=""				ShadowWhenDead="False"				Fade="False">				<OCL					Type="INITIAL">					<OCL>OCL_GDIAPCDebris</OCL>				</OCL>				<Sound					Type="INITIAL"					List="GDI_Generic_VoiceDieMS" />				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="ALL"					DeathTypesForbidden="TOPPLED" />			</SlowDeath>			<FXListBehavior				id="C74C39D8">				<DieMuxData					ExemptStatus=""					RequiredStatus=""					DamageAmountRequired="-1"					MinKillerAngle="0.9999999d"					MaxKillerAngle="-0.9999999d"					DeathTypes="ALL"					DeathTypesForbidden="" />				<Event					Index="onDeath"					FX="FX_GDIVehicleExplodeNoScorch"					MinThreshold="0"					MaxThreshold="0"					Direction="Default"					OrientToObject="True"					ForceUseDoFXObj="False" />			</FXListBehavior>			<SpecialPower				id="8493B462"				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"				AntiCategory=""				AntiFX=""				AttributeModifier=""				AttributeModifierRange="0"				AttributeModifierFX=""				WeatherDuration="0"				InitiateFX=""				TriggerFX=""				SetModelCondition="TOPPLED"				SetModelConditionTime="0s"				GiveLevels="0"				ChangeWeather="NORMAL"				OnTriggerRechargeSpecialPower=""				BurnDecayModifier="0"				MaxDistanceFromCommandCenter="0"				UpdateModuleStartsAttack="True"				StartsPaused="False"				ReEnableAntiCategory="False"				AttributeModifierAffectsSelf="False"				AttributeModifierWeatherBased="False"				TargetEnemy="False"				TargetAllSides="False"				DisableDuringAnimDuration="False"				IdleWhenStartingPower="False"				AffectGood="False"				AffectEvil="False"				AffectAllies="True"				AvailableAtStart="True"				AdjustVictim="False"				UseDistanceFromCommandCenter="False"				ChildModuleHandlesFX="False">				<AttributeModifierAffects					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterMP					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterStrategic					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />			</SpecialPower>			<WeaponFireSpecialAbilityUpdate				id="791B627F"				GrabPassengerHealGain="0%"				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"				StartAbilityRange="10"				AbilityAbortRange="1E+07"				PreparationTime="0s"				PersistentPrepTime="0s"				PersistentCount="-1"				PackTime="0s"				UnpackTime="0s"				PreTriggerUnstealthTime="0s"				Options="CHECK_SPECIALPOWER_REQUIREMENTS_DURING_UPDATE"				PackUnpackVariationFactor="0"				ParalyzeDurationWhenCompleted="0s"				ParalyzeDurationWhenAborted="0s"				SpecialObject=""				MaxSpecialObjects="1"				EffectDuration="0s"				EffectValue="1"				EffectRange="0"				FleeRangeAfterCompletion="0"				DisableFXParticleSystem=""				PackSound=""				UnpackSound=""				PrepSoundLoop=""				TriggerSound=""				ActiveLoopSound=""				AwardXPForTriggering="0"				SkillPointsForTriggering="-1"				UnpackingVariation="0"				FreezeAfterTriggerDuration="0s"				RequiredConditions=""				RejectedConditions=""				SetObjectStatusOnTrigger=""				ClearObjectStatusOnExit=""				TriggerAttributeModifier=""				AttributeModifierDuration="0s"				ChainedButton=""				RequireAndSpendTiberiumOnCaster="0"				DisabledTypesToProcess="HELD"				DisabledTypesToContinueSoundsFor="HELD"				StartRechargeOnExit="False"				GoIdleInStartPreparation="True"				FaceTarget="True"				SpecialWeapon="GDIAPCMinefield"				WhichSpecialWeapon="0"				BusyForDuration="0s"				WeaponSlotID="1"				WeaponSlotType="PRIMARY_WEAPON"				SkipContinue="False"				NeedLivingTargets="False"				PlayWeaponPreFireFX="False"				OffsetTargetLocationFromObject="False"				DestealthClosestObjectMatchingFilter="False" />			<AISpecialPowerUpdate				id="DBD07887"				CommandButtonName="Command_APCMinefield"				SecondaryCommandButtonName=""				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"				SpecialPowerRadius="100"				ReinforceDistance="0"				SpellMakesAStructure=""				SpecificUnit=""				UnitKindOf=""				AllyUnitInclude=""				AllyUnitExclude=""				EnemyUnitInclude=""				EnemyUnitExclude=""				MinimumCutoff="0"				UpdateTime="1s"				MaxFrequency="0"				RandomizeTargetLocation="False" />			<CreateAndEnterObjectSpecialPower				id="6D44A823"				SpecialPowerTemplate="SpecialPowerCallForTransportZOCOM"				AntiCategory=""				AntiFX=""				AttributeModifier=""				AttributeModifierRange="0"				AttributeModifierFX=""				WeatherDuration="0"				InitiateFX=""				TriggerFX="FX_GDICallForTransportFlare"				SetModelCondition="TOPPLED"				SetModelConditionTime="0s"				GiveLevels="0"				ChangeWeather="NORMAL"				OnTriggerRechargeSpecialPower=""				BurnDecayModifier="0"				MaxDistanceFromCommandCenter="0"				UpdateModuleStartsAttack="False"				StartsPaused="False"				ReEnableAntiCategory="False"				AttributeModifierAffectsSelf="False"				AttributeModifierWeatherBased="False"				TargetEnemy="False"				TargetAllSides="False"				DisableDuringAnimDuration="False"				IdleWhenStartingPower="True"				AffectGood="False"				AffectEvil="False"				AffectAllies="True"				AvailableAtStart="True"				AdjustVictim="False"				UseDistanceFromCommandCenter="False"				ChildModuleHandlesFX="True"				OCL="OCL_ZOCOMCallForTransportForVehicle"				CreateLocation="CREATE_ABOVE_LOCATION"				MaxCreateCount="0"				NumberToSpawn="1"				DestinationOCL=""				RegisterObjectsWithSpecialAbilityUpdate="False">				<AttributeModifierAffects					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterMP					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<RequirementsFilterStrategic					Rule="UNPARSED"					Relationship=""					Alignment="NONE"					Include=""					Exclude=""					StatusBitFlags=""					RejectStatusBitFlags=""					AcceptModelCondition=""					RejectModelCondition="" />				<FXOffset					x="25"					y="0"					z="0" />			</CreateAndEnterObjectSpecialPower>			<StatusBitsUpgrade				id="85B2DF85"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_01"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="1FDD3ADA"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_02"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_GDIFaction</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="323E319E"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_02"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_SteelTalonsFaction</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="CD63B192"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_02"				StatusToClear=""				ApplyToContained="False">				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>			</StatusBitsUpgrade>			<StatusBitsUpgrade				id="D305500E"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				StatusToSet="WEAPON_UPGRADED_03"				StatusToClear="WEAPON_UPGRADED_02"				ApplyToContained="False">				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>			</StatusBitsUpgrade>			<!--			<AttributeModifierAuraUpdate				id="ModuleTag_AttributeModifier_CrystalShield_Propagate"				InitiallyActive="true"				AttributeModifierName="AttributeModifier_AlienCrystalShield_Propagated"				RefreshDelay="1s"				AllowSelf="false"				AffectContainedOnly="true"				RequiredObjectStatusFlags="IN_STASIS"/>				-->			<AttributeModifierAuraUpdate				id="1E660B36"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				AttributeModifierName="AttributeModifier_AlienPhaseField_Propagated"				RefreshDelay="1s"				Range="0"				RequiredConditions=""				AntiCategory=""				AntiFX=""				MaxActiveRank="0"				RequiredObjectStatusFlags="OUT_OF_PHASE"				TargetEnemy="False"				AllowPowerWhenAttacking="True"				InitiallyActive="True"				AffectGood="False"				AffectEvil="False"				RunWhileDead="False"				AllowSelf="False"				AffectContainedOnly="True"				AffectHordeMembersOnly="False" />			<AudioLoopUpgrade				id="9D4DB7C1"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				SoundToPlay="AudioEvent:GDI_CommandPost_APammoUpgrade"				KillAfterMS="0">				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>			</AudioLoopUpgrade>			<SubObjectsUpgrade				id="C21BE537"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				ShowSubObjects="APC_UGAB APC_UGTURRET"				FadeTimeInSeconds="0.5"				WaitBeforeFadeInSeconds="0"				RecolorHouse="False"				SkipFadeOnCreate="False"				HideSubObjectsOnRemove="False"				UnHideSubObjectsOnRemove="False">				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>			</SubObjectsUpgrade>			<LevelUpUpgrade				id="D0BB7535"				RequiresAllTriggers="False"				RequiresAllConflictingTriggers="False"				Permanent="False"				WaypointMode="False"				WaypointModeTerminal="True"				LevelsToGain="1"				LevelCap="4"				DoFlash="False">				<TriggeredBy>Upgrade_CallSupportUpgrade</TriggeredBy>			</LevelUpUpgrade>			<GrantUpgradeCreate				id="77FA1297"				UpgradeToGrant="Upgrade_CallSupportUpgrade"				ExemptStatus=""				GiveOnBuildComplete="False" />						</Behaviors>		<AI>			<AIUpdate				id="12FA48BA"				AutoAcquireEnemiesWhenIdle="YES"				StopChaseDistance="500"				HoldGroundCloseRangeDistance="0"				AILuaEventsList="GDIAPCFunctions"				MinCowerTime="0s"				MaxCowerTime="0s"				RampageTime="0s"				BurningDeathTime="0s"				TimeToEjectPassengersOnRampage="0"				ComboLocomotorSet="NORMAL"				ComboLocoAttackDistance="80"				IdleTargetTime="0s"				MaxCombineChildren="1"				SpawnOffsetRadius="0"				StandGround="False"				CanAttackWhileContained="False"				RampageRequiresAflame="False"				FadeOnPortals="False">				<UnitAITargetChooserData					IdleScanDelay="0.8s"					ReacquireDelay="5s"					StartupDelay="0s"					SympathyRange="100"					CheckVisionRange="False"					CanPickDynamicTargets="False"					RotateToTargetWhenAiming="False"					CanAutoAcquireNonAutoAcquirable="False"					TargetingCompareList="DefaultTargetingCompareList" />			</AIUpdate>		</AI>		<Body>			<ActiveBody				id="B313F576"				MaxHealth="2800"				MaxHealthDamaged="0"				MaxHealthReallyDamaged="0"				InitialHealth="-1"				RecoveryTime="0"				DodgePercent="0"				EnteringDamagedTransitionTime="0s"				EnteringReallyDamagedTransitionTime="0s"				GrabFX=""				GrabDamage="200"				HealingBuffFX=""				DamagedAttributeModifier=""				ReallyDamagedAttributeModifier=""				CheerRadius="200"				BurningDeathFX=""				SecondChanceUpgrade=""				SecondChanceHeal="0"				UseDefaultDamageSettings="True"				RemoveUpgradesOnDeath="False"				BurningDeathBehavior="False" />		</Body>		<Geometry			IsSmall="True">			<Shape				Type="BOX"				ContactPointGeneration="VEHICLE"				MajorRadius="20"				MinorRadius="10"				Height="11.5"				FrontAngle="0d"				Active="True"				UsedForHealthBox="True" />		</Geometry>		<AudioArrayVoice>			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceAttack"				AudioType="voiceAttack" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceCreate"				AudioType="voiceCreated" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"				AudioType="voiceMove" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"				AudioType="voiceGuard" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMoveAttack"				AudioType="voiceAttackAfterMoving" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceRetreat"				AudioType="voiceRetreatToCastle" />			<AudioEntry				Sound="Multisound:GDI_GuardianAPC_VoiceSelectMS"				AudioType="voiceSelect" />			<AudioEntry				Sound="Multisound:GDI_GuardianAPC_VoiceSelectBattleMS"				AudioType="voiceSelectBattle" />			<NamedEntry				Sound="AudioEvent:GDI_GuardianAPC_VoiceMineDrop"				Name="InitiateAPCMinefield" />		</AudioArrayVoice>		<AudioArraySound>			<AudioEntry				Sound="AudioEvent:GuardianAPCMoveStart"				AudioType="soundMoveStart" />			<AudioEntry				Sound="AudioEvent:PredatorIdleLoop"				AudioType="soundAmbient" />			<AudioEntry				Sound="AudioEvent:GDI_GuardianAPC_MoveByLoop"				AudioType="soundMoveLoop" />		</AudioArraySound>		<EvaEvents			EvaEventDieOwner="UnitLost"			EvaEventDamagedOwner="UnitUnderAttack"			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"			EvaEventSecondDamageFarFromFirstScanRange="600"			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"			EvaEventAmbushed="UnitAmbushed"			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"			EvaEventAvailableForProduction="NewConstructionOptions"			EvaEventProductionStarted="UnitConstructionStarted"			EvaEventBuildOnHold="BuildOnHold"			EvaEventBuildCancelled="BuildCancelled"			EvaEventPromotedOwner="UnitPromoted" />		<ShadowInfo			Type="VOLUME"			Texture=""			AdditionalTexture=""			SizeX="0"			SizeY="0"			OffsetX="0"			OffsetY="0"			OpacityStart="0"			OpacityFadeInTime="0s"			OpacityPeak="1"			OpacityFadeOutTime="0s"			OpacityEnd="0"			MaxHeight="20"			SunAngle="0"			OverrideLODVisibility="False"			UseHouseColor="False"			IsRotatingWithObject="True"			LocalPlayerOnly="False" />		<VisionInfo			VisionRange="350"			ShroudClearingRange="400"			VisionSide="100%"			VisionRear="100%"			VisionBonusTestRadius="100"			VisionBonusTestSegments="8"			VisionBonusPercentPerFoot="0%"			MaxVisionBonusPercent="50%"			MinVisionBonusPercent="-50%" />		<CrusherInfo			CrushKnockback="0"			CrushZFactor="1"			MinCrushVelocityPercent="1%"			CrushDecelerationPercent="0%"			CrushWeapon=""			CrushRevengeWeapon=""			CrusherLevel="0"			CrushableLevel="2"			MountedCrusherLevel="255"			MountedCrushableLevel="255"			CrushEqualLevelProps="True"			UseCrushAttack="True"			CrushOnlyWhileCharging="False"			CrushAllies="False" />		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>	</GameObject>			</AssetDeclaration>
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+
+	<!-- ********************************************************  ZOCOM APC ************************************************************************ -->
+
+	<GameObject
+		id="ZOCOMAPC"
+		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS TRANSPORT PRELOAD SCORE ATTACK_NEEDS_LINE_OF_SIGHT CAN_REVERSE_MOVE VEHICLE CAN_BE_FAVORITE_UNIT"
+		Description="Desc:GDIAPC"
+		TypeDescription="Type:GDIAPC"
+		RadarPriority="UNIT"
+		BuildCompletion="INVALID"
+		FenceWidth="0"
+		FenceXOffset="0"
+		RemoveTerrainRadius="0"
+		EmotionRange="0"
+		PlacementViewAngle="0d"
+		BuildFadeInOnCreateTimeSeconds="0s"
+		FactoryExitWidth="0"
+		FactoryExtraBibWidth="0"
+		Side="ZOCOM"
+		EditorName="ZOCOMAPC"
+		EditorSorting="UNIT"
+		BountyValue="0"
+		BuildTime="7"
+		BuildFadeInOnCreateTime="0"
+		EnergyProduction="0"
+		EnergyBonus="0"
+		CommandSet="ZOCOMAPCCommandSet"
+		SelectPortrait="Portrait_GDIAPC"
+		ButtonImage="Portrait_GDIAPC"
+		VoicePriority="176"
+		MinZIncreaseForVoiceMoveToHigherGround="-1"
+		CrowdResponse=""
+		CampnessValue="0"
+		CampnessValueRadius="600"
+		Scale="1"
+		HealthBoxScale="1.5"
+		HealthBoxHeightOffset="10"
+		OcclusionDelay="0"
+		LiveCameraPitch="0"
+		FormationWidth="1"
+		FormationDepth="1"
+		InstanceScaleFuzziness="0"
+		ThreatRadius="-1"
+		RamPower="0"
+		RamZMult="1"
+		ShockwaveResistance="100"
+		CommandPoints="100"
+		CommandPointBonus="0"
+		VoiceAttackChargeTimeout="0"
+		MaxDistanceForEngaged="0"
+		EngagedStateTimeout="0"
+		ThreatLevel="10"
+		SlopeLimitIndex="0"
+		PathfindDiameter="-1"
+		SupplyOverride="0"
+		DisplayMeleeDamage="-1"
+		DisplayRangedDamage="-1"
+		HeroSortOrder="2147483647"
+		FiringArc="360"
+		CamouflageDetectionMultiplier="1"
+		SelectionPriority="2147483647"
+		ProductionQueueType="VEHICLE"
+		BuildPlacementTypeFlag="INVALID"
+		BuildOnRequiredObjectKindOf=""
+		UnitCategory="VEHICLE"
+		WeaponCategory="GUN"
+		HasFiredRecentlyTime="2s"
+		UnitTypeIcon=""
+		ReinvisibilityDelay="7s"
+		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"
+		CaptureTime="0s"
+		BuildCost="700"
+		RefundValue="0"
+		ThreatValue="0"
+		MaxSimultaneousOfType="0"
+		TransportSlotCount="1"
+		IsTrainable="True"
+		IsForbidden="False"
+		IsPrerequisite="False"
+		IsGrabbable="False"
+		IsHarvestable="False"
+		StructureRubbleHeight="0"
+		ForceLuaRegistration="False"
+		ShowHealthInSelectionDecal="False"
+		KeepSelectableWhenDead="False"
+		IsAutoBuilt="False"
+		CanPathThroughGates="True"
+		ShouldClearShotsOnIdle="False"
+		BuildInProximityToSamePlayerStucture="True">
+		<DisplayName>Name:GDIAPC</DisplayName>
+		<ArmorSet
+			Armor="GDIGuardianAPCArmor"
+			DamageFX="VehicleDamageFX"
+			Conditions="" />
+		<LocomotorSet
+			Speed="72"
+			Condition="NORMAL"
+			Locomotor="GDIAPCLocomotor" />
+		<SkirmishAIInformation
+			BaseBuildingLocation="FRONT"
+			ConquerMetricsOverrideDamageType="UNDEFINED"
+			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
+			UnitBuilderStandardCombatUnit="True" />
+		<Draws>
+			<TruckDraw
+				id="50DF2C46"
+				RecoilDamping="0.02"
+				MaxRecoilDistance="0.1"
+				InitialRecoilSpeed="10"
+				RecoilSettleSpeed="3"
+				MinLODRequired="LOW"
+				ProjectileBoneFeedbackEnabledSlots=""
+				TrackMarks="EXTireTrack2"
+				ExtraPublicBone="FXWeapon BoneGarrison01 BoneGarrison02 BoneGarrison03 BoneGarrison04 BoneGarrison05 BoneGarrison06 BoneGarrison07 BoneGarrison08 BoneGarrison09 BoneGarrison10"
+				DependencySharedModelFlags=""
+				TrackMarksLeftBone="Bone_TireLR"
+				TrackMarksRightBone="Bone_TireRR"
+				HighDetailLODThreshold="0"
+				LowDetailLODThreshold="0"
+				WadingParticleSys=""
+				AlphaCameraFadeOuterRadius="0"
+				AlphaCameraFadeInnerRadius="0"
+				AlphaCameraAtInnerRadius="100%"
+				StaticSortLevelWhileFading="-1"
+				BirthFadeTime="0"
+				OkToChangeModelColor="True"
+				AnimationsRequirePower="True"
+				UseYAxisForTurretRotation="False"
+				TrackMarksOnlyWhenCorneringQuickly="True"
+				UseProducerTexture="False"
+				NoRotate="False"
+				UseFiringArcRotation="False"
+				Selectable="True"
+				RandomTextureFixedRandomIndex="False"
+				ParticlesAttachedToAnimatedBones="False"
+				ParticleBonesCheckDrawable="False"
+				ShadowForceDisable="False"
+				SwitchModelLODMode="False"
+				StaticModelLODMode="False"
+				ShowShadowWhileContained="False"
+				UseStandardModelNames="False"
+				UseDefaultAnimation="False"
+				BirthFadeAdditive="False"
+				ZWriteDisableOverride="False"
+				MultiPlayerOnly="False"
+				AffectedByStealth="True"
+				InvertStealthOpacity="False"
+				HighDetailOnly="False"
+				SetAnimsToLastFrameOnConstructionComplete="True"
+				Dust=""
+				DirtSpray=""
+				PowerslideSpray=""
+				LeftFrontTireBone="Bone_TireLF"
+				RightFrontTireBone="Bone_TireRF"
+				LeftRearTireBone="Bone_TireLR1"
+				RightRearTireBone="Bone_TireRR1"
+				MidLeftRearTireBone="Bone_TireLR"
+				MidRightRearTireBone="Bone_TireRR"
+				TireRotationMultiplier="0.2"
+				TireRotationMultiplierFront="1"
+				PowerslideRotationAddition="1.25"
+				CabRotationMultiplier="1"
+				TrailerRotationMultiplier="1"
+				RotationDamping="1">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DContainer:GUAPC_SKN"
+						ExtraMesh="False" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<WeaponRecoilBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<WeaponMuzzleFlash
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<Turret
+						TurretNameKey="Turret"
+						TurretArtAngle="0d"
+						TurretPitch="Turret_Pitch"
+						TurretArtPitch="0d"
+						TurretID="1" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DYING"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DContainer:GUAPCR"
+						ExtraMesh="False" />
+					<ParticleSysBone
+						BoneName="Bone_Chassis"
+						FXParticleSystemTemplate="GDIDebrisSmallFire"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="Bone_Chassis"
+						FXParticleSystemTemplate="GDIDebrisSmallFireDistortion"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="Bone_Chassis"
+						FXParticleSystemTemplate="GDIDebrisSmallSmoke"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DContainer:GUAPC_SKN"
+						ExtraMesh="False" />
+					<Texture
+						Original="GUAPC"
+						New="GUAPC_D" />
+					<ParticleSysBone
+						BoneName="BoneGarrison01"
+						FXParticleSystemTemplate="GDIPredDamagedFire"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="BoneGarrison01"
+						FXParticleSystemTemplate="GDIPredDamagedFireDistortion"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="BoneGarrison01"
+						FXParticleSystemTemplate="GDIPredDamagedSmoke"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="FORMATION_PREVIEW"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DMesh:GUAPC_FP"
+						ExtraMesh="False" />
+				</ModelConditionState>
+			</TruckDraw>
+			<TracerModelDraw
+				id="54201A36"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.2"
+				MaxTracersPerFrame="0.3"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerGDI"
+				TracerHitFx="FX_BulletHitGDI"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="1"
+					b="1"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_01 WEAPON_UPGRADED_03"
+					RequiredStatus="" />
+			</TracerModelDraw>
+			<TracerModelDraw
+				id="40E1A406"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.5"
+				MaxTracersPerFrame="0.5"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerHeroic"
+				TracerHitFx="FX_BulletHitGDIHeroic"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="0"
+					b="0"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_01"
+					RequiredStatus="WEAPON_UPGRADED_03" />
+			</TracerModelDraw>
+			<TracerModelDraw
+				id="55661E57"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.2"
+				MaxTracersPerFrame="0.2"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerGDIAPAmmo"
+				TracerHitFx="FX_BulletHitGDIAP"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="1"
+					b="1"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_03"
+					RequiredStatus="WEAPON_UPGRADED_01" />
+			</TracerModelDraw>
+			<TracerModelDraw
+				id="C0CF1421"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.3"
+				MaxTracersPerFrame="0.3"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerGDIAPAmmoHeroic"
+				TracerHitFx="FX_BulletHitGDIAPHeroic"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="1"
+					b="1"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_02"
+					RequiredStatus="WEAPON_UPGRADED_01" />
+			</TracerModelDraw>
+		</Draws>
+		<Behaviors>
+			<AttributeModifierPoolUpdate
+				id="513BC476" />
+			<SquishCollide
+				id="8CCB269A"
+				CrushAnimTime="1s"
+				CrushKillDelay="0.5s"
+				UseDirectionCheck="True" />
+			<FireWeaponWhenDead
+				id="DDED328F"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				DelayTime="0s"
+				DeathWeapon="CatalystInfantryDeathWeapon"
+				FocusFireKindOfFlag=""
+				InitiallyActive="True"
+				ActiveDuringConstruction="False"
+				ContinueToBezierDestination="False">
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="CATALYST"
+					DeathTypesForbidden="" />
+			</FireWeaponWhenDead>
+			<AutoHealBehavior
+				id="C07BF5C0"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				HealingAmount="100"
+				HealingDelay="0.5s"
+				StartHealingDelay="1s"
+				Radius="0"
+				KindOf=""
+				HealFXList=""
+				SpawnFXList=""
+				RespawnMinimumDelay="0s"
+				InitiallyActive="False"
+				AffectsWholePlayer="False"
+				AffectsContained="False"
+				HealOnlyIfNotUnderAttack="False"
+				HealOnlyIfNotInCombat="False"
+				HealOnlyOthers="False"
+				NonStackable="False"
+				RespawnNearbyHordeMembers="False">
+				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
+			</AutoHealBehavior>
+			<AttributeModifierUpgrade
+				id="AA36A1AA"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">
+				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>
+			</AttributeModifierUpgrade>
+			<AttributeModifierUpgrade
+				id="81C6F752"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">
+				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterDamage</TriggeredBy>
+			</AttributeModifierUpgrade>
+			<AttributeModifierUpgrade
+				id="E35F7EC4"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
+				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+			<StancesBehavior
+				id="54CA416E"
+				StanceTemplate="Generic" />
+			<LevelUpUpgrade
+				id="A92BDFEA"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="1"
+				LevelCap="4"
+				DoFlash="True">
+				<TriggeredBy>Upgrade_ProductionVeterancy_VETERAN</TriggeredBy>
+			</LevelUpUpgrade>
+			<LevelUpUpgrade
+				id="5C3F216A"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="2"
+				LevelCap="4"
+				DoFlash="True">
+				<TriggeredBy>Upgrade_ProductionVeterancy_ELITE</TriggeredBy>
+			</LevelUpUpgrade>
+			<LevelUpUpgrade
+				id="379F3CE2"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="3"
+				LevelCap="4"
+				DoFlash="True">
+				<TriggeredBy>Upgrade_ProductionVeterancy_HEROIC</TriggeredBy>
+			</LevelUpUpgrade>
+			<InvisibilityUpdate
+				id="3BD7F2F5"
+				Options=""
+				UpdatePeriod="0.5s"
+				BroadcastRange="0"
+				OpacityMin="40%"
+				OpacityMax="100%">
+				<InvisibilityNugget
+					ForbiddenConditions="PREATTACK_A FIRING_A FIRING_OR_PREATTACK_A RELOADING_A PREATTACK_B FIRING_B FIRING_OR_PREATTACK_B RELOADING_B PREATTACK_C FIRING_C FIRING_OR_PREATTACK_C RELOADING_C USING_WEAPON_A USING_WEAPON_B USING_WEAPON_C"
+					ForbiddenConditionExceptions=""
+					ForbiddenWeaponSets=""
+					ForbiddenStatus="IS_FIRING_WEAPON USING_ABILITY IS_AIMING_WEAPON SPECIAL_ABILITY_PACKING_UNPACKING_OR_USING"
+					CamouflageLevel="0"
+					InvisibilityType="STEALTH"
+					Options=""
+					EnteringStealthFX=""
+					LeavingStealthFX=""
+					HintDetectableStates="IS_ATTACKING"
+					NoStealthForAttackWindow="0s" />
+				<RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>
+			</InvisibilityUpdate>
+			<StealthUpgrade
+				id="F2B9DFBE"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True">
+				<TriggeredBy>Upgrade_CloakingFieldInvisibility</TriggeredBy>
+			</StealthUpgrade>
+			<TemporarilyDefectUpdate
+				id="3473AFD2"
+				DefectionFrameCount="300" />
+			<ProductionUpdate
+				id="34FE0D85"
+				MaxQueueEntries="99"
+				NumDoorAnimations="0"
+				DoorOpeningTime="0s"
+				DoorOpeningTimeMetaUnit="0s"
+				DoorWaitOpenTime="0s"
+				DoorCloseTime="0s"
+				ConstructionCompleteDuration="0"
+				DisabledTypesToProcess=""
+				UnitInvulnerableTime="0"
+				SpecialPrepModelconditionTime="0"
+				BonusForType=""
+				SpeedBonusAudioLoop=""
+				Type="INVALID"
+				ProductionTimeDelayScalar="0s"
+				GiveNoXP="True"
+				VeteranUnitsFromVeteranFactory="False"
+				SetBonusModelConditionOnSpeedBonus="False"
+				SecondaryQueue="False"
+				IgnorePreReqs="False" />
+			<WeaponSetUpdate
+				id="720F4A50">
+				<WeaponSlotTurret
+					ID="1"
+					InterleavedStyle="INTERLEAVE_RANDOM"
+					WeaponChoiceCriteria="PREFER_MOST_DAMAGE"
+					AllowInterleavedFiring="False">
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="GDIAPCAutoCannon"
+						Upgrade=""
+						ObjectStatus=""
+						IsPlayerUpgradePermanent="False" />
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="GDIAPCAutoCannonAPAmmo"
+						Upgrade=""
+						ObjectStatus="WEAPON_UPGRADED_01"
+						IsPlayerUpgradePermanent="False" />
+					<TurretSettings
+						TurretTurnRate="200"
+						TurretPitchRate="200"
+						MinimumPitch="-15d"
+						PitchHeight="50%"
+						ControlledWeaponSlots=""
+						MinIdleScanTime="1s"
+						MaxIdleScanTime="5s"
+						MinIdleScanAngle="0"
+						MaxIdleScanAngle="90"
+						MaxDeflectionClockwise="180d"
+						MaxDeflectionAntiClockwise="180d"
+						NaturalTurretAngle="0d"
+						AllowsPitch="True"
+						RecenterWhenOutOfTurnRange="True">
+						<TurretAITargetChooserData
+							IdleScanDelay="0.8s"
+							ReacquireDelay="5s"
+							StartupDelay="0s"
+							SympathyRange="25"
+							CheckVisionRange="False"
+							CanPickDynamicTargets="True"
+							RotateToTargetWhenAiming="True"
+							CanAutoAcquireNonAutoAcquirable="False"
+							TargetingCompareList="DefaultTurretTargetingCompareList"
+							ActiveWhenPerformingSpecialAbility="False"
+							CanAcquireDynamicIfAssignedOutOfRange="True"
+							CanPickTargetsOutOfTurretAngle="False" />
+					</TurretSettings>
+				</WeaponSlotTurret>
+			</WeaponSetUpdate>
+			<Physics
+				id="6D41764B"
+				MaxXRotationVelocity="360"
+				MaxYRotationVelocity="360"
+				MaxZRotationVelocity="360"
+				GravityMultiplier="1"
+				ShockStunnedTimeLow="5"
+				ShockStunnedTimeHigh="10"
+				ShockStandingTime="5"
+				FirstHeight="1.3"
+				SecondHeight="1.3"
+				FirstPercentIndent="33%"
+				SecondPercentIndent="66%"
+				BounceCount="2"
+				BounceDistance="5"
+				BounceFirstHeight="1.3"
+				BounceSecondHeight="1.3"
+				BounceFirstPercentIndent="33%"
+				BounceSecondPercentIndent="66%"
+				GroundHitFX=""
+				GroundBounceFX=""
+				FirstPercentHeight="33%"
+				SecondPercentHeight="66%"
+				CurveFlattenMinDist="0"
+				TumbleRandomly="False"
+				AllowBouncing="False"
+				KillWhenRestingOnGround="False"
+				OrientToFlightPath="False"
+				IgnoreTerrainHeight="False" />
+			<ProductionUpdate
+				id="2387032B"
+				MaxQueueEntries="99"
+				NumDoorAnimations="0"
+				DoorOpeningTime="0s"
+				DoorOpeningTimeMetaUnit="0s"
+				DoorWaitOpenTime="0s"
+				DoorCloseTime="0s"
+				ConstructionCompleteDuration="0"
+				DisabledTypesToProcess=""
+				UnitInvulnerableTime="0"
+				SpecialPrepModelconditionTime="0"
+				BonusForType=""
+				SpeedBonusAudioLoop=""
+				Type="INVALID"
+				ProductionTimeDelayScalar="0s"
+				GiveNoXP="False"
+				VeteranUnitsFromVeteranFactory="False"
+				SetBonusModelConditionOnSpeedBonus="False"
+				SecondaryQueue="False"
+				IgnorePreReqs="False" />
+			<HordeTransportContain
+				id="9DC593B0"
+				ContainMax="1"
+				EnterSound="AudioEvent:VehicleEnter"
+				ExitSound="AudioEvent:VehicleExit"
+				DamagePercentToUnits="0%"
+				PassengersTestCollisionHeight="-1000"
+				NumberOfExitPaths="1"
+				DoorOpenTime="1"
+				ObjectStatusOfContained="CAN_ATTACK UNSELECTABLE ENCLOSED"
+				ModifierRequiredTime="100"
+				KillIfEmptyTime="0s"
+				ModelConditionsWhenNotEmpty=""
+				PassengersInTurret="False"
+				AllowOwnPlayerInsideOverride="True"
+				AllowAlliesInside="True"
+				AllowEnemiesInside="False"
+				AllowNeutralInside="False"
+				ShowPips="True"
+				CollidePickup="True"
+				EjectPassengersOnDeath="True"
+				KillPassengersOnDeath="True"
+				HasObjectStatusOfContainedEntry="True"
+				Enabled="True"
+				Slots="1"
+				ExitPitchRate="0"
+				HealthRegenPercentPerSec="0"
+				ExitDelay="0"
+				TypeOneForWeaponSet=""
+				TypeTwoForWeaponSet=""
+				TypeOneForWeaponState=""
+				TypeTwoForWeaponState=""
+				TypeThreeForWeaponState=""
+				GrabWeapon=""
+				ConditionForEntry="TOPPLED"
+				ThrowOutPassengersDelay="0"
+				ThrowOutPassengersLandingWarhead=""
+				EnterFadeTime="0"
+				ExitFadeTime="0"
+				ReleaseSnappyness="0.7"
+				ScatterNearbyOnExit="True"
+				OrientLikeContainerOnExit="False"
+				DestroyRidersWhoAreNotFreeToExit="False"
+				ForceOrientationContainer="True"
+				CanGrabStructure="False"
+				FireGrabWeaponOnVictim="True"
+				ShouldThrowOutPassengers="False"
+				FadePassengerOnEnter="False"
+				FadePassengerOnExit="False"
+				FadeReverse="False"
+				ExtendedExitContainerChecks="False"
+				FlyOffMapOnEmpty="False">
+				<PassengerFilter
+					Rule="ANY"
+					Relationship=""
+					Alignment="NONE"
+					Include="INFANTRY"
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="ALL"
+					DeathTypesForbidden="" />
+				<PassengerData
+					BonePrefix="BONEGARRISON">
+					<Filter
+						Rule="NONE"
+						Relationship=""
+						Alignment="NONE"
+						Include="INFANTRY"
+						Exclude=""
+						StatusBitFlags=""
+						RejectStatusBitFlags=""
+						AcceptModelCondition=""
+						RejectModelCondition="" />
+				</PassengerData>
+				<MemberTemplateStatusInfo
+					ThingTemplate="GDISniperSquad"
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
+				<MemberTemplateStatusInfo
+					ThingTemplate="GDISniperSquad_Veteran"
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
+				<MemberTemplateStatusInfo
+					ThingTemplate="ZOCOMSniperSquad"
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
+				<MemberTemplateStatusInfo
+					ThingTemplate="ZOCOMSniperSquad_Veteran"
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
+			</HordeTransportContain>
+			<MoveToPositionAndEvacuateSpecialPower
+				id="DBDCABC7"
+				SpecialPowerTemplate="SpecialPowerMoveToPositionAndEvacuate"
+				AntiCategory=""
+				AntiFX=""
+				AttributeModifier=""
+				AttributeModifierRange="0"
+				AttributeModifierFX=""
+				WeatherDuration="0"
+				InitiateFX=""
+				TriggerFX=""
+				SetModelCondition="TOPPLED"
+				SetModelConditionTime="0s"
+				GiveLevels="0"
+				ChangeWeather="NORMAL"
+				OnTriggerRechargeSpecialPower=""
+				BurnDecayModifier="0"
+				MaxDistanceFromCommandCenter="0"
+				UpdateModuleStartsAttack="False"
+				StartsPaused="False"
+				ReEnableAntiCategory="False"
+				AttributeModifierAffectsSelf="False"
+				AttributeModifierWeatherBased="False"
+				TargetEnemy="False"
+				TargetAllSides="False"
+				DisableDuringAnimDuration="False"
+				IdleWhenStartingPower="False"
+				AffectGood="False"
+				AffectEvil="False"
+				AffectAllies="True"
+				AvailableAtStart="True"
+				AdjustVictim="False"
+				UseDistanceFromCommandCenter="False"
+				ChildModuleHandlesFX="False">
+				<AttributeModifierAffects
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterMP
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterStrategic
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+			</MoveToPositionAndEvacuateSpecialPower>
+			<SlowDeath
+				id="73542D4A"
+				SinkRate="2"
+				ProbabilityModifier="10"
+				ModifierBonusPerOverkillPercent="0%"
+				SinkDelay="3s"
+				SinkDelayVariance="0s"
+				DestructionDelay="5s"
+				DestructionDelayVariance="0s"
+				DecayBeginTime="0s"
+				FlingForce="0"
+				FlingForceVariance="0"
+				FlingPitch="0d"
+				FlingPitchVariance="0d"
+				DeathFlags=""
+				FadeTime="0s"
+				FadeDelay="0s"
+				DeathTypes=""
+				DeathObjectStatusBits=""
+				ShadowWhenDead="False"
+				Fade="False">
+				<OCL
+					Type="INITIAL">
+					<OCL>OCL_GDIAPCDebris</OCL>
+				</OCL>
+				<Sound
+					Type="INITIAL"
+					List="GDI_Generic_VoiceDieMS" />
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="ALL"
+					DeathTypesForbidden="TOPPLED" />
+			</SlowDeath>
+			<FXListBehavior
+				id="C74C39D8">
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="ALL"
+					DeathTypesForbidden="" />
+				<Event
+					Index="onDeath"
+					FX="FX_GDIVehicleExplodeNoScorch"
+					MinThreshold="0"
+					MaxThreshold="0"
+					Direction="Default"
+					OrientToObject="True"
+					ForceUseDoFXObj="False" />
+			</FXListBehavior>
+			<SpecialPower
+				id="8493B462"
+				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"
+				AntiCategory=""
+				AntiFX=""
+				AttributeModifier=""
+				AttributeModifierRange="0"
+				AttributeModifierFX=""
+				WeatherDuration="0"
+				InitiateFX=""
+				TriggerFX=""
+				SetModelCondition="TOPPLED"
+				SetModelConditionTime="0s"
+				GiveLevels="0"
+				ChangeWeather="NORMAL"
+				OnTriggerRechargeSpecialPower=""
+				BurnDecayModifier="0"
+				MaxDistanceFromCommandCenter="0"
+				UpdateModuleStartsAttack="True"
+				StartsPaused="False"
+				ReEnableAntiCategory="False"
+				AttributeModifierAffectsSelf="False"
+				AttributeModifierWeatherBased="False"
+				TargetEnemy="False"
+				TargetAllSides="False"
+				DisableDuringAnimDuration="False"
+				IdleWhenStartingPower="False"
+				AffectGood="False"
+				AffectEvil="False"
+				AffectAllies="True"
+				AvailableAtStart="True"
+				AdjustVictim="False"
+				UseDistanceFromCommandCenter="False"
+				ChildModuleHandlesFX="False">
+				<AttributeModifierAffects
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterMP
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterStrategic
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+			</SpecialPower>
+			<WeaponFireSpecialAbilityUpdate
+				id="791B627F"
+				GrabPassengerHealGain="0%"
+				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"
+				StartAbilityRange="10"
+				AbilityAbortRange="1E+07"
+				PreparationTime="0s"
+				PersistentPrepTime="0s"
+				PersistentCount="-1"
+				PackTime="0s"
+				UnpackTime="0s"
+				PreTriggerUnstealthTime="0s"
+				Options="CHECK_SPECIALPOWER_REQUIREMENTS_DURING_UPDATE"
+				PackUnpackVariationFactor="0"
+				ParalyzeDurationWhenCompleted="0s"
+				ParalyzeDurationWhenAborted="0s"
+				SpecialObject=""
+				MaxSpecialObjects="1"
+				EffectDuration="0s"
+				EffectValue="1"
+				EffectRange="0"
+				FleeRangeAfterCompletion="0"
+				DisableFXParticleSystem=""
+				PackSound=""
+				UnpackSound=""
+				PrepSoundLoop=""
+				TriggerSound=""
+				ActiveLoopSound=""
+				AwardXPForTriggering="0"
+				SkillPointsForTriggering="-1"
+				UnpackingVariation="0"
+				FreezeAfterTriggerDuration="0s"
+				RequiredConditions=""
+				RejectedConditions=""
+				SetObjectStatusOnTrigger=""
+				ClearObjectStatusOnExit=""
+				TriggerAttributeModifier=""
+				AttributeModifierDuration="0s"
+				ChainedButton=""
+				RequireAndSpendTiberiumOnCaster="0"
+				DisabledTypesToProcess="HELD"
+				DisabledTypesToContinueSoundsFor="HELD"
+				StartRechargeOnExit="False"
+				GoIdleInStartPreparation="True"
+				FaceTarget="True"
+				SpecialWeapon="GDIAPCMinefield"
+				WhichSpecialWeapon="0"
+				BusyForDuration="0s"
+				WeaponSlotID="1"
+				WeaponSlotType="PRIMARY_WEAPON"
+				SkipContinue="False"
+				NeedLivingTargets="False"
+				PlayWeaponPreFireFX="False"
+				OffsetTargetLocationFromObject="False"
+				DestealthClosestObjectMatchingFilter="False" />
+			<AISpecialPowerUpdate
+				id="DBD07887"
+				CommandButtonName="Command_APCMinefield"
+				SecondaryCommandButtonName=""
+				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"
+				SpecialPowerRadius="100"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf=""
+				AllyUnitInclude=""
+				AllyUnitExclude=""
+				EnemyUnitInclude=""
+				EnemyUnitExclude=""
+				MinimumCutoff="0"
+				UpdateTime="1s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False" />
+			<CreateAndEnterObjectSpecialPower
+				id="6D44A823"
+				SpecialPowerTemplate="SpecialPowerCallForTransportZOCOM"
+				AntiCategory=""
+				AntiFX=""
+				AttributeModifier=""
+				AttributeModifierRange="0"
+				AttributeModifierFX=""
+				WeatherDuration="0"
+				InitiateFX=""
+				TriggerFX="FX_GDICallForTransportFlare"
+				SetModelCondition="TOPPLED"
+				SetModelConditionTime="0s"
+				GiveLevels="0"
+				ChangeWeather="NORMAL"
+				OnTriggerRechargeSpecialPower=""
+				BurnDecayModifier="0"
+				MaxDistanceFromCommandCenter="0"
+				UpdateModuleStartsAttack="False"
+				StartsPaused="False"
+				ReEnableAntiCategory="False"
+				AttributeModifierAffectsSelf="False"
+				AttributeModifierWeatherBased="False"
+				TargetEnemy="False"
+				TargetAllSides="False"
+				DisableDuringAnimDuration="False"
+				IdleWhenStartingPower="True"
+				AffectGood="False"
+				AffectEvil="False"
+				AffectAllies="True"
+				AvailableAtStart="True"
+				AdjustVictim="False"
+				UseDistanceFromCommandCenter="False"
+				ChildModuleHandlesFX="True"
+				OCL="OCL_ZOCOMCallForTransportForVehicle"
+				CreateLocation="CREATE_ABOVE_LOCATION"
+				MaxCreateCount="0"
+				NumberToSpawn="1"
+				DestinationOCL=""
+				RegisterObjectsWithSpecialAbilityUpdate="False">
+				<AttributeModifierAffects
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterMP
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterStrategic
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<FXOffset
+					x="100"
+					y="0"
+					z="0" />
+			</CreateAndEnterObjectSpecialPower>
+			<StatusBitsUpgrade
+				id="85B2DF85"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_01"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="1FDD3ADA"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_02"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_GDIFaction</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="323E319E"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_02"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_SteelTalonsFaction</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="CD63B192"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_02"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="D305500E"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_03"
+				StatusToClear="WEAPON_UPGRADED_02"
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
+			</StatusBitsUpgrade>
+			<!--
+			<AttributeModifierAuraUpdate
+				id="ModuleTag_AttributeModifier_CrystalShield_Propagate"
+				InitiallyActive="true"
+				AttributeModifierName="AttributeModifier_AlienCrystalShield_Propagated"
+				RefreshDelay="1s"
+				AllowSelf="false"
+				AffectContainedOnly="true"
+				RequiredObjectStatusFlags="IN_STASIS"/>
+				-->
+			<AttributeModifierAuraUpdate
+				id="1E660B36"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifierName="AttributeModifier_AlienPhaseField_Propagated"
+				RefreshDelay="1s"
+				Range="0"
+				RequiredConditions=""
+				AntiCategory=""
+				AntiFX=""
+				MaxActiveRank="0"
+				RequiredObjectStatusFlags="OUT_OF_PHASE"
+				TargetEnemy="False"
+				AllowPowerWhenAttacking="True"
+				InitiallyActive="True"
+				AffectGood="False"
+				AffectEvil="False"
+				RunWhileDead="False"
+				AllowSelf="False"
+				AffectContainedOnly="True"
+				AffectHordeMembersOnly="False" />
+			<AudioLoopUpgrade
+				id="9D4DB7C1"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				SoundToPlay="AudioEvent:GDI_CommandPost_APammoUpgrade"
+				KillAfterMS="0">
+				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>
+			</AudioLoopUpgrade>
+			<SubObjectsUpgrade
+				id="C21BE537"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				ShowSubObjects="APC_UGAB APC_UGTURRET"
+				FadeTimeInSeconds="0.5"
+				WaitBeforeFadeInSeconds="0"
+				RecolorHouse="False"
+				SkipFadeOnCreate="False"
+				HideSubObjectsOnRemove="False"
+				UnHideSubObjectsOnRemove="False">
+				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>
+			</SubObjectsUpgrade>
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
+		</Behaviors>
+		<AI>
+			<AIUpdate
+				id="12FA48BA"
+				AutoAcquireEnemiesWhenIdle="YES"
+				StopChaseDistance="500"
+				HoldGroundCloseRangeDistance="0"
+				AILuaEventsList="GDIAPCFunctions_R24"
+				MinCowerTime="0s"
+				MaxCowerTime="0s"
+				RampageTime="0s"
+				BurningDeathTime="0s"
+				TimeToEjectPassengersOnRampage="0"
+				ComboLocomotorSet="NORMAL"
+				ComboLocoAttackDistance="80"
+				IdleTargetTime="0s"
+				MaxCombineChildren="1"
+				SpawnOffsetRadius="0"
+				StandGround="False"
+				CanAttackWhileContained="False"
+				RampageRequiresAflame="False"
+				FadeOnPortals="False">
+				<UnitAITargetChooserData
+					IdleScanDelay="0.8s"
+					ReacquireDelay="5s"
+					StartupDelay="0s"
+					SympathyRange="30"
+					CheckVisionRange="False"
+					CanPickDynamicTargets="False"
+					RotateToTargetWhenAiming="False"
+					CanAutoAcquireNonAutoAcquirable="False"
+					TargetingCompareList="DefaultTargetingCompareList" />
+			</AIUpdate>
+		</AI>
+		<Body>
+			<ActiveBody
+				id="B313F576"
+				MaxHealth="2800"
+				MaxHealthDamaged="0"
+				MaxHealthReallyDamaged="0"
+				InitialHealth="-1"
+				RecoveryTime="0"
+				DodgePercent="0"
+				EnteringDamagedTransitionTime="0s"
+				EnteringReallyDamagedTransitionTime="0s"
+				GrabFX=""
+				GrabDamage="200"
+				HealingBuffFX=""
+				DamagedAttributeModifier=""
+				ReallyDamagedAttributeModifier=""
+				CheerRadius="200"
+				BurningDeathFX=""
+				SecondChanceUpgrade=""
+				SecondChanceHeal="0"
+				UseDefaultDamageSettings="True"
+				RemoveUpgradesOnDeath="False"
+				BurningDeathBehavior="False" />
+		</Body>
+		<Geometry
+			IsSmall="True">
+			<Shape
+				Type="BOX"
+				ContactPointGeneration="VEHICLE"
+				MajorRadius="20"
+				MinorRadius="10"
+				Height="11.5"
+				FrontAngle="0d"
+				Active="True"
+				UsedForHealthBox="True" />
+		</Geometry>
+		<AudioArrayVoice>
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceAttack"
+				AudioType="voiceAttack" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceCreate"
+				AudioType="voiceCreated" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"
+				AudioType="voiceMove" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"
+				AudioType="voiceGuard" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMoveAttack"
+				AudioType="voiceAttackAfterMoving" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceRetreat"
+				AudioType="voiceRetreatToCastle" />
+			<AudioEntry
+				Sound="Multisound:GDI_GuardianAPC_VoiceSelectMS"
+				AudioType="voiceSelect" />
+			<AudioEntry
+				Sound="Multisound:GDI_GuardianAPC_VoiceSelectBattleMS"
+				AudioType="voiceSelectBattle" />
+			<NamedEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMineDrop"
+				Name="InitiateAPCMinefield" />
+		</AudioArrayVoice>
+		<AudioArraySound>
+			<AudioEntry
+				Sound="GuardianAPCMoveStart"
+				AudioType="soundMoveStart" />
+			<AudioEntry
+				Sound="PredatorIdleLoop"
+				AudioType="soundAmbient" />
+			<AudioEntry
+				Sound="GDI_GuardianAPC_MoveByLoop"
+				AudioType="soundMoveLoop" />
+		</AudioArraySound>
+		<EvaEvents
+			EvaEventDieOwner="UnitLost"
+			EvaEventDamagedOwner="UnitUnderAttack"
+			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
+			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
+			EvaEventAvailableForProduction="NewConstructionOptions"
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventBuildOnHold="BuildOnHold"
+			EvaEventBuildCancelled="BuildCancelled"
+			EvaEventPromotedOwner="UnitPromoted" />
+		<ShadowInfo
+			Type="VOLUME"
+			Texture=""
+			AdditionalTexture=""
+			SizeX="0"
+			SizeY="0"
+			OffsetX="0"
+			OffsetY="0"
+			OpacityStart="0"
+			OpacityFadeInTime="0s"
+			OpacityPeak="1"
+			OpacityFadeOutTime="0s"
+			OpacityEnd="0"
+			MaxHeight="20"
+			SunAngle="0"
+			OverrideLODVisibility="False"
+			UseHouseColor="False"
+			IsRotatingWithObject="True"
+			LocalPlayerOnly="False" />
+		<VisionInfo
+			VisionRange="350"
+			ShroudClearingRange="400"
+			VisionSide="100%"
+			VisionRear="100%"
+			VisionBonusTestRadius="100"
+			VisionBonusTestSegments="8"
+			VisionBonusPercentPerFoot="0%"
+			MaxVisionBonusPercent="50%"
+			MinVisionBonusPercent="-50%" />
+		<CrusherInfo
+			CrushKnockback="0"
+			CrushZFactor="1"
+			MinCrushVelocityPercent="1%"
+			CrushDecelerationPercent="0%"
+			CrushWeapon=""
+			CrushRevengeWeapon=""
+			CrusherLevel="0"
+			CrushableLevel="2"
+			MountedCrusherLevel="255"
+			MountedCrushableLevel="255"
+			CrushEqualLevelProps="True"
+			UseCrushAttack="True"
+			CrushOnlyWhileCharging="False"
+			CrushAllies="False" />
+		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>
+	</GameObject>
+
+	<!-- ********************************************************  VETERAN APC ************************************************************************ -->
+
+	<GameObject
+		id="ZOCOMAPC_Veteran"
+		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS TRANSPORT PRELOAD SCORE ATTACK_NEEDS_LINE_OF_SIGHT CAN_REVERSE_MOVE VEHICLE CAN_BE_FAVORITE_UNIT"
+		Description="Desc:GDIAPC"
+		TypeDescription="Type:GDIAPC"
+		RadarPriority="UNIT"
+		BuildCompletion="INVALID"
+		FenceWidth="0"
+		FenceXOffset="0"
+		RemoveTerrainRadius="0"
+		EmotionRange="0"
+		PlacementViewAngle="0d"
+		BuildFadeInOnCreateTimeSeconds="0s"
+		FactoryExitWidth="0"
+		FactoryExtraBibWidth="0"
+		Side="ZOCOM"
+		EditorName="ZOCOMAPC_Veteran"
+		EditorSorting="UNIT"
+		BountyValue="0"
+		BuildTime="7"
+		BuildFadeInOnCreateTime="0"
+		EnergyProduction="0"
+		EnergyBonus="0"
+		CommandSet="ZOCOMAPCCommandSet"
+		SelectPortrait="Portrait_GDIAPC"
+		ButtonImage="Portrait_GDIAPC"
+		VoicePriority="176"
+		MinZIncreaseForVoiceMoveToHigherGround="-1"
+		CrowdResponse=""
+		CampnessValue="0"
+		CampnessValueRadius="600"
+		Scale="1"
+		HealthBoxScale="1.5"
+		HealthBoxHeightOffset="10"
+		OcclusionDelay="0"
+		LiveCameraPitch="0"
+		FormationWidth="1"
+		FormationDepth="1"
+		InstanceScaleFuzziness="0"
+		ThreatRadius="-1"
+		RamPower="0"
+		RamZMult="1"
+		ShockwaveResistance="100"
+		CommandPoints="100"
+		CommandPointBonus="0"
+		VoiceAttackChargeTimeout="0"
+		MaxDistanceForEngaged="0"
+		EngagedStateTimeout="0"
+		ThreatLevel="10"
+		SlopeLimitIndex="0"
+		PathfindDiameter="-1"
+		SupplyOverride="0"
+		DisplayMeleeDamage="-1"
+		DisplayRangedDamage="-1"
+		HeroSortOrder="2147483647"
+		FiringArc="360"
+		CamouflageDetectionMultiplier="1"
+		SelectionPriority="2147483647"
+		ProductionQueueType="VEHICLE"
+		BuildPlacementTypeFlag="INVALID"
+		BuildOnRequiredObjectKindOf=""
+		UnitCategory="VEHICLE"
+		WeaponCategory="GUN"
+		HasFiredRecentlyTime="2s"
+		UnitTypeIcon=""
+		ReinvisibilityDelay="7s"
+		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"
+		CaptureTime="0s"
+		BuildCost="700"
+		RefundValue="0"
+		ThreatValue="0"
+		MaxSimultaneousOfType="0"
+		TransportSlotCount="1"
+		IsTrainable="True"
+		IsForbidden="False"
+		IsPrerequisite="False"
+		IsGrabbable="False"
+		IsHarvestable="False"
+		StructureRubbleHeight="0"
+		ForceLuaRegistration="False"
+		ShowHealthInSelectionDecal="False"
+		KeepSelectableWhenDead="False"
+		IsAutoBuilt="False"
+		CanPathThroughGates="True"
+		ShouldClearShotsOnIdle="False"
+		BuildInProximityToSamePlayerStucture="True">
+		<EquivalentTo>ZOCOMAPC</EquivalentTo>
+		<DisplayName>Name:GDIAPC</DisplayName>
+		<ArmorSet
+			Armor="GDIGuardianAPCArmor"
+			DamageFX="VehicleDamageFX"
+			Conditions="" />
+		<LocomotorSet
+			Speed="72"
+			Condition="NORMAL"
+			Locomotor="GDIAPCLocomotor" />
+		<SkirmishAIInformation
+			BaseBuildingLocation="FRONT"
+			ConquerMetricsOverrideDamageType="UNDEFINED"
+			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
+			UnitBuilderStandardCombatUnit="True" />
+		<Draws>
+			<TruckDraw
+				id="50DF2C46"
+				RecoilDamping="0.02"
+				MaxRecoilDistance="0.1"
+				InitialRecoilSpeed="10"
+				RecoilSettleSpeed="3"
+				MinLODRequired="LOW"
+				ProjectileBoneFeedbackEnabledSlots=""
+				TrackMarks="EXTireTrack2"
+				ExtraPublicBone="FXWeapon BoneGarrison01 BoneGarrison02 BoneGarrison03 BoneGarrison04 BoneGarrison05 BoneGarrison06 BoneGarrison07 BoneGarrison08 BoneGarrison09 BoneGarrison10"
+				DependencySharedModelFlags=""
+				TrackMarksLeftBone="Bone_TireLR"
+				TrackMarksRightBone="Bone_TireRR"
+				HighDetailLODThreshold="0"
+				LowDetailLODThreshold="0"
+				WadingParticleSys=""
+				AlphaCameraFadeOuterRadius="0"
+				AlphaCameraFadeInnerRadius="0"
+				AlphaCameraAtInnerRadius="100%"
+				StaticSortLevelWhileFading="-1"
+				BirthFadeTime="0"
+				OkToChangeModelColor="True"
+				AnimationsRequirePower="True"
+				UseYAxisForTurretRotation="False"
+				TrackMarksOnlyWhenCorneringQuickly="True"
+				UseProducerTexture="False"
+				NoRotate="False"
+				UseFiringArcRotation="False"
+				Selectable="True"
+				RandomTextureFixedRandomIndex="False"
+				ParticlesAttachedToAnimatedBones="False"
+				ParticleBonesCheckDrawable="False"
+				ShadowForceDisable="False"
+				SwitchModelLODMode="False"
+				StaticModelLODMode="False"
+				ShowShadowWhileContained="False"
+				UseStandardModelNames="False"
+				UseDefaultAnimation="False"
+				BirthFadeAdditive="False"
+				ZWriteDisableOverride="False"
+				MultiPlayerOnly="False"
+				AffectedByStealth="True"
+				InvertStealthOpacity="False"
+				HighDetailOnly="False"
+				SetAnimsToLastFrameOnConstructionComplete="True"
+				Dust=""
+				DirtSpray=""
+				PowerslideSpray=""
+				LeftFrontTireBone="Bone_TireLF"
+				RightFrontTireBone="Bone_TireRF"
+				LeftRearTireBone="Bone_TireLR1"
+				RightRearTireBone="Bone_TireRR1"
+				MidLeftRearTireBone="Bone_TireLR"
+				MidRightRearTireBone="Bone_TireRR"
+				TireRotationMultiplier="0.2"
+				TireRotationMultiplierFront="1"
+				PowerslideRotationAddition="1.25"
+				CabRotationMultiplier="1"
+				TrailerRotationMultiplier="1"
+				RotationDamping="1">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DContainer:GUAPC_SKN"
+						ExtraMesh="False" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<WeaponRecoilBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<WeaponMuzzleFlash
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXWeapon" />
+					<Turret
+						TurretNameKey="Turret"
+						TurretArtAngle="0d"
+						TurretPitch="Turret_Pitch"
+						TurretArtPitch="0d"
+						TurretID="1" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DYING"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DContainer:GUAPCR"
+						ExtraMesh="False" />
+					<ParticleSysBone
+						BoneName="Bone_Chassis"
+						FXParticleSystemTemplate="GDIDebrisSmallFire"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="Bone_Chassis"
+						FXParticleSystemTemplate="GDIDebrisSmallFireDistortion"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="Bone_Chassis"
+						FXParticleSystemTemplate="GDIDebrisSmallSmoke"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DContainer:GUAPC_SKN"
+						ExtraMesh="False" />
+					<Texture
+						Original="GUAPC"
+						New="GUAPC_D" />
+					<ParticleSysBone
+						BoneName="BoneGarrison01"
+						FXParticleSystemTemplate="GDIPredDamagedFire"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="BoneGarrison01"
+						FXParticleSystemTemplate="GDIPredDamagedFireDistortion"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+					<ParticleSysBone
+						BoneName="BoneGarrison01"
+						FXParticleSystemTemplate="GDIPredDamagedSmoke"
+						PersistID="0"
+						FollowBone="True"
+						OnlyIfOnWater="False"
+						OnlyIfOnLand="False" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="FORMATION_PREVIEW"
+					PortraitImage=""
+					ButtonImage=""
+					RetainSubObjects="False">
+					<Model
+						Name="W3DMesh:GUAPC_FP"
+						ExtraMesh="False" />
+				</ModelConditionState>
+			</TruckDraw>
+			<TracerModelDraw
+				id="54201A36"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.2"
+				MaxTracersPerFrame="0.3"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerGDI"
+				TracerHitFx="FX_BulletHitGDI"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="1"
+					b="1"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_01 WEAPON_UPGRADED_03"
+					RequiredStatus="" />
+			</TracerModelDraw>
+			<TracerModelDraw
+				id="40E1A406"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.5"
+				MaxTracersPerFrame="0.5"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerHeroic"
+				TracerHitFx="FX_BulletHitGDIHeroic"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="0"
+					b="0"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_01"
+					RequiredStatus="WEAPON_UPGRADED_03" />
+			</TracerModelDraw>
+			<TracerModelDraw
+				id="55661E57"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.2"
+				MaxTracersPerFrame="0.2"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerGDIAPAmmo"
+				TracerHitFx="FX_BulletHitGDIAP"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="1"
+					b="1"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_03"
+					RequiredStatus="WEAPON_UPGRADED_01" />
+			</TracerModelDraw>
+			<TracerModelDraw
+				id="C0CF1421"
+				MinLength="50"
+				MaxLength="50"
+				Width="3"
+				MinSpeed="30"
+				MaxSpeed="30"
+				SweepSpeed="1"
+				SpreadAngle="2"
+				MinTracersPerFrame="0.3"
+				MaxTracersPerFrame="0.3"
+				FrameLifeTime="35"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				Texture="FXTracerGDIAPAmmoHeroic"
+				TracerHitFx="FX_BulletHitGDIAPHeroic"
+				TracerEmitFx=""
+				TextureIndex="0"
+				UseAdditiveBlending="True">
+				<HeadColor
+					r="1"
+					g="1"
+					b="1"
+					a="1" />
+				<TailColor
+					r="0"
+					g="0"
+					b="0"
+					a="0" />
+				<ObjectStatusValidation
+					ForbiddenStatus="WEAPON_UPGRADED_02"
+					RequiredStatus="WEAPON_UPGRADED_01" />
+			</TracerModelDraw>
+		</Draws>
+		<Behaviors>
+			<AttributeModifierPoolUpdate
+				id="513BC476" />
+			<SquishCollide
+				id="8CCB269A"
+				CrushAnimTime="1s"
+				CrushKillDelay="0.5s"
+				UseDirectionCheck="True" />
+			<FireWeaponWhenDead
+				id="DDED328F"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				DelayTime="0s"
+				DeathWeapon="CatalystInfantryDeathWeapon"
+				FocusFireKindOfFlag=""
+				InitiallyActive="True"
+				ActiveDuringConstruction="False"
+				ContinueToBezierDestination="False">
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="CATALYST"
+					DeathTypesForbidden="" />
+			</FireWeaponWhenDead>
+			<AutoHealBehavior
+				id="C07BF5C0"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				HealingAmount="100"
+				HealingDelay="0.5s"
+				StartHealingDelay="1s"
+				Radius="0"
+				KindOf=""
+				HealFXList=""
+				SpawnFXList=""
+				RespawnMinimumDelay="0s"
+				InitiallyActive="False"
+				AffectsWholePlayer="False"
+				AffectsContained="False"
+				HealOnlyIfNotUnderAttack="False"
+				HealOnlyIfNotInCombat="False"
+				HealOnlyOthers="False"
+				NonStackable="False"
+				RespawnNearbyHordeMembers="False">
+				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
+			</AutoHealBehavior>
+			<AttributeModifierUpgrade
+				id="AA36A1AA"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">
+				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>
+			</AttributeModifierUpgrade>
+			<AttributeModifierUpgrade
+				id="81C6F752"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">
+				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterDamage</TriggeredBy>
+			</AttributeModifierUpgrade>
+			<AttributeModifierUpgrade
+				id="E35F7EC4"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
+				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+			<StancesBehavior
+				id="54CA416E"
+				StanceTemplate="Generic" />
+			<LevelUpUpgrade
+				id="A92BDFEA"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="1"
+				LevelCap="4"
+				DoFlash="True">
+				<TriggeredBy>Upgrade_ProductionVeterancy_VETERAN</TriggeredBy>
+			</LevelUpUpgrade>
+			<LevelUpUpgrade
+				id="5C3F216A"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="2"
+				LevelCap="4"
+				DoFlash="True">
+				<TriggeredBy>Upgrade_ProductionVeterancy_ELITE</TriggeredBy>
+			</LevelUpUpgrade>
+			<LevelUpUpgrade
+				id="379F3CE2"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="3"
+				LevelCap="4"
+				DoFlash="True">
+				<TriggeredBy>Upgrade_ProductionVeterancy_HEROIC</TriggeredBy>
+			</LevelUpUpgrade>
+			<InvisibilityUpdate
+				id="3BD7F2F5"
+				Options=""
+				UpdatePeriod="0.5s"
+				BroadcastRange="0"
+				OpacityMin="40%"
+				OpacityMax="100%">
+				<InvisibilityNugget
+					ForbiddenConditions="PREATTACK_A FIRING_A FIRING_OR_PREATTACK_A RELOADING_A PREATTACK_B FIRING_B FIRING_OR_PREATTACK_B RELOADING_B PREATTACK_C FIRING_C FIRING_OR_PREATTACK_C RELOADING_C USING_WEAPON_A USING_WEAPON_B USING_WEAPON_C"
+					ForbiddenConditionExceptions=""
+					ForbiddenWeaponSets=""
+					ForbiddenStatus="IS_FIRING_WEAPON USING_ABILITY IS_AIMING_WEAPON SPECIAL_ABILITY_PACKING_UNPACKING_OR_USING"
+					CamouflageLevel="0"
+					InvisibilityType="STEALTH"
+					Options=""
+					EnteringStealthFX=""
+					LeavingStealthFX=""
+					HintDetectableStates="IS_ATTACKING"
+					NoStealthForAttackWindow="0s" />
+				<RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>
+			</InvisibilityUpdate>
+			<StealthUpgrade
+				id="F2B9DFBE"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True">
+				<TriggeredBy>Upgrade_CloakingFieldInvisibility</TriggeredBy>
+			</StealthUpgrade>
+			<TemporarilyDefectUpdate
+				id="3473AFD2"
+				DefectionFrameCount="300" />
+			<ProductionUpdate
+				id="34FE0D85"
+				MaxQueueEntries="99"
+				NumDoorAnimations="0"
+				DoorOpeningTime="0s"
+				DoorOpeningTimeMetaUnit="0s"
+				DoorWaitOpenTime="0s"
+				DoorCloseTime="0s"
+				ConstructionCompleteDuration="0"
+				DisabledTypesToProcess=""
+				UnitInvulnerableTime="0"
+				SpecialPrepModelconditionTime="0"
+				BonusForType=""
+				SpeedBonusAudioLoop=""
+				Type="INVALID"
+				ProductionTimeDelayScalar="0s"
+				GiveNoXP="True"
+				VeteranUnitsFromVeteranFactory="False"
+				SetBonusModelConditionOnSpeedBonus="False"
+				SecondaryQueue="False"
+				IgnorePreReqs="False" />
+			<WeaponSetUpdate
+				id="720F4A50">
+				<WeaponSlotTurret
+					ID="1"
+					InterleavedStyle="INTERLEAVE_RANDOM"
+					WeaponChoiceCriteria="PREFER_MOST_DAMAGE"
+					AllowInterleavedFiring="False">
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="GDIAPCAutoCannon"
+						Upgrade=""
+						ObjectStatus=""
+						IsPlayerUpgradePermanent="False" />
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="GDIAPCAutoCannonAPAmmo"
+						Upgrade=""
+						ObjectStatus="WEAPON_UPGRADED_01"
+						IsPlayerUpgradePermanent="False" />
+					<TurretSettings
+						TurretTurnRate="200"
+						TurretPitchRate="200"
+						MinimumPitch="-15d"
+						PitchHeight="50%"
+						ControlledWeaponSlots=""
+						MinIdleScanTime="1s"
+						MaxIdleScanTime="5s"
+						MinIdleScanAngle="0"
+						MaxIdleScanAngle="90"
+						MaxDeflectionClockwise="180d"
+						MaxDeflectionAntiClockwise="180d"
+						NaturalTurretAngle="0d"
+						AllowsPitch="True"
+						RecenterWhenOutOfTurnRange="True">
+						<TurretAITargetChooserData
+							IdleScanDelay="0.8s"
+							ReacquireDelay="5s"
+							StartupDelay="0s"
+							SympathyRange="25"
+							CheckVisionRange="False"
+							CanPickDynamicTargets="True"
+							RotateToTargetWhenAiming="True"
+							CanAutoAcquireNonAutoAcquirable="False"
+							TargetingCompareList="DefaultTurretTargetingCompareList"
+							ActiveWhenPerformingSpecialAbility="False"
+							CanAcquireDynamicIfAssignedOutOfRange="True"
+							CanPickTargetsOutOfTurretAngle="False" />
+					</TurretSettings>
+				</WeaponSlotTurret>
+			</WeaponSetUpdate>
+			<Physics
+				id="6D41764B"
+				MaxXRotationVelocity="360"
+				MaxYRotationVelocity="360"
+				MaxZRotationVelocity="360"
+				GravityMultiplier="1"
+				ShockStunnedTimeLow="5"
+				ShockStunnedTimeHigh="10"
+				ShockStandingTime="5"
+				FirstHeight="1.3"
+				SecondHeight="1.3"
+				FirstPercentIndent="33%"
+				SecondPercentIndent="66%"
+				BounceCount="2"
+				BounceDistance="5"
+				BounceFirstHeight="1.3"
+				BounceSecondHeight="1.3"
+				BounceFirstPercentIndent="33%"
+				BounceSecondPercentIndent="66%"
+				GroundHitFX=""
+				GroundBounceFX=""
+				FirstPercentHeight="33%"
+				SecondPercentHeight="66%"
+				CurveFlattenMinDist="0"
+				TumbleRandomly="False"
+				AllowBouncing="False"
+				KillWhenRestingOnGround="False"
+				OrientToFlightPath="False"
+				IgnoreTerrainHeight="False" />
+			<ProductionUpdate
+				id="2387032B"
+				MaxQueueEntries="99"
+				NumDoorAnimations="0"
+				DoorOpeningTime="0s"
+				DoorOpeningTimeMetaUnit="0s"
+				DoorWaitOpenTime="0s"
+				DoorCloseTime="0s"
+				ConstructionCompleteDuration="0"
+				DisabledTypesToProcess=""
+				UnitInvulnerableTime="0"
+				SpecialPrepModelconditionTime="0"
+				BonusForType=""
+				SpeedBonusAudioLoop=""
+				Type="INVALID"
+				ProductionTimeDelayScalar="0s"
+				GiveNoXP="False"
+				VeteranUnitsFromVeteranFactory="False"
+				SetBonusModelConditionOnSpeedBonus="False"
+				SecondaryQueue="False"
+				IgnorePreReqs="False" />
+			<HordeTransportContain
+				id="9DC593B0"
+				ContainMax="1"
+				EnterSound="AudioEvent:VehicleEnter"
+				ExitSound="AudioEvent:VehicleExit"
+				DamagePercentToUnits="0%"
+				PassengersTestCollisionHeight="-1000"
+				NumberOfExitPaths="1"
+				DoorOpenTime="1"
+				ObjectStatusOfContained="CAN_ATTACK UNSELECTABLE ENCLOSED"
+				ModifierRequiredTime="100"
+				KillIfEmptyTime="0s"
+				ModelConditionsWhenNotEmpty=""
+				PassengersInTurret="False"
+				AllowOwnPlayerInsideOverride="True"
+				AllowAlliesInside="True"
+				AllowEnemiesInside="False"
+				AllowNeutralInside="False"
+				ShowPips="True"
+				CollidePickup="True"
+				EjectPassengersOnDeath="True"
+				KillPassengersOnDeath="True"
+				HasObjectStatusOfContainedEntry="True"
+				Enabled="True"
+				Slots="1"
+				ExitPitchRate="0"
+				HealthRegenPercentPerSec="0"
+				ExitDelay="0"
+				TypeOneForWeaponSet=""
+				TypeTwoForWeaponSet=""
+				TypeOneForWeaponState=""
+				TypeTwoForWeaponState=""
+				TypeThreeForWeaponState=""
+				GrabWeapon=""
+				ConditionForEntry="TOPPLED"
+				ThrowOutPassengersDelay="0"
+				ThrowOutPassengersLandingWarhead=""
+				EnterFadeTime="0"
+				ExitFadeTime="0"
+				ReleaseSnappyness="0.7"
+				ScatterNearbyOnExit="True"
+				OrientLikeContainerOnExit="False"
+				DestroyRidersWhoAreNotFreeToExit="False"
+				ForceOrientationContainer="True"
+				CanGrabStructure="False"
+				FireGrabWeaponOnVictim="True"
+				ShouldThrowOutPassengers="False"
+				FadePassengerOnEnter="False"
+				FadePassengerOnExit="False"
+				FadeReverse="False"
+				ExtendedExitContainerChecks="False"
+				FlyOffMapOnEmpty="False">
+				<PassengerFilter
+					Rule="ANY"
+					Relationship=""
+					Alignment="NONE"
+					Include="INFANTRY"
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="ALL"
+					DeathTypesForbidden="" />
+				<PassengerData
+					BonePrefix="BONEGARRISON">
+					<Filter
+						Rule="NONE"
+						Relationship=""
+						Alignment="NONE"
+						Include="INFANTRY"
+						Exclude=""
+						StatusBitFlags=""
+						RejectStatusBitFlags=""
+						AcceptModelCondition=""
+						RejectModelCondition="" />
+				</PassengerData>
+				<MemberTemplateStatusInfo
+					ThingTemplate="GDISniperSquad"
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
+				<MemberTemplateStatusInfo
+					ThingTemplate="GDISniperSquad_Veteran"
+					ObjectStatus="CAN_SPOT_FOR_BOMBARD" />
+			</HordeTransportContain>
+			<MoveToPositionAndEvacuateSpecialPower
+				id="DBDCABC7"
+				SpecialPowerTemplate="SpecialPowerMoveToPositionAndEvacuate"
+				AntiCategory=""
+				AntiFX=""
+				AttributeModifier=""
+				AttributeModifierRange="0"
+				AttributeModifierFX=""
+				WeatherDuration="0"
+				InitiateFX=""
+				TriggerFX=""
+				SetModelCondition="TOPPLED"
+				SetModelConditionTime="0s"
+				GiveLevels="0"
+				ChangeWeather="NORMAL"
+				OnTriggerRechargeSpecialPower=""
+				BurnDecayModifier="0"
+				MaxDistanceFromCommandCenter="0"
+				UpdateModuleStartsAttack="False"
+				StartsPaused="False"
+				ReEnableAntiCategory="False"
+				AttributeModifierAffectsSelf="False"
+				AttributeModifierWeatherBased="False"
+				TargetEnemy="False"
+				TargetAllSides="False"
+				DisableDuringAnimDuration="False"
+				IdleWhenStartingPower="False"
+				AffectGood="False"
+				AffectEvil="False"
+				AffectAllies="True"
+				AvailableAtStart="True"
+				AdjustVictim="False"
+				UseDistanceFromCommandCenter="False"
+				ChildModuleHandlesFX="False">
+				<AttributeModifierAffects
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterMP
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterStrategic
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+			</MoveToPositionAndEvacuateSpecialPower>
+			<SlowDeath
+				id="73542D4A"
+				SinkRate="2"
+				ProbabilityModifier="10"
+				ModifierBonusPerOverkillPercent="0%"
+				SinkDelay="3s"
+				SinkDelayVariance="0s"
+				DestructionDelay="5s"
+				DestructionDelayVariance="0s"
+				DecayBeginTime="0s"
+				FlingForce="0"
+				FlingForceVariance="0"
+				FlingPitch="0d"
+				FlingPitchVariance="0d"
+				DeathFlags=""
+				FadeTime="0s"
+				FadeDelay="0s"
+				DeathTypes=""
+				DeathObjectStatusBits=""
+				ShadowWhenDead="False"
+				Fade="False">
+				<OCL
+					Type="INITIAL">
+					<OCL>OCL_GDIAPCDebris</OCL>
+				</OCL>
+				<Sound
+					Type="INITIAL"
+					List="GDI_Generic_VoiceDieMS" />
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="ALL"
+					DeathTypesForbidden="TOPPLED" />
+			</SlowDeath>
+			<FXListBehavior
+				id="C74C39D8">
+				<DieMuxData
+					ExemptStatus=""
+					RequiredStatus=""
+					DamageAmountRequired="-1"
+					MinKillerAngle="0.9999999d"
+					MaxKillerAngle="-0.9999999d"
+					DeathTypes="ALL"
+					DeathTypesForbidden="" />
+				<Event
+					Index="onDeath"
+					FX="FX_GDIVehicleExplodeNoScorch"
+					MinThreshold="0"
+					MaxThreshold="0"
+					Direction="Default"
+					OrientToObject="True"
+					ForceUseDoFXObj="False" />
+			</FXListBehavior>
+			<SpecialPower
+				id="8493B462"
+				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"
+				AntiCategory=""
+				AntiFX=""
+				AttributeModifier=""
+				AttributeModifierRange="0"
+				AttributeModifierFX=""
+				WeatherDuration="0"
+				InitiateFX=""
+				TriggerFX=""
+				SetModelCondition="TOPPLED"
+				SetModelConditionTime="0s"
+				GiveLevels="0"
+				ChangeWeather="NORMAL"
+				OnTriggerRechargeSpecialPower=""
+				BurnDecayModifier="0"
+				MaxDistanceFromCommandCenter="0"
+				UpdateModuleStartsAttack="True"
+				StartsPaused="False"
+				ReEnableAntiCategory="False"
+				AttributeModifierAffectsSelf="False"
+				AttributeModifierWeatherBased="False"
+				TargetEnemy="False"
+				TargetAllSides="False"
+				DisableDuringAnimDuration="False"
+				IdleWhenStartingPower="False"
+				AffectGood="False"
+				AffectEvil="False"
+				AffectAllies="True"
+				AvailableAtStart="True"
+				AdjustVictim="False"
+				UseDistanceFromCommandCenter="False"
+				ChildModuleHandlesFX="False">
+				<AttributeModifierAffects
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterMP
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterStrategic
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+			</SpecialPower>
+			<WeaponFireSpecialAbilityUpdate
+				id="791B627F"
+				GrabPassengerHealGain="0%"
+				SpecialPowerTemplate="SpecialPowerGDI_APCMinefield"
+				StartAbilityRange="10"
+				AbilityAbortRange="1E+07"
+				PreparationTime="0s"
+				PersistentPrepTime="0s"
+				PersistentCount="-1"
+				PackTime="0s"
+				UnpackTime="0s"
+				PreTriggerUnstealthTime="0s"
+				Options="CHECK_SPECIALPOWER_REQUIREMENTS_DURING_UPDATE"
+				PackUnpackVariationFactor="0"
+				ParalyzeDurationWhenCompleted="0s"
+				ParalyzeDurationWhenAborted="0s"
+				SpecialObject=""
+				MaxSpecialObjects="1"
+				EffectDuration="0s"
+				EffectValue="1"
+				EffectRange="0"
+				FleeRangeAfterCompletion="0"
+				DisableFXParticleSystem=""
+				PackSound=""
+				UnpackSound=""
+				PrepSoundLoop=""
+				TriggerSound=""
+				ActiveLoopSound=""
+				AwardXPForTriggering="0"
+				SkillPointsForTriggering="-1"
+				UnpackingVariation="0"
+				FreezeAfterTriggerDuration="0s"
+				RequiredConditions=""
+				RejectedConditions=""
+				SetObjectStatusOnTrigger=""
+				ClearObjectStatusOnExit=""
+				TriggerAttributeModifier=""
+				AttributeModifierDuration="0s"
+				ChainedButton=""
+				RequireAndSpendTiberiumOnCaster="0"
+				DisabledTypesToProcess="HELD"
+				DisabledTypesToContinueSoundsFor="HELD"
+				StartRechargeOnExit="False"
+				GoIdleInStartPreparation="True"
+				FaceTarget="True"
+				SpecialWeapon="GDIAPCMinefield"
+				WhichSpecialWeapon="0"
+				BusyForDuration="0s"
+				WeaponSlotID="1"
+				WeaponSlotType="PRIMARY_WEAPON"
+				SkipContinue="False"
+				NeedLivingTargets="False"
+				PlayWeaponPreFireFX="False"
+				OffsetTargetLocationFromObject="False"
+				DestealthClosestObjectMatchingFilter="False" />
+			<AISpecialPowerUpdate
+				id="DBD07887"
+				CommandButtonName="Command_APCMinefield"
+				SecondaryCommandButtonName=""
+				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"
+				SpecialPowerRadius="100"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf=""
+				AllyUnitInclude=""
+				AllyUnitExclude=""
+				EnemyUnitInclude=""
+				EnemyUnitExclude=""
+				MinimumCutoff="0"
+				UpdateTime="1s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False" />
+			<CreateAndEnterObjectSpecialPower
+				id="6D44A823"
+				SpecialPowerTemplate="SpecialPowerCallForTransportZOCOM"
+				AntiCategory=""
+				AntiFX=""
+				AttributeModifier=""
+				AttributeModifierRange="0"
+				AttributeModifierFX=""
+				WeatherDuration="0"
+				InitiateFX=""
+				TriggerFX="FX_GDICallForTransportFlare"
+				SetModelCondition="TOPPLED"
+				SetModelConditionTime="0s"
+				GiveLevels="0"
+				ChangeWeather="NORMAL"
+				OnTriggerRechargeSpecialPower=""
+				BurnDecayModifier="0"
+				MaxDistanceFromCommandCenter="0"
+				UpdateModuleStartsAttack="False"
+				StartsPaused="False"
+				ReEnableAntiCategory="False"
+				AttributeModifierAffectsSelf="False"
+				AttributeModifierWeatherBased="False"
+				TargetEnemy="False"
+				TargetAllSides="False"
+				DisableDuringAnimDuration="False"
+				IdleWhenStartingPower="True"
+				AffectGood="False"
+				AffectEvil="False"
+				AffectAllies="True"
+				AvailableAtStart="True"
+				AdjustVictim="False"
+				UseDistanceFromCommandCenter="False"
+				ChildModuleHandlesFX="True"
+				OCL="OCL_ZOCOMCallForTransportForVehicle"
+				CreateLocation="CREATE_ABOVE_LOCATION"
+				MaxCreateCount="0"
+				NumberToSpawn="1"
+				DestinationOCL=""
+				RegisterObjectsWithSpecialAbilityUpdate="False">
+				<AttributeModifierAffects
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterMP
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<RequirementsFilterStrategic
+					Rule="UNPARSED"
+					Relationship=""
+					Alignment="NONE"
+					Include=""
+					Exclude=""
+					StatusBitFlags=""
+					RejectStatusBitFlags=""
+					AcceptModelCondition=""
+					RejectModelCondition="" />
+				<FXOffset
+					x="25"
+					y="0"
+					z="0" />
+			</CreateAndEnterObjectSpecialPower>
+			<StatusBitsUpgrade
+				id="85B2DF85"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_01"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="1FDD3ADA"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_02"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_GDIFaction</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="323E319E"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_02"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_SteelTalonsFaction</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="CD63B192"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_02"
+				StatusToClear=""
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_ZOCOMFaction</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="D305500E"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				StatusToSet="WEAPON_UPGRADED_03"
+				StatusToClear="WEAPON_UPGRADED_02"
+				ApplyToContained="False">
+				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
+			</StatusBitsUpgrade>
+			<!--
+			<AttributeModifierAuraUpdate
+				id="ModuleTag_AttributeModifier_CrystalShield_Propagate"
+				InitiallyActive="true"
+				AttributeModifierName="AttributeModifier_AlienCrystalShield_Propagated"
+				RefreshDelay="1s"
+				AllowSelf="false"
+				AffectContainedOnly="true"
+				RequiredObjectStatusFlags="IN_STASIS"/>
+				-->
+			<AttributeModifierAuraUpdate
+				id="1E660B36"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				AttributeModifierName="AttributeModifier_AlienPhaseField_Propagated"
+				RefreshDelay="1s"
+				Range="0"
+				RequiredConditions=""
+				AntiCategory=""
+				AntiFX=""
+				MaxActiveRank="0"
+				RequiredObjectStatusFlags="OUT_OF_PHASE"
+				TargetEnemy="False"
+				AllowPowerWhenAttacking="True"
+				InitiallyActive="True"
+				AffectGood="False"
+				AffectEvil="False"
+				RunWhileDead="False"
+				AllowSelf="False"
+				AffectContainedOnly="True"
+				AffectHordeMembersOnly="False" />
+			<AudioLoopUpgrade
+				id="9D4DB7C1"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				SoundToPlay="AudioEvent:GDI_CommandPost_APammoUpgrade"
+				KillAfterMS="0">
+				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>
+			</AudioLoopUpgrade>
+			<SubObjectsUpgrade
+				id="C21BE537"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				ShowSubObjects="APC_UGAB APC_UGTURRET"
+				FadeTimeInSeconds="0.5"
+				WaitBeforeFadeInSeconds="0"
+				RecolorHouse="False"
+				SkipFadeOnCreate="False"
+				HideSubObjectsOnRemove="False"
+				UnHideSubObjectsOnRemove="False">
+				<TriggeredBy>Upgrade_GDIAPAmmo</TriggeredBy>
+			</SubObjectsUpgrade>
+			<LevelUpUpgrade
+				id="D0BB7535"
+				RequiresAllTriggers="False"
+				RequiresAllConflictingTriggers="False"
+				Permanent="False"
+				WaypointMode="False"
+				WaypointModeTerminal="True"
+				LevelsToGain="1"
+				LevelCap="4"
+				DoFlash="False">
+				<TriggeredBy>Upgrade_CallSupportUpgrade</TriggeredBy>
+			</LevelUpUpgrade>
+			<GrantUpgradeCreate
+				id="77FA1297"
+				UpgradeToGrant="Upgrade_CallSupportUpgrade"
+				ExemptStatus=""
+				GiveOnBuildComplete="False" />
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+		</Behaviors>
+		<AI>
+			<AIUpdate
+				id="12FA48BA"
+				AutoAcquireEnemiesWhenIdle="YES"
+				StopChaseDistance="500"
+				HoldGroundCloseRangeDistance="0"
+				AILuaEventsList="GDIAPCFunctions_R24"
+				MinCowerTime="0s"
+				MaxCowerTime="0s"
+				RampageTime="0s"
+				BurningDeathTime="0s"
+				TimeToEjectPassengersOnRampage="0"
+				ComboLocomotorSet="NORMAL"
+				ComboLocoAttackDistance="80"
+				IdleTargetTime="0s"
+				MaxCombineChildren="1"
+				SpawnOffsetRadius="0"
+				StandGround="False"
+				CanAttackWhileContained="False"
+				RampageRequiresAflame="False"
+				FadeOnPortals="False">
+				<UnitAITargetChooserData
+					IdleScanDelay="0.8s"
+					ReacquireDelay="5s"
+					StartupDelay="0s"
+					SympathyRange="100"
+					CheckVisionRange="False"
+					CanPickDynamicTargets="False"
+					RotateToTargetWhenAiming="False"
+					CanAutoAcquireNonAutoAcquirable="False"
+					TargetingCompareList="DefaultTargetingCompareList" />
+			</AIUpdate>
+		</AI>
+		<Body>
+			<ActiveBody
+				id="B313F576"
+				MaxHealth="2800"
+				MaxHealthDamaged="0"
+				MaxHealthReallyDamaged="0"
+				InitialHealth="-1"
+				RecoveryTime="0"
+				DodgePercent="0"
+				EnteringDamagedTransitionTime="0s"
+				EnteringReallyDamagedTransitionTime="0s"
+				GrabFX=""
+				GrabDamage="200"
+				HealingBuffFX=""
+				DamagedAttributeModifier=""
+				ReallyDamagedAttributeModifier=""
+				CheerRadius="200"
+				BurningDeathFX=""
+				SecondChanceUpgrade=""
+				SecondChanceHeal="0"
+				UseDefaultDamageSettings="True"
+				RemoveUpgradesOnDeath="False"
+				BurningDeathBehavior="False" />
+		</Body>
+		<Geometry
+			IsSmall="True">
+			<Shape
+				Type="BOX"
+				ContactPointGeneration="VEHICLE"
+				MajorRadius="20"
+				MinorRadius="10"
+				Height="11.5"
+				FrontAngle="0d"
+				Active="True"
+				UsedForHealthBox="True" />
+		</Geometry>
+		<AudioArrayVoice>
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceAttack"
+				AudioType="voiceAttack" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceCreate"
+				AudioType="voiceCreated" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"
+				AudioType="voiceMove" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMove"
+				AudioType="voiceGuard" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMoveAttack"
+				AudioType="voiceAttackAfterMoving" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceRetreat"
+				AudioType="voiceRetreatToCastle" />
+			<AudioEntry
+				Sound="Multisound:GDI_GuardianAPC_VoiceSelectMS"
+				AudioType="voiceSelect" />
+			<AudioEntry
+				Sound="Multisound:GDI_GuardianAPC_VoiceSelectBattleMS"
+				AudioType="voiceSelectBattle" />
+			<NamedEntry
+				Sound="AudioEvent:GDI_GuardianAPC_VoiceMineDrop"
+				Name="InitiateAPCMinefield" />
+		</AudioArrayVoice>
+		<AudioArraySound>
+			<AudioEntry
+				Sound="AudioEvent:GuardianAPCMoveStart"
+				AudioType="soundMoveStart" />
+			<AudioEntry
+				Sound="AudioEvent:PredatorIdleLoop"
+				AudioType="soundAmbient" />
+			<AudioEntry
+				Sound="AudioEvent:GDI_GuardianAPC_MoveByLoop"
+				AudioType="soundMoveLoop" />
+		</AudioArraySound>
+		<EvaEvents
+			EvaEventDieOwner="UnitLost"
+			EvaEventDamagedOwner="UnitUnderAttack"
+			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
+			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
+			EvaEventAmbushed="UnitAmbushed"
+			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
+			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
+			EvaEventAvailableForProduction="NewConstructionOptions"
+			EvaEventProductionStarted="UnitConstructionStarted"
+			EvaEventBuildOnHold="BuildOnHold"
+			EvaEventBuildCancelled="BuildCancelled"
+			EvaEventPromotedOwner="UnitPromoted" />
+		<ShadowInfo
+			Type="VOLUME"
+			Texture=""
+			AdditionalTexture=""
+			SizeX="0"
+			SizeY="0"
+			OffsetX="0"
+			OffsetY="0"
+			OpacityStart="0"
+			OpacityFadeInTime="0s"
+			OpacityPeak="1"
+			OpacityFadeOutTime="0s"
+			OpacityEnd="0"
+			MaxHeight="20"
+			SunAngle="0"
+			OverrideLODVisibility="False"
+			UseHouseColor="False"
+			IsRotatingWithObject="True"
+			LocalPlayerOnly="False" />
+		<VisionInfo
+			VisionRange="350"
+			ShroudClearingRange="400"
+			VisionSide="100%"
+			VisionRear="100%"
+			VisionBonusTestRadius="100"
+			VisionBonusTestSegments="8"
+			VisionBonusPercentPerFoot="0%"
+			MaxVisionBonusPercent="50%"
+			MinVisionBonusPercent="-50%" />
+		<CrusherInfo
+			CrushKnockback="0"
+			CrushZFactor="1"
+			MinCrushVelocityPercent="1%"
+			CrushDecelerationPercent="0%"
+			CrushWeapon=""
+			CrushRevengeWeapon=""
+			CrusherLevel="0"
+			CrushableLevel="2"
+			MountedCrusherLevel="255"
+			MountedCrushableLevel="255"
+			CrushEqualLevelProps="True"
+			UseCrushAttack="True"
+			CrushOnlyWhileCharging="False"
+			CrushAllies="False" />
+		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>
+	</GameObject>
+
+
+</AssetDeclaration>

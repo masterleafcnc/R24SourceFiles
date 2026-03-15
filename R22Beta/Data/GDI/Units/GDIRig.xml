@@ -70,7 +70,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon=""
 		ReinvisibilityDelay="7s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_GDIArmoryRailgunTech"						
+		WorldMapArmoryUpgradesAllowed="Upgrade_GDIArmoryRailgunTech"
 		CaptureTime="0s"
 		BuildCost="2000"
 		RefuntValue="0"
@@ -707,6 +707,12 @@
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
 			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuff">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
 				StanceTemplate="Generic" />
@@ -779,7 +785,7 @@
 				id="ModuleTag_RailgunUpgrade"
 				AddConditionFlags="USER_5">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
-			</ModelConditionUpgrade>	
+			</ModelConditionUpgrade>
 			<TemporarilyDefectUpdate
 				id="3473AFD2"
 				DefectionFrameCount="300" />
@@ -1043,7 +1049,7 @@
 				AutoAcquireEnemiesWhenIdle="NO"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList=""
+				AILuaEventsList="RigFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -1154,8 +1160,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"
@@ -1208,6 +1214,6 @@
 			UseCrushAttack="True"
 			CrushOnlyWhileCharging="False"
 			CrushAllies="False" />
-		<DisplayUpgrade>Upgrade_GDIArmoryRailgunTech</DisplayUpgrade>	
-	</GameObject>	
+		<DisplayUpgrade>Upgrade_GDIArmoryRailgunTech</DisplayUpgrade>
+	</GameObject>
 </AssetDeclaration>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<GameObject
@@ -500,7 +500,7 @@
 			<AIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="AlienMothershipEventsList">
+				AILuaEventsList="AlienMothershipEventsList_R24">
 				<UnitAITargetChooserData
 					CheckVisionRange="false"
 					RotateToTargetWhenAiming="false" />
@@ -580,3 +580,4 @@
 			CrushableLevel="0" />
 	</GameObject>
 </AssetDeclaration>
+

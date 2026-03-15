@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="ZOCOMFireHawk"
@@ -1922,7 +1922,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="GDIFirehawkFunctions"
+				AILuaEventsList="GDIFirehawkFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -2136,3 +2136,4 @@
 		<DisplayUpgrade>Upgrade_CeramicArmor</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

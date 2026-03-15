@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="BlackHandCustomWarmech"
@@ -1836,7 +1836,7 @@
 			<DeployStyleAIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="BlackHandCustomWarmechFunctions_R23"
+				AILuaEventsList="BlackHandCustomWarmechFunctions_R24"
 				MustDeployToAttack="false">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
@@ -2112,3 +2112,6 @@
 		<DisplayUpgrade>Upgrade_BlackHandSecretShrinePurifyingFlame</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+
+
+

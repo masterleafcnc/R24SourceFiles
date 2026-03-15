@@ -137,7 +137,7 @@
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="W3DMesh:AUSeeker_FP" />
-				</ModelConditionState>				
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="REALLYDAMAGED">
@@ -182,7 +182,7 @@
 						AnimationMode="ONCE" />
 				</AnimationState>
 			</TankDraw>
-			
+
 			<!-- draw a nice 'combined' effect, PLACEHOLDER -->
 			<ScriptedModelDraw
 				id="ModuleTag_DrawCombined">
@@ -198,7 +198,7 @@
 					<ParticleSysBone
 						BoneName="NONE"
 						FollowBone="true"
-						FXParticleSystemTemplate="AUBuzzerCombineGlow" />						
+						FXParticleSystemTemplate="AUBuzzerCombineGlow" />
 				</ModelConditionState>
 			</ScriptedModelDraw>
 <!-- Forcefield Generator -->
@@ -290,14 +290,14 @@
 					ConditionsYes="DYING">
 					<Model
 						Name="" />
-				</ModelConditionState>					
+				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_1">
 					<Model
 						Name="W3DContainer:FXShldSeekerTank" />
 				</ModelConditionState>
-			</ScriptedModelDraw>	
+			</ScriptedModelDraw>
 		</Draws>
 		<Behaviors>
 			<AttributeModifierPoolUpdate
@@ -383,6 +383,12 @@
 				WaypointModeTerminal="True"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffScorp">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="54CA416E"
@@ -774,7 +780,7 @@
 				AutoAcquireEnemiesWhenIdle="YES"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="AlienSeekerTankFunctions"
+				AILuaEventsList="AlienSeekerTankFunctions_R24"
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"
@@ -878,8 +884,8 @@
 			EvaEventDamagedOwner="UnitUnderAttack"
 			EvaEventDamagedFromShroudedSourceOwner="UnitUnderAttackFromShroudedUnit"
 			EvaEventDamagedByFireOwner="GenericUnitBeingBurned"
-			EvaEventSecondDamageFarFromFirstScanRange="600"    
-			EvaEventSecondDamageFarFromFirstTimeoutMS="31000" 
+			EvaEventSecondDamageFarFromFirstScanRange="600"
+			EvaEventSecondDamageFarFromFirstTimeoutMS="31000"
 			EvaEventAmbushed="UnitAmbushed"
 			EvaEnemyObjectSightedEvent="GenericEnemyUnitSighted"
 			EvaEventDetectedEnemy="EnemyStealthUnitDiscovered"

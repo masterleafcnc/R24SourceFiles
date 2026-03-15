@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
     <GameObject id="Traveler59Cultist"
         KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS INFANTRY PRELOAD ATTACK_NEEDS_LINE_OF_SIGHT PATH_THROUGH_INFANTRY HEALED_BY_TIBERIUM"
@@ -272,7 +272,8 @@
             </FXListBehavior>
         </Behaviors>
         <AI>
-            <AIUpdate id="0x12FA48BA" AutoAcquireEnemiesWhenIdle="YES">
+            <AIUpdate id="0x12FA48BA" AutoAcquireEnemiesWhenIdle="YES"
+	AILuaEventsList="Traveler59CultistFunctions_R24">
                 <UnitAITargetChooserData CheckVisionRange="True"
                     TargetingCompareList="DefaultTargetingCompareList" />
             </AIUpdate>
@@ -315,3 +316,4 @@
         <DisplayUpgrade>Upgrade_Traveler59AdvancedArticulators</DisplayUpgrade>
     </GameObject>
 </AssetDeclaration>
+

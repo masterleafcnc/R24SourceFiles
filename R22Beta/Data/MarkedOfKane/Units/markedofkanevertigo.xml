@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 	<GameObject
 		id="MarkedOfKaneVertigo"
@@ -1824,7 +1824,8 @@
 				OutOfAmmoDamagePerSecond="1.5"
 				ReturnToBaseWhenVictimDead="true"
 				CirclesForAttack="true"
-				AutoAcquireEnemiesWhenIdle="YES">
+				AutoAcquireEnemiesWhenIdle="YES"
+	AILuaEventsList="MarkedOfKaneVertigoFunctions_R24">
 				<UnitAITargetChooserData
 					SympathyRange="100.0" />
 				<LockonInfo />
@@ -1984,3 +1985,4 @@
 		<DisplayUpgrade>Upgrade_VertigoDisruptionPod</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
+

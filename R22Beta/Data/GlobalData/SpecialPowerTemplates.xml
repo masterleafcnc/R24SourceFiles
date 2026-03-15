@@ -171,7 +171,7 @@
 		InitiateSound="AudioEvent:ALI_MasterMind_ManipulateStart"
 		RadiusCursorRadius="50"
 		ReloadTime="30s"
-		MaxCastRange="400"
+		MaxCastRange="300"
 		DisallowedTargetObjectStatus="IN_STASIS STEALTHED UNATTACKABLE"
 		DisallowedTargetModelStates="INVISIBLE_STEALTH"
 		NameOfVoiceNameToUseAsInitiateIntendToDoVoice="InitiateAreaMindControl"

@@ -233,7 +233,7 @@
 			<AIUpdate
 				id="ModuleTag_AIUpdate"
 				AutoAcquireEnemiesWhenIdle="NO"
-				AILuaEventsList="BuildingPowerFunctions">
+				AILuaEventsList="ElectroMagneticPulseControlCenter_Functions">
 			</AIUpdate>
 		</AI>
 		<Body>

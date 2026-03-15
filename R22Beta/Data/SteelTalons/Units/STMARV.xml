@@ -63,17 +63,17 @@
 					RetainSubObjects="true">
 					<Model
 						Name="W3DContainer:GUMARV_SKN3" /> 	<!--
-					<WeaponFireFXBone 		
-						WeaponSlotID="1" 		
-						WeaponSlotType="PRIMARY_WEAPON" 		
-						BoneName="MuzzleFx" /> 	
-					<WeaponRecoilBone 		
-						WeaponSlotID="1" 		
-						WeaponSlotType="PRIMARY_WEAPON" 		
-						BoneName="B_Barrel" /> 	
-					<WeaponMuzzleFlash 		
-						WeaponSlotID="1" 		
-						WeaponSlotType="PRIMARY_WEAPON" 		
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="MuzzleFx" />
+					<WeaponRecoilBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="B_Barrel" />
+					<WeaponMuzzleFlash
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="MuzzleFlash_" /> 		-->
 					<WeaponLaunchBone
 						WeaponSlotID="1"
@@ -603,10 +603,10 @@
 						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="MuzzleFlash_01" />
 					<!--
-					<WeaponLaunchBone 		
-						WeaponSlotID="1" 		
-						WeaponSlotType="PRIMARY_WEAPON" 		
-						BoneName="MuzzleFx01" /> 
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="MuzzleFx01" />
 					-->
 				</ModelConditionState>
 				<ModelConditionState
@@ -672,10 +672,10 @@
 				</AnimationState>
 
 				<!--
-				<AnimationState 
+				<AnimationState
 					ParseCondStateType="PARSE_DEFAULT"
 					StateName="STATE_Idle">
-					<Animation 
+					<Animation
 						AnimationName="GUMARVCANNON_ANM"
 						AnimationMode="ONCE"
 						AnimationBlendTime="0" />
@@ -688,21 +688,21 @@
 						CurDrawableSetTransitionAnimState("TRANS_RevolveBarrelHeroic")
 						end
 					</Script>
-				</AnimationState> 
+				</AnimationState>
 				<AnimationState
-					ParseCondStateType="PARSE_NORMAL" 
+					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_1 USER_2"
 					StateName="STATE_FiredHeroic">
-					<Animation 
+					<Animation
 						AnimationName="GUMARVCANNON_ANM"
 						AnimationMode="ONCE"
 						AnimationBlendTime="0" />
 				</AnimationState>
 				<AnimationState
-					ParseCondStateType="PARSE_NORMAL" 
+					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_1"
 					StateName="STATE_Fired">
-					<Animation 
+					<Animation
 						AnimationName="GUMARVCANNON_ANM"
 						AnimationMode="ONCE"
 						AnimationBlendTime="0" />
@@ -911,7 +911,7 @@
 					</Constants>
 				</FXShader>
 			</LaserDraw>
-	
+
 			<LaserDraw id="ModuleTag_LaserDistort05" UseDistortionShader="true" Texture1_UTile="1"
 				Texture1_VTile=".5"
 				Texture1_UScrollRate="0" Texture1_VScrollRate=".2" Texture1_NumFrames="1"
@@ -988,7 +988,7 @@
 					</Constants>
 				</FXShader>
 			</LaserDraw>
-	
+
 			<TracerModelDraw id="ModuleTag_SniperTracerModelDraw1" MinLength="100.0"
 				MaxLength="100.0" Width="5.0"
 				MinSpeed="35" MaxSpeed="35" SweepSpeed="0.0" SpreadAngle="0.0"
@@ -1522,6 +1522,12 @@
 				id="ModuleTag_AttributeModifierUpgradeMUCArmor"
 				AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
 				<TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+			</AttributeModifierUpgrade>
+
+			<AttributeModifierUpgrade
+				id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+				AttributeModifier="Modifier_ReverseMoveSpeedBuffMammoth">
+				<TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StancesBehavior
 				id="ModuleTag_Stance"
@@ -2340,7 +2346,7 @@
 			<LaserState id="ModuleTag_LaserState05" LaserId="4" />
 			<LaserState id="ModuleTag_LaserState06" LaserId="5" />
 			<LaserState id="ModuleTag_LaserState07" LaserId="6" />
-			<LaserState id="ModuleTag_LaserState08" LaserId="7" /> 
+			<LaserState id="ModuleTag_LaserState08" LaserId="7" />
 			<Physics id="ModuleTag_Physics" />
 			<SlowDeath id="ModuleTag_Death" SinkDelay="5s" SinkRate="1.5" DestructionDelay="15s">
 				<OCL Type="INITIAL">
@@ -2464,7 +2470,7 @@
 		</Behaviors>
 		<AI>
 			<AIUpdate id="ModuleTag_AI" AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="GDIMARVFunctions">
+				AILuaEventsList="GDIMARVFunctions_R24">
 				<UnitAITargetChooserData CanPickDynamicTargets="false" SympathyRange="100.0"
 					RotateToTargetWhenAiming="false" />
 			</AIUpdate>
@@ -2483,15 +2489,15 @@
 		</ClientBehaviors>
 		<Geometry
 			IsSmall="false">
-			<!-- 			<Shape 
-				Type="BOX" 
-				MajorRadius="55.0" 
-				MinorRadius="45.0" 
-				Height="40.0" 
-				ContactPointGeneration="VEHICLE"> 
-				<Offset 	
-					x="-6.79372" 	
-					y="0.0" 	
+			<!-- 			<Shape
+				Type="BOX"
+				MajorRadius="55.0"
+				MinorRadius="45.0"
+				Height="40.0"
+				ContactPointGeneration="VEHICLE">
+				<Offset
+					x="-6.79372"
+					y="0.0"
 					z="0.0" />
 			</Shape>				-->
 			<Shape
