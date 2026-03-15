@@ -119,10 +119,10 @@ unitBugDataTable = {
 	--							  Used in: 2nd false positive filter
 
 	-- NOD UNITS --
-	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Raider Buggy
-	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Raider Buggy
-	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
-	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Raider Buggy
+	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Mok Raider Buggy
+	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Black Hand Raider Buggy
+	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Nod Raider Buggy
+	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 2, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.33 }, -- Nod Raider Buggy
 
 	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
 	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
@@ -1258,7 +1258,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local selectedUnitList = group.reverseUnits
 	local selectedCount = group.reverseUnitCount
 	if selectedCount <= 0 then return end
-	local checksDone = group.checksDone
 	--WriteToFile("groupId.txt",  tostring(groupId) .. "\n")
 	-- edge case for when units are attacking to permit an extended range check (disabled for now)
 	--local enableExtendedCheck = unitReversing.wasAttackingBeforeReverse and (group.unitsNotMovingBeforeBackingUp >= ceil(selectedCount*0.50))
@@ -1291,10 +1290,10 @@ function CheckForObjReverseBugging(self, frameDiff)
 		isBugging = true
 	end
 
-    --if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
+    -- if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
 	-- checksDone is more than ceil(unitReversing.groupId.selectedCount*0.5)
 	if not unitReversing.hasBeenCounted then
-		checksDone = checksDone + 1
+		group.checksDone = group.checksDone + 1
 		unitReversing.hasBeenCounted = true
 	end
 	-- First determine if this unit is bugging and add it to the list, dont fix units that are being already fixed
@@ -1327,8 +1326,8 @@ function CheckForObjReverseBugging(self, frameDiff)
 	--local fixCancelledForType = group.fixCancelledByType and group.fixCancelledByType[objName]
 
 	if not group.fixCancelled then
-		-- WriteToFile("checksDone.txt", "checks done: " .. tostring(checksDone) .. " expected checks: " .. tostring(group.expectedChecks) .. "\n")
-		if checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+		-- WriteToFile("checksDone.txt", "checks done: " .. tostring(group.checksDone) .. " expected checks: " .. tostring(group.expectedChecks) .. "\n")
+		if group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
 			-- if number of units bugging is less than the count * BUG_THRESHOLD_SMALL_GROUP
 			-- if more than LARGE_GROUP_SIZE units are selected, make the detection more forgiving
 
@@ -1432,8 +1431,8 @@ function CheckForObjReverseBugging(self, frameDiff)
 							local buggingUnit = unitsReversing[unitType[i]]
 							if buggingUnit ~= nil then
 								local buggingRef = buggingUnit.selfReference
-								--ExecuteAction("NAMED_FLASH", buggingRef, 2)
-								FixBuggingUnit(buggingRef)
+								--ExecuteAction("NAMED_FLASH_WHITE", buggingRef, 2)
+								FixBuggingUnit(buggingRef, true)
 							else
 								if unitType[i] ~= nil then
 									tremove(unitType, i)
@@ -1444,9 +1443,9 @@ function CheckForObjReverseBugging(self, frameDiff)
 				end
 			elseif isBugging then
 				--ExecuteAction("NAMED_FLASH", self, 2)
-				FixBuggingUnit(self)
+				FixBuggingUnit(self, true)
 			end
-		elseif isBugging and checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+		elseif isBugging and group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
 			-- Only clear bugging state when threshold was reached and we decided not to fix
 			-- (too many bugging = likely false positive). Before threshold is reached,
 			-- keep the state so the unit can still be fixed when slower types finish checking.
@@ -1456,11 +1455,10 @@ function CheckForObjReverseBugging(self, frameDiff)
 			--unitReversing.hasBeenFixed = false
 		end
 	end
-	group.checksDone = checksDone
 end
 		
 -- Fixes a unit detected to be bugging and then checks if any selected unit has the bugged unit assigned as unitAnchor
-function FixBuggingUnit(self)
+function FixBuggingUnit(self, applySpeedBuff)
 	local a,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil or unitReversing.groupId == nil then return end
 	local group = getglobal(unitReversing.groupId)
@@ -1483,7 +1481,8 @@ function FixBuggingUnit(self)
 		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
 	end
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
-	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil and ObjectTestModelCondition(self, "USER_72") == false then
+	ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
 		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
 		unitReversing.hasBeenFixed = true
 	end
@@ -1496,7 +1495,7 @@ function FixBuggingUnit(self)
 		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 1)
 	end
 	-- apply upgrade 
-	if not EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") then
+	if not EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") and applySpeedBuff then
 		ObjectGrantUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
 	end
 
@@ -1859,7 +1858,7 @@ function SuddenStopCheck(self)
 
 		if fixUnit then
 			--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
-			FixBuggingUnit(self)
+			FixBuggingUnit(self, false)
 		end
 	end
 	resetGroupId()
@@ -1927,23 +1926,12 @@ function BackingUpEnd(self)
 	SuddenStopCheck(self)
 	
 	if clearList and group ~= nil then
-		group.unitsToFixByType = {}
-		group.checksDone = 0
-		group.fixCancelled = false
-		group.thirdTurnCountChecked = false
-		group.fixCancelledByType = nil
-		group.thirdTurnFrameCountByType = nil
-		group.thirdTurnUnitCountByType = nil
-		group.firstTurnFrameCountByType = nil
-		group.firstTurnUnitCountByType = nil
-		group.expectedChecks = 0
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
 			-- if the id is the same as the id in current index clear it
 			if unitsReversing[unitRef] ~= nil then
 				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
-				unitsReversing[unitRef].hasBeenFixed = false
 				unitsReversing[unitRef].expectedChecksFlag = false
 				unitsReversing[unitRef].hasBeenCounted = false
 				--if EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") then
