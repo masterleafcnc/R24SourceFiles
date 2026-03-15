@@ -97,7 +97,7 @@
 			DamageFX="FactionStructureDamageFX"
 			Conditions="" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -759,17 +759,16 @@
 			<AISpecialPowerUpdate
 				id="EAE01399"
 				CommandButtonName="Command_SpecialPowerPhaseField"
-				SecondaryCommandButtonName=""
-				SpecialPowerAIType="SPECIAL_POWER_SPECIFIC_UNIT"
-				SpecialPowerRadius="-1"
-				ReinforceDistance="0"
+				SpecialPowerAIType="SPECIAL_POWER_HEAL_AOE"
+				SpecialPowerRadius="999999"
+				ReinforceDistance="300"
 				SpellMakesAStructure=""
-				SpecificUnit="AlienAssimilator"
+				SpecificUnit=""
 				UnitKindOf=""
-				AllyUnitInclude=""
-				AllyUnitExclude=""
+				AllyUnitInclude="VEHICLE"
+				AllyUnitExclude="INFANTRY STRUCTURE"
 				EnemyUnitInclude=""
-				EnemyUnitExclude=""
+				EnemyUnitExclude="INFANTRY VEHICLE STRUCTURE"
 				MinimumCutoff="0"
 				UpdateTime="1s"
 				MaxFrequency="0"

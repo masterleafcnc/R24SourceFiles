@@ -101,7 +101,7 @@
 			DamageFX="NormalDamageFX"
 			Conditions="PLAYER_UPGRADE" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -913,11 +913,11 @@
 				ReinforceDistance="0"
 				SpellMakesAStructure=""
 				SpecificUnit=""
-				UnitKindOf=""
+				UnitKindOf="INFANTRY"
 				AllyUnitInclude="INFANTRY"
-				AllyUnitExclude="VEHICLE"
+				AllyUnitExclude="UNIQUE_UNIT ENGINEER INFILTRATOR VEHICLE AIRCRAFT"
 				EnemyUnitInclude=""
-				EnemyUnitExclude=""
+				EnemyUnitExclude="INFANTRY VEHICLE"
 				MinimumCutoff="0"
 				UpdateTime="1s"
 				MaxFrequency="0"

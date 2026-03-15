@@ -31,7 +31,7 @@
 			Armor="AlienWarpBeaconArmor"
 			DamageFX="FactionStructureDamageFX" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="BACK" />
+			BaseBuildingLocation="HOMEBASE" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"

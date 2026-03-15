@@ -2669,6 +2669,25 @@
 				PlayWeaponPreFireFX="False"
 				OffsetTargetLocationFromObject="False"
 				DestealthClosestObjectMatchingFilter="False" />
+
+			<AISpecialPowerUpdate
+				id="ModuleTag_ZoneTrooperSquadFireJumpJets"
+				CommandButtonName="Command_ZoneTrooperSquadGetToJumpJetRange"
+				SpecialPowerAIType="SPECIAL_POWER_MOVEMENT"
+				SpecialPowerRadius="-1"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf=""
+				AllyUnitInclude=""
+				AllyUnitExclude="UNIQUE_UNIT META_UNIT"
+				EnemyUnitInclude=""
+				EnemyUnitExclude=""
+				MinimumCutoff="100"
+				UpdateTime="2s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False"/>
+			
 			<BezierProjectile
 				id="EE915646"
 				FirstHeight="0"

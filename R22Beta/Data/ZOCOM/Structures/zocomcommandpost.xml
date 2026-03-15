@@ -102,7 +102,7 @@
 			DamageFX="NormalDamageFX"
 			Conditions="PLAYER_UPGRADE" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -980,22 +980,15 @@
 					RejectModelCondition="" />
 			</OCLSpecialPower>
 			<AISpecialPowerUpdate
-				id="73D10F32"
+				id="ModuleTag_CommandPostRadarScanAI"
 				CommandButtonName="Command_CommandPostRadarScan"
-				SecondaryCommandButtonName=""
-				SpecialPowerAIType="SPECIAL_POWER_TARGET_STEALTH"
-				SpecialPowerRadius="999999"
-				ReinforceDistance="0"
-				SpellMakesAStructure=""
-				SpecificUnit=""
+				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT"
+				SpecialPowerRadius="999999.0"
 				UnitKindOf=""
 				AllyUnitInclude=""
-				AllyUnitExclude=""
-				EnemyUnitInclude=""
-				EnemyUnitExclude=""
-				MinimumCutoff="0"
-				UpdateTime="1s"
-				MaxFrequency="0"
+				AllyUnitExclude="INFANTRY VEHICLE AIRCRAFT CIVILIAN_BUILDING STRUCTURE NEUTRAL_TECH UNIQUE_UNIT HUSK"
+				EnemyUnitInclude="FS_FACTORY FS_WAR_FACTORY FS_AIRFIELD AIRFIELD"
+				EnemyUnitExclude="INFANTRY VEHICLE AIRCRAFT CAN_ATTACK INFILTRATOR CIVILIAN_BUILDING NEUTRAL_TECH HUSK"
 				RandomizeTargetLocation="False" />
 			<ArmorUpgrade
 				id="D7169F09"

@@ -35,7 +35,7 @@
 			Armor="NODHangarLaserFencingArmor"
 			DamageFX="NormalDamageFX" />			
 		<SkirmishAIInformation
-			BaseBuildingLocation="BACK" />
+			BaseBuildingLocation="HOMEBASE" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"
@@ -687,11 +687,10 @@
 				CreateLocation="CREATE_AT_EDGE_NEAR_SOURCE">
 			</OCLSpecialPower>
 			<AISpecialPowerUpdate
-				id="ModuleTag_NODOpsBurrowMinesAI"
-				CommandButtonName="Command_NODBurrowMines"
-				SpecialPowerRadius="99999.0"
-				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK" 
-			/>
+				id="ModuleTag_NODOpsBurrowMagneticMinesAI"
+				CommandButtonName="Command_MarkedOfKaneMagneticMines"
+				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"
+				SpecialPowerRadius="99999" />
 			<ModelConditionUpgrade
 				id="ModuleTag_UpgradeLaserFencing"
 				AddConditionFlags="USER_6">

@@ -218,9 +218,10 @@
 			<AISpecialPowerUpdate
 				id="ModuleTag_EMPControlCenterAI"
 				CommandButtonName="Command_EMPControlCenterEMP"
+				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
 				SpecialPowerRadius="99999.0"
-				UnitKindOf="FS_POWER"
-				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES" 
+				ReinforceDistance="1200"
+				UnitKindOf="VEHICLE" 
 			/>
 			<RepairUpdate 
 				id="ModuleTag_RepairUpdate">

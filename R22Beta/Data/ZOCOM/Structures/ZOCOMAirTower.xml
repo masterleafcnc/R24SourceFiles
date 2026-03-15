@@ -34,7 +34,7 @@
 			<RequiredObject>ZOCOMCommandPost</RequiredObject>
 		</GameDependency>
 		<SkirmishAIInformation
-			BaseBuildingLocation="BACK" />
+			BaseBuildingLocation="HOMEBASE" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"
@@ -836,18 +836,19 @@
 			<StructureUnpackUpdate
 				UnpackTime="1.5s" />
 			<OCLSpecialPower
-				id="ModuleTag_OCLSpecialPowerBombingRun"
-				SpecialPowerTemplate="SpecialPowerBombingRun"
+				id="ModuleTag_OCLSpecialPowerZOCOMBombingRun"
+				SpecialPowerTemplate="SpecialPowerZOCOMBombingRun"
 				OCL="OCL_ZOCOMCommandPostBombingRun"
 				CreateLocation="CREATE_AT_EDGE_NEAR_SOURCE"
 				DestinationOCL="OCL_GDICommandPostBombingRunBeacon"
 			/>			
 			<AISpecialPowerUpdate
-				id="ModuleTag_CommandPostBombingRunAI"
-				CommandButtonName="Command_CommandPostBombingRun"
+				id="ModuleTag_ZOCOMCommandPostBombingRunAI"
+				CommandButtonName="Command_ZOCOMCommandPostBombingRun"
 				SpecialPowerRadius="999999.0"
-				UnitKindOf="FS_POWER"
+				UnitKindOf="HARVESTER"
 				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES" 
+				RandomizeTargetLocation="False"
 			/>
 
 			<OCLSpecialPower
@@ -858,11 +859,12 @@
 				CreateLocation="CREATE_AT_EDGE_NEAR_SOURCE"
 			/>
 			<AISpecialPowerUpdate
-				id="ModuleTag_CommandPostCallBloodhoundAI"
-				CommandButtonName="Command_CommandPostCallBloodhound"
-				ReinforceDistance="400.0"
-				SpecialPowerRadius="300.0"
-				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT" 
+				id="ModuleTag_ZOCOMCommandPostCallBloodhoundAI"
+				CommandButtonName="Command_CommandPostCallZOCOMBloodhound"
+				ReinforceDistance="99999"
+				SpecialPowerRadius="1000"
+				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT"
+				RandomizeTargetLocation="False"
 			/>
 				
 			<ArmorUpgrade

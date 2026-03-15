@@ -93,6 +93,8 @@
 			Speed="57"
 			Condition="NORMAL"
 			Locomotor="NormalRangedSquadLocomotor" />
+		<SkirmishAIInformation
+			UnitBuilderStandardCombatUnit="True" />
 		<Draws>
 			<ScriptedModelDraw
 				id="50DF2C46"

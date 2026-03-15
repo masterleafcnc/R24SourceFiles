@@ -36,7 +36,7 @@
 			Armor="NODDropZoneLaserFencingArmor"
 			DamageFX="NormalDamageFX" />			
 		<SkirmishAIInformation
-			BaseBuildingLocation="FRONT" />
+			BaseBuildingLocation="TIBERIUM" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"

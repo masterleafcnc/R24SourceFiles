@@ -101,7 +101,7 @@
 			DamageFX="NormalDamageFX"
 			Conditions="PLAYER_UPGRADE" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />

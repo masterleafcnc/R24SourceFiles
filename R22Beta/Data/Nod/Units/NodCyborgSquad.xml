@@ -510,10 +510,14 @@
 			<AISpecialPowerUpdate
 				id="ModuleTag_NODCyborgEmpPulse"
 				CommandButtonName="Command_NODEMPBlastGetInRange"
-				SpecialPowerRadius="250"
-				UnitKindOf="VEHICLE FS_POWER"
-				EnemyUnitExclude="INFANTRY HUSK AIRCRAFT CIVILIAN_BUILDING"
-				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK" />
+				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"
+				SpecialPowerRadius="275"
+				UnitKindOf="VEHICLE STRUCTURE"
+				EnemyUnitInclude=""
+				EnemyUnitExclude="INFANTRY AIRCRAFT HUSK CIVILIAN_BUILDING WALL_HUB WALL_SEGMENT"
+				MinimumCutoff="100"
+				UpdateTime="1s"
+				MaxFrequency="0" />
 
 			<StealthDetectorUpdate 
 			id="ModuleTag_StealthDetect" 

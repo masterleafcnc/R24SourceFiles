@@ -101,7 +101,7 @@
 			DamageFX="NormalDamageFX"
 			Conditions="PLAYER_UPGRADE" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -693,6 +693,12 @@
 					AcceptModelCondition=""
 					RejectModelCondition="" />
 			</OCLSpecialPower>
+			<AISpecialPowerUpdate
+				id="ModuleTag_BHDecoyTempleAI"
+				CommandButtonName="Command_NODDecoyTemple"
+				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
+				SpecialPowerRadius="300"
+				SpellMakesAStructure="BlackHandDecoyTempleOfNOD"/>
 		</Behaviors>
 		<AI>
 			<AIUpdate

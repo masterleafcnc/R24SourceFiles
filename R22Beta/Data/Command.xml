@@ -28,6 +28,22 @@
   </LogicCommand>
 
 -->
+	<!--Start: SkirmishAI Logic Commands-->
+	<LogicCommand
+		id="Command_NODDecoyTemple"
+		Type="SPECIAL_POWER"
+		Options="">
+		<SpecialPower>SpecialPower_DecoyTemple</SpecialPower>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ControlCenterSeedTiberium"
+		Type="SPECIAL_POWER"
+		Options="NEED_TARGET_POS">
+		<SpecialPower>SpecialPower_AlienSeedTiberium</SpecialPower>
+	</LogicCommand>
+	
+	<!--End: SkirmishAI Logic Commands-->
 
   <LogicCommand
 		Type="OBJECT_UPGRADE"

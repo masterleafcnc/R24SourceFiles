@@ -101,7 +101,7 @@
 			DamageFX="NormalDamageFX"
 			Conditions="PLAYER_UPGRADE" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -936,6 +936,14 @@
 					AcceptModelCondition=""
 					RejectModelCondition="" />
 			</OCLSpecialPower>
+			<AISpecialPowerUpdate
+				id="ModuleTag_AIRailgunAccelerators"
+				CommandButtonName="Command_SpecialPowerRailgunAccelerator"
+				SpecialPowerAIType="SPECIAL_POWER_AOE_BUFF"
+				SpecialPowerRadius="99999"
+				UnitKindOf="VEHICLE"
+				AllyUnitExclude="INFANTRY AIRCRAFT"
+				RandomizeTargetLocation="False"/>
 			<SubObjectsUpgrade
 				id="B21534E9"
 				RequiresAllTriggers="False"

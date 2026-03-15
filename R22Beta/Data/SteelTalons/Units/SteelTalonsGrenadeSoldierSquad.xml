@@ -867,6 +867,23 @@
 				</RankInfo>
 				<RankToReleaseWhenAttacking>1</RankToReleaseWhenAttacking>
 			</HordeContain>
+			<AISpecialPowerUpdate
+				id="Module_TagFireSTEMPGrenadesAI"
+				CommandButtonName="Command_STEMPGrenadesGetInRange"
+				SpecialPowerAIType="SPECIAL_POWER_RANGED_AOE_ATTACK"
+				SpecialPowerRadius="350"
+				ReinforceDistance="0"
+				SpellMakesAStructure=""
+				SpecificUnit=""
+				UnitKindOf="VEHICLE STRUCTURE"
+				AllyUnitInclude=""
+				AllyUnitExclude=""
+				EnemyUnitInclude=""
+				EnemyUnitExclude="INFANTRY AIRCRAFT HUSK CIVILIAN_BUILDING WALL_HUB WALL_SEGMENT"
+				MinimumCutoff="100"
+				UpdateTime="2.5s"
+				MaxFrequency="0"
+				RandomizeTargetLocation="False" />
 		</Behaviors>
 		<AI>
 			<HordeAIUpdate

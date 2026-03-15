@@ -97,7 +97,7 @@
 			DamageFX="FactionStructureDamageFX"
 			Conditions="" />
 		<SkirmishAIInformation
-			BaseBuildingLocation="SPREAD"
+			BaseBuildingLocation="HOMEBASE"
 			ConquerMetricsOverrideDamageType="UNDEFINED"
 			ConquerMetricsOverrideAntiMask="ANTI_GROUND"
 			UnitBuilderStandardCombatUnit="False" />
@@ -655,14 +655,14 @@
 				SecondaryCommandButtonName=""
 				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
 				SpecialPowerRadius="999999"
-				ReinforceDistance="0"
+				ReinforceDistance="1500"
 				SpellMakesAStructure=""
 				SpecificUnit=""
-				UnitKindOf="STRUCTURE"
+				UnitKindOf=""
 				AllyUnitInclude=""
-				AllyUnitExclude=""
-				EnemyUnitInclude=""
-				EnemyUnitExclude=""
+				AllyUnitExclude="INFANTRY VEHICLE STRUCTURE HUSK CIVILIAN_BUILDING"
+				EnemyUnitInclude="INFANTRY VEHICLE"
+				EnemyUnitExclude="AIRCRAFT STRUCTURE"
 				MinimumCutoff="0"
 				UpdateTime="1s"
 				MaxFrequency="0"
