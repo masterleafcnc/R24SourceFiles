@@ -131,7 +131,7 @@ unitBugDataTable = {
 	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Stealth Tank
 	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Marked of Kane Stealth Tank
 
-	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
+	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
 
 	["FD8822B1"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Flame Tank
 	["1E1AEEBE"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Flame Tank
@@ -1290,7 +1290,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 		isBugging = true
 	end
 
-    -- if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
+    --if isBugging then ExecuteAction("NAMED_FLASH_WHITE", self, 2) end
 	-- checksDone is more than ceil(unitReversing.groupId.selectedCount*0.5)
 	if not unitReversing.hasBeenCounted then
 		group.checksDone = group.checksDone + 1
@@ -1365,7 +1365,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 						-- objName is currently only just this object
 						group.fixCancelledByType[objName] = true
 						-- fixUnits = false
-						print("1st false positive filter")
+						--print("1st false positive filter")
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end
 				end
@@ -1377,12 +1377,13 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
-						print("2nd false positive filter")
+						--print("2nd false positive filter")
 						for i = getn(unitsToFixForType), 1, -1 do
 							local unit = unitsReversing[unitsToFixForType[i]]
 							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
 								--print("removing")
-								tremove(unitsToFixForType, i)
+								--tremove(unitsToFixForType, i)
+								group.fixCancelledByType[objName] = true
 							end
 						end
 					end
@@ -1401,7 +1402,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 				for objName,count in group.reverseUnitsByType do
 					unitBugDataType = unitBugDataTable[objName]
 					local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
-					 WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. "\n")
+					-- WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. "\n")
 					if not (thirdTurnUnitCountForType < ceil(count*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(count*unitBugDataType.notMovingBackupRatio))) then
 						notAllTypesAreBugging = true
 						--group.fixCancelledByType[objName] = true
@@ -1410,7 +1411,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					end
 				end
 				if not notAllTypesAreBugging then
-					print("3rd false positive filter")
+					--print("3rd false positive filter")
 					fixUnits = false
 				end
 			end
@@ -1481,7 +1482,6 @@ function FixBuggingUnit(self, applySpeedBuff)
 		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
 	end
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
-	ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
 		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
 		unitReversing.hasBeenFixed = true
