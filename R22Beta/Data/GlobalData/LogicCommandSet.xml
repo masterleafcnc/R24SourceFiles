@@ -124,6 +124,299 @@
 		<Cmd>Command_PurchaseUpgradeAdaptiveArmor</Cmd>
 		<Cmd>Command_PurchaseUpgradeGDITungstenAAShells</Cmd>
 		<Cmd>Command_SpecialPowerSonicRepulsionField</Cmd>
+		<Cmd>Command_SpecialPowerRailgunAccelerator</Cmd>
+	</LogicCommandSet>
+	
+	<!--Added for AI Changes-->
+
+	<LogicCommandSet
+		id="AlienGatewayCommandSet">
+		<Cmd>Command_ConstructAlienGunWalker</Cmd>
+		<Cmd>Command_ConstructAlienSeekerTank</Cmd>
+		<Cmd>Command_ConstructAlienHarvester</Cmd>
+		<Cmd>Command_ConstructAlienDevourerTank</Cmd>
+		<Cmd>Command_ConstructAlienCorrupter</Cmd>
+		<Cmd>Command_ConstructAlienAnnihilatorTripod</Cmd>
+		<Cmd>Command_ConstructAlienCustomizableVehicle</Cmd>
+		<Cmd>Command_RepairVehicle</Cmd>
+		<Cmd>Command_SpecialPowerAlienRepairDrones</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Traveler59GatewayCommandSet">
+		<Cmd>Command_ConstructTraveler59GunWalker</Cmd>
+		<Cmd>Command_ConstructTraveler59SeekerTank</Cmd>
+		<Cmd>Command_ConstructTraveler59Harvester</Cmd>
+		<Cmd>Command_ConstructTraveler59Corrupter</Cmd>
+		<Cmd>Command_ConstructTraveler59AnnihilatorTripod</Cmd>
+		<Cmd>Command_ConstructTraveler59CustomizableVehicle</Cmd>
+		<Cmd>Command_RepairVehicle</Cmd>
+		<Cmd>Command_SpecialPowerAlienRepairDrones</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Reaper17GatewayCommandSet">
+		<Cmd>Command_ConstructReaper17ShardWalker</Cmd>
+		<Cmd>Command_ConstructReaper17SeekerTank</Cmd>
+		<Cmd>Command_ConstructReaper17Harvester</Cmd>
+		<Cmd>Command_ConstructReaper17DevourerTank</Cmd>
+		<Cmd>Command_ConstructReaper17Corrupter</Cmd>
+		<Cmd>Command_ConstructReaper17AnnihilatorTripod</Cmd>
+		<Cmd>Command_ConstructReaper17CustomizableVehicle</Cmd>
+		<Cmd>Command_RepairVehicle</Cmd>
+		<Cmd>Command_SpecialPowerAlienRepairDrones</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="AlienReactorCommandSet">
+		<Cmd>Command_PurchaseUpgradeForcefieldGenerator</Cmd>
+		<Cmd>Command_PurchaseUpgradeAlienShardLaunchers</Cmd>
+		<Cmd>Command_SpecialPowerPhaseField</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Traveler59ReactorCommandSet">
+		<Cmd>Command_PurchaseUpgradeAlienShardLaunchers</Cmd>
+		<Cmd>Command_PurchaseUpgradeTravelerEngines</Cmd>
+		<Cmd>Command_SpecialPowerPhaseField</Cmd>
+		<Cmd>Command_SpecialPowerTemporalWormhole</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Reaper17ReactorCommandSet">
+		<Cmd>Command_PurchaseUpgradeReaper17ForcefieldGenerator</Cmd>
+		<Cmd>Command_PurchaseUpgradeAlienShardLaunchers</Cmd>
+		<Cmd>Command_PurchaseUpgradeBlueShardWeapon</Cmd>
+		<Cmd>Command_PurchaseUpgradeConversionReserves</Cmd>
+		<Cmd>Command_SpecialPowerPhaseField</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="AlienSignalTransmitterCommandSet">
+		<Cmd>Command_SpecialPowerOverlordsWrath</Cmd>
+		<Cmd>Command_SummonMothership</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Traveler59SignalTransmitterCommandSet">
+		<Cmd>Command_SpecialPowerOverlordsWrath</Cmd>
+		<Cmd>Command_SummonMothership</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Reaper17SignalTransmitterCommandSet">
+		<Cmd>Command_AlienShockPods</Cmd>
+		<Cmd>Command_SpecialPowerOverlordsWrath</Cmd>
+		<Cmd>Command_SummonMothership</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="AlienStatisChamberCommandSet">
+		<Cmd>Command_PurchaseUpgradeBlinkPack</Cmd>
+		<Cmd>Command_PurchaseUpgradePlasmaDiskLauncher</Cmd>
+		<Cmd>Command_SpecialPowerCrystalField</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Traveler59StatisChamberCommandSet">
+		<Cmd>Command_PurchaseUpgradeAdvancedArticulators</Cmd>
+		<Cmd>Command_PurchaseUpgradePlasmaDiskLauncher</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Reaper17StasisChamberCommandSet">
+		<Cmd>Command_PurchaseUpgradeBlinkPack</Cmd>
+		<Cmd>Command_PurchaseUpgradePlasmaDiskLauncher</Cmd>
+		<Cmd>Command_SpecialPowerCrystalField</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="AlienPlanetaryAssaultCarrierCommandSet">
+		<Cmd>Command_AlienAssaultCarrierDeployIonStormStart</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Traveler59PlanetaryAssaultCarrierCommandSet">
+		<Cmd>Command_AlienAssaultCarrierDeployIonStormStart</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="BlackHandTechAssemblyPlantCommandSet">
+		<Cmd>Command_UpgradeNODEmpBurst</Cmd>
+		<Cmd>Command_PurchaseUpgradeChargedParticleBeam</Cmd>
+		<Cmd>Command_PurchaseUpgradeTibCoreMissilesBH</Cmd>
+		<Cmd>Command_NODDecoyTemple</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="NODHangarCommandSet">
+		<Cmd>Command_ConstructNODVenom</Cmd>
+		<Cmd>Command_ConstructNODVertigo</Cmd>
+		<Cmd>Command_NODRecallAllAircraft</Cmd>
+		<Cmd>Command_UpgradeNODSignatureGenerator</Cmd>
+		<Cmd>Command_PurchaseUpgradeVertigoDisruptionPod</Cmd>
+		<Cmd>Command_NODBurrowMines</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="MarkedOfKaneHangarCommandSet">
+		<Cmd>Command_ConstructMarkedOfKaneVenom</Cmd>
+		<Cmd>Command_ConstructMarkedOfKaneVertigo</Cmd>
+		<Cmd>Command_NODRecallAllAircraft</Cmd>
+		<Cmd>Command_UpgradeNODSignatureGenerator</Cmd>
+		<Cmd>Command_PurchaseUpgradeVertigoDisruptionPod</Cmd>
+		<!--<Cmd>Command_NODBurrowMines</Cmd>-->
+		<Cmd>Command_MarkedOfKaneMagneticMines</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="GDIAirTowerCommandSet">
+		<Cmd>Command_ConstructGDIOrca</Cmd>
+		<Cmd>Command_ConstructGDIHammerhead</Cmd>
+		<Cmd>Command_ConstructGDIFireHawk</Cmd>
+		<Cmd>Command_GDIRecallAllAircraft</Cmd>
+		<Cmd>Command_CommandPostCallBloodhound</Cmd>
+		<Cmd>Command_CommandPostBombingRun</Cmd>
+		<Cmd>Command_PurchaseUpgradeGDIHardpoints</Cmd>
+		<Cmd>Command_PurchaseUpgradeStratofighterBooster</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="SteelTalonsAirTowerCommandSet">
+		<Cmd>Command_ConstructSteelTalonsOrca</Cmd>
+		<Cmd>Command_ConstructSteelTalonsHammerhead</Cmd>
+		<Cmd>Command_ConstructSteelTalonsFireHawk</Cmd>
+		<Cmd>Command_GDIRecallAllAircraft</Cmd>
+		<Cmd>Command_CommandPostCallSTBloodhound</Cmd>
+		<Cmd>Command_CommandPostBombingRun</Cmd>
+		<Cmd>Command_PurchaseUpgradeGDIHardpoints</Cmd>
+		<Cmd>Command_PurchaseUpgradeStratofighterBooster</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="ZOCOMAirTowerCommandSet">
+		<Cmd>Command_ConstructZOCOMOrca</Cmd>
+		<Cmd>Command_ConstructZOCOMHammerhead</Cmd>
+		<Cmd>Command_ConstructZOCOMFireHawk</Cmd>
+		<Cmd>Command_GDIRecallAllAircraft</Cmd>
+		<Cmd>Command_CommandPostCallZOCOMBloodhound</Cmd>
+		<Cmd>Command_ZOCOMCommandPostBombingRun</Cmd>
+		<Cmd>Command_PurchaseUpgradeCeramicArmor</Cmd>
+		<Cmd>Command_PurchaseUpgradeStratofighterBooster</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="GDISpaceCommandUplinkCommandSet">
+		<Cmd>Command_SpaceCommandGDIDropPods</Cmd>
+		<Cmd>Command_SpaceCommandGDIShockwave</Cmd>
+		<Cmd>Command_SpecialPowerSupersonicAirAttack</Cmd>
+		<Cmd>Command_SpecialPowerMjolnirStrike</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="ZOCOMSpaceCommandUplinkCommandSet">
+		<Cmd>Command_SpaceCommandZOCOMRaiderPods</Cmd>
+		<Cmd>Command_SpaceCommandGDIShockwave</Cmd>
+		<Cmd>Command_SpecialPowerSupersonicAirAttack</Cmd>
+		<Cmd>Command_SpecialPowerMjolnirStrike</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="BlackHandConfessorCabalSquadCommandSet">
+		<Cmd>Command_BlackHandConfessorCabalSquadFireGrenade</Cmd>
+		<Cmd>Command_BlackHandConfessorCabalFireGrenade</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="NODShadowSquadCommandSet">
+		<Cmd>Command_NodShadow_GliderLiftOff</Cmd>
+		<Cmd>Command_NodShadow_GliderLand</Cmd>
+		<Cmd>Command_NodShadow_PlaceExplosiveCharges</Cmd>
+		<Cmd>Command_NODShadowSquadDeployBeacon</Cmd>
+		<Cmd>Command_NODShadowSquadBeaconGetInRange</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="MarkedOfKaneMobileArtilleryCommandSet">
+		<Cmd>Command_AttackMove</Cmd>
+		<Cmd>Command_NodCallForTransportVehicle</Cmd>
+		<Cmd>Command_SpotBeaconBombard</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="BlackHandMobileArtilleryCommandSet">
+		<Cmd>Command_AttackMove</Cmd>
+		<Cmd>Command_SpotBeaconBombard</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="NODVenomCommandSet">
+		<Cmd>Command_NODSignatureGenerator</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="GDIZoneTrooperSquadCommandSet">
+		<Cmd>Command_GDICallForTransportInfantry</Cmd>
+		<Cmd>Command_ZoneTrooperSquadGetToJumpJetRange</Cmd>
+		<Cmd>Command_ZoneTrooperSquadFireJumpJets</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+		<!--<Cmd>Command_Stop</Cmd>-->
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="ZOCOMZoneRaiderSquadCommandSet">
+		<Cmd>Command_ZOCOMCallForTransportInfantry</Cmd>
+		<Cmd>Command_ZoneTrooperSquadGetToJumpJetRange</Cmd>
+		<Cmd>Command_ZoneTrooperSquadFireJumpJets</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+		<!--<Cmd>Command_Stop</Cmd>-->
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="SteelTalonsMammothCommandSet">
+		<Cmd>Command_AttackMove</Cmd>
+		<Cmd>Command_ActivateAdaptiveArmor</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="MutantHovelCommandSet">
+		<Cmd>Command_ConstructMutantMarauderSquad</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="EMPControlCenterCommandSet">
+		<Cmd>Command_EMPControlCenterEMP</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="AlienControlCenterCommandSet">
+		<Cmd>Command_TiberiumVibrationScan</Cmd>
+		<Cmd>Command_SpecialPowerSwarm</Cmd>
+		<Cmd>Command_LightningSpike</Cmd>
+		<Cmd>Command_ControlCenterSeedTiberium</Cmd>
+		<Cmd>Command_PurchaseUpgradeMinorForcefieldGenerator</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Traveler59ControlCenterCommandSet">
+		<Cmd>Command_TiberiumVibrationScan</Cmd>
+		<Cmd>Command_SpecialPowerSwarm</Cmd>
+		<Cmd>Command_LightningSpike</Cmd>
+		<Cmd>Command_ControlCenterSeedTiberium</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="Reaper17ControlCenterCommandSet">
+		<Cmd>Command_Reaper17TiberiumVibrationScan</Cmd>
+		<Cmd>Command_SpecialPowerSwarm</Cmd>
+		<Cmd>Command_LightningSpike</Cmd>
+		<Cmd>Command_ControlCenterSeedTiberium</Cmd>
+		<Cmd>Command_PurchaseUpgradeReaper17MinorForcefieldGenerator</Cmd>
 	</LogicCommandSet>
 
 </AssetDeclaration>
