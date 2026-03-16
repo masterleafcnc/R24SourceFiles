@@ -412,13 +412,6 @@
 				EnemyUnitInclude="CAN_ATTACK STRUCTURE"
 				EnemyUnitExclude="INFANTRY AIRCRAFT CIVILIAN_BUILDING HUSK"
 				RandomizeTargetLocation="False" />
-			<AISpecialPowerUpdate
-				id="ModuleTag_MjolnirStrikeAI"
-				CommandButtonName="Command_SpecialPowerMjolnirStrike"
-		        	SpecialPowerRadius="999999.0"
-				UnitKindOf="FS_POWER"
-				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES" 
-			/>
 <!-- SUPERSONIC AIR ATTACK -->
 			<OCLSpecialPower
 				id="ModuleTag_OCLSpecialPowerAirAttack"
