@@ -748,5 +748,6 @@
         <CrusherInfo
             CrusherLevel="1"
             CrushableLevel="2" />
+        <DisplayUpgrade>Upgrade_NODDozerBlades</DisplayUpgrade>
     </GameObject>
 </AssetDeclaration>
