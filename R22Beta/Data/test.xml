@@ -118,6 +118,7 @@
 		<Include source="Nod\Units\NODHarvester.xml" type="all"/>	 -->
 
 		<!-- post r23z changes
+		<Include source="GlobalData/WeaponR21.xml" type="all"/>
 		<Include source="ReverseDummy.xml" type="all"/>	 
 		<Include source="SteelTalons\Units\STMRT.xml" type="all"/>
 		<Include source="BlackHand/Units/blackhandmobileartillery.xml" type="all"/>
@@ -126,7 +127,6 @@
 		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
 
 		<!-- new objects -->
-		<Include source="GlobalData/WeaponR21.xml" type="all"/>
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
