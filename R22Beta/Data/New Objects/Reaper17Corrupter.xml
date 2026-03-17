@@ -94,7 +94,7 @@
         ReinvisibilityDelay="7s">
         <DisplayName>NAME:ALIENCorrupter</DisplayName>
         <GameDependency>
-            <RequiredObject>AlienControlCenter</RequiredObject>
+            <RequiredObject>Reaper17ControlCenter</RequiredObject>
         </GameDependency>
         <ArmorSet
             Armor="AlienCorrupterArmor"

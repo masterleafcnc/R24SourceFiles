@@ -121,6 +121,7 @@
 		<Include source="GlobalData/WeaponR21.xml" type="all"/>
 		<Include source="ReverseDummy.xml" type="all"/>	 
 		<Include source="SteelTalons\Units\STMRT.xml" type="all"/>
+		<Include source="ZOCOM/Structures/ZOCOMSpaceCommandUplink.xml" type="all"/>
 		<Include source="BlackHand/Units/blackhandmobileartillery.xml" type="all"/>
 		<Include source="Nod/Units/nodmobileartillery.xml" type="all"/>
 		<Include source="MarkedOfKane/Units/markedofkanemobileartillery.xml" type="all"/>
