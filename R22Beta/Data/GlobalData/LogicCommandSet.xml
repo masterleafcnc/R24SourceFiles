@@ -350,7 +350,7 @@
 	<LogicCommandSet
 		id="BlackHandMobileArtilleryCommandSet">
 		<Cmd>Command_AttackMove</Cmd>
-		<Cmd>Command_SpotBeaconBombard</Cmd>
+		<!--<Cmd>Command_SpotBeaconBombard</Cmd>-->
 	</LogicCommandSet>
 
 	<LogicCommandSet
