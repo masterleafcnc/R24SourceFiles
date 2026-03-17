@@ -42,6 +42,13 @@
 		Options="NEED_TARGET_POS">
 		<SpecialPower>SpecialPower_AlienSeedTiberium</SpecialPower>
 	</LogicCommand>
+
+	<LogicCommand
+		id="Command_SummonAlienShockPodsAI"
+		Type="SPECIAL_POWER"
+		Options="NEED_TARGET_POS">
+		<SpecialPower>SpecialPower_AlienShockPods</SpecialPower>
+	</LogicCommand>
 	
 	<!--End: SkirmishAI Logic Commands-->
 

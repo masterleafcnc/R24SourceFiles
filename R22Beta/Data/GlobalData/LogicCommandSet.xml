@@ -205,7 +205,7 @@
 
 	<LogicCommandSet
 		id="Reaper17SignalTransmitterCommandSet">
-		<Cmd>Command_AlienShockPods</Cmd>
+		<Cmd>Command_SummonAlienShockPodsAI</Cmd>
 		<Cmd>Command_SpecialPowerOverlordsWrath</Cmd>
 		<Cmd>Command_SummonMothership</Cmd>
 	</LogicCommandSet>
@@ -350,7 +350,7 @@
 	<LogicCommandSet
 		id="BlackHandMobileArtilleryCommandSet">
 		<Cmd>Command_AttackMove</Cmd>
-		<Cmd>Command_SpotBeaconBombard</Cmd>
+		<!--<Cmd>Command_SpotBeaconBombard</Cmd>-->
 	</LogicCommandSet>
 
 	<LogicCommandSet
