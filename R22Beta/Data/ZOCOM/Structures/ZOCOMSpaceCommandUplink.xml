@@ -402,6 +402,12 @@
 				SpecialPowerTemplate="SpecialPowerGDI_SpaceCommandShockwaveArtillery"
 				ReadyCondition="SPECIALPOWER1_READY" />
 <!-- MJOLNIR -->
+			<OCLSpecialPower
+				id="ModuleTag_MjolnirStrikePower"
+				SpecialPowerTemplate="SpecialPower_MjolnirStrike"
+				OCL="OCL_GDIMjolnirBeaconOne"
+				CreateLocation="CREATE_AT_LOCATION"
+			/>
 			<AISpecialPowerUpdate
 				id="ModuleTag_MjolnirStrikeAI"
 				CommandButtonName="Command_SpecialPowerMjolnirStrike"
