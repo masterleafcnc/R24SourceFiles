@@ -802,7 +802,7 @@
 			</OCLSpecialPower>
 			<AISpecialPowerUpdate
 				id="E9972EAD"
-				CommandButtonName="Command_AlienShockPods"
+				CommandButtonName="Command_SummonAlienShockPodsAI"
 				SecondaryCommandButtonName=""
 				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
 				SpecialPowerRadius="99999"

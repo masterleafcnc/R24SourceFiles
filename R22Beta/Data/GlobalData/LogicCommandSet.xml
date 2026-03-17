@@ -205,7 +205,7 @@
 
 	<LogicCommandSet
 		id="Reaper17SignalTransmitterCommandSet">
-		<Cmd>Command_AlienShockPods</Cmd>
+		<Cmd>Command_SummonAlienShockPodsAI</Cmd>
 		<Cmd>Command_SpecialPowerOverlordsWrath</Cmd>
 		<Cmd>Command_SummonMothership</Cmd>
 	</LogicCommandSet>
