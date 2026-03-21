@@ -391,10 +391,9 @@
 				CommandButtonName="Command_SpaceCommandGDIShockwave"
 				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
 				SpecialPowerRadius="99999"
-				ReinforceDistance="1200"
-				UnitKindOf="UNIQUE_UNIT"
-				EnemyUnitInclude="CAN_ATTACK STRUCTURE"
-				EnemyUnitExclude="INFANTRY AIRCRAFT CIVILIAN_BUILDING HUSK"
+				ReinforceDistance="1300"
+				UnitKindOf="VEHICLE"
+				EnemyUnitExclude="AIRCRAFT CIVILIAN_BUILDING HUSK"
 				RandomizeTargetLocation="False" />
 			
 			<MonitorSpecialPowerTimerUpdate
@@ -414,7 +413,7 @@
 				SpecialPowerAIType="SPECIAL_POWER_ENEMY_TYPE_KILLER_STRUCTURES"
 				SpecialPowerRadius="99999"
 				ReinforceDistance="1500"
-				UnitKindOf=""
+				UnitKindOf="CAN_ATTACK"
 				EnemyUnitInclude="CAN_ATTACK STRUCTURE"
 				EnemyUnitExclude="INFANTRY AIRCRAFT CIVILIAN_BUILDING HUSK"
 				RandomizeTargetLocation="False" />
