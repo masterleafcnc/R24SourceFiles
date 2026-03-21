@@ -805,7 +805,8 @@
 					AcceptModelCondition=""
 					RejectModelCondition="" />
 			</OCLSpecialPower>
-			<AISpecialPowerUpdate
+			<!--Retired to direct preference to bloodhounds-->
+			<!--<AISpecialPowerUpdate
 				id="4303908E"
 				CommandButtonName="Command_CommandPostCallHunterKiller"
 				SecondaryCommandButtonName=""
@@ -822,7 +823,7 @@
 				MinimumCutoff="0"
 				UpdateTime="1s"
 				MaxFrequency="0"
-				RandomizeTargetLocation="False" />
+				RandomizeTargetLocation="False" />-->
 			<ProductionUpdate
 				id="749674DE"
 				MaxQueueEntries="99"

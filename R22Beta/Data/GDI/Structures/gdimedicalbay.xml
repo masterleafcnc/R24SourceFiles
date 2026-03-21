@@ -250,14 +250,14 @@
 				OCL="OCL_CallSupportGDIAirborne"
 				CreateLocation="CREATE_AT_EDGE_NEAR_SOURCE"
 			/>
-
-			<AISpecialPowerUpdate
+			<!--Retired to direct preference to bloodhounds-->
+			<!--<AISpecialPowerUpdate
 				id="ModuleTag_CommandPostCallAirborneAI"
 				CommandButtonName="Command_CommandPostCallAirborne"
 				ReinforceDistance="400.0"
 				SpecialPowerRadius="300.0"
 				SpecialPowerAIType="SPECIAL_POWER_REINFORCEMENT"
-			/>
+			/>-->
 
 			<ProductionUpdate
 				id="ModuleTag_ProductionUpdate"
