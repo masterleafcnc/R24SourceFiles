@@ -157,9 +157,9 @@ unitBugDataTable = {
 	["7A639A9A"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Specter
 
 	-- SCRIN UNITS --
-	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Seeker
-	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Seeker
-	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Traveler-59 Seeker
+	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Seeker
+	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Seeker
+	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Traveler-59 Seeker
 
 	["AF991372"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Devourer Tank
 	["416EFDFF"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Devourer Tank
@@ -1029,6 +1029,25 @@ end
 function GetUnitReversingData(self)
 	if self ~= nil then
 		local a = getObjectId(self)
+
+		-- check if this object is a harvester that can reverse move, returns true if so, else false.
+		local checkHarv = function()
+			local objectName = getObjectName(%self) 
+			local harvesters = {	
+				["3A3D109A"] = true,
+				["C3785BFE"] = true,
+				["21661DFB"] = true,
+				["D258354"] = true,
+				["F52AEEDF"] = true,
+				["C23B3A15"] = true
+			}
+
+			if harvesters[objectName] then
+				return true
+			end
+			return false
+		end
+
 		unitsReversing[a] = unitsReversing[a] or {
 			firstFrame = 0, -- first frame after reversing while turning fast
 			isReverseMoving = false, -- flag to stop the re-assignment of firstFrame
@@ -1048,7 +1067,8 @@ function GetUnitReversingData(self)
 			hasComeToAStop = false, 
 			unitAnchor = nil, -- can be an array from closest to farthest
 			bugFrameDiff = 0,
-			expectedChecksFlag = false
+			expectedChecksFlag = false,
+			isReverseMoveHarvester = checkHarv()
 		}
 		return a, unitsReversing[a]
 	end
@@ -1173,6 +1193,10 @@ function BackingUpFastTurnEnd(self)
 	if unitReversing == nil then return end
 	-- prevents this from executing when the unit is not moving or has already reverse moved 
 	if unitReversing.hasComeToAStop or unitReversing.hasAlreadyReversed or unitReversing.timesTriggeredFast > TURN_TRIGGER_COUNT then return end
+	-- check if its DOCKING or DOCKING_BEGINNING (to prevent harvesters from checking for bugs while docking)
+	if unitReversing.isReverseMoveHarvester then
+		if ObjectTestModelCondition(self, "DOCKING") or ObjectTestModelCondition(self, "DOCKING_BEGINNING") or ObjectTestModelCondition(self, "DOCKING_ENDING") then return end
+	end
 	local curFrame = GetFrame()
 	local frameDiff = curFrame - unitReversing.firstFrame
 	local group = getglobal(unitReversing.groupId)
@@ -1214,6 +1238,10 @@ function BackingUpTurnEnd(self)
     local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
 	if unitReversing.hasComeToAStop or unitReversing.hasAlreadyReversed then return end
+	-- check if its DOCKING or DOCKING_BEGINNING (to prevent harvesters from checking for bugs while docking)
+	if unitReversing.isReverseMoveHarvester then
+		if ObjectTestModelCondition(self, "DOCKING") or ObjectTestModelCondition(self, "DOCKING_BEGINNING") or ObjectTestModelCondition(self, "DOCKING_ENDING") then return end
+	end
 	local timesToTrigger = TURN_TRIGGER_COUNT
 	local frameDiff = GetFrame() - unitReversing.firstFrame
 
@@ -1356,7 +1384,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 						-- objName is currently only just this object
 						group.fixCancelledByType[objName] = true
 						-- fixUnits = false
-						--print("1st false positive filter")
+						-- print("1st false positive filter")
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end
 				end
@@ -1368,7 +1396,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
-						--print("2nd false positive filter")
+						-- print("2nd false positive filter")
 						for i = getn(unitsToFixForType), 1, -1 do
 							local unit = unitsReversing[unitsToFixForType[i]]
 							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
@@ -1402,7 +1430,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					end
 				end
 				if not notAllTypesAreBugging then
-					--print("3rd false positive filter")
+					-- print("3rd false positive filter")
 					fixUnits = false
 				end
 			end
@@ -1809,6 +1837,10 @@ function SuddenStopCheck(self)
 		%unitReversing.groupIdAssigned = false
 	end
 	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or unitReversing.hasComeToAStop or not unitReversing.lastMoveWasReverse then return resetGroupId() end
+	-- check if its DOCKING or DOCKING_BEGINNING (to prevent harvesters from checking for bugs while docking)
+	if unitReversing.isReverseMoveHarvester then
+		if ObjectTestModelCondition(self, "DOCKING") or ObjectTestModelCondition(self, "DOCKING_BEGINNING") or ObjectTestModelCondition(self, "DOCKING_ENDING") then return resetGroupId() end
+	end
 	unitReversing.lastMoveWasReverse = false
 	if unitReversing.groupId == nil then return resetGroupId() end
 	--unitReversing.isReverseMoving = false
