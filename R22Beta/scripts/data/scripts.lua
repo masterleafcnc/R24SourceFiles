@@ -1038,7 +1038,6 @@ function GetUnitReversingData(self)
 			stringReference = SetObjectReference(self),
 			selfReference = self,
 			groupId = nil,
-			isMovingFlag = true,
 			lastMoveWasReverse = false,
 			lastReverseMoveFrame = 0,
 			hasAlreadyReversed = false,
@@ -1097,13 +1096,12 @@ function UnitIsMoving(self)
 	local a = getObjectId(self)
 	if unitsReversing[a] == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
-	if ObjectTestModelCondition(self, "BACKING_UP") == false and unitReversing.hasComeToAStop then
-		unitReversing.isMovingFlag = true
+	if ObjectTestModelCondition(self, "BACKING_UP") == false then
 		unitReversing.hasComeToAStop = false
 	end
 end
 
--- checks if most units are moving and if the number returned exceeds the threshold then assign the isMovingFlag to false
+-- checks if most units are moving and if the number returned exceeds the threshold then assign the hasComeToAStop to true
 function UnitNoLongerMoving(self)
 	if self == nil then return end
 	local a = getObjectId(self)
@@ -1116,17 +1114,13 @@ function UnitNoLongerMoving(self)
 		if group ~= nil and group.reverseUnits ~= nil and group.reverseUnitCount ~= nil then
 			-- if a few units are moving now but originally before backing up most units were not moving then set moving flag to true
 			local numberOfUnitsMoving = GetNumberOfUnitsMoving(group.reverseUnits)
-			--unitReversing.isMovingFlag = true
 			for _, unitRef in group.reverseUnits do
 				if unitsReversing[unitRef] ~= nil then
 					if numberOfUnitsMoving <= floor(group.reverseUnitCount * UNITS_STILL_MOVING_THRESHOLD)
 					and ((group.unitsNotMovingBeforeBackingUp or 0) >= group.reverseUnitCount * 0.35) and unitsReversing[unitRef].wasAttackingBeforeReverse then
-						unitsReversing[unitRef].isMovingFlag = true
 						unitsReversing[unitRef].hasComeToAStop = false
 					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
-						unitsReversing[unitRef].isMovingFlag = false
 						unitsReversing[unitRef].hasComeToAStop = true
-						--unitsReversing[unitRef].lastMoveWasReverse = false
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end					
 				end
@@ -1140,10 +1134,9 @@ function UnitNoLongerMoving(self)
 			local numberOfUnitsMoving = GetNumberOfUnitsMoving(teamTable.reverseUnits)
 			--WriteToFile("numberOfUnitsMoving.txt",  "units not moving: " .. tostring(numberOfUnitsMoving) .. "teamTable units size: " .. getTableSize(teamTable.reverseUnits) .. "\n")
 			if numberOfUnitsMoving <= floor(teamTable.reverseUnitCount * 0.15) then
-				-- assign isMovingFlag as false only if the last move was a reverse move
+				-- assign hasComeToAStop as true only if the last move was a reverse move
 				for _, unitRef in teamTable.reverseUnits do
 					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].wasAttackingBeforeReverse then
-						unitsReversing[unitRef].isMovingFlag = false
 						--unitsReversing[unitRef].lastMoveWasReverse = false
 						unitsReversing[unitRef].hasComeToAStop = true
 						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
@@ -1153,8 +1146,6 @@ function UnitNoLongerMoving(self)
 		else
 			-- team table is empty (player has deselected it), so clear flags for this unit directly
 			if not unitReversing.wasAttackingBeforeReverse then
-				unitReversing.isMovingFlag = false
-				--unitReversing.lastMoveWasReverse = false
 				unitReversing.hasComeToAStop = true
 				--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 			end
@@ -1181,7 +1172,7 @@ function BackingUpFastTurnEnd(self)
     local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
 	-- prevents this from executing when the unit is not moving or has already reverse moved 
-	if not unitReversing.isMovingFlag or unitReversing.hasAlreadyReversed or unitReversing.timesTriggeredFast > TURN_TRIGGER_COUNT then return end
+	if unitReversing.hasComeToAStop or unitReversing.hasAlreadyReversed or unitReversing.timesTriggeredFast > TURN_TRIGGER_COUNT then return end
 	local curFrame = GetFrame()
 	local frameDiff = curFrame - unitReversing.firstFrame
 	local group = getglobal(unitReversing.groupId)
@@ -1222,7 +1213,7 @@ end
 function BackingUpTurnEnd(self)
     local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	if not unitReversing.isMovingFlag or unitReversing.hasAlreadyReversed then return end
+	if unitReversing.hasComeToAStop or unitReversing.hasAlreadyReversed then return end
 	local timesToTrigger = TURN_TRIGGER_COUNT
 	local frameDiff = GetFrame() - unitReversing.firstFrame
 
@@ -1582,7 +1573,6 @@ function BackingUp(self)
 		%unitReversing.isReverseMoving = true
 		%unitReversing.hasBeenCounted = false
 		%unitReversing.expectedChecksFlag = false
-		--%unitReversing.isMovingFlag = true
 	end
 
 	 -- Check if this is a spam/repeat command (within 2 frames) or a generic new command
@@ -1593,16 +1583,11 @@ function BackingUp(self)
 
 	if unitReversing.hasComeToAStop then
 		unitReversing.hasComeToAStop = false
-		-- Only skip if the unit still belongs to an active group (mid-group re-trigger).
-		-- If groupId is nil, the previous group ended and this is a new reverse move.
-		if unitReversing.groupId ~= nil then
-			return resetFlags()
-		end
+		return 
 	end
 
 	-- Reset the flags here to ensure we don't carry over bugs from previous moves
 	resetFlags()
-	unitReversing.isMovingFlag = true
 	unitReversing.hasAlreadyReversed = false
 
 	if not unitReversing.groupIdAssigned then
@@ -1823,7 +1808,7 @@ function SuddenStopCheck(self)
 		%unitReversing.groupId = nil
 		%unitReversing.groupIdAssigned = false
 	end
-	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or not unitReversing.isMovingFlag or not unitReversing.lastMoveWasReverse then return resetGroupId() end
+	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or unitReversing.hasComeToAStop or not unitReversing.lastMoveWasReverse then return resetGroupId() end
 	unitReversing.lastMoveWasReverse = false
 	if unitReversing.groupId == nil then return resetGroupId() end
 	--unitReversing.isReverseMoving = false
@@ -1857,7 +1842,7 @@ function SuddenStopCheck(self)
 		end
 
 		if fixUnit then
-			--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+			--ExecuteAction("NAMED_FLASH", self, 2)
 			FixBuggingUnit(self, false)
 		end
 	end
@@ -1926,6 +1911,7 @@ function BackingUpEnd(self)
 	SuddenStopCheck(self)
 	
 	if clearList and group ~= nil then
+		--print("clearing group")
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
 			-- if the id is the same as the id in current index clear it
