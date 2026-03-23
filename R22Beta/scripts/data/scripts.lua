@@ -1121,9 +1121,8 @@ end
 
 function UnitIsMoving(self)
 	if self == nil then return end
-	local a = getObjectId(self)
-	if unitsReversing[a] == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
 	if ObjectTestModelCondition(self, "BACKING_UP") == false then
 		unitReversing.hasComeToAStop = false
 	end
@@ -1132,9 +1131,9 @@ end
 -- checks if most units are moving and if the number returned exceeds the threshold then assign the hasComeToAStop to true
 function UnitNoLongerMoving(self)
 	if self == nil then return end
-	local a = getObjectId(self)
-	if unitsReversing[a] == nil then return end
+	--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
 	--if unitReversing.hasComeToAStop then return end
 	-- check if most units selected are not moving
 	if not unitReversing.hasBeenFixed and unitReversing.groupId ~= nil then
@@ -1149,7 +1148,7 @@ function UnitNoLongerMoving(self)
 						unitsReversing[unitRef].hasComeToAStop = false
 					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].hasComeToAStop = true
-						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+						--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
 					end					
 				end
 			end
@@ -1167,7 +1166,7 @@ function UnitNoLongerMoving(self)
 					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						--unitsReversing[unitRef].lastMoveWasReverse = false
 						unitsReversing[unitRef].hasComeToAStop = true
-						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+						--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
 					end
 				end
 			end
@@ -1590,6 +1589,9 @@ end
 function BackingUp(self)
     local a, unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
+	if unitReversing.isReverseMoveHarvester then
+		if ObjectTestModelCondition(self, "DOCKING") or ObjectTestModelCondition(self, "DOCKING_BEGINNING") or ObjectTestModelCondition(self, "DOCKING_ENDING") then return end
+	end
     local curFrame = GetFrame()
 	unitReversing.lastMoveWasReverse = true
 
@@ -1741,6 +1743,7 @@ function AddToUnitSelection(self)
 	if self == nil then return end
 	-- initialized here to prevent first instance of BACKING_UP having a cascading effect.
 	local _, unitReversing = GetUnitReversingData(self)
+	-------------------------------------------------------------------------------------
     local playerTeam = tostring(ObjectTeamName(self) .. "table")
     local unitId = getObjectId(self)
     local teamTable = getglobal(playerTeam) or nil
@@ -1779,8 +1782,6 @@ function AddToUnitSelection(self)
 				getGlobals()
 			end
 			teamTable.reverseUnitsByType[objName][unitId] = unitId
-
-			--end
 		end
     end
 end
@@ -1849,9 +1850,8 @@ end
 
 -- checks if the group still exists if most units are still moving, and if this one has stopped then call FixBuggingUnit to fix it
 function SuddenStopCheck(self)
-	local a = getObjectId(self)
-	if unitsReversing[a] == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
 	local resetGroupId = function()
 		%unitReversing.groupId = nil
 		%unitReversing.groupIdAssigned = false
@@ -1920,9 +1920,8 @@ end
 -- Triggered by -BACKING_UP, this triggers when multiple reverse move commands.
 -- Removes groupId of this unit and then checks if the global of that group is empty and if it is, removes it.
 function BackingUpEnd(self)
-	local a = getObjectId(self)
-	if unitsReversing[a] == nil then return end
-	local _,unitReversing = GetUnitReversingData(self)	
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
 	unitReversing.lastReverseMoveFrame =  GetFrame()
 	local group = unitReversing.groupId ~= nil and getglobal(unitReversing.groupId) or nil
 	local reverseUnitList = {}
@@ -1990,9 +1989,8 @@ end
 -- USER_72 has ended, remove NO_COLLISIONS and speed buff if this unit has it.
 function BuggedUnitTimeoutEnd(self)
 	if self == nil then return end
-	local a = getObjectId(self)
-	if unitsReversing[a] == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil then return end
 	if unitReversing ~= nil then
 		unitReversing.hasBeenFixed = false
 		--unitReversing.unitAnchor = nil
