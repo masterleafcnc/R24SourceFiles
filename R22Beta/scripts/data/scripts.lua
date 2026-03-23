@@ -59,7 +59,7 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 function flushPlayerTeams() 
 	for i = 1, getn(playerTable), 1 do
 		if i <= 8 then
-			local player = tostring("team" .. playerTable[i])
+			local player = tostring("team" .. playerTable[i] .. "table")
 			setglobal(player, nil)
 		else
 			break
@@ -75,7 +75,7 @@ function getGlobals()
 	WriteToFile("globals.txt", globalString .. "------------------------------------")
 end
 
---flushPlayerTeams() 
+flushPlayerTeams() 
 
 harvesterData = {}
 crystalData = {}
@@ -1828,7 +1828,7 @@ function GroupUnitOnDeath(self)
 			if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
 				group.units[a] = nil
 				--group.unitCount = (group.unitCount or 1) - 1
-				teamTable.unitCount = getTableSize(teamTable.units)
+				group.unitCount = getTableSize(group.units)
 				if group.reverseUnits ~= nil and group.reverseUnits[a] ~= nil then
 					group.reverseUnits[a] = nil
 					group.reverseUnitCount = getTableSize(group.reverseUnits)
