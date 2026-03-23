@@ -1295,7 +1295,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local lowerLimit = unitBugData.bugCheckLowerLimit
 	local upperLimit = unitBugData.bugCheckUpperLimit
 	-- WriteToFile("upperLimit.txt",  tostring(upperLimit) .. "\n")
-
 	-- lowerLimit causes false positives when units are ordered to move at more than screen distance
 	if frameDiff > bugDuration + upperLimit then frameDiff = bugDuration end
 	local inBugRange = frameDiff >= bugDuration - lowerLimit and frameDiff <= bugDuration + upperLimit
@@ -1392,7 +1391,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 						group.fixCancelledByType[objName] = true
 						-- fixUnits = false
 						-- print("1st false positive filter")
-						--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+						-- ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 					end
 				end
 
@@ -1779,7 +1778,7 @@ function AddToUnitSelection(self)
 			--teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1 
 			if teamTable.reverseUnitsByType[objName] == nil then
 				teamTable.reverseUnitsByType[objName] = {}
-				getGlobals()
+				--getGlobals()
 			end
 			teamTable.reverseUnitsByType[objName][unitId] = unitId
 		end
