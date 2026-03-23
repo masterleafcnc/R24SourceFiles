@@ -1210,7 +1210,9 @@ function BackingUpFastTurnEnd(self)
 
 	-- track units that have backedup after receiving a groupId
 	if not unitReversing.expectedChecksFlag then
-		group.expectedChecks = (group.expectedChecks or 0) + 1
+		if group ~= nil then
+			group.expectedChecks = (group.expectedChecks or 0) + 1
+		end
 		unitReversing.expectedChecksFlag = true
 	end
 
