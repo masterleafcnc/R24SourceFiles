@@ -1,36 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration xmlns="uri:ea.com:eala:asset"
-				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<Tags></Tags>
-	<Includes>
-		<Include type="all"
-				 source="DATA:GlobalData/GlobalDefines.xml" />
-		<Include type="all"
-				 source="ART:GBWatchTwr.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrD2_SN.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrD2_AN.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrD3_SN.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrD3_AN.w3x" />
-		<Include type="all"
-				 source="ART:FXspotlight.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwr_A.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrG.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrG_A.w3x" />
-		<Include type="all"
-				 source="ART:GBWatchTwrGD3.w3x" />
-		<Include type="all"
-				 source="ART:FXTracerGDI.xml" />
-		<Include type="all"
-				 source="DATA:GlobalData/GlobalDefines.xml" />
-		<!-- Base Object -->
-	</Includes>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset"	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<GameObject id="GDIWatchTower"
 				SelectPortrait="Portrait_GDIWatchTower"
 				ButtonImage="Portrait_GDIWatchTower"

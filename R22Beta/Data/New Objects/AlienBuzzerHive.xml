@@ -1,36 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AssetDeclaration xmlns="uri:ea.com:eala:asset"
-				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<Tags></Tags>
-	<Includes>
-		<Include type="all"
-				 source="ART:ABBHive.w3x" />
-		<Include type="all"
-				 source="ART:ABBHiveBld.w3x" />
-		<Include type="all"
-				 source="ART:ABBHive_D2SN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHive_D2AN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHive_D3SN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHive_D3AN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHiveDr_SKN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHiveDr_OPN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHiveDr_CLS.w3x" />
-		<Include type="all"
-				 source="ART:NBEmpty_ABLD.w3x" />
-		<Include type="all"
-				 source="ART:ABBHiveBld_SKN.w3x" />
-		<Include type="all"
-				 source="ART:ABBHiveBld_AAN.w3x" />
-		<Include type="all"
-				 source="ART:FXAspotlight.w3x" />
-		<!-- Base Object -->
-	</Includes>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<GameObject id="AlienBuzzerHive"
 				SelectPortrait="Portrait_ALIENBuzzerHive"
 				ButtonImage="Portrait_ALIENBuzzerHive"

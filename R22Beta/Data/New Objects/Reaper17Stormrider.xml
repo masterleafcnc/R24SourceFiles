@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
-    <Tags></Tags>
-    <Includes>
-        <!-- Base Object -->
-        <Include
-            type="instance"
-            source="DATA:Alien/Units/AlienStormrider.xml" />
-    </Includes>
     <GameObject
         id="Reaper17Stormrider"
         Side="Reaper17"
