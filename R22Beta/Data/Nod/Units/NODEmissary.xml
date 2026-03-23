@@ -230,7 +230,7 @@
 			<AIUpdate
 				id="ModuleTag_03"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="EmissaryFunctions_R24"></AIUpdate>
+				AILuaEventsList=""></AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody

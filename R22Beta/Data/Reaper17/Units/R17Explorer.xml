@@ -718,7 +718,7 @@
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
 				FadeOnPortals="False" 
-	AILuaEventsList="Reaper17ExplorerFunctions_R24"/>
+	AILuaEventsList=""/>
 		</AI>
 		<Body>
 			<ActiveBody
@@ -836,5 +836,3 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
-
-

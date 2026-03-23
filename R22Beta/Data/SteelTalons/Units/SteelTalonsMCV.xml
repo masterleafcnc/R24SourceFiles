@@ -311,8 +311,8 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="NO"
-				AILuaEventsList="MCVFunctions_R24"></AIUpdate>
+				AutoAcquireEnemiesWhenIdle="NO">
+			</AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody

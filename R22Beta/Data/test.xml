@@ -127,7 +127,7 @@
 		<Include source="MarkedOfKane/Units/markedofkanemobileartillery.xml" type="all"/>
 		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
 
-		<!-- new objects -->
+		<!-- new objects 
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
@@ -146,7 +146,19 @@
 		<Include source="New Objects\Reaper17Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/>
-		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" />
+		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" /> -->
+
+		<Include type="all" source="Alien\Structures\AlienStasisChamber.xml" />
+		<Include type="all" source="GDI\Structures\GDISpaceCommandUplink.xml" />
+		<Include type="all" source="GDI\Structures\gdiarmory.xml" />
+		<Include type="all" source="GDI\Structures\gdimedicalbay.xml" />
+		<Include type="all" source="Reaper17\Structures\R17StasisChamber.xml" />
+		<Include type="all" source="SteelTalons\Structures\STSpaceCommandUplink.xml" />
+		<Include type="all" source="ZOCOM\Structures\ZOCOMSpaceCommandUplink.xml" />
+		<Include type="all" source="ZOCOM\Structures\zocomarmory.xml" />
+		<Include type="all" source="ZOCOM\Structures\zocommedicalbay.xml" />
+		<Include type="all" source="traveler59\Structures\T59Reactor.xml" />
+
 		
 		<!-- Reverse move speed buff updated units 
 		<Include source="Alien/Units/alienseekertank.xml" type="all"/> 	

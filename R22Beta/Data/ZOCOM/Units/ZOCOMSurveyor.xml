@@ -213,7 +213,7 @@
 			<AIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="NO"
-				AILuaEventsList="SurveyorFunctions_R24"></AIUpdate>
+				AILuaEventsList=""></AIUpdate>
 		</AI>
 		<Body>
 			<ActiveBody

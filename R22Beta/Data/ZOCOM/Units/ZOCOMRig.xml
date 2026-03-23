@@ -1048,7 +1048,7 @@
 				AutoAcquireEnemiesWhenIdle="NO"
 				StopChaseDistance="500"
 				HoldGroundCloseRangeDistance="0"
-				AILuaEventsList="RigFunctions_R24"
+				AILuaEventsList=""
 				MinCowerTime="0s"
 				MaxCowerTime="0s"
 				RampageTime="0s"

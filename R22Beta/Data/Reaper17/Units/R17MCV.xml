@@ -304,8 +304,7 @@
 		</Behaviors>
 		<AI>
 			<AIUpdate
-				id="ModuleTag_AI" 
-	AILuaEventsList="Reaper17MCVFunctions_R24"/>
+				id="ModuleTag_AI" />
 		</AI>
 		<Body>
 			<!-- if this value changes, make sure the health of the AlienMCVUnpacking is updated too... -->
@@ -389,4 +388,3 @@
 			CrushableLevel="3" />
 	</GameObject>
 </AssetDeclaration>
-

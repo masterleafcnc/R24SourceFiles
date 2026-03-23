@@ -1200,8 +1200,7 @@
 				StandGround="False"
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False" 
-	AILuaEventsList="MarkedOfKaneMCVFunctions_R24"/>
+				FadeOnPortals="False" />
 		</AI>
 		<Body>
 			<ActiveBody
@@ -1406,7 +1405,3 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
-
-
-
-
