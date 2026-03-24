@@ -1537,7 +1537,7 @@
 				CanAttackWhileContained="False"
 				RampageRequiresAflame="False"
 				FadeOnPortals="False"
-	AILuaEventsList="Traveler59RazorDroneFunctions_R24">
+				AILuaEventsList="RazorDroneFunctions_R24">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.8s"
 					ReacquireDelay="5s"
@@ -1670,4 +1670,3 @@
 		<DisplayUpgrade>Upgrade_Traveler59AdvancedArticulators</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
-

@@ -1133,7 +1133,6 @@ function getTableSize(t)
 end
 
 function UnitIsMoving(self)
-	if self == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
 	if ObjectTestModelCondition(self, "BACKING_UP") == false then
@@ -1143,7 +1142,6 @@ end
 
 -- checks if most units are moving and if the number returned exceeds the threshold then assign the hasComeToAStop to true
 function UnitNoLongerMoving(self)
-	if self == nil then return end
 	--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
@@ -1459,7 +1457,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 			end
 		end
 
-
 		-- Apply fixes if threshold was met
 		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
 		-- checksDone over the threshold can still fix earlier-detected bugging units
@@ -1522,9 +1519,15 @@ function FixBuggingUnit(self, applySpeedBuff)
 		end
 	else
 		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+		-- there are no units that arent bugging so lets just stop this one and return the function
+		 if unitReversing.unitAnchor == nil then
+			ExecuteAction("NAMED_STOP", self)
+			return 
+		end
 	end
+
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
-	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
+	if not unitReversing.hasBeenFixed then
 		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
 		unitReversing.hasBeenFixed = true
 	end
@@ -1703,22 +1706,20 @@ end
 
 -- Gets a random selected unit of this players selection and assigns it to unitReversing.unitAnchor = unitAnchor
 function AssignRandomAnchor(self)
-    if self ~= nil then
-        local a,unitReversing = GetUnitReversingData(self)
-		if unitReversing == nil or unitReversing.groupId == nil then return end
-		local group = getglobal(unitReversing.groupId)
-		if group == nil or group.units == nil then return end
-		-- list of ids
-        local selectedUnitList = group.units
-		-- Check if we have at least 2 units in the selection (self + at least one other)
-		if next(selectedUnitList) ~= nil and next(selectedUnitList, next(selectedUnitList)) ~= nil then	
-			-- gets a unit that isnt self randomly.
-			local randomUnitId = GetRandomKey(selectedUnitList, a)
-			if randomUnitId ~= nil and unitsReversing[randomUnitId] ~= nil then
-				unitReversing.unitAnchor = unitsReversing[randomUnitId].stringReference
-			end
+	local a,unitReversing = GetUnitReversingData(self)
+	if unitReversing == nil or unitReversing.groupId == nil then return end
+	local group = getglobal(unitReversing.groupId)
+	if group == nil or group.units == nil then return end
+	-- list of ids
+	local selectedUnitList = group.units
+	-- Check if we have at least 2 units in the selection (self + at least one other)
+	if next(selectedUnitList) ~= nil and next(selectedUnitList, next(selectedUnitList)) ~= nil then	
+		-- gets a unit that isnt self randomly.
+		local randomUnitId = GetRandomKey(selectedUnitList, a)
+		if randomUnitId ~= nil and unitsReversing[randomUnitId] ~= nil then
+			unitReversing.unitAnchor = unitsReversing[randomUnitId].stringReference
 		end
-    end
+	end
 end
 
 -- Gets the random key to assign to the unit for anchor purposes.
@@ -1754,14 +1755,12 @@ end
 
 -- Triggered by +SELECTED
 function AddToUnitSelection(self)
-	if self == nil then return end
 	-- initialized here to prevent first instance of BACKING_UP having a cascading effect.
 	local _, unitReversing = GetUnitReversingData(self)
 	-------------------------------------------------------------------------------------
     local playerTeam = tostring(ObjectTeamName(self) .. "table")
     local unitId = getObjectId(self)
     local teamTable = getglobal(playerTeam) or nil
-
 	--if unitReversing.groupId ~= nil then
 	--	ExecuteAction("NAMED_FLASH", self, 2)
 	--end
@@ -1792,7 +1791,7 @@ function AddToUnitSelection(self)
 		if unitBugDataTable[objName] ~= nil then
 			teamTable.reverseUnits[unitId] = unitId
 			teamTable.reverseUnitCount = getTableSize(teamTable.reverseUnits)
-			-- store a table of current selected unit types
+			--store a table of current selected unit types
 			--if teamTable.reverseUnitsByType[objName] == nil then
 			--teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1 
 			if teamTable.reverseUnitsByType[objName] == nil then
@@ -1805,7 +1804,6 @@ function AddToUnitSelection(self)
 end
 -- Triggered by -SELECTED
 function RemoveFromUnitSelection(self)
-	if self == nil then return end
     local playerTeam = tostring(ObjectTeamName(self) .. "table")
     local unitId = getObjectId(self)
 	local teamTable = getglobal(playerTeam) or nil
@@ -1836,34 +1834,40 @@ end
 
 -- Clears the unitsReversing table of this unit. If it belongs in a group, remove it. 
 function GroupUnitOnDeath(self)
-	if self == nil then return end
 	local a,unitReversing = GetUnitReversingData(self)	
+	local groupId = unitReversing and unitReversing.groupId
+	unitsReversing[a] = nil
     RemoveFromUnitSelection(self)
-    if unitsReversing[a] ~= nil then
-		-- remove from the group its part of
-		if unitReversing.groupId ~= nil then
-			local group = getglobal(unitReversing.groupId)
-			-- remove this unit from the group snapshot
-			if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
-				group.units[a] = nil
-				--group.unitCount = (group.unitCount or 1) - 1
-				group.unitCount = getTableSize(group.units)
-				if group.reverseUnits ~= nil and group.reverseUnits[a] ~= nil then
-					group.reverseUnits[a] = nil
-					group.reverseUnitCount = getTableSize(group.reverseUnits)
-					if group.expectedChecks > 0 then
-						group.expectedChecks = group.expectedChecks - 1
-					end
-				end
-				-- check if theres no units left in the group and if so , clear the global.
-				if group.unitCount <= 0 or next(group.units) == nil then
-					setglobal(unitReversing.groupId, nil)
-					--print("clearing global on death")
+	-- remove from the group its part of
+	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
+	if groupId ~= nil then
+		local group = getglobal(groupId)
+		-- remove this unit from the group snapshot
+		if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
+			group.units[a] = nil
+			--group.unitCount = (group.unitCount or 1) - 1
+			group.unitCount = getTableSize(group.units)
+			if group.reverseUnits ~= nil and group.reverseUnits[a] ~= nil then
+				group.reverseUnits[a] = nil
+				group.reverseUnitCount = getTableSize(group.reverseUnits)
+				if group.expectedChecks > 0 then
+					group.expectedChecks = group.expectedChecks - 1
 				end
 			end
+			-- check if theres no units left in the group and if so , clear the global.
+			if group.unitCount <= 0 or next(group.units) == nil then
+				setglobal(groupId, nil)
+				--print("clearing global on death")
+			end
 		end
-        unitsReversing[a] = nil
-    end
+	end
+end
+
+-- for squads 
+function GroupUnitOnDeathSquads(self)
+	--WriteToFile("unitKilled.txt", "a unit has been killed" .. "\n")
+	GroupUnitOnDeath(self)
+	OnSquadDestroyed_103(self)
 end
 
 -- checks if the group still exists if most units are still moving, and if this one has stopped then call FixBuggingUnit to fix it
@@ -1984,7 +1988,7 @@ function BackingUpEnd(self)
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
 			-- if the id is the same as the id in current index clear it
-			if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].groupId == unitReversing.groupId then
+			if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].groupId == groupId then
 				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
 				unitsReversing[unitRef].expectedChecksFlag = false
@@ -2006,7 +2010,6 @@ end
 
 -- USER_72 has ended, remove NO_COLLISIONS and speed buff if this unit has it.
 function BuggedUnitTimeoutEnd(self)
-	if self == nil then return end
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
 	if unitReversing ~= nil then
@@ -2874,7 +2877,6 @@ function OnSquadExitRax1_103(self)
 end
 
 function OnSquadDestroyed_103(self)
-
 	local a = ObjectDescription(self)
 
 	-- To ensure this routine is never re-run (eg when garrisoning)

@@ -814,8 +814,7 @@
 				StandGround="False"
 				CanAttackWhileContained="True"
 				RampageRequiresAflame="False"
-				FadeOnPortals="False"
-	AILuaEventsList="AlienBuzzers_SlavedFunctions_R24">
+				FadeOnPortals="False">
 				<UnitAITargetChooserData
 					IdleScanDelay="0.3s"
 					ReacquireDelay="0.3s"
@@ -975,4 +974,3 @@
 			CrushAllies="False" />
 	</GameObject>
 </AssetDeclaration>
-

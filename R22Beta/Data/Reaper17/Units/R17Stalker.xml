@@ -570,7 +570,7 @@
 			<AIUpdate
 				id="ModuleTag_AI"
 				AutoAcquireEnemiesWhenIdle="YES"
-				AILuaEventsList="AlienStalkerFunctions">
+				AILuaEventsList="AlienStalkerFunctions_R24">
 				<UnitAITargetChooserData
 					SympathyRange="25.0" />
 			</AIUpdate>
