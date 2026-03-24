@@ -65,14 +65,27 @@ function flushPlayerTeams()
 			break
 		end
 	end
+	
+	for k, v in globals() do
+		if strfind(k, "group_%d+") ~= nil then
+			setglobal(k, nil) 
+		end
+	end
 end
 
 function getGlobals()
 	local globalString = ""
+	local hasGroups = false
 	for k, v in globals() do
-		globalString = globalString .. k .. "\n"
+		if strfind(k, "group_%d+") ~= nil then
+			globalString = globalString .. k .. "\n"
+			hasGroups= true
+		end
 	end
-	WriteToFile("globals.txt", globalString .. "------------------------------------")
+	if not hasGroups then 
+		globalString = globalString .. "No groups exist that are reverse moving." .. "\n"
+	end
+	WriteToFile("globals.txt", globalString .. "------------------------------------" .. "\n")
 end
 
 flushPlayerTeams() 
@@ -1749,6 +1762,10 @@ function AddToUnitSelection(self)
     local unitId = getObjectId(self)
     local teamTable = getglobal(playerTeam) or nil
 
+	--if unitReversing.groupId ~= nil then
+	--	ExecuteAction("NAMED_FLASH", self, 2)
+	--end
+
     if teamTable == nil then
         teamTable = {}
 		setglobal(playerTeam, teamTable)
@@ -1951,7 +1968,7 @@ function BackingUpEnd(self)
 	--if checksDone == unitReversing.groupId.selectedCount-1 then
 	local clearList = true
 	for _, unitRef in reverseUnitList do
-		if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].isReverseMoving then
+		if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].isReverseMoving and unitsReversing[unitRef].groupId == unitReversing.groupId then
 			-- if a unit is reverse moving, dont clear the list
 			clearList = false
 			break
@@ -1967,7 +1984,7 @@ function BackingUpEnd(self)
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
 			-- if the id is the same as the id in current index clear it
-			if unitsReversing[unitRef] ~= nil then
+			if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].groupId == unitReversing.groupId then
 				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
 				unitsReversing[unitRef].expectedChecksFlag = false
