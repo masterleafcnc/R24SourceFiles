@@ -65,12 +65,6 @@ function flushPlayerTeams()
 			break
 		end
 	end
-	
-	for k, v in globals() do
-		if strfind(k, "group_%d+") ~= nil then
-			setglobal(k, nil) 
-		end
-	end
 end
 
 function getGlobals()

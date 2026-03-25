@@ -1190,6 +1190,17 @@
 		<EventHandler EventName="OnSelectedEnd" ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
 	</EventList>
 	<!-- infantry -->
+	<EventList Name="BHConfessorSquadFunctions_R24" Inherit="BaseScriptFunctions">
+		<EventHandler EventName="OnCreated"	ScriptFunctionName="OnConfessorSquadCreated_103" DebugSingleStep="false"/>
+	</EventList>  
+
+	<EventList Name="NodImprovedCyborgSquadFunctions_R24" Inherit="BaseScriptFunctions">
+		<EventHandler EventName="OnCreated"	ScriptFunctionName="OnImprovedCyborgSquadCreated_103" DebugSingleStep="false"/>
+	</EventList>     
+
+	<EventList Name="GDISniperSquadFunctions_R24" Inherit="BaseScriptFunctions">
+		<EventHandler EventName="OnCreated"		ScriptFunctionName="OnGDISniperSquadCreated" DebugSingleStep="false"/>
+	</EventList>
 
 	<EventList Name="GenericRagedFunctions_R24" Inherit="GenericRagedFunctions_103">
 	</EventList>
@@ -1598,12 +1609,7 @@
 
 	<EventList Name="GDISniperSquadFunctions" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnCreated"		ScriptFunctionName="OnGDISniperSquadCreated" DebugSingleStep="false"/>
-	</EventList>
-
-	<EventList Name="GDISniperSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
-		<EventHandler EventName="OnCreated"		ScriptFunctionName="OnGDISniperSquadCreated" DebugSingleStep="false"/>
-	</EventList>
-	
+	</EventList>	
 
 	<EventList Name="GDIOrcaFunctions" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnCreated"		ScriptFunctionName="OnGDIOrcaCreated" DebugSingleStep="false"/>
@@ -1862,17 +1868,11 @@
 	    <EventHandler EventName="OnCreated"	ScriptFunctionName="OnImprovedCyborgSquadCreated_103" DebugSingleStep="false"/>
 	</EventList>     
 
-	<EventList Name="NodImprovedCyborgSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
-	    <EventHandler EventName="OnCreated"	ScriptFunctionName="OnImprovedCyborgSquadCreated_103" DebugSingleStep="false"/>
-	</EventList>     
 	
 	<EventList Name="BHConfessorSquadFunctions_103" Inherit="GenericSquadFunctions_103">
 	    <EventHandler EventName="OnCreated"	ScriptFunctionName="OnConfessorSquadCreated_103" DebugSingleStep="false"/>
 	</EventList>  
 
-	<EventList Name="BHConfessorSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
-	    <EventHandler EventName="OnCreated"	ScriptFunctionName="OnConfessorSquadCreated_103" DebugSingleStep="false"/>
-	</EventList>  
 	<!-- ######################################################## -->
    
 	<EventList Name="GDIWolverineFunctions" Inherit="BaseScriptFunctions">
