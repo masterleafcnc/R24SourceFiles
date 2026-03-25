@@ -1533,6 +1533,11 @@ function FixBuggingUnit(self, applySpeedBuff)
 		end
 	else
 		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+		 -- there are no units that arent bugging so lets just stop this one and return the function
+		 if unitReversing.unitAnchor == nil then
+			ExecuteAction("NAMED_STOP", self)
+			return 
+		end
 	end
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
 	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
