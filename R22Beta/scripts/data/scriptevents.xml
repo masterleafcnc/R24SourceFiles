@@ -978,11 +978,14 @@
    	 </EventList>
 
 	 <!-- r24 reverse move units -->
-	<EventList Name="GenericSquadFunctions_R24" Inherit="GenericSquadFunctions_103">
+	<EventList Name="GenericSquadFunctions_R24" Inherit="BaseScriptFunctions">
 		<!-- DOESNT WORK ON SQUADS (games kills them before lua destroyed events can take place
 		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeathSquads" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/> -->
+		<EventHandler EventName="OnLeavingFactory" ScriptFunctionName="OnSquadExitRax_103" DebugSingleStep="false"/>				
+		<EventHandler EventName="OnLeavingFactory1" ScriptFunctionName="OnSquadExitRax1_103" DebugSingleStep="false"/>		
+		<EventHandler EventName="OnDestroyed" ScriptFunctionName="OnSquadDestroyed_103" DebugSingleStep="false"/>	
 	</EventList>
 
 	<EventList Name="NodCyborgSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
