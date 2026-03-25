@@ -1190,11 +1190,11 @@
 		<EventHandler EventName="OnSelectedEnd" ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
 	</EventList>
 	<!-- infantry -->
-	<EventList Name="BHConfessorSquadFunctions_R24" Inherit="BaseScriptFunctions">
+	<EventList Name="BHConfessorSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
 		<EventHandler EventName="OnCreated"	ScriptFunctionName="OnConfessorSquadCreated_103" DebugSingleStep="false"/>
 	</EventList>  
 
-	<EventList Name="NodImprovedCyborgSquadFunctions_R24" Inherit="BaseScriptFunctions">
+	<EventList Name="NodImprovedCyborgSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
 		<EventHandler EventName="OnCreated"	ScriptFunctionName="OnImprovedCyborgSquadCreated_103" DebugSingleStep="false"/>
 	</EventList>     
 
