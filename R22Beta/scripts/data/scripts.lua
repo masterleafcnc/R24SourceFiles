@@ -1366,6 +1366,19 @@ function CheckForObjReverseBugging(self, frameDiff)
 	if not group.fixCancelled then
 		-- WriteToFile("checksDone.txt", "checks done: " .. tostring(group.checksDone) .. " expected checks: " .. tostring(group.expectedChecks) .. "\n")
 		if group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+
+			-- fix units that havent backedUp
+			if group.checksDone == group.expectedChecks-1 then
+				local unitsThatHaventMoved = {}
+				for _,unitRef in selectedUnitList do
+					local selfRef = unitsReversing[unitRef].selfReference
+					if not unitsReversing[unitRef].hasBeenFixed and not (unitsReversing[unitRef].isReverseMoving or unitsReversing[unitRef].hasComeToAStop) then
+						FixBuggingUnit(selfRef, false)
+						--ExecuteAction("NAMED_FLASH_WHITE", selfRef, 2)
+					end
+				end
+			end
+
 			-- if number of units bugging is less than the count * BUG_THRESHOLD_SMALL_GROUP
 			-- if more than LARGE_GROUP_SIZE units are selected, make the detection more forgiving
 
@@ -1457,6 +1470,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 			end
 		end
 
+
 		-- Apply fixes if threshold was met
 		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
 		-- checksDone over the threshold can still fix earlier-detected bugging units
@@ -1519,15 +1533,9 @@ function FixBuggingUnit(self, applySpeedBuff)
 		end
 	else
 		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
-		-- there are no units that arent bugging so lets just stop this one and return the function
-		 if unitReversing.unitAnchor == nil then
-			ExecuteAction("NAMED_STOP", self)
-			return 
-		end
 	end
-
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
-	if not unitReversing.hasBeenFixed then
+	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
 		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
 		unitReversing.hasBeenFixed = true
 	end
@@ -1796,7 +1804,7 @@ function AddToUnitSelection(self)
 			--teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1 
 			if teamTable.reverseUnitsByType[objName] == nil then
 				teamTable.reverseUnitsByType[objName] = {}
-				--getGlobals()
+				-- getGlobals()
 			end
 			teamTable.reverseUnitsByType[objName][unitId] = unitId
 		end
@@ -1984,17 +1992,18 @@ function BackingUpEnd(self)
 	SuddenStopCheck(self)
 	
 	if clearList and group ~= nil then
-		--print("clearing group")
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
+			-- WriteToFile("groupUnitList.txt", tostring(unitRef) .. "\n")
 			-- if the id is the same as the id in current index clear it
-			if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].groupId == groupId then
+			if unitsReversing[unitRef] ~= nil and (unitsReversing[unitRef].groupId == groupId or unitsReversing[unitRef].groupId == nil) then
 				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
 				unitsReversing[unitRef].expectedChecksFlag = false
 				unitsReversing[unitRef].hasBeenCounted = false
 				-- clear USER_72 and speed bonuses if this entire group no longer is no reverse moving 
 				if ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") then
+					--ExecuteAction("NAMED_FLASH", unitsReversing[unitRef].selfReference, 2)
 					BuggedUnitTimeoutEnd(unitsReversing[unitRef].selfReference)
 				end
 			end
@@ -2037,6 +2046,7 @@ end
 
 -- EMP EXPLOIT FIX --
 
+
 function OnUnpackingDisableCommands(self)
 	ObjectForbidPlayerCommands( self, true )
 end
@@ -2044,6 +2054,14 @@ end
 function OnUnpackingDisableCommandsEnd(self)
 	ObjectForbidPlayerCommands( self, false )
 end
+
+-- FREE INF FIX R24 --
+
+function CancelProduction(self)
+	print("destroyed structure")
+	ObjectCreateAndFireTempWeapon(self, "KillUnitsComingOut")
+end
+
 
 
 function OnGDIWatchTowerCreated(self)
