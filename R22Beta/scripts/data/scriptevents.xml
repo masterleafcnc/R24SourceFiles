@@ -1009,6 +1009,7 @@
 		<EventHandler EventName="OnBackingUpLeftEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="OnLeavingFactory"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser72End"	ScriptFunctionName="BuggedUnitTimeoutEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnMoving"	ScriptFunctionName="UnitIsMoving" DebugSingleStep="false"/>
