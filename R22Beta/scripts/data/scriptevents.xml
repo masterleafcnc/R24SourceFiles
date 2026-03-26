@@ -210,7 +210,7 @@
 			<Conditions>-UNSELECTABLE</Conditions>
 		</ObjectStatusEvent>	
 		
-			<ObjectStatusEvent Name="OnEnclosed">
+		<ObjectStatusEvent Name="OnEnclosed">
 			<Conditions>+ENCLOSED</Conditions>
 		</ObjectStatusEvent>		
 
@@ -983,9 +983,9 @@
 		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeathSquads" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/> -->
-		<EventHandler EventName="OnLeavingFactory" ScriptFunctionName="OnSquadExitRax_103" DebugSingleStep="false"/>				
-		<EventHandler EventName="OnLeavingFactory1" ScriptFunctionName="OnSquadExitRax1_103" DebugSingleStep="false"/>		
-		<EventHandler EventName="OnDestroyed" ScriptFunctionName="OnSquadDestroyed_103" DebugSingleStep="false"/>	
+		<EventHandler EventName="OnLeavingFactory" ScriptFunctionName="OnSquadExitRax_R24" DebugSingleStep="false"/>				
+		<EventHandler EventName="OnLeavingFactory1" ScriptFunctionName="OnSquadExitRax1_R24" DebugSingleStep="false"/>		
+		<EventHandler EventName="OnDestroyed" ScriptFunctionName="OnSquadDestroyed_R24" DebugSingleStep="false"/>	
 	</EventList>
 
 	<EventList Name="NodCyborgSquadFunctions_R24" Inherit="GenericSquadFunctions_R24">
@@ -1009,6 +1009,7 @@
 		<EventHandler EventName="OnBackingUpLeftEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnDestroyed"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="OnLeavingFactory"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnUser72End"	ScriptFunctionName="BuggedUnitTimeoutEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnMoving"	ScriptFunctionName="UnitIsMoving" DebugSingleStep="false"/>
