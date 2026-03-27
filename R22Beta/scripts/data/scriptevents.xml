@@ -1209,6 +1209,7 @@
 	</EventList>
 	
 	<EventList Name="AlienMastermindFunctions_R24" Inherit="SelectionGroupFunctions_R24">
+		<EventHandler EventName="OnSlaughtered"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="BlackHandConfessorFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1220,12 +1221,12 @@
 	<EventList Name="BlackHandMilitantRocketFunctions_R24" Inherit="BaseScriptFunctions">
 	</EventList>
 
-	<EventList Name="CombatEngineerFunctions_R24" Inherit="SelectionGroupFunctions_R24">
+	<EventList Name="CombatEngineerFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnSlaughtered"	ScriptFunctionName="OnHuskCapture" DebugSingleStep="false"/>
 		<EventHandler EventName="OnCreated" ScriptFunctionName="OnCombatEngineerCreatedR23" DebugSingleStep="false"/>
 	</EventList>
 
-	<EventList Name="EngineerFunctions_R24" Inherit="SelectionGroupFunctions_R24">
+	<EventList Name="EngineerFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnSlaughtered" ScriptFunctionName="OnHuskCapture" DebugSingleStep="false"/>
 		<EventHandler EventName="OnCreated" ScriptFunctionName="OnEngineerCreatedR23" DebugSingleStep="false"/>
 	</EventList>
@@ -1299,6 +1300,7 @@
 	</EventList>
 
 	<EventList Name="Traveler59BlinkMastermindFunctions_R24" Inherit="SelectionGroupFunctions_R24">
+		<EventHandler EventName="OnSlaughtered"	ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="Traveler59CultistFunctions_R24" Inherit="BaseScriptFunctions">
