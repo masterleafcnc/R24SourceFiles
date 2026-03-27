@@ -1151,7 +1151,7 @@ function UnitNoLongerMoving(self)
 			for _, unitRef in group.reverseUnits do
 				if unitsReversing[unitRef] ~= nil then
 					if numberOfUnitsMoving <= floor(group.reverseUnitCount * UNITS_STILL_MOVING_THRESHOLD)
-					and ((group.unitsNotMovingBeforeBackingUp or 0) >= ceil(group.reverseUnitCount * 0.35)) and unitsReversing[unitRef].wasAttackingBeforeReverse then
+					and ((group.unitsNotMovingBeforeBackingUp or 0) >= floor(group.reverseUnitCount * 0.35)) and unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].hasComeToAStop = false
 					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].hasComeToAStop = true
