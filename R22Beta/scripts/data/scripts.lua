@@ -1872,6 +1872,7 @@ function GroupUnitOnDeath(self)
 	local a,unitReversing = GetUnitReversingData(self)	
 	local groupId = unitReversing and unitReversing.groupId
 	unitsReversing[a] = nil
+
     RemoveFromUnitSelection(self)
 	-- remove from the group its part of
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
@@ -1899,6 +1900,21 @@ function GroupUnitOnDeath(self)
 				--print("clearing global on death")
 			end
 		end
+	end
+
+	if next(unitsReversing) == nil then
+		local unitGroups = {}
+		for k, _ in globals() do
+			if strfind(k, "group_%d+") ~= nil then
+				tinsert(unitGroups, k)
+			end
+		end
+
+		for i=1, getn(unitGroups) do
+			setglobal(unitGroups[i], nil)
+		end
+		flushPlayerTeams() 
+		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
 	end
 end
 
