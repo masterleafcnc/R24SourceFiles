@@ -1367,13 +1367,12 @@ function CheckForObjReverseBugging(self, frameDiff)
 
 			-- fix units that havent backedUp
 			if group.checksDone == group.expectedChecks-1 then
-				for _,unitRef in selectedUnitList do
-					local selfRef = unitsReversing[unitRef].selfReference
-					if not unitsReversing[unitRef].hasBeenFixed and not (unitsReversing[unitRef].isReverseMoving or unitsReversing[unitRef].hasComeToAStop) then
-						FixBuggingUnit(selfRef, false)
-						--ExecuteAction("NAMED_FLASH_WHITE", selfRef, 2)
-					end
-				end
+				for _, unitRef in selectedUnitList do
+       				local unit = unitsReversing[unitRef]
+        			if unit ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and not unit.hasBeenFixed and not (unit.isReverseMoving or unit.hasComeToAStop) then
+                		FixBuggingUnit(unit.selfReference, false)
+        			end
+ 				 end
 			end
 
 			-- if number of units bugging is less than the count * BUG_THRESHOLD_SMALL_GROUP
@@ -1720,8 +1719,9 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 				end
 			end
 		end
+		local assignedGroup = nil
 		if groupId ~= nil then
-			local assignedGroup = getglobal(groupId)
+			assignedGroup = getglobal(groupId)
 		end
 		--local assignedGroup = unitGroups[groupId]
 		if assignedGroup ~= nil then
