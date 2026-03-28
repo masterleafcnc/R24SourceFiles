@@ -1155,7 +1155,7 @@ function UnitNoLongerMoving(self)
 						unitsReversing[unitRef].hasComeToAStop = false
 					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						unitsReversing[unitRef].hasComeToAStop = true
-						ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
+						--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
 					end					
 				end
 			end
@@ -1173,7 +1173,7 @@ function UnitNoLongerMoving(self)
 					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].wasAttackingBeforeReverse then
 						--unitsReversing[unitRef].lastMoveWasReverse = false
 						unitsReversing[unitRef].hasComeToAStop = true
-						ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
+						--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
 					end
 				end
 			end
@@ -1181,7 +1181,7 @@ function UnitNoLongerMoving(self)
 			-- team table is empty (player has deselected it), so clear flags for this unit directly
 			if not unitReversing.wasAttackingBeforeReverse then
 				unitReversing.hasComeToAStop = true
-				ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+				--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 			end
 		end
 	end
