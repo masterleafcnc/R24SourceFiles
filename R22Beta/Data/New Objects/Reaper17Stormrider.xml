@@ -62,7 +62,7 @@
                 </ModelConditionState>
                 <ModelConditionState
                     ParseCondStateType="PARSE_NORMAL"
-                    ConditionsYes="DAMAGED USER_5 USER_6">
+                    ConditionsYes="USER_5 DAMAGED USER_6">
                     <Model
                         Name="W3DContainer:AUSRIDERION" />
                     <Texture
@@ -75,7 +75,7 @@
                 </ModelConditionState>
                 <ModelConditionState
                     ParseCondStateType="PARSE_NORMAL"
-                    ConditionsYes="REALLYDAMAGED USER_5 USER_6">
+                    ConditionsYes="USER_5 REALLYDAMAGED USER_6">
                     <Model
                         Name="W3DContainer:AUSRIDERION" />
                     <Texture
@@ -96,7 +96,7 @@
                 </ModelConditionState>
                 <ModelConditionState
                     ParseCondStateType="PARSE_NORMAL"
-                    ConditionsYes="DAMAGED USER_5">
+                    ConditionsYes="USER_5 DAMAGED">
                     <Model
                         Name="W3DContainer:AUSRIDERION" />
                     <ParticleSysBone
@@ -106,7 +106,7 @@
                 </ModelConditionState>
                 <ModelConditionState
                     ParseCondStateType="PARSE_NORMAL"
-                    ConditionsYes="REALLYDAMAGED USER_5">
+                    ConditionsYes="USER_5 REALLYDAMAGED">
                     <Model
                         Name="W3DContainer:AUSRIDERION" />
                     <Texture
