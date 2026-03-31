@@ -398,58 +398,7 @@
             </TracerModelDraw>
         </Draws>
         <Behaviors>
-            <WeaponSetUpdate
-                id="ModuleTag_WeaponSetUpdate">
-                <WeaponSlotHardpoint
-                    ID="1">
-                    <Weapon
-                        Ordering="PRIMARY_WEAPON"
-                        Template="AlienStormRiderPlasmaAutocannon" />
-                </WeaponSlotHardpoint>
-            </WeaponSetUpdate>
-            <Physics
-                id="ModuleTag_Physics" />
-            <ProductionUpdate
-                id="ModuleTag_PU"
-                MaxQueueEntries="1" />
-            <ReturnToProducerSpecialPower
-                id="ModuleTag_ReturnToProducerSpecialPower"
-                SpecialPowerTemplate="SpecialPowerReturnToProducer" />
-            <SlowDeath
-                id="ModuleTag_Death"
-                SinkDelay="0s"
-                SinkRate="0.5"
-                DestructionDelay="0s">
-                <OCL
-                    Type="INITIAL">
-                    <OCL>OCL_ALIENStormRiderDebris</OCL>
-                </OCL>
-                <DieMuxData
-                    DeathTypes="ALL"
-                    DeathTypesForbidden="TOPPLED" />
-                <Sound
-                    Type="INITIAL"
-                    List="AudioEvent:ALI_StormRider_SoundDie" />
-            </SlowDeath>
-            <FXListBehavior
-                id="ModuleTag_FXList">
-                <DieMuxData
-                    DeathTypes="ALL" />
-                <Event
-                    Index="onDeath"
-                    FX="FX_ALIENVehicleExplode" />
-            </FXListBehavior>
-            <StatusBitsUpgrade
-                id="ModuleTag_VeterancyUpgrade"
-                StatusToSet="WEAPON_UPGRADED_03">
-                <TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
-            </StatusBitsUpgrade>
-            <ModelConditionUpgrade
-                id="ModuleTag_AllFactionUpgrade"
-                AddConditionFlags="USER_6">
-                <TriggeredBy>Upgrade_AllFactionUpgrade</TriggeredBy>
-            </ModelConditionUpgrade>
-            <AttributeModifierPoolUpdate
+              <AttributeModifierPoolUpdate
                 id="DefaultAttributeModifierPoolUpdate" />
             <SquishCollide
                 id="DefaultSquishCollide" />
@@ -520,6 +469,57 @@
             <TemporarilyDefectUpdate
                 id="ModuleTag_TemporarilyDefect"
                 DefectionFrameCount="300" />
+            <WeaponSetUpdate
+                id="ModuleTag_WeaponSetUpdate">
+                <WeaponSlotHardpoint
+                    ID="1">
+                    <Weapon
+                        Ordering="PRIMARY_WEAPON"
+                        Template="AlienStormRiderPlasmaAutocannon" />
+                </WeaponSlotHardpoint>
+            </WeaponSetUpdate>
+            <Physics
+                id="ModuleTag_Physics" />
+            <ProductionUpdate
+                id="ModuleTag_PU"
+                MaxQueueEntries="1" />
+            <ReturnToProducerSpecialPower
+                id="ModuleTag_ReturnToProducerSpecialPower"
+                SpecialPowerTemplate="SpecialPowerReturnToProducer" />
+            <SlowDeath
+                id="ModuleTag_Death"
+                SinkDelay="0s"
+                SinkRate="0.5"
+                DestructionDelay="0s">
+                <OCL
+                    Type="INITIAL">
+                    <OCL>OCL_ALIENStormRiderDebris</OCL>
+                </OCL>
+                <DieMuxData
+                    DeathTypes="ALL"
+                    DeathTypesForbidden="TOPPLED" />
+                <Sound
+                    Type="INITIAL"
+                    List="AudioEvent:ALI_StormRider_SoundDie" />
+            </SlowDeath>
+            <FXListBehavior
+                id="ModuleTag_FXList">
+                <DieMuxData
+                    DeathTypes="ALL" />
+                <Event
+                    Index="onDeath"
+                    FX="FX_ALIENVehicleExplode" />
+            </FXListBehavior>
+            <StatusBitsUpgrade
+                id="ModuleTag_VeterancyUpgrade"
+                StatusToSet="WEAPON_UPGRADED_03">
+                <TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
+            </StatusBitsUpgrade>
+            <ModelConditionUpgrade
+                id="ModuleTag_AllFactionUpgrade"
+                AddConditionFlags="USER_6">
+                <TriggeredBy>Upgrade_AllFactionUpgrade</TriggeredBy>
+            </ModelConditionUpgrade>
         </Behaviors>
         <AI>
             <JetAIUpdate

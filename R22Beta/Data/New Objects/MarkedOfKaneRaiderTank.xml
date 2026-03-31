@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
-    <Tags></Tags>
-    <Includes>
-        <!-- Base Object -->
-        <Include
-            type="instance"
-            source="DATA:NOD/Units/NODRaiderTank.xml" />
-    </Includes>
     <GameObject
         id="MarkedOfKaneRaiderTank"
         Side="MarkedOfKane"
@@ -34,6 +27,10 @@
         <ArmorSet
             Armor="NODRaiderTankArmor"
             DamageFX="VehicleDamageFX" />
+        <ArmorSet
+			Armor="NODRaiderTankArmorDozerBlades"
+			DamageFX="VehicleDamageFX"
+			Conditions="PLAYER_UPGRADE" />
         <LocomotorSet
             Locomotor="NODRaiderTankLocomotor"
             Condition="NORMAL"
@@ -428,6 +425,82 @@
             </LaserDraw>
         </Draws>
         <Behaviors>
+            <AttributeModifierPoolUpdate
+                id="DefaultAttributeModifierPoolUpdate" />
+            <SquishCollide
+                id="DefaultSquishCollide" />
+            <FireWeaponWhenDead
+                id="ModuleTag_CatalystDeathWeapon"
+                InitiallyActive="true"
+                DeathWeapon="CatalystInfantryDeathWeapon"
+                ContinueToBezierDestination="false">
+                <DieMuxData
+                    DeathTypes="CATALYST" />
+            </FireWeaponWhenDead>
+            <AutoHealBehavior
+                id="Upgrade_HeroicHeal"
+                InitiallyActive="false"
+                HealOnlyIfNotInCombat="false"
+                HealOnlyIfNotUnderAttack="false"
+                StartHealingDelay="1s"
+                HealingAmount="100"
+                HealingDelay=".5s">
+                <TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
+            </AutoHealBehavior>
+            <AttributeModifierUpgrade
+                id="ModuleTag_AttributeModifierUpgradeMUCSpeed"
+                AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">
+                <TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>
+            </AttributeModifierUpgrade>
+            <AttributeModifierUpgrade
+                id="ModuleTag_AttributeModifierUpgradeMUCDamage"
+                AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">
+                <TriggeredBy>Upgrade_MultifunctionUpgradeCenterDamage</TriggeredBy>
+            </AttributeModifierUpgrade>
+            <AttributeModifierUpgrade
+                id="ModuleTag_AttributeModifierUpgradeMUCArmor"
+                AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
+                <TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
+            </AttributeModifierUpgrade>
+            <StancesBehavior
+                id="ModuleTag_Stance"
+                StanceTemplate="Generic" />
+            <LevelUpUpgrade
+                id="ModuleTag_LevelUpUpgrade_Veteran"
+                LevelCap="4"
+                LevelsToGain="1">
+                <TriggeredBy>Upgrade_ProductionVeterancy_VETERAN</TriggeredBy>
+            </LevelUpUpgrade>
+            <LevelUpUpgrade
+                id="ModuleTag_LevelUpUpgrade_Elite"
+                LevelCap="4"
+                LevelsToGain="2">
+                <TriggeredBy>Upgrade_ProductionVeterancy_ELITE</TriggeredBy>
+            </LevelUpUpgrade>
+            <LevelUpUpgrade
+                id="ModuleTag_LevelUpUpgrade_Heroic"
+                LevelCap="4"
+                LevelsToGain="3">
+                <TriggeredBy>Upgrade_ProductionVeterancy_HEROIC</TriggeredBy>
+            </LevelUpUpgrade>
+            <InvisibilityUpdate
+                id="ModuleTag_Invisibility"
+                UpdatePeriod="0.5s">
+                <InvisibilityNugget />
+                <RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>
+            </InvisibilityUpdate>
+            <StealthUpgrade
+                id="ModuleTag_InvisibilityTrigger">
+                <TriggeredBy>Upgrade_CloakingFieldInvisibility</TriggeredBy>
+            </StealthUpgrade>
+            <TemporarilyDefectUpdate
+                id="ModuleTag_TemporarilyDefect"
+                DefectionFrameCount="300" />
+            <AttributeModifierUpgrade
+                id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
+                AttributeModifier="Modifier_ReverseMoveSpeedBuffScorp">
+                <TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
+            </AttributeModifierUpgrade>
             <WeaponSetUpdate
                 id="ModuleTag_WeaponSetUpdate">
                 <WeaponSlotTurret
@@ -552,82 +625,6 @@
                 SoundToPlay="AudioEvent:NOD_ScorpionTank_DozerBladeAvailable">
                 <TriggeredBy>Upgrade_NODDozerBlades</TriggeredBy>
             </AudioLoopUpgrade>
-            <AttributeModifierPoolUpdate
-                id="DefaultAttributeModifierPoolUpdate" />
-            <SquishCollide
-                id="DefaultSquishCollide" />
-            <FireWeaponWhenDead
-                id="ModuleTag_CatalystDeathWeapon"
-                InitiallyActive="true"
-                DeathWeapon="CatalystInfantryDeathWeapon"
-                ContinueToBezierDestination="false">
-                <DieMuxData
-                    DeathTypes="CATALYST" />
-            </FireWeaponWhenDead>
-            <AutoHealBehavior
-                id="Upgrade_HeroicHeal"
-                InitiallyActive="false"
-                HealOnlyIfNotInCombat="false"
-                HealOnlyIfNotUnderAttack="false"
-                StartHealingDelay="1s"
-                HealingAmount="100"
-                HealingDelay=".5s">
-                <TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
-            </AutoHealBehavior>
-            <AttributeModifierUpgrade
-                id="ModuleTag_AttributeModifierUpgradeMUCSpeed"
-                AttributeModifier="Modifier_MultifunctionUpgradeCenterSpeed">
-                <TriggeredBy>Upgrade_MultifunctionUpgradeCenterSpeed</TriggeredBy>
-            </AttributeModifierUpgrade>
-            <AttributeModifierUpgrade
-                id="ModuleTag_AttributeModifierUpgradeMUCDamage"
-                AttributeModifier="Modifier_MultifunctionUpgradeCenterDamage">
-                <TriggeredBy>Upgrade_MultifunctionUpgradeCenterDamage</TriggeredBy>
-            </AttributeModifierUpgrade>
-            <AttributeModifierUpgrade
-                id="ModuleTag_AttributeModifierUpgradeMUCArmor"
-                AttributeModifier="Modifier_MultifunctionUpgradeCenterArmor">
-                <TriggeredBy>Upgrade_MultifunctionUpgradeCenterArmor</TriggeredBy>
-            </AttributeModifierUpgrade>
-            <StancesBehavior
-                id="ModuleTag_Stance"
-                StanceTemplate="Generic" />
-            <LevelUpUpgrade
-                id="ModuleTag_LevelUpUpgrade_Veteran"
-                LevelCap="4"
-                LevelsToGain="1">
-                <TriggeredBy>Upgrade_ProductionVeterancy_VETERAN</TriggeredBy>
-            </LevelUpUpgrade>
-            <LevelUpUpgrade
-                id="ModuleTag_LevelUpUpgrade_Elite"
-                LevelCap="4"
-                LevelsToGain="2">
-                <TriggeredBy>Upgrade_ProductionVeterancy_ELITE</TriggeredBy>
-            </LevelUpUpgrade>
-            <LevelUpUpgrade
-                id="ModuleTag_LevelUpUpgrade_Heroic"
-                LevelCap="4"
-                LevelsToGain="3">
-                <TriggeredBy>Upgrade_ProductionVeterancy_HEROIC</TriggeredBy>
-            </LevelUpUpgrade>
-            <InvisibilityUpdate
-                id="ModuleTag_Invisibility"
-                UpdatePeriod="0.5s">
-                <InvisibilityNugget />
-                <RequiresUpgrade>Upgrade_CloakingFieldInvisibility</RequiresUpgrade>
-            </InvisibilityUpdate>
-            <StealthUpgrade
-                id="ModuleTag_InvisibilityTrigger">
-                <TriggeredBy>Upgrade_CloakingFieldInvisibility</TriggeredBy>
-            </StealthUpgrade>
-            <TemporarilyDefectUpdate
-                id="ModuleTag_TemporarilyDefect"
-                DefectionFrameCount="300" />
-            <AttributeModifierUpgrade
-                id="ModuleTag_AttributeModifierUpgradeReverseMoveSpeedBuff"
-                AttributeModifier="Modifier_ReverseMoveSpeedBuffScorp">
-                <TriggeredBy>Upgrade_ReverseMoveSpeedBuff</TriggeredBy>
-            </AttributeModifierUpgrade>
         </Behaviors>
         <AI>
             <AIUpdate

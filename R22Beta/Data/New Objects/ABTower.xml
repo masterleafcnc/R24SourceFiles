@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
-    <Tags></Tags>
-    <Includes>
-        <Include
-            type="all"
-            source="ART:ABTower.W3X" />
-        <Include
-            type="all"
-            source="ART:ABTower_D2.W3X" />
-        <Include
-            type="all"
-            source="ART:ABTower_D3.W3X" />
-        <Include
-            type="all"
-            source="ART:ABTower_D4.W3X" />
-        <Include
-            type="all"
-            source="ART:ABTowerR.W3X" />
-        <Include
-            type="all"
-            source="ART:HC_ABTower_Build.XML" />
-    </Includes>
     <GameObject
         id="ABTower"
         SelectPortrait="Portrait_AlienTower"

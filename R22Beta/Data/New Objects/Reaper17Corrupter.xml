@@ -390,40 +390,7 @@
             </StreamDraw>
         </Draws>
         <Behaviors>
-            <WeaponSetUpdate
-                id="ModuleTag_WeaponSetUpdate">
-                <WeaponSlotHardpoint
-                    ID="1">
-                    <Weapon
-                        Ordering="PRIMARY_WEAPON"
-                        Template="AlienCorrupterTioxinBlastCannon" />
-                </WeaponSlotHardpoint>
-            </WeaponSetUpdate>
-            <StreamState
-                id="ModuleTag_StreamState"
-                StreamId="0" />
-            <Physics
-                id="ModuleTag_Physics" />
-            <SlowDeath
-                id="ModuleTag_Death"
-                SinkDelay="4s"
-                SinkRate="2.4"
-                DestructionDelay="7s">
-                <DieMuxData
-                    DeathTypes="ALL" />
-                <Sound
-                    Type="INITIAL"
-                    List="AudioEvent:ALI_Corrupter_SoundDie" />
-            </SlowDeath>
-            <UncombineSpecialPower
-                id="ModuleTag_SpecialPowerUncombine"
-                SpecialPowerTemplate="SpecialPowerUncombineWithUnit" />
-            <StatusBitsUpgrade
-                id="ModuleTag_ObjectStatusForTibAgitation"
-                StatusToSet="DOES_CONTAIN_TIBERIUM">
-                <TriggeredBy>Upgrade_AlienFaction</TriggeredBy>
-            </StatusBitsUpgrade>
-            <AttributeModifierPoolUpdate
+             <AttributeModifierPoolUpdate
                 id="DefaultAttributeModifierPoolUpdate" />
             <SquishCollide
                 id="DefaultSquishCollide" />
@@ -499,6 +466,39 @@
             <TemporarilyDefectUpdate
                 id="ModuleTag_TemporarilyDefect"
                 DefectionFrameCount="300" />
+            <WeaponSetUpdate
+                id="ModuleTag_WeaponSetUpdate">
+                <WeaponSlotHardpoint
+                    ID="1">
+                    <Weapon
+                        Ordering="PRIMARY_WEAPON"
+                        Template="AlienCorrupterTioxinBlastCannon" />
+                </WeaponSlotHardpoint>
+            </WeaponSetUpdate>
+            <StreamState
+                id="ModuleTag_StreamState"
+                StreamId="0" />
+            <Physics
+                id="ModuleTag_Physics" />
+            <SlowDeath
+                id="ModuleTag_Death"
+                SinkDelay="4s"
+                SinkRate="2.4"
+                DestructionDelay="7s">
+                <DieMuxData
+                    DeathTypes="ALL" />
+                <Sound
+                    Type="INITIAL"
+                    List="AudioEvent:ALI_Corrupter_SoundDie" />
+            </SlowDeath>
+            <UncombineSpecialPower
+                id="ModuleTag_SpecialPowerUncombine"
+                SpecialPowerTemplate="SpecialPowerUncombineWithUnit" />
+            <StatusBitsUpgrade
+                id="ModuleTag_ObjectStatusForTibAgitation"
+                StatusToSet="DOES_CONTAIN_TIBERIUM">
+                <TriggeredBy>Upgrade_AlienFaction</TriggeredBy>
+            </StatusBitsUpgrade>
         </Behaviors>
         <AI>
             <AIUpdate
