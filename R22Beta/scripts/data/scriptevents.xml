@@ -1397,7 +1397,7 @@
 		<EventHandler EventName="OnClipFull" ScriptFunctionName="OnGDIOrcaClipFull" DebugSingleStep="false"/>
 	</EventList>
 
-	<EventList Name="GDIV35Ox_SummonedFunctions_R24" Inherit="SelectionGroupFunctions_R24">
+	<EventList Name="GDIV35Ox_SummonedFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnCreated" ScriptFunctionName="OnGDIV35Ox_Created_103" DebugSingleStep="false"/>
 		<EventHandler EventName="OnCarrying" ScriptFunctionName="OnGDIV35Ox_Carrying_103" DebugSingleStep="false"/>
 	</EventList>
