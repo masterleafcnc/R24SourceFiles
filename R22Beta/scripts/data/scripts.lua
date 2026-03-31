@@ -56,34 +56,6 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 "SkirmishBlackHand", "SkirmishCivilian", "SkirmishCommentator", "SkirmishGDI", "SkirmishMarkedOfKane",
 "SkirmishNeutral", "SkirmishNod", "SkirmishNull", "SkirmishObserver", "SkirmishReaper17","SkirmishSteelTalons", "SkirmishTraveler59", "SkirmishZOCOM", "PlyrCreeps", "PlyrCivilian"}
 
-function flushPlayerTeams() 
-	for i = 1, getn(playerTable), 1 do
-		if i <= 8 then
-			local player = tostring("team" .. playerTable[i] .. "table")
-			setglobal(player, nil)
-		else
-			break
-		end
-	end
-end
-
-function getGlobals()
-	local globalString = ""
-	local hasGroups = false
-	for k, v in globals() do
-		if strfind(k, "group_%d+") ~= nil then
-			globalString = globalString .. k .. "\n"
-			hasGroups= true
-		end
-	end
-	if not hasGroups then 
-		globalString = globalString .. "No groups exist that are reverse moving." .. "\n"
-	end
-	WriteToFile("globals.txt", globalString .. "------------------------------------" .. "\n")
-end
-
---flushPlayerTeams() 
-
 harvesterData = {}
 crystalData = {}
 unitsReversing = {}
@@ -2088,6 +2060,18 @@ function WriteToFile(file, content)
 		closefile(file)
 	end
 end
+
+function flushPlayerTeams() 
+	for i = 1, getn(playerTable), 1 do
+		if i <= 8 then
+			local player = tostring("team" .. playerTable[i] .. "table")
+			setglobal(player, nil)
+		else
+			break
+		end
+	end
+end
+
 
 -- ###################################################################
 
