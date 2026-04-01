@@ -56,6 +56,15 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 "SkirmishBlackHand", "SkirmishCivilian", "SkirmishCommentator", "SkirmishGDI", "SkirmishMarkedOfKane",
 "SkirmishNeutral", "SkirmishNod", "SkirmishNull", "SkirmishObserver", "SkirmishReaper17","SkirmishSteelTalons", "SkirmishTraveler59", "SkirmishZOCOM", "PlyrCreeps", "PlyrCivilian"}
 
+teamPlayer_1 = {}
+teamPlayer_2 = {}
+teamPlayer_3 = {}
+teamPlayer_4 = {}
+teamPlayer_5 = {}
+teamPlayer_6 = {}
+teamPlayer_7 = {}
+teamPlayer_8 = {}
+
 harvesterData = {}
 crystalData = {}
 unitsReversing = {}
@@ -1089,8 +1098,8 @@ end
 function flushPlayerTeams() 
 	for i = 1, getn(playerTable), 1 do
 		if i <= 8 then
-			local player = tostring("team" .. playerTable[i] .. "table")
-			setglobal(player, nil)
+			local player = tostring("team" .. playerTable[i])
+			setglobal(player, {})
 		else
 			break
 		end
@@ -1178,7 +1187,7 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 	local groupId = unitReversing.groupId
 	-- unit was already tagged in the else block for loop.
 	if not unitReversing.groupIdAssigned then
-		local playerTeam = tostring(ObjectTeamName(self) .. "table")
+		local playerTeam = tostring(ObjectTeamName(self))
 		local teamTable = getglobal(playerTeam)
 		if teamTable == nil or teamTable.units == nil then return end
 		-- first unit in the group, create snapshot and tag all units currently selected, this will also copy the unitsCount over to teamSnapshot.
@@ -1254,7 +1263,7 @@ function UnitNoLongerMoving(self)
 		end
 	-- The player issued a stop (group no longer exists) --
 	elseif not unitReversing.hasBeenFixed and not unitReversing.groupIdAssigned then
-		local playerTeam = tostring(ObjectTeamName(self) .. "table")
+		local playerTeam = tostring(ObjectTeamName(self))
 		local teamTable = getglobal(playerTeam)
 		if teamTable ~= nil and teamTable.reverseUnits ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 then
 			local numberOfUnitsMoving = GetNumberOfUnitsMoving(teamTable.reverseUnits)
@@ -1787,7 +1796,7 @@ function AddToUnitSelection(self)
 	local _, unitReversing = GetUnitReversingData(self)
 	unitReversing.hasBeenSelected = true
 	-------------------------------------------------------------------------------------
-    local playerTeam = tostring(ObjectTeamName(self) .. "table")
+    local playerTeam = tostring(ObjectTeamName(self))
     local unitId = getObjectId(self)
     local teamTable = getglobal(playerTeam)
 	--if unitReversing.groupId ~= nil then
@@ -1797,7 +1806,6 @@ function AddToUnitSelection(self)
 
     if teamTable == nil then
         teamTable = {}
-		setglobal(playerTeam, teamTable)
     end
 
     if teamTable.units == nil then
@@ -1834,7 +1842,7 @@ function AddToUnitSelection(self)
 end
 -- Triggered by -SELECTED
 function RemoveFromUnitSelection(self)
-    local playerTeam = tostring(ObjectTeamName(self) .. "table") 
+    local playerTeam = tostring(ObjectTeamName(self)) 
     local unitId = getObjectId(self)
 	local teamTable = getglobal(playerTeam) 
     
@@ -1859,7 +1867,7 @@ function RemoveFromUnitSelection(self)
 			end
 
 			if teamTable.unitCount <= 0 or next(teamTable.units) == nil then
-				setglobal(playerTeam, nil)
+				setglobal(playerTeam, {})
 				--print("clearing global, units deselected")
 			end
 			--print("unit deselected")
@@ -1921,8 +1929,6 @@ function GroupUnitOnDeath(self)
 	local groupId = unitReversing and unitReversing.groupId
 	unitsReversing[a] = nil
 
-    RemoveFromUnitSelection(self)
-
 	if next(unitsReversing) == nil then
 		local unitGroups = {}
 		for k, _ in globals() do
@@ -1965,6 +1971,7 @@ function GroupUnitOnDeath(self)
 			end
 		end
 	end
+	RemoveFromUnitSelection(self)
 end
 
 -- gets the current selection count of units that are within a group of units
@@ -2019,7 +2026,7 @@ function SuddenStopCheck(self)
 
 	if GetNumberOfUnitsMoving(group.reverseUnits) >= floor(group.reverseUnitCount * 0.80) and frameDiff <= maxFrameDiff then
 		local fixUnit = true
-		local playerTeam = tostring(ObjectTeamName(self) .. "table")
+		local playerTeam = tostring(ObjectTeamName(self))
 		local teamTable = getglobal(playerTeam)
 		if teamTable ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 and teamTable.reverseUnits ~= nil then
 			-- only fix the unit if the current selection is the same as the snapshot selection count. Also when teamTable.unitCount is 0 it means there are no units selected.
