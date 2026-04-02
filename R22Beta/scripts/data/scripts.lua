@@ -1622,15 +1622,16 @@ function GetANonBuggingUnit(selectedUnitsOfPlayer, unit)
 	local candidates = {}
 	local isHarv = unitReversing.isReverseMoveHarvester 
 	for _, unitRef in selectedUnitsOfPlayer do
-		if unitsReversing[unitRef] ~= nil then
-			if unitsReversing[unitRef].selfReference ~= unit and not unitsReversing[unitRef].hasBeenFixed then
+		local cachedUnit = unitsReversing[unitRef]
+		if cachedUnit ~= nil then
+			if cachedUnit.selfReference ~= unit and not cachedUnit.hasBeenFixed then
 				-- check to see if unit is bugging and isnt destroyed
-				if EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitRef].stringReference) and not EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") == false then
+				if EvaluateCondition("NAMED_NOT_DESTROYED",cachedUnit.stringReference) and not EvaluateCondition("UNIT_HAS_UPGRADE",cachedUnit.stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(cachedUnit.selfReference, "USER_72") == false then
 					if not isHarv then
-						tinsert(candidates, unitsReversing[unitRef].stringReference)
+						tinsert(candidates, cachedUnit.stringReference)
 					else
-						if strfind(getObjectName(unit), getObjectName(unitsReversing[unitRef].selfReference)) ~= nil then
-							tinsert(candidates, unitsReversing[unitRef].stringReference)
+						if cachedUnit.isReverseMoveHarvester then
+							tinsert(candidates, cachedUnit.stringReference)
 						end
 					end
 				end
@@ -1723,7 +1724,14 @@ function AssignRandomAnchor(self)
 	local selectedUnitList = group.units
 	-- Online interface lag sometimes assigns harvesters to a unit group, only use harvesters of this type as a candidate for anchor.
 	if unitReversing.isReverseMoveHarvester then 
-		selectedUnitList = group.reverseUnitsByType[getObjectName(self)]
+		--selectedUnitList = group.reverseUnitsByType[getObjectName(self)]
+		local reverseHarvesters = {}
+		for _,unitRef in group.reverseUnits do
+			if unitsReversing[unitRef].isReverseMoveHarvester then
+				reverseHarvesters[unitRef] = unitRef
+			end
+		end
+		selectedUnitList = reverseHarvesters
 	end
 	-- Check if we have at least 2 units in the selection (self + at least one other)
 	if next(selectedUnitList) ~= nil and next(selectedUnitList, next(selectedUnitList)) ~= nil then	
