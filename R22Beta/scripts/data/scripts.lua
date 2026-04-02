@@ -1187,11 +1187,19 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 	local groupId = unitReversing.groupId
 	-- unit was already tagged in the else block for loop.
 	if not unitReversing.groupIdAssigned then
-		local playerTeam = tostring(ObjectTeamName(self))
-		local teamTable = getglobal(playerTeam)
+		local teamTable = getglobal(tostring(ObjectTeamName(self)))
 		if teamTable == nil or teamTable.units == nil then return end
 		-- first unit in the group, create snapshot and tag all units currently selected, this will also copy the unitsCount over to teamSnapshot.
-		local teamSnapshot = DeepCopyTable(teamTable)
+		-- local teamSnapshot = DeepCopyTable(teamTable)
+
+		local teamSnapshot = {
+			units = DeepCopyTable(teamTable.units or {}),
+			unitCount = teamTable.unitCount or 0,
+			reverseUnits = DeepCopyTable(teamTable.reverseUnits or {}),
+			reverseUnitCount = teamTable.reverseUnitCount or 0,
+			reverseUnitsByType = DeepCopyTable(teamTable.reverseUnitsByType or {})
+		}
+
 		-- the table contains a unique id that all units share when selected during this reverse move
 		groupId = "group_" .. tostring(curFrame) .. "_" .. tostring(a) .. tostring(floor(GetRandomNumber()*99999999))
 		-- store a global variable with the id generated for this group containing all selected units (obtained by DeepCopyTable)
@@ -1206,7 +1214,8 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 		teamSnapshot.firstTurnUnitCountByType = {}
 		teamSnapshot.expectedChecks = 0
 		teamSnapshot.unitsNotMovingBeforeBackingUp = 0
-		setglobal(groupId, teamSnapshot)
+		--setglobal(groupId, teamSnapshot)
+		teamTable[groupId] = teamSnapshot
 		--groupIds[groupId] = groupId
 		--unitGroups[groupId] = teamSnapshot
 		-- assign every unit the same groupId
@@ -1224,7 +1233,7 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 		end
 		local assignedGroup = nil
 		if groupId ~= nil then
-			assignedGroup = getglobal(groupId)
+			assignedGroup = teamTable[groupId]
 		end
 		--local assignedGroup = unitGroups[groupId]
 		if assignedGroup ~= nil then
@@ -1241,10 +1250,12 @@ function UnitNoLongerMoving(self)
 	--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
+	local playerTeam = tostring(ObjectTeamName(self))
 	--if unitReversing.hasComeToAStop then return end
 	-- check if most units selected are not moving
 	if not unitReversing.hasBeenFixed and unitReversing.groupIdAssigned and unitReversing.groupId ~= nil then
-		local group = getglobal(unitReversing.groupId)
+		local group = getglobal(playerTeam)[unitReversing.groupId]
+		
 		--local group = unitGroups[unitReversing.groupId]
 		if group ~= nil and group.reverseUnits ~= nil and group.reverseUnitCount ~= nil then
 			-- if a few units are moving now but originally before backing up most units were not moving then set moving flag to true
@@ -1263,7 +1274,6 @@ function UnitNoLongerMoving(self)
 		end
 	-- The player issued a stop (group no longer exists) --
 	elseif not unitReversing.hasBeenFixed and not unitReversing.groupIdAssigned then
-		local playerTeam = tostring(ObjectTeamName(self))
 		local teamTable = getglobal(playerTeam)
 		if teamTable ~= nil and teamTable.reverseUnits ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 then
 			local numberOfUnitsMoving = GetNumberOfUnitsMoving(teamTable.reverseUnits)
@@ -1296,7 +1306,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	local bugDuration = unitBugData.frameCount
 	-- check if unit is really damaged
 	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and bugDuration*unitBugData.reallyDamagedDurationMult or bugDuration
-	local group = getglobal(unitReversing.groupId) 
+	local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 	--local group = unitGroups[unitReversing.groupId]
 	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return end
 	group.checksDone = group.checksDone or 0
@@ -1544,7 +1554,7 @@ function BackingUpFastTurnEnd(self)
 	end
 	local curFrame = GetFrame()
 	local frameDiff = curFrame - unitReversing.firstFrame
-	local group = getglobal(unitReversing.groupId)
+	local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 	--local group = unitGroups[unitReversing.groupId]
 
 	-- track units that have backedup after receiving a groupId
@@ -1627,7 +1637,7 @@ end
 function FixBuggingUnit(self, applySpeedBuff)
 	local a,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil or not unitReversing.groupIdAssigned or unitReversing.groupId == nil then return end
-	local group = getglobal(unitReversing.groupId)
+	local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 	--local group = unitGroups[unitReversing.groupId]
 	if group == nil or group.units == nil then return end
 	local selectedUnitList = group.units
@@ -1697,7 +1707,7 @@ end
 function AssignRandomAnchor(self)
 	local a,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil or unitReversing.groupId == nil then return end
-	local group = getglobal(unitReversing.groupId)
+	local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 	--local group = unitGroups[unitReversing.groupId]
 	if group == nil or group.units == nil then return end
 	-- list of ids
@@ -1760,10 +1770,10 @@ function BackingUp(self)
 
 	local groupId = unitReversing.groupId 
 	if groupId ~= nil then
-		local group = getglobal(groupId)
+		local group = getglobal(tostring(ObjectTeamName(self)))[groupId]
 		if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 			--unitGroups[groupId] = nil
-			setglobal(groupId, nil)
+			getglobal(tostring(ObjectTeamName(self)))[groupId] = nil
 			--CheckExistingGroups(self)
 			--print("clearing global")
 		end
@@ -1796,9 +1806,8 @@ function AddToUnitSelection(self)
 	local _, unitReversing = GetUnitReversingData(self)
 	unitReversing.hasBeenSelected = true
 	-------------------------------------------------------------------------------------
-    local playerTeam = tostring(ObjectTeamName(self))
     local unitId = getObjectId(self)
-    local teamTable = getglobal(playerTeam)
+    local teamTable = getglobal(tostring(ObjectTeamName(self)))
 	--if unitReversing.groupId ~= nil then
 	--	ExecuteAction("NAMED_FLASH", self, 2)
 	--end
@@ -1866,10 +1875,10 @@ function RemoveFromUnitSelection(self)
 				end
 			end
 
-			if teamTable.unitCount <= 0 or next(teamTable.units) == nil then
-				setglobal(playerTeam, {})
-				--print("clearing global, units deselected")
-			end
+			--if teamTable.unitCount <= 0 or next(teamTable.units) == nil then
+				-- setglobal(playerTeam, {})
+				-- print("clearing global, units deselected")
+			--end
 			--print("unit deselected")
         end
     end
@@ -1917,7 +1926,7 @@ function CheckExistingGroups(unitReversing, group)
 		--WriteToFile("cleared list.txt", tostring(unitReversing.groupId) .. " " ..  tostring(unitReversing.groupIdAssigned) .. "\n")
 		--free the global snapshot since all units have been cleared
 		--unitGroups[groupId] = nil
-		setglobal(groupId, nil)
+		getglobal(tostring(ObjectTeamName(unitReversing.selfReference)))[unitReversing.groupId] = nil
 		--CheckExistingGroups(self)
 		--print("clearing global")
 	end
@@ -1930,16 +1939,16 @@ function GroupUnitOnDeath(self)
 	unitsReversing[a] = nil
 
 	if next(unitsReversing) == nil then
-		local unitGroups = {}
-		for k, _ in globals() do
-			if strfind(k, "group_%d+") ~= nil then
-				tinsert(unitGroups, k)
-			end
-		end
+		--local unitGroups = {}
+		--for k, _ in globals() do
+		--	if strfind(k, "group_%d+") ~= nil then
+		--		tinsert(unitGroups, k)
+		--	end
+		--end
 
-		for i=1, getn(unitGroups) do
-			setglobal(unitGroups[i], nil)
-		end
+		--for i=1, getn(unitGroups) do
+		--	setglobal(unitGroups[i], nil)
+		--end
 		flushPlayerTeams() 
 		return
 		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
@@ -1947,7 +1956,7 @@ function GroupUnitOnDeath(self)
 	-- remove from the group its part of
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
 	if groupId ~= nil then
-		local group = getglobal(groupId) 
+		local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 		--local group = unitGroups[groupId] 
 		-- remove this unit from the group snapshot
 		if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
@@ -1963,9 +1972,9 @@ function GroupUnitOnDeath(self)
 			end
 			-- check if theres no units left in the group and if so , clear the global.
 			CheckExistingGroups(unitReversing, group)
-			if group ~= nil and group.unitCount <= 0 or next(group.units) == nil then
+			if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 				--unitGroups[groupId] = nil
-				setglobal(groupId, nil)
+				getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId] = nil
 				--CheckExistingGroups(self)
 				--print("clearing global on death")
 			end
@@ -2005,7 +2014,8 @@ function SuddenStopCheck(self)
 	end
 	unitReversing.lastMoveWasReverse = false
 	--unitReversing.isReverseMoving = false
-	local group = getglobal(unitReversing.groupId) 
+	local playerTeam = tostring(ObjectTeamName(self))
+	local group = getglobal(playerTeam)[unitReversing.groupId]
 	--local group = unitGroups[unitReversing.groupId]
 	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return resetGroupId() end
 	local curFrame = GetFrame()
@@ -2026,7 +2036,6 @@ function SuddenStopCheck(self)
 
 	if GetNumberOfUnitsMoving(group.reverseUnits) >= floor(group.reverseUnitCount * 0.80) and frameDiff <= maxFrameDiff then
 		local fixUnit = true
-		local playerTeam = tostring(ObjectTeamName(self))
 		local teamTable = getglobal(playerTeam)
 		if teamTable ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 and teamTable.reverseUnits ~= nil then
 			-- only fix the unit if the current selection is the same as the snapshot selection count. Also when teamTable.unitCount is 0 it means there are no units selected.
@@ -2065,8 +2074,7 @@ function BackingUpEnd(self)
 
 	-- necessary if units stop 
 	SuddenStopCheck(self)
-
-	local group = unitReversing.groupId ~= nil and getglobal(unitReversing.groupId)
+	local group = unitReversing.groupId ~= nil and getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 	CheckExistingGroups(unitReversing, group)
 end
 
