@@ -153,9 +153,9 @@ unitBugDataTable = {
 	["7A639A9A"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Specter
 
 	-- SCRIN UNITS --
-	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Seeker
-	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Seeker
-	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Traveler-59 Seeker
+	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Scrin Seeker
+	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Reaper-17 Seeker
+	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Traveler-59 Seeker
 
 	["AF991372"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Devourer Tank
 	["416EFDFF"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Devourer Tank
@@ -331,6 +331,13 @@ function OnSteelTalonsMammothCreated(self)
 	ObjectHideSubObjectPermanently( self, "UGRAILACCELERATOR_02", true )
 	ObjectHideSubObjectPermanently( self, "MuzzleFlash_01", true )
 	ObjectHideSubObjectPermanently( self, "MuzzleFlash_02", true )
+end
+
+-- Set the reference of an object in order to assign object status successfully.
+function SetObjectReference(self)
+	local ObjectStringRef = "object_" .. getObjectId(self) .. tostring(GetFrame()) .. tostring(floor(GetRandomNumber()*99999999))
+	ExecuteAction("SET_UNIT_REFERENCE", ObjectStringRef, self)
+	return ObjectStringRef
 end
 
 function GetHarvesterData(self)
@@ -1106,13 +1113,6 @@ function flushPlayerTeams()
 	end
 end
 
--- Set the reference of an object in order to assign object status successfully.
-function SetObjectReference(self)
-	local ObjectStringRef = "object_" .. getObjectId(self) .. tostring(GetFrame()) .. tostring(floor(GetRandomNumber()*99999999))
-	ExecuteAction("SET_UNIT_REFERENCE", ObjectStringRef, self)
-	return ObjectStringRef
-end
-
 -- Sets the initial frame when a unit fast turns while backing up, triggered by +BACKING_UP +TURN_LEFT_HIGH_SPEED
 function BackingUpFast(self)
 	local _,unitReversing = GetUnitReversingData(self)
@@ -1305,7 +1305,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	if unitBugData == nil then return end
 	local bugDuration = unitBugData.frameCount
 	-- check if unit is really damaged
-	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and bugDuration*unitBugData.reallyDamagedDurationMult or bugDuration
+	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and floor(bugDuration*unitBugData.reallyDamagedDurationMult+0.5) or bugDuration
 	local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
 	--local group = unitGroups[unitReversing.groupId]
 	if group == nil or group.reverseUnits == nil or group.reverseUnitCount == nil then return end
@@ -1339,7 +1339,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- if the average first turn frameDiff for this unit type equals bugDuration, override inBugRange
 	local selfObjName = getObjectName(self)
 	group.unitsToFixByType[selfObjName] = group.unitsToFixByType[selfObjName] or {}
-	local unitsToFixForType = group.unitsToFixByType[selfObjName]
+	local unitsToFixForType = group.unitsToFixByType
 	local isBugging = false
 	if unitReversing.fastTurnWas0Frames then
 		-- if two fast turns yields framediff of 0, it can be assumed the number of frames in -TURN_LEFT or -TURN_RIGHT is 7 (for buggies)
@@ -1367,14 +1367,14 @@ function CheckForObjReverseBugging(self, frameDiff)
 		--ExecuteAction("NAMED_FLASH", self, 2)
 		-- verify the unit doesnt already exist in the table to prevent duplicate entries
 		local alreadyExists = false
-		for _, v in unitsToFixForType do
+		for _, v in unitsToFixForType[selfObjName] do
 			if v == a then
 				alreadyExists = true
 				break
 			end
 		end
 		if not alreadyExists then
-			tinsert(unitsToFixForType, a)
+			tinsert(unitsToFixForType[selfObjName], a)
 			--ExecuteAction("NAMED_FLASH", self, 2)
 		end
 	end
@@ -1452,10 +1452,11 @@ function CheckForObjReverseBugging(self, frameDiff)
 					--local avgFirstTurnCount = ceil(firstTurnFrameCountForType / firstTurnUnitCountForType)
 					local avgFirstTurnCount = floor((firstTurnFrameCountForType + firstTurnUnitCountForType - 1) / firstTurnUnitCountForType) 
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
-					if avgFirstTurnCount >= bugDuration*unitBugDataType.avgFirstTurnRatio then
+					if avgFirstTurnCount >= floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5) then
 						 --print("2nd false positive filter")
-						for i = getn(unitsToFixForType), 1, -1 do
-							local unit = unitsReversing[unitsToFixForType[i]]
+						local unitsForObj = unitsToFixForType[objName] or {}
+						for i = getn(unitsForObj), 1, -1 do
+							local unit = unitsReversing[unitsForObj[i]]
 							if unit == nil or unit.bugFrameDiff ~= bugDuration and not unit.wasAttackingBeforeReverse and getObjectName(unit.selfReference) == tostring(objName) then
 								--print("removing")
 								--tremove(unitsToFixForType, i)
@@ -2031,7 +2032,7 @@ function SuddenStopCheck(self)
 	local unitBugData = unitBugDataTable[getObjectName(self)]
 	if unitBugData == nil then return resetGroupId() end
 	local bugDuration = unitBugData.frameCount
-	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and bugDuration * unitBugData.reallyDamagedDurationMult or bugDuration
+	bugDuration = ObjectTestModelCondition(self, "REALLYDAMAGED") and floor(bugDuration*unitBugData.reallyDamagedDurationMult+0.5) or bugDuration
 	local maxFrameDiff = floor(bugDuration * 1.25)
 
 	if GetNumberOfUnitsMoving(group.reverseUnits) >= floor(group.reverseUnitCount * 0.80) and frameDiff <= maxFrameDiff then
