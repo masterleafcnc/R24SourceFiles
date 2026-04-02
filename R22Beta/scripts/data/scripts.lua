@@ -56,14 +56,25 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 "SkirmishBlackHand", "SkirmishCivilian", "SkirmishCommentator", "SkirmishGDI", "SkirmishMarkedOfKane",
 "SkirmishNeutral", "SkirmishNod", "SkirmishNull", "SkirmishObserver", "SkirmishReaper17","SkirmishSteelTalons", "SkirmishTraveler59", "SkirmishZOCOM", "PlyrCreeps", "PlyrCivilian"}
 
-teamPlayer_1 = {}
-teamPlayer_2 = {}
-teamPlayer_3 = {}
-teamPlayer_4 = {}
-teamPlayer_5 = {}
-teamPlayer_6 = {}
-teamPlayer_7 = {}
-teamPlayer_8 = {}
+-- Ensure every player starts with the exact same variables
+function CreateBaseTeamTable()
+    return {
+        units = {},
+        reverseUnits = {},
+        reverseUnitsByType = {},
+        unitCount = 0,
+        reverseUnitCount = 0
+    }
+end
+
+teamPlayer_1 = CreateBaseTeamTable()
+teamPlayer_2 = CreateBaseTeamTable()
+teamPlayer_3 = CreateBaseTeamTable()
+teamPlayer_4 = CreateBaseTeamTable()
+teamPlayer_5 = CreateBaseTeamTable()
+teamPlayer_6 = CreateBaseTeamTable()
+teamPlayer_7 = CreateBaseTeamTable()
+teamPlayer_8 = CreateBaseTeamTable()
 
 harvesterData = {}
 crystalData = {}
@@ -1103,14 +1114,14 @@ function WriteToFile(file, content)
 end
 
 function flushPlayerTeams() 
-	for i = 1, getn(playerTable), 1 do
-		if i <= 8 then
-			local player = tostring("team" .. playerTable[i])
-			setglobal(player, {})
-		else
-			break
-		end
-	end
+	teamPlayer_1 = CreateBaseTeamTable()
+	teamPlayer_2 = CreateBaseTeamTable()
+	teamPlayer_3 = CreateBaseTeamTable()
+	teamPlayer_4 = CreateBaseTeamTable()
+	teamPlayer_5 = CreateBaseTeamTable()
+	teamPlayer_6 = CreateBaseTeamTable()
+	teamPlayer_7 = CreateBaseTeamTable()
+	teamPlayer_8 = CreateBaseTeamTable()
 end
 
 -- Sets the initial frame when a unit fast turns while backing up, triggered by +BACKING_UP +TURN_LEFT_HIGH_SPEED
@@ -1829,26 +1840,6 @@ function AddToUnitSelection(self)
 	-------------------------------------------------------------------------------------
     local unitId = getObjectId(self)
     local teamTable = getglobal(tostring(ObjectTeamName(self)))
-	--if unitReversing.groupId ~= nil then
-	--	ExecuteAction("NAMED_FLASH", self, 2)
-	--end
-	--ExecuteAction("NAMED_FLASH", self, 2)
-
-    if teamTable == nil then
-        teamTable = {}
-    end
-
-    if teamTable.units == nil then
-        teamTable.units = {}
-    end
-
-    if teamTable.reverseUnits == nil then
-        teamTable.reverseUnits = {}
-    end
-
-	if teamTable.reverseUnitsByType == nil then
-        teamTable.reverseUnitsByType = {}
-    end
 
     if teamTable.units[unitId] == nil then
         teamTable.units[unitId] = unitId
@@ -1895,10 +1886,10 @@ function RemoveFromUnitSelection(self)
 					end
 				end
 			end
-
+			--WriteToFile("teamTable.txt", "teamTable unitCount: " .. tostring(teamTable.unitCount) .. "\n")
 			--if teamTable.unitCount <= 0 or next(teamTable.units) == nil then
-				-- setglobal(playerTeam, {})
-				-- print("clearing global, units deselected")
+			--	setglobal(playerTeam, CreateBaseTeamTable())		
+				--print("clearing global, units deselected")
 			--end
 			--print("unit deselected")
         end
@@ -1958,22 +1949,6 @@ function GroupUnitOnDeath(self)
 	local a,unitReversing = GetUnitReversingData(self)	
 	local groupId = unitReversing and unitReversing.groupId
 	unitsReversing[a] = nil
-
-	if next(unitsReversing) == nil then
-		--local unitGroups = {}
-		--for k, _ in globals() do
-		--	if strfind(k, "group_%d+") ~= nil then
-		--		tinsert(unitGroups, k)
-		--	end
-		--end
-
-		--for i=1, getn(unitGroups) do
-		--	setglobal(unitGroups[i], nil)
-		--end
-		flushPlayerTeams() 
-		return
-		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
-	end
 	-- remove from the group its part of
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
 	if groupId ~= nil then
@@ -2002,6 +1977,11 @@ function GroupUnitOnDeath(self)
 		end
 	end
 	RemoveFromUnitSelection(self)
+
+	if next(unitsReversing) == nil then
+		flushPlayerTeams() 
+		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
+	end
 end
 
 -- gets the current selection count of units that are within a group of units
