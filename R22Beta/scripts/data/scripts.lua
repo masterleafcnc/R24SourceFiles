@@ -153,9 +153,9 @@ unitBugDataTable = {
 	["7A639A9A"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 3, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Specter
 
 	-- SCRIN UNITS --
-	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Scrin Seeker
-	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Reaper-17 Seeker
-	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Traveler-59 Seeker
+	["B8802763"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Scrin Seeker
+	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Reaper-17 Seeker
+	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Traveler-59 Seeker
 
 	["AF991372"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Devourer Tank
 	["416EFDFF"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Devourer Tank
@@ -169,11 +169,11 @@ unitBugDataTable = {
 	["51430053"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -6, bugCheckLowerLimit = 3, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.05, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.60 }, -- Traveler-59 Gunwalker
 
 	-- GDI UNITS --
-	["D01CFD88"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI APC
-	["7CC56843"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Steel Talons APC
-	["64BCB106"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM APC
-	["AF462A8F"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI Veteran APC
-	["BD7701CB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM Veteran APC
+	["D01CFD88"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI APC
+	["7CC56843"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Steel Talons APC
+	["64BCB106"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM APC
+	["AF462A8F"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI Veteran APC
+	["BD7701CB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM Veteran APC
 
 	["F714BBD3"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Predator Tank
 	["E6EAD02C"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Predator Tank
@@ -201,12 +201,12 @@ unitBugDataTable = {
 	["921C06CC"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Surveyor
 	["F3F183DD"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Surveyor
 
-	["AD5F0217"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- ZOCOM Pitbull
-	["6FF52808"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- GDI Pitbull
-	["C6387E0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Steel Talons Pitbull
-	["AABD1C1F"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- ZOCOM Veteran Pitbull
-	["D9E0C318"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- GDI Veteran Pitbull
-	["90BA3D4D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Steel Talons Veteran Pitbull
+	["AD5F0217"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- ZOCOM Pitbull
+	["6FF52808"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- GDI Pitbull
+	["C6387E0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Steel Talons Pitbull
+	["AABD1C1F"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- ZOCOM Veteran Pitbull
+	["D9E0C318"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- GDI Veteran Pitbull
+	["90BA3D4D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Steel Talons Veteran Pitbull
 
 	["6FCB2318"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Rig
 	["B48BEDD2"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Rig
@@ -1453,7 +1453,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = floor((firstTurnFrameCountForType + firstTurnUnitCountForType - 1) / firstTurnUnitCountForType) 
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5) then
-						-- print("2nd false positive filter")
+						--print("2nd false positive filter")
 						local unitsForObj = unitsToFixForType[objName] or {}
 						for i = getn(unitsForObj), 1, -1 do
 							local unit = unitsReversing[unitsForObj[i]]
@@ -1618,13 +1618,21 @@ end
 -- unit is the string reference of the unit that called this function
 function GetANonBuggingUnit(selectedUnitsOfPlayer, unit)
 	if selectedUnitsOfPlayer == nil then return nil end
+	local _,unitReversing = GetUnitReversingData(unit)
 	local candidates = {}
+	local isHarv = unitReversing.isReverseMoveHarvester 
 	for _, unitRef in selectedUnitsOfPlayer do
 		if unitsReversing[unitRef] ~= nil then
-			if unitsReversing[unitRef].selfReference ~= unit then
+			if unitsReversing[unitRef].selfReference ~= unit and not unitsReversing[unitRef].hasBeenFixed then
 				-- check to see if unit is bugging and isnt destroyed
-				if EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitRef].stringReference) and not unitsReversing[unitRef].hasBeenFixed and not EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") == false then
-					tinsert(candidates, unitsReversing[unitRef].stringReference)
+				if EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitRef].stringReference) and not EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") == false then
+					if not isHarv then
+						tinsert(candidates, unitsReversing[unitRef].stringReference)
+					else
+						if strfind(getObjectName(unit), getObjectName(unitsReversing[unitRef].selfReference)) ~= nil then
+							tinsert(candidates, unitsReversing[unitRef].stringReference)
+						end
+					end
 				end
 			end
 		end
@@ -1713,6 +1721,10 @@ function AssignRandomAnchor(self)
 	if group == nil or group.units == nil then return end
 	-- list of ids
 	local selectedUnitList = group.units
+	-- Online interface lag sometimes assigns harvesters to a unit group, only use harvesters of this type as a candidate for anchor.
+	if unitReversing.isReverseMoveHarvester then 
+		selectedUnitList = group.reverseUnitsByType[getObjectName(self)]
+	end
 	-- Check if we have at least 2 units in the selection (self + at least one other)
 	if next(selectedUnitList) ~= nil and next(selectedUnitList, next(selectedUnitList)) ~= nil then	
 		-- gets a unit that isnt self randomly.
