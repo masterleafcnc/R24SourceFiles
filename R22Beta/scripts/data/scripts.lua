@@ -1841,25 +1841,29 @@ function AddToUnitSelection(self)
     local unitId = getObjectId(self)
     local teamTable = getglobal(tostring(ObjectTeamName(self)))
 
-    if teamTable.units[unitId] == nil then
-        teamTable.units[unitId] = unitId
-        --teamTable.unitCount = (teamTable.unitCount or 0) + 1
-		teamTable.unitCount = getTableSize(teamTable.units)
-		-- if this units hash exists in the unitBugDataTable, it can reverse move therefore we count it
-		local objName = getObjectName(self)
-		if unitBugDataTable[objName] ~= nil then
-			teamTable.reverseUnits[unitId] = unitId
-			teamTable.reverseUnitCount = getTableSize(teamTable.reverseUnits)
-			--store a table of current selected unit types
-			--if teamTable.reverseUnitsByType[objName] == nil then
-			--teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1 
-			if teamTable.reverseUnitsByType[objName] == nil then
-				teamTable.reverseUnitsByType[objName] = {}
-				--getGlobals()
+	if unitId ~= nil and teamTable ~= nil and teamTable.units ~= nil then
+		if teamTable.units[unitId] == nil then
+			teamTable.units[unitId] = unitId
+			--teamTable.unitCount = (teamTable.unitCount or 0) + 1
+			teamTable.unitCount = getTableSize(teamTable.units)
+			-- if this units hash exists in the unitBugDataTable, it can reverse move therefore we count it
+			local objName = getObjectName(self)
+			if unitBugDataTable[objName] ~= nil then
+				if teamTable.reverseUnits ~= nil and teamTable.reverseUnits[unitId] == nil then
+					teamTable.reverseUnits[unitId] = unitId
+					teamTable.reverseUnitCount = getTableSize(teamTable.reverseUnits)
+					--store a table of current selected unit types
+					--if teamTable.reverseUnitsByType[objName] == nil then
+					--teamTable.reverseUnitsByType[objName] = (teamTable.reverseUnitsByType[objName] or 0) + 1 
+					if teamTable.reverseUnitsByType[objName] == nil then
+						teamTable.reverseUnitsByType[objName] = {}
+						--getGlobals()
+					end
+					teamTable.reverseUnitsByType[objName][unitId] = unitId
+				end
 			end
-			teamTable.reverseUnitsByType[objName][unitId] = unitId
 		end
-    end
+	end
 end
 -- Triggered by -SELECTED
 function RemoveFromUnitSelection(self)
