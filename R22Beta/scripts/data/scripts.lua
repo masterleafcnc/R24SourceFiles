@@ -1956,7 +1956,8 @@ function GroupUnitOnDeath(self)
 	-- remove from the group its part of
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
 	if groupId ~= nil then
-		local group = getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId]
+		local playerTeam = tostring(ObjectTeamName(self))
+		local group = getglobal(playerTeam)[unitReversing.groupId]
 		--local group = unitGroups[groupId] 
 		-- remove this unit from the group snapshot
 		if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
@@ -1974,7 +1975,7 @@ function GroupUnitOnDeath(self)
 			CheckExistingGroups(unitReversing, group)
 			if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 				--unitGroups[groupId] = nil
-				getglobal(tostring(ObjectTeamName(self)))[unitReversing.groupId] = nil
+				getglobal(playerTeam)[unitReversing.groupId] = nil
 				--CheckExistingGroups(self)
 				--print("clearing global on death")
 			end
@@ -2087,12 +2088,10 @@ end
 function BuggedUnitTimeoutEnd(self)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	if unitReversing ~= nil then
-		unitReversing.hasBeenFixed = false
-		--unitReversing.unitAnchor = nil
-		if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
-			ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)	
-		end
+	unitReversing.hasBeenFixed = false
+	--unitReversing.unitAnchor = nil
+	if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
+		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)	
 	end
 
 	if EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") then
