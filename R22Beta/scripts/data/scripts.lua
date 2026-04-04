@@ -76,6 +76,60 @@ teamPlayer_6 = CreateBaseTeamTable()
 teamPlayer_7 = CreateBaseTeamTable()
 teamPlayer_8 = CreateBaseTeamTable()
 
+function WriteToFile(file, content) 
+	local file = openfile("C:\\Users\\Public\\Documents\\" .. file, "a")
+	if file then
+		write(file, content)
+		closefile(file)
+	end
+end
+
+function flushPlayerTeams()
+	for i = 1, 8 do
+		local player = "teamPlayer_" .. i
+		local teamTable = getglobal(player)
+
+		if teamTable ~= nil then
+			for k, v in teamTable do
+				if type(k) == "string" and strfind(k, "^group_") ~= nil and type(v) == "table" then
+					for subKey, _ in v do
+						v[subKey] = nil
+					end
+					teamTable[k] = nil
+				end
+			end
+
+			if teamTable.units ~= nil then
+				for k, _ in teamTable.units do
+					teamTable.units[k] = nil
+				end
+			end
+
+			if teamTable.reverseUnits ~= nil then
+				for k, _ in teamTable.reverseUnits do
+					teamTable.reverseUnits[k] = nil
+				end
+			end
+
+			if teamTable.reverseUnitsByType ~= nil then
+				for k, _ in teamTable.reverseUnitsByType do
+					for unitId,_ in teamTable.reverseUnitsByType[k] do
+						teamTable.reverseUnitsByType[k][unitId] = nil
+					end
+					teamTable.reverseUnitsByType[k] = nil
+				end
+			end
+
+			teamTable.unitCount = 0
+			teamTable.reverseUnitCount = 0
+		end
+	end	
+
+	collectgarbage()
+end
+
+flushPlayerTeams()
+
 harvesterData = {}
 crystalData = {}
 unitsReversing = {}
@@ -128,7 +182,6 @@ unitBugDataTable = {
 	-- NOD UNITS --
 	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Mok Raider Buggy
 	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Black Hand Raider Buggy
-	["NODScorpionBuggy"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Nod Raider Buggy
 	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Nod Raider Buggy
 
 	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
@@ -238,13 +291,7 @@ function getObjectId(x)
 end
 
 function getObjectName(x)
-	-- Object name
-	-- print(tostring(ObjectDescription(x)))
-	if strfind(ObjectDescription(x),"%[%{%d+,%d+") ~= nil then
-		return strsub(ObjectDescription(x),strfind(ObjectDescription(x),'%[')+6,strfind(ObjectDescription(x),', ')-1)
-	else 
-		return strsub(ObjectDescription(x),strfind(ObjectDescription(x),'%[')+1,strfind(ObjectDescription(x),', ')-1)
-	end
+	return strsub(ObjectTemplateName(x),strfind(ObjectTemplateName(x),'%}')+1)
 end
 
 function NoOp(self, source)
@@ -1105,25 +1152,6 @@ function GetUnitReversingData(self)
 	return nil, nil
 end
 
-function WriteToFile(file, content) 
-	local file = openfile("C:\\Users\\Public\\Documents\\" .. file, "a")
-	if file then
-		write(file, content)
-		closefile(file)
-	end
-end
-
-function flushPlayerTeams() 
-	teamPlayer_1 = CreateBaseTeamTable()
-	teamPlayer_2 = CreateBaseTeamTable()
-	teamPlayer_3 = CreateBaseTeamTable()
-	teamPlayer_4 = CreateBaseTeamTable()
-	teamPlayer_5 = CreateBaseTeamTable()
-	teamPlayer_6 = CreateBaseTeamTable()
-	teamPlayer_7 = CreateBaseTeamTable()
-	teamPlayer_8 = CreateBaseTeamTable()
-end
-
 -- Sets the initial frame when a unit fast turns while backing up, triggered by +BACKING_UP +TURN_LEFT_HIGH_SPEED
 function BackingUpFast(self)
 	local _,unitReversing = GetUnitReversingData(self)
@@ -1944,7 +1972,6 @@ function CheckExistingGroups(unitReversing, group)
 		--unitGroups[groupId] = nil
 		getglobal(tostring(ObjectTeamName(unitReversing.selfReference)))[unitReversing.groupId] = nil
 		--CheckExistingGroups(self)
-		--print("clearing global")
 	end
 end
 
@@ -1953,6 +1980,12 @@ function GroupUnitOnDeath(self)
 	local a,unitReversing = GetUnitReversingData(self)	
 	local groupId = unitReversing and unitReversing.groupId
 	unitsReversing[a] = nil
+	if next(unitsReversing) == nil then
+		flushPlayerTeams() 
+		return
+		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
+	end
+
 	-- remove from the group its part of
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
 	if groupId ~= nil then
@@ -1982,11 +2015,6 @@ function GroupUnitOnDeath(self)
 		end
 	end
 	RemoveFromUnitSelection(self)
-
-	if next(unitsReversing) == nil then
-		flushPlayerTeams() 
-		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
-	end
 end
 
 -- gets the current selection count of units that are within a group of units
