@@ -1856,7 +1856,7 @@ function BackingUp(self)
 	local groupId = unitReversing.groupId 
 	if groupId ~= nil then
 		local playerTeam = tostring(ObjectTeamName(self))
-		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
+		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[groupId] or nil
 		if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 			--unitGroups[groupId] = nil
 			getglobal(playerTeam)[groupId] = nil
@@ -1998,7 +1998,7 @@ function CheckExistingGroups(unitReversing, group)
 		--free the global snapshot since all units have been cleared
 		--unitGroups[groupId] = nil
 		local playerTeam = tostring(ObjectTeamName(unitReversing.selfReference))
-		if isValidTeam(playerTeam) then getglobal(playerTeam)[unitReversing.groupId] = nil end
+		if isValidTeam(playerTeam) then getglobal(playerTeam)[groupId] = nil end
 		--CheckExistingGroups(self)
 	end
 end
@@ -2018,7 +2018,7 @@ function GroupUnitOnDeath(self)
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
 	if groupId ~= nil then
 		local playerTeam = tostring(ObjectTeamName(self))
-		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
+		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[groupId] or nil
 		--local group = unitGroups[groupId] 
 		-- remove this unit from the group snapshot
 		if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
@@ -2036,7 +2036,7 @@ function GroupUnitOnDeath(self)
 			CheckExistingGroups(unitReversing, group)
 			if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 				--unitGroups[groupId] = nil
-				getglobal(playerTeam)[unitReversing.groupId] = nil
+				getglobal(playerTeam)[groupId] = nil
 				--CheckExistingGroups(self)
 				--print("clearing global on death")
 			end
