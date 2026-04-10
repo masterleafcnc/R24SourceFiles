@@ -111,7 +111,7 @@ function flushPlayerTeams()
 
 		if teamTable ~= nil then
 			for k, v in teamTable do
-				if type(k) == "string" and strfind(k, "^group_") ~= nil and type(v) == "table" then
+				if type(k) == "string" and strsub(k,1,6) == "group_" and type(v) == "table" then
 					for subKey, _ in v do
 						v[subKey] = nil
 					end
