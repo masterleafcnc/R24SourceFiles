@@ -2168,7 +2168,12 @@ function BackingUpEnd(self)
 	SuddenStopCheck(self)
 	
 	local playerTeam = tostring(ObjectTeamName(self))
-	local group = unitReversing.groupId ~= nil and (isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil)
+
+	local group = nil
+	if unitReversing.groupId ~= nil and isValidTeam(playerTeam) then
+		group = getglobal(playerTeam)[unitReversing.groupId]
+	end
+
 	CheckExistingGroups(unitReversing, group)
 end
 
