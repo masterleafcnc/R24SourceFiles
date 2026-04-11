@@ -1457,8 +1457,8 @@ function CheckForObjReverseBugging(self, frameDiff)
 			if group.checksDone == group.expectedChecks-1 then
 				for _, unitRef in selectedUnitList do
        				local unit = unitsReversing[unitRef]
-        			if unit ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and not unit.hasBeenFixed and not unit.isReverseMoving and not unit.hasComeToAStop and ObjectTestModelCondition(unit.selfReference, "MOVING_OUT_OF_THE_WAY") and ObjectTestModelCondition(unit.selfReference, "MOVING") == false then
-						ExecuteAction("NAMED_FLASH_WHITE", unit.selfReference, 2)
+        			if unit ~= nil and not unit.hasBeenFixed and not unit.isReverseMoving and not unit.hasComeToAStop and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and ObjectTestModelCondition(unit.selfReference, "MOVING_OUT_OF_THE_WAY") and ObjectTestModelCondition(unit.selfReference, "MOVING") == false then
+						--ExecuteAction("NAMED_FLASH_WHITE", unit.selfReference, 2)
                 		FixBuggingUnit(unit.selfReference, false)
         			end
  				 end
