@@ -200,9 +200,9 @@ unitBugDataTable = {
 	--							  Used in: 2nd false positive filter
 
 	-- NOD UNITS --
-	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Mok Raider Buggy
-	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Black Hand Raider Buggy
-	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Nod Raider Buggy
+	["E3C841B0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Mok Raider Buggy
+	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Black Hand Raider Buggy
+	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Nod Raider Buggy
 
 	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
 	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
@@ -1540,7 +1540,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 				end
 			end
 
-			-- FOR ADDING NEW UNITS 
 			-- A high thirdTurnUnitCount indicates units have performed the reverse move bug.
 			-- A low value (0-2) means units are turning normally and not bugging, so cancel the fix.
 			-- Exception: when most units were not moving before backing up (e.g. units that stopped to attack),
@@ -1564,7 +1563,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					end
 				end
 				if not notAllTypesAreBugging then
-					--print("3rd false positive filter")
+					-- print("3rd false positive filter")
 					fixUnits = false
 				end
 			end
@@ -1791,7 +1790,7 @@ end
 -- Gets a random selected unit of this players selection and assigns it to unitReversing.unitAnchor = unitAnchor
 function AssignRandomAnchor(self)
 	local a,unitReversing = GetUnitReversingData(self)
-	if unitReversing == nil or unitReversing.groupId == nil then return end
+	if unitReversing == nil or unitReversing.groupId == nil or unitReversing.unitAnchor ~= nil then return end
 	local playerTeam = tostring(ObjectTeamName(self))
 	local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
 	--local group = unitGroups[unitReversing.groupId]
@@ -1817,6 +1816,7 @@ function AssignRandomAnchor(self)
 			unitReversing.unitAnchor = unitsReversing[randomUnitId].stringReference
 		end
 	end
+	ObjectBroadcastEventToAllies(self, "UnitAnchorEvent", 65)
 end
 
 -- Triggered by +BACKING_UP
@@ -1880,8 +1880,24 @@ function BackingUp(self)
 	if unitReversing.hasBeenSelected then
 		AssignGroupId(unitReversing, a, curFrame, self)
 	end
-
+ 
 	AssignRandomAnchor(self)
+end
+
+-- self is the unit that received this broadcasted event, other is the unit that dispatched it.
+function OptimizedUnitAnchor(self, other)
+	local _, unitReversingSelf = GetUnitReversingData(self)
+	local _, unitReversingOther = GetUnitReversingData(other)
+
+	-- if one of the two units is a harvester dont override the random anchor.
+	if unitReversingSelf.isReverseMoveHarvester == unitReversingOther.isReverseMoveHarvester then
+		if unitReversingSelf.groupId == unitReversingOther.groupId then
+			unitReversingSelf.unitAnchor = unitReversingOther.stringReference
+			unitReversingOther.unitAnchor = unitReversingSelf.stringReference
+			--ExecuteAction("NAMED_FLASH", unitReversingSelf.selfReference, 2)
+			--ExecuteAction("NAMED_FLASH_WHITE", unitReversingOther.selfReference, 2)
+		end
+	end
 end
 
 -- copies a snapshot and recursively snapshots nested tables within.

@@ -884,7 +884,8 @@
 		<ScriptedEvent Name="OnCommandeered" />
 		<ScriptedEvent Name="OnBeamTargetInit" />	
 
-		<ScriptedEvent Name="TiberiumEvent" />		
+		<ScriptedEvent Name="TiberiumEvent" />	
+		<ScriptedEvent Name="UnitAnchorEvent" />
     </Events>
     
     <EventList Name="BaseScriptFunctions">
@@ -996,6 +997,7 @@
 		<EventHandler EventName="OnDestroyed" ScriptFunctionName="GroupUnitOnDeath" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelected"	ScriptFunctionName="AddToUnitSelection" DebugSingleStep="false"/>
 		<EventHandler EventName="OnSelectedEnd"	ScriptFunctionName="RemoveFromUnitSelection" DebugSingleStep="false"/>
+		<EventHandler EventName="UnitAnchorEvent"	ScriptFunctionName="OptimizedUnitAnchor" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="GenericReverseMoveVehicleFunctions_R24" Inherit="BaseScriptFunctions">
@@ -1014,6 +1016,7 @@
 		<EventHandler EventName="OnMoving"	ScriptFunctionName="UnitIsMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
+		<EventHandler EventName="UnitAnchorEvent"	ScriptFunctionName="OptimizedUnitAnchor" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="NodMobileArtilleryFunctions_R24" Inherit="GenericReverseMoveVehicleFunctions_R24">
