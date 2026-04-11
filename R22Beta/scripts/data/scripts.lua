@@ -2167,6 +2167,7 @@ function BackingUpEnd(self)
 	-- necessary if units stop 
 	SuddenStopCheck(self)
 	
+	local playerTeam = tostring(ObjectTeamName(self))
 	local group = unitReversing.groupId ~= nil and (isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil)
 	CheckExistingGroups(unitReversing, group)
 end
