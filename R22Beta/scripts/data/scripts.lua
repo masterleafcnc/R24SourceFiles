@@ -158,8 +158,8 @@ TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bug
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
 CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
-BUG_THRESHOLD_LARGE_GROUP = 0.45 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
-BUG_THRESHOLD_SMALL_GROUP = 0.75 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
+BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
+BUG_THRESHOLD_SMALL_GROUP = 0.70 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
 UNITS_STILL_MOVING_THRESHOLD = 0.75 -- ratio of units still moving before clearing movement flag
 
