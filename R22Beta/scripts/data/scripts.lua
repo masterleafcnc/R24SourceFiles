@@ -158,8 +158,8 @@ TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bug
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
 CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
-BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
-BUG_THRESHOLD_SMALL_GROUP = 0.50 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
+BUG_THRESHOLD_LARGE_GROUP = 0.45 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
+BUG_THRESHOLD_SMALL_GROUP = 0.75 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
 UNITS_STILL_MOVING_THRESHOLD = 0.75 -- ratio of units still moving before clearing movement flag
 
@@ -241,8 +241,8 @@ unitBugDataTable = {
 	["DB2B7D2F"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Reaper-17 Seeker
 	["7296891C"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0.01, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Traveler-59 Seeker
 
-	["AF991372"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Scrin Devourer Tank
-	["416EFDFF"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Reaper-17 Devourer Tank
+	["AF991372"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Scrin Devourer Tank
+	["416EFDFF"] = { frameCount = 12, reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Reaper-17 Devourer Tank
 
 	["77A0E8A9"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Scrin Corruptor
 	["B187F87A"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 3, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.15, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Reaper-17 Corruptor
@@ -1457,7 +1457,8 @@ function CheckForObjReverseBugging(self, frameDiff)
 			if group.checksDone == group.expectedChecks-1 then
 				for _, unitRef in selectedUnitList do
        				local unit = unitsReversing[unitRef]
-        			if unit ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and not unit.hasBeenFixed and not (unit.isReverseMoving or unit.hasComeToAStop) then
+        			if unit ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and not unit.hasBeenFixed and not unit.isReverseMoving and not unit.hasComeToAStop and ObjectTestModelCondition(unit.selfReference, "MOVING_OUT_OF_THE_WAY") and ObjectTestModelCondition(unit.selfReference, "MOVING") == false then
+						ExecuteAction("NAMED_FLASH_WHITE", unit.selfReference, 2)
                 		FixBuggingUnit(unit.selfReference, false)
         			end
  				 end
@@ -1469,16 +1470,27 @@ function CheckForObjReverseBugging(self, frameDiff)
 			local bugThreshold = selectedCount > LARGE_GROUP_SIZE and BUG_THRESHOLD_LARGE_GROUP or BUG_THRESHOLD_SMALL_GROUP
 			local maxBugging = ceil(selectedCount*bugThreshold)
 			local totalBugging = 0	
+			local totalBuggingPerType = {}
 
-			for _, unitType in group.unitsToFixByType do totalBugging = totalBugging + getn(unitType) end
+			-- value of totalBuggingPerType is the object id, key is object name (ej: NodScorpionBuggy)
+			for unitType, unitID in unitsToFixForType do 
+				totalBuggingPerType[unitType] = getn(unitID) 
+				totalBugging = totalBugging + getn(unitID) 
+			end
 			--ExecuteAction("SHOW_MILITARY_CAPTION", tostring(totalBugging), 2)	
-			--WriteToFile("totalBugging.txt", tostring(totalBugging) .. "\n")
 			if totalBugging <= maxBugging then
 				-- proceed to fix the units
 				fixUnits = true
 			else
 				group.fixCancelled = true
 			end
+
+			--if group.checksDone == group.expectedChecks then
+			--	for unitType, unitID in unitsToFixForType do 
+			--		WriteToFile("totalBuggingPerType.txt", "Bugging units of type: " .. tostring(unitType) .. ": " .. tostring(totalBuggingPerType[unitType]) .. "\n")
+			--	end
+			--	WriteToFile("totalBugging.txt", tostring(totalBugging) .. "\n")
+			--end
 
 			-- key is the object name, value is the count of the units of that object name in this group
 			for objName,_ in group.reverseUnitsByType do
@@ -1514,7 +1526,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 					local avgFirstTurnCount = floor((firstTurnFrameCountForType + firstTurnUnitCountForType - 1) / firstTurnUnitCountForType) 
 					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. "\n")
 					if avgFirstTurnCount >= floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5) then
-						--print("2nd false positive filter")
+						-- print("2nd false positive filter")
 						local unitsForObj = unitsToFixForType[objName] or {}
 						for i = getn(unitsForObj), 1, -1 do
 							local unit = unitsReversing[unitsForObj[i]]
@@ -1537,13 +1549,14 @@ function CheckForObjReverseBugging(self, frameDiff)
 				group.thirdTurnCountChecked = true
 				-- total across all types for thirdTurnMinRatio check
 				local notAllTypesAreBugging = false
-				-- count is is the ObjName 
-				for objName,count in group.reverseUnitsByType do 
-					local count = getTableSize(count)
+				-- objCount is table of all units of objName 
+				for objName,objCount in group.reverseUnitsByType do 
+					local count = getTableSize(objCount)
 					unitBugDataType = unitBugDataTable[objName]
 					local thirdTurnUnitCountForType = (group.thirdTurnUnitCountByType and group.thirdTurnUnitCountByType[objName]) or 0
-					-- WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. "\n")
-					if not (thirdTurnUnitCountForType < ceil(count*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(count*unitBugDataType.notMovingBackupRatio))) then
+					--WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. " unit count: " .. tostring(count) .. "\n")
+					local unitsBuggingOfThisType = totalBuggingPerType[objName] or 0
+					if not ((unitsBuggingOfThisType <= thirdTurnUnitCountForType) and (thirdTurnUnitCountForType >= 1) and thirdTurnUnitCountForType < ceil(count*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(count*unitBugDataType.notMovingBackupRatio))) then
 						notAllTypesAreBugging = true
 						--group.fixCancelledByType[objName] = true
 						-- group.fixCancelled = true
@@ -1556,7 +1569,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 				end
 			end
 		end
-
 
 		-- Apply fixes if threshold was met
 		-- fixUnits alone triggers the fix so that a non-bugging unit that pushes
@@ -1708,7 +1720,7 @@ end
 -- Fixes a unit detected to be bugging and then checks if any selected unit has the bugged unit assigned as unitAnchor
 function FixBuggingUnit(self, applySpeedBuff)
 	local a,unitReversing = GetUnitReversingData(self)
-	if unitReversing == nil or not unitReversing.groupIdAssigned or unitReversing.groupId == nil then return end
+	if unitReversing == nil or not unitReversing.groupIdAssigned or unitReversing.groupId == nil or unitReversing.hasBeenFixed then return end
 	local playerTeam = tostring(ObjectTeamName(self))
 	local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
 	--local group = unitGroups[unitReversing.groupId]
@@ -1736,7 +1748,7 @@ function FixBuggingUnit(self, applySpeedBuff)
 		end
 	end
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
-	if not unitReversing.hasBeenFixed and unitReversing.unitAnchor ~= nil then
+	if unitReversing.unitAnchor ~= nil then
 		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
 		unitReversing.hasBeenFixed = true
 	end
@@ -2068,6 +2080,7 @@ function SuddenStopCheck(self)
 	local resetGroupId = function()
 		--%unitReversing.groupId = nil
 		%unitReversing.groupIdAssigned = false
+		%unitReversing.firstFrame = 0
 	end
 	if ObjectTestModelCondition(self, "MOVING") or unitReversing.hasBeenFixed or unitReversing.hasComeToAStop or not unitReversing.lastMoveWasReverse then return resetGroupId() end
 	-- check if its DOCKING or DOCKING_BEGINNING (to prevent harvesters from checking for bugs while docking)
