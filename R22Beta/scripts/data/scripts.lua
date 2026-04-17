@@ -1160,11 +1160,13 @@ function GetUnitReversingData(self)
 			hasBeenCounted = false,
 			fastTurnWas0Frames = false,
 			hasComeToAStop = false, 
-			unitAnchor = nil, -- can be an array from closest to farthest
+			unitAnchor = nil, -- is the object id of the the unit to follow in case of bugging
 			bugFrameDiff = 0,
 			hasBeenSelected = false,
 			expectedChecksFlag = false,
 			groupIdAssigned = false,
+			--unitsFollowingMe = {}, -- list of objectids of units whose anchor is this unit referenced by objectid.
+			isBeingFollowed = false,
 			isReverseMoveHarvester = checkHarv()
 		}
 		return a, unitsReversing[a]
@@ -1182,7 +1184,7 @@ function GetNumberOfUnitsMoving(selectedUnitList)
 	if selectedUnitList == nil then return 0 end
 	local unitsMoving = 0
 	for _, unitRef in selectedUnitList do
-		if unitsReversing[unitRef] ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "MOVING") then
+		if unitsReversing[unitRef] ~= nil and EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "MOVING") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "MOVING_OUT_OF_THE_WAY") == false then
 			unitsMoving = unitsMoving + 1
 		end
 	end
@@ -1204,7 +1206,7 @@ end
 function UnitIsMoving(self)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	if ObjectTestModelCondition(self, "BACKING_UP") == false then
+	if ObjectTestModelCondition(self, "BACKING_UP") == false and unitReversing.wasAttackingBeforeReverse and ObjectTestModelCondition(self, "MOVING_OUT_OF_THE_WAY") == false then
 		unitReversing.hasComeToAStop = false
 	end
 end
@@ -1305,56 +1307,43 @@ function AssignGroupId(unitReversing, a, curFrame, self)
 	end
 end
 
+-- +MOVING_OUT_OF_THE_WAY event function -> fire an event in an radius (small radius) to check if a unit around is the anchor and if it has hasBeenFixed set to true. if this is the case stop it with NAMED_STOP and only fire the event if the anchor has hasBeenFixed set to true.
+function UnitGettingOutOfTheWay(self)
+	-- this unit is the anchor 
+	local _,unitReversing = GetUnitReversingData(self)
+	if unitReversing.isBeingFollowed then
+		ObjectBroadcastEventToAllies(self, "GettingOutOfTheWayEvent", 100)
+	end
+end
+
+-- other is the unit that broadcasted this event, self is potentially the unit that is bumping into other
+function GettingOutOfTheWayEvent(self, other)
+	local selfId,unitReversingSelf = GetUnitReversingData(self)
+	local otherId,unitReversingOther = GetUnitReversingData(other)
+	-- the object id of the unit matches the unit that broadcasted this event, concluding that a collision took place between that unit and the other.
+	if unitReversingSelf.unitAnchor ~= nil then
+		--WriteToFile("unitAnchor.txt",  tostring(unitReversingSelf.unitAnchor) .. "  " .. tostring(selfId) .. "\n")
+		if unitReversingSelf.hasBeenFixed and unitReversingOther.isBeingFollowed and unitReversingOther.hasComeToAStop then
+			ExecuteAction("NAMED_STOP", unitReversingSelf.selfReference)
+			--ExecuteAction("NAMED_FLASH", unitReversingSelf.selfReference, 2)
+			unitReversingSelf.hasBeenFixed = false
+			unitReversingOther.isBeingFollowed = false
+		end
+	end
+end
+
 -- checks if most units are moving and if the number returned exceeds the threshold then assign the hasComeToAStop to true
 function UnitNoLongerMoving(self)
 	--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
-	local _,unitReversing = GetUnitReversingData(self)
+	local unitId,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	local playerTeam = tostring(ObjectTeamName(self))
-	--if unitReversing.hasComeToAStop then return end
-	-- check if most units selected are not moving
-	if not unitReversing.hasBeenFixed and unitReversing.groupIdAssigned and unitReversing.groupId ~= nil then
-		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
-		
-		--local group = unitGroups[unitReversing.groupId]
-		if group ~= nil and group.reverseUnits ~= nil and group.reverseUnitCount ~= nil then
-			-- if a few units are moving now but originally before backing up most units were not moving then set moving flag to true
-			local numberOfUnitsMoving = GetNumberOfUnitsMoving(group.reverseUnits)
-			for _, unitRef in group.reverseUnits do
-				if unitsReversing[unitRef] ~= nil then
-					if numberOfUnitsMoving <= floor(group.reverseUnitCount * UNITS_STILL_MOVING_THRESHOLD)
-					and ((group.unitsNotMovingBeforeBackingUp or 0) >= floor(group.reverseUnitCount * 0.35)) and unitsReversing[unitRef].wasAttackingBeforeReverse then
-						unitsReversing[unitRef].hasComeToAStop = false
-					elseif numberOfUnitsMoving <= floor(group.reverseUnitCount * 0.15) and not unitsReversing[unitRef].wasAttackingBeforeReverse then
-						unitsReversing[unitRef].hasComeToAStop = true
-						--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
-					end					
-				end
-			end
-		end
-	-- The player issued a stop (group no longer exists) --
-	elseif not unitReversing.hasBeenFixed and not unitReversing.groupIdAssigned then
-		local teamTable = isValidTeam(playerTeam) and getglobal(playerTeam) or nil
-		if teamTable ~= nil and teamTable.reverseUnits ~= nil and teamTable.reverseUnitCount ~= nil and teamTable.reverseUnitCount > 0 then
-			local numberOfUnitsMoving = GetNumberOfUnitsMoving(teamTable.reverseUnits)
-			--WriteToFile("numberOfUnitsMoving.txt",  "units not moving: " .. tostring(numberOfUnitsMoving) .. "teamTable units size: " .. getTableSize(teamTable.reverseUnits) .. "\n")
-			if numberOfUnitsMoving <= floor(teamTable.reverseUnitCount * 0.15) then
-				-- assign hasComeToAStop as true only if the last move was a reverse move
-				for _, unitRef in teamTable.reverseUnits do
-					if unitsReversing[unitRef] ~= nil and not unitsReversing[unitRef].wasAttackingBeforeReverse then
-						--unitsReversing[unitRef].lastMoveWasReverse = false
-						unitsReversing[unitRef].hasComeToAStop = true
-						--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
-					end
-				end
-			end
-		else
-			-- team table is empty (player has deselected it), so clear flags for this unit directly
-			if not unitReversing.wasAttackingBeforeReverse then
-				unitReversing.hasComeToAStop = true
-				--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
-			end
-		end
+	if not unitReversing.wasAttackingBeforeReverse then
+		unitReversing.hasComeToAStop = true
+		--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+	else
+		unitReversing.wasAttackingBeforeReverse = false
+		--unitReversing.hasComeToAStop = false
+		--ExecuteAction("NAMED_FLASH", self, 2)
 	end
 end
 
@@ -1457,7 +1446,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 			if group.checksDone == group.expectedChecks-1 then
 				for _, unitRef in selectedUnitList do
        				local unit = unitsReversing[unitRef]
-        			if unit ~= nil and not unit.hasBeenFixed and not unit.isReverseMoving and not unit.hasComeToAStop and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and ObjectTestModelCondition(unit.selfReference, "MOVING_OUT_OF_THE_WAY") and ObjectTestModelCondition(unit.selfReference, "MOVING") == false then
+        			if unit ~= nil and not unit.hasBeenFixed and not unit.isReverseMoving and EvaluateCondition("NAMED_NOT_DESTROYED", unit.stringReference) and ObjectTestModelCondition(unit.selfReference, "MOVING") == false then
 						--ExecuteAction("NAMED_FLASH_WHITE", unit.selfReference, 2)
                 		FixBuggingUnit(unit.selfReference, false)
         			end
@@ -1598,9 +1587,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 				FixBuggingUnit(self, true)
 			end
 		elseif isBugging and group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
-			-- Only clear bugging state when threshold was reached and we decided not to fix
-			-- (too many bugging = likely false positive). Before threshold is reached,
-			-- keep the state so the unit can still be fixed when slower types finish checking.
 			if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
 				ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)
 			end
@@ -1701,10 +1687,10 @@ function GetANonBuggingUnit(selectedUnitsOfPlayer, unit)
 				-- check to see if unit is bugging and isnt destroyed
 				if EvaluateCondition("NAMED_NOT_DESTROYED",cachedUnit.stringReference) and not EvaluateCondition("UNIT_HAS_UPGRADE",cachedUnit.stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(cachedUnit.selfReference, "USER_72") == false then
 					if not isHarv then
-						tinsert(candidates, cachedUnit.stringReference)
+						tinsert(candidates, unitRef)
 					else
 						if cachedUnit.isReverseMoveHarvester then
-							tinsert(candidates, cachedUnit.stringReference)
+							tinsert(candidates, unitRef)
 						end
 					end
 				end
@@ -1735,21 +1721,28 @@ function FixBuggingUnit(self, applySpeedBuff)
 
 	-- check if unitAnchor is destroyed or is nil
 	if unitReversing.unitAnchor ~= nil then
-		if not EvaluateCondition("NAMED_NOT_DESTROYED",unitReversing.unitAnchor) then 
+		if not EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitReversing.unitAnchor].stringReference) then 
 			unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
 		end
 	else
 		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+		 --WriteToFile("GetANonBuggingUnit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
 		 -- there are no units that arent bugging so lets just stop this one and return the function
 		 if unitReversing.unitAnchor == nil then
 			-- ExecuteAction("NAMED_STOP", self)
+			-- ExecuteAction("NAMED_FLASH_WHITE", unitReversing.selfReference, 2)
 			return 
 		end
 	end
+
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
 	if unitReversing.unitAnchor ~= nil then
-		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, unitReversing.unitAnchor)	
+		local anchorUnit = unitsReversing[unitReversing.unitAnchor]
+		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, anchorUnit.stringReference)	
 		unitReversing.hasBeenFixed = true
+		-- add this units objectid to the unitsFollowingMe array of the anchor unit
+		-- anchorUnit.unitsFollowingMe[a] = a
+		anchorUnit.isBeingFollowed = true
 	end
 
 	if ObjectTestModelCondition(self, "USER_72") == false then
@@ -1768,7 +1761,7 @@ function FixBuggingUnit(self, applySpeedBuff)
 		--  this unit is bugging so lets go through all the closest units and see if it coincides with this one
 		-- 	WriteToFile("closeunit.txt",  "object 1:  " .. tostring(unitsReversing[unitRef].stringReference)  .. "  " .. "object 2: " .. tostring(unitsReversing[unitRef].unitAnchor) .. "\n")
 		if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].unitAnchor ~= nil then
-			if unitsReversing[unitRef].unitAnchor == unitReversing.stringReference then
+			if unitsReversing[unitRef].unitAnchor == unitReversing.unitAnchor then
 				-- get a unit that hasnt bugged that isnt itself
 				local nonBuggingUnit = GetANonBuggingUnit(group.units, unitsReversing[unitRef].selfReference)
 				-- only proceed if we found a non-bugging unit
@@ -1778,7 +1771,11 @@ function FixBuggingUnit(self, applySpeedBuff)
 					-- move this unit to the previously assigned non bugging unit
 					if unitsReversing[unitRef].hasBeenFixed and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") then
 						--print("assigning to different unit")
-						ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[unitRef].stringReference, unitsReversing[unitRef].unitAnchor)
+						local newAnchorUnit = unitsReversing[nonBuggingUnit]
+						ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[unitRef].stringReference, newAnchorUnit.stringReference)
+						-- add this units objectid to the unitsFollowingMe array of the anchor unit
+						-- newAnchorUnit.unitsFollowingMe[unitRef] = unitRef
+						newAnchorUnit.isBeingFollowed = true
 					end
 				end
 			end
@@ -1813,7 +1810,7 @@ function AssignRandomAnchor(self)
 		-- gets a unit that isnt self randomly.
 		local randomUnitId = GetRandomKey(selectedUnitList, a)
 		if randomUnitId ~= nil and unitsReversing[randomUnitId] ~= nil then
-			unitReversing.unitAnchor = unitsReversing[randomUnitId].stringReference
+			unitReversing.unitAnchor = randomUnitId
 		end
 	end
 	ObjectBroadcastEventToAllies(self, "UnitAnchorEvent", 65)
@@ -1886,14 +1883,14 @@ end
 
 -- self is the unit that received this broadcasted event, other is the unit that dispatched it.
 function OptimizedUnitAnchor(self, other)
-	local _, unitReversingSelf = GetUnitReversingData(self)
-	local _, unitReversingOther = GetUnitReversingData(other)
+	local selfId, unitReversingSelf = GetUnitReversingData(self)
+	local otherId, unitReversingOther = GetUnitReversingData(other)
 
 	-- if one of the two units is a harvester dont override the random anchor.
 	if unitReversingSelf.isReverseMoveHarvester == unitReversingOther.isReverseMoveHarvester then
 		if unitReversingSelf.groupId == unitReversingOther.groupId then
-			unitReversingSelf.unitAnchor = unitReversingOther.stringReference
-			unitReversingOther.unitAnchor = unitReversingSelf.stringReference
+			unitReversingSelf.unitAnchor = otherId
+			unitReversingOther.unitAnchor = selfId
 			--ExecuteAction("NAMED_FLASH", unitReversingSelf.selfReference, 2)
 			--ExecuteAction("NAMED_FLASH_WHITE", unitReversingOther.selfReference, 2)
 		end
@@ -2138,7 +2135,7 @@ function SuddenStopCheck(self)
 
 		if fixUnit then
 			--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
-			FixBuggingUnit(self, false)
+			FixBuggingUnit(self, true)
 		end
 	end
 	resetGroupId()
@@ -2181,7 +2178,7 @@ end
 function BuggedUnitTimeoutEnd(self)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	unitReversing.hasBeenFixed = false
+	--unitReversing.hasBeenFixed = false
 	--unitReversing.unitAnchor = nil
 	if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
 		ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)	

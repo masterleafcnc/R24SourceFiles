@@ -630,7 +630,11 @@
 		
 		<ModelConditionEvent Name="OnUsingWeaponA">
 			<Conditions>+USING_WEAPON_A</Conditions>
-		</ModelConditionEvent>					
+		</ModelConditionEvent>	
+		
+		<ModelConditionEvent Name="MovingOutOfTheWay">
+			<Conditions>+MOVING_OUT_OF_THE_WAY</Conditions>
+		</ModelConditionEvent>		
 
 		<ObjectStatusEvent Name="OnTempDefected">
 			<Conditions>+TEMPORARILY_DEFECTED</Conditions>
@@ -886,6 +890,7 @@
 
 		<ScriptedEvent Name="TiberiumEvent" />	
 		<ScriptedEvent Name="UnitAnchorEvent" />
+		<ScriptedEvent Name="GettingOutOfTheWayEvent" />
     </Events>
     
     <EventList Name="BaseScriptFunctions">
@@ -1003,8 +1008,10 @@
 	<EventList Name="GenericReverseMoveVehicleFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
+		<!--
 		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
+	-->
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
@@ -1017,6 +1024,8 @@
 		<EventHandler EventName="OnMovingEnd"	ScriptFunctionName="UnitNoLongerMoving" DebugSingleStep="false"/>
 		<EventHandler EventName="OnAttacking"	ScriptFunctionName="UnitIsAttacking" DebugSingleStep="false"/>
 		<EventHandler EventName="UnitAnchorEvent"	ScriptFunctionName="OptimizedUnitAnchor" DebugSingleStep="false"/>
+		<EventHandler EventName="MovingOutOfTheWay"	ScriptFunctionName="UnitGettingOutOfTheWay" DebugSingleStep="false"/>
+		<EventHandler EventName="GettingOutOfTheWayEvent"	ScriptFunctionName="GettingOutOfTheWayEvent" DebugSingleStep="false"/>
 	</EventList>
 
 	<EventList Name="NodMobileArtilleryFunctions_R24" Inherit="GenericReverseMoveVehicleFunctions_R24">
@@ -1043,8 +1052,9 @@
 	<EventList Name="NodFlameTankFunctions_R24" Inherit="GenericRagedFunctions_103">
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
+		<!--
 		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/> -->
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
@@ -1073,8 +1083,10 @@
 		<EventHandler EventName="OnHarvestingEnd"	ScriptFunctionName="OffTiberiumHarvested" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
+		<!-- 
 		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
+	-->
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
@@ -1136,8 +1148,10 @@
 		<EventHandler EventName="OnHarvestingEnd"	ScriptFunctionName="OffTiberiumHarvested" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
+		<!--
 		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
+	-->
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
