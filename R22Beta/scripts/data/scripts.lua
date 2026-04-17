@@ -1318,8 +1318,8 @@ end
 
 -- other is the unit that broadcasted this event, self is potentially the unit that is bumping into other
 function GettingOutOfTheWayEvent(self, other)
-	local selfId,unitReversingSelf = GetUnitReversingData(self)
-	local otherId,unitReversingOther = GetUnitReversingData(other)
+	local _,unitReversingSelf = GetUnitReversingData(self)
+	local _,unitReversingOther = GetUnitReversingData(other)
 	-- the object id of the unit matches the unit that broadcasted this event, concluding that a collision took place between that unit and the other.
 	if unitReversingSelf.unitAnchor ~= nil then
 		--WriteToFile("unitAnchor.txt",  tostring(unitReversingSelf.unitAnchor) .. "  " .. tostring(selfId) .. "\n")
@@ -1761,7 +1761,7 @@ function FixBuggingUnit(self, applySpeedBuff)
 		--  this unit is bugging so lets go through all the closest units and see if it coincides with this one
 		-- 	WriteToFile("closeunit.txt",  "object 1:  " .. tostring(unitsReversing[unitRef].stringReference)  .. "  " .. "object 2: " .. tostring(unitsReversing[unitRef].unitAnchor) .. "\n")
 		if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].unitAnchor ~= nil then
-			if unitsReversing[unitRef].unitAnchor == unitReversing.unitAnchor then
+			if unitsReversing[unitRef].unitAnchor == a then
 				-- get a unit that hasnt bugged that isnt itself
 				local nonBuggingUnit = GetANonBuggingUnit(group.units, unitsReversing[unitRef].selfReference)
 				-- only proceed if we found a non-bugging unit
