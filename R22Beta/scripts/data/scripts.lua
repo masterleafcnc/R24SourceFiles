@@ -104,48 +104,55 @@ function isValidTeam(team)
 	return false
 end
 
+function clearGroupTable(t)
+    if type(t) == "table" then
+        for k, v in t do
+			WriteToFile("groupTable.txt", "Clearing Key: " .. tostring(k) .. " | Value Type: " .. type(v) .. "\n")
+            if type(v) == "table" then
+                clearGroupTable(v) -- Clean the nested child
+            end
+            t[k] = nil -- Wipe the entry
+        end
+    end
+end
+
 function flushPlayerTeams()
-	for i = 1, 8 do
-		local player = "teamPlayer_" .. i
-		local teamTable = getglobal(player)
+    for i = 1, 8 do
+        local player = "teamPlayer_" .. i
+        local teamTable = getglobal(player)
 
-		if teamTable ~= nil then
-			for k, v in teamTable do
-				if type(k) == "string" and strsub(k,1,6) == "group_" and type(v) == "table" then
-					for subKey, _ in v do
-						v[subKey] = nil
-					end
-					teamTable[k] = nil
-				end
-			end
+        if type(teamTable) == "table" then
+            
+            -- Handle dynamic "group_" tables
+            for k, v in teamTable do
+                if type(k) == "string" and strsub(k, 1, 6) == "group_" and type(v) == "table" then
+                    -- Deep clear all sub-keys/nested tables
+                    clearGroupTable(v) 
+                    -- Nil the reference in the parent (teamTable)
+                    teamTable[k] = nil 
+                end
+            end
+            --call clearGroupTable on these to wipe their contents
+            if type(teamTable.units) == "table" then
+                clearGroupTable(teamTable.units)
+            end
 
-			if teamTable.units ~= nil then
-				for k, _ in teamTable.units do
-					teamTable.units[k] = nil
-				end
-			end
+            if type(teamTable.reverseUnits) == "table" then
+                clearGroupTable(teamTable.reverseUnits)
+            end
 
-			if teamTable.reverseUnits ~= nil then
-				for k, _ in teamTable.reverseUnits do
-					teamTable.reverseUnits[k] = nil
-				end
-			end
+            if type(teamTable.reverseUnitsByType) == "table" then
+                -- Even though this is a table of tables, the recursion 
+                -- in clearGroupTable will handle the nested unitId tables.
+                clearGroupTable(teamTable.reverseUnitsByType)
+            end
+		
+            teamTable.unitCount = 0
+            teamTable.reverseUnitCount = 0
+        end
+    end 
 
-			if teamTable.reverseUnitsByType ~= nil then
-				for k, _ in teamTable.reverseUnitsByType do
-					for unitId,_ in teamTable.reverseUnitsByType[k] do
-						teamTable.reverseUnitsByType[k][unitId] = nil
-					end
-					teamTable.reverseUnitsByType[k] = nil
-				end
-			end
-
-			teamTable.unitCount = 0
-			teamTable.reverseUnitCount = 0
-		end
-	end	
-
-	collectgarbage()
+    collectgarbage()
 end
 
 flushPlayerTeams()
@@ -1205,9 +1212,8 @@ end
 function UnitIsMoving(self)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil then return end
-	if ObjectTestModelCondition(self, "BACKING_UP") == false and unitReversing.wasAttackingBeforeReverse and ObjectTestModelCondition(self, "MOVING_OUT_OF_THE_WAY") == false then
-		unitReversing.hasComeToAStop = false
-	end
+
+	unitReversing.hasComeToAStop = false
 end
 
 -- Gets the random key to assign to the unit for anchor purposes.
@@ -1329,6 +1335,15 @@ function UnitNoLongerMoving(self)
 		unitReversing.wasAttackingBeforeReverse = false
 		--unitReversing.hasComeToAStop = false
 		--ExecuteAction("NAMED_FLASH", self, 2)
+	end
+
+	-- unitAnchor corresponds with objectId
+	if unitReversing.unitAnchor ~= nil then
+		-- unit im anchored to
+		local unitImFollowing = unitsReversing[unitReversing.unitAnchor]
+		if unitImFollowing ~= nil and unitImFollowing.unitAnchor == unitId and unitImFollowing.isBeingFollowed then
+			unitImFollowing.isBeingFollowed = false
+		end
 	end
 end
 
@@ -1729,7 +1744,7 @@ function FixBuggingUnit(self, applySpeedBuff)
 
 	-- check if unitAnchor is destroyed or is nil
 	if unitReversing.unitAnchor ~= nil then
-		if not EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitReversing.unitAnchor].stringReference) then 
+		if unitsReversing[unitReversing.unitAnchor] ~= nil and not EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitReversing.unitAnchor].stringReference) then 
 			unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
 		end
 	else
@@ -1744,8 +1759,8 @@ function FixBuggingUnit(self, applySpeedBuff)
 	end
 
 	--WriteToFile("closeunit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
-	if unitReversing.unitAnchor ~= nil then
-		local anchorUnit = unitsReversing[unitReversing.unitAnchor]
+	local anchorUnit = unitsReversing[unitReversing.unitAnchor]
+	if unitReversing.unitAnchor ~= nil and anchorUnit ~= nil then
 		ExecuteAction("UNIT_GUARD_OBJECT", unitReversing.stringReference, anchorUnit.stringReference)	
 		unitReversing.hasBeenFixed = true
 		-- add this units objectid to the unitsFollowingMe array of the anchor unit
@@ -1884,8 +1899,12 @@ function BackingUp(self)
 		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[groupId] or nil
 		if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 			--unitGroups[groupId] = nil
-			getglobal(playerTeam)[groupId] = nil
-			unitReversing.groupId = nil
+			local parentTable = getglobal(playerTeam)
+			local subTable = parentTable[groupId]
+			if type(subTable) == "table" then
+				clearGroupTable(subTable)   -- Step 1: Wipe all internal sub-keys
+				parentTable[groupId] = nil -- Step 2: Delete the reference from parent
+			end
 			--CheckExistingGroups(self)
 			--print("clearing global")
 		end
@@ -2053,7 +2072,14 @@ function CheckExistingGroups(unitReversing, group)
 		--free the global snapshot since all units have been cleared
 		--unitGroups[groupId] = nil
 		local playerTeam = tostring(ObjectTeamName(unitReversing.selfReference))
-		if isValidTeam(playerTeam) then getglobal(playerTeam)[groupId] = nil end
+		if isValidTeam(playerTeam) then 
+			local parentTable = getglobal(playerTeam)
+			local subTable = parentTable[groupId]
+			if type(subTable) == "table" then
+				clearGroupTable(subTable)  
+				parentTable[groupId] = nil
+			end
+		end
 		--CheckExistingGroups(self)
 	end
 end
@@ -2091,7 +2117,12 @@ function GroupUnitOnDeath(self)
 			CheckExistingGroups(unitReversing, group)
 			if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
 				--unitGroups[groupId] = nil
-				getglobal(playerTeam)[groupId] = nil
+				local parentTable = getglobal(playerTeam)
+				local subTable = parentTable[groupId]
+				if type(subTable) == "table" then
+					clearGroupTable(subTable)  
+					parentTable[groupId] = nil
+				end
 				--CheckExistingGroups(self)
 				--print("clearing global on death")
 			end
