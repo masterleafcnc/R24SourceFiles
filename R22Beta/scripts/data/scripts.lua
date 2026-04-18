@@ -1309,7 +1309,7 @@ function GettingOutOfTheWayEvent(self, other)
 	if unitReversingSelf.unitAnchor ~= nil then
 		--WriteToFile("unitAnchor.txt",  tostring(unitReversingSelf.unitAnchor) .. "  " .. tostring(selfId) .. "\n")
 		if unitReversingSelf.hasBeenFixed and unitReversingOther.isBeingFollowed and unitReversingOther.hasComeToAStop then
-			--ExecuteAction("NAMED_STOP", unitReversingSelf.selfReference)
+			ExecuteAction("NAMED_STOP", unitReversingSelf.selfReference)
 			--ExecuteAction("NAMED_FLASH", unitReversingSelf.selfReference, 2)
 			unitReversingSelf.hasBeenFixed = false
 			unitReversingOther.isBeingFollowed = false
