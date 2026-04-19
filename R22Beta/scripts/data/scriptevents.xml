@@ -1008,10 +1008,8 @@
 	<EventList Name="GenericReverseMoveVehicleFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
-	
 		<EventHandler EventName="OnBackingUpFastRight"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeft"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
-
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
@@ -1052,9 +1050,8 @@
 	<EventList Name="NodFlameTankFunctions_R24" Inherit="GenericRagedFunctions_103">
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
-		<!--
-		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/> -->
+		<EventHandler EventName="OnBackingUpFastRight"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeft"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
@@ -1083,10 +1080,8 @@
 		<EventHandler EventName="OnHarvestingEnd"	ScriptFunctionName="OffTiberiumHarvested" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
-		<!-- 
-		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-	-->
+		<EventHandler EventName="OnBackingUpFastRight"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeft"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
@@ -1148,10 +1143,8 @@
 		<EventHandler EventName="OnHarvestingEnd"	ScriptFunctionName="OffTiberiumHarvested" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
-		<!--
-		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-	-->
+		<EventHandler EventName="OnBackingUpFastRight"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeft"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
