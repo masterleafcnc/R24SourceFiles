@@ -1258,7 +1258,35 @@
 		</ScatterRadiusVsType>
 	</WeaponTemplate>
 
-	
+	<WeaponTemplate
+		id="MARVGrenadeSoldierWeaponWarhead"
+		Name="MARVGrenadeSoldierWeaponWarhead"
+		ProjectileCollidesWith="ENEMIES"
+		RadiusDamageAffects="ALLIES ENEMIES NEUTRALS"
+		HitStoredTarget="true"
+ 		>
+		<Nuggets>
+			<DamageContainedNugget
+				MaxUnitsToDamage="100"
+				WindowBlastFX="FX_ClearGarrison"
+				Damage="1500000"
+				DamageType="GRENADE"
+				DeathType="EXPLODED">
+				<DamageObjectFilter
+					Rule="NONE"
+					Include="INFANTRY" />
+			</DamageContainedNugget>
+			<DamageNugget
+				Damage="200.0"
+				Radius="20.0"
+				DamageType="GRENADE"
+				DamageFXType="GDI_GRENADE"
+				DeathType="EXPLODED" />
+		</Nuggets>
+		<HitStoredObjectFilter
+			Rule="ANY"
+			Include="STRUCTURE" />
+	</WeaponTemplate>
 
 	<!-- emp grenades -->
 	<!--
