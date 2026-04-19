@@ -500,7 +500,7 @@
                     DeathTypesForbidden="TOPPLED" />
                 <Sound
                     Type="INITIAL"
-                    List="AudioEvent:ALI_StormRider_SoundDie" />
+                    List="ALI_StormRider_SoundDie" />
             </SlowDeath>
             <FXListBehavior
                 id="ModuleTag_FXList">

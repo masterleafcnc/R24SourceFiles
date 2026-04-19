@@ -284,7 +284,7 @@
 				SinkRate="4.0"
 				DestructionDelay="10.0s">
 				<Sound Type="INITIAL"
-					List="Multisound:HumanFaction_SmallBuilding_DieMS" />
+					List="HumanFaction_SmallBuilding_DieMS" />
 				<DieMuxData DeathTypes="ALL" />
 			</SlowDeath>
 			<FXListBehavior id="ModuleTag_FXList">

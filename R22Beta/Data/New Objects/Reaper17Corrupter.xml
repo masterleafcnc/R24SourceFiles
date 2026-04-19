@@ -489,7 +489,7 @@
                     DeathTypes="ALL" />
                 <Sound
                     Type="INITIAL"
-                    List="AudioEvent:ALI_Corrupter_SoundDie" />
+                    List="ALI_Corrupter_SoundDie" />
             </SlowDeath>
             <UncombineSpecialPower
                 id="ModuleTag_SpecialPowerUncombine"

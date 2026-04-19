@@ -299,7 +299,7 @@
                 </OCL>
                 <Sound
                     Type="INITIAL"
-                    List="AudioEvent:ALI_SeekerTank_Die" />
+                    List="ALI_SeekerTank_Die" />
                 <DieMuxData
                     DeathTypes="ALL"
                     DeathTypesForbidden="TOPPLED" />

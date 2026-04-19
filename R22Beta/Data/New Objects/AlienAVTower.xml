@@ -144,7 +144,7 @@
                 DestructionDelay="10s">
                 <Sound
                     Type="INITIAL"
-                    List="AudioEvent:ALI_Building_Die" />
+                    List="ALI_Building_Die" />
                 <DieMuxData
                     DeathTypes="ALL" />
             </SlowDeath>

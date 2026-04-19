@@ -570,7 +570,7 @@
                     DeathTypesForbidden="TOPPLED" />
                 <Sound
                     Type="INITIAL"
-                    List="Multisound:NOD_Generic_VoiceDieMS" />
+                    List="NOD_Generic_VoiceDieMS" />
             </SlowDeath>
             <FXListBehavior
                 id="ModuleTag_FXList">

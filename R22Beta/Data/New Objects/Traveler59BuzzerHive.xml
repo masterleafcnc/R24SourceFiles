@@ -229,7 +229,7 @@
 				SinkRate="4.0"
 				DestructionDelay="8.0s">
 				<Sound Type="INITIAL"
-					List="AudioEvent:ALI_Building_Die" />
+					List="ALI_Building_Die" />
 				<DieMuxData DeathTypes="ALL" />
 			</SlowDeath>
 			<SpawnBehavior id="ModuleTag_SpawnBuzzers"

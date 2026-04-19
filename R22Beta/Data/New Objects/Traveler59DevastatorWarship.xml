@@ -768,7 +768,7 @@
                     DeathTypesForbidden="TOPPLED" />
                 <Sound
                     Type="INITIAL"
-                    List="AudioEvent:ALI_DevastatorWarship_SoundDie" />
+                    List="ALI_DevastatorWarship_SoundDie" />
             </SlowDeath>
             <FXListBehavior
                 id="ModuleTag_FXList">

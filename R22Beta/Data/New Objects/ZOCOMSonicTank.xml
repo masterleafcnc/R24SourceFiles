@@ -403,7 +403,7 @@
                     DeathTypesForbidden="TOPPLED" />
                 <Sound
                     Type="INITIAL"
-                    List="Multisound:GDI_Generic_VoiceDieMS" />
+                    List="GDI_Generic_VoiceDieMS" />
             </SlowDeath>
             <FXListBehavior
                 id="ModuleTag_FXList">
