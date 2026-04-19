@@ -1427,7 +1427,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- FALSE POSITIVE FILTERS -- 
 	local fixUnits = false
 	if not group.fixCancelled then
-		if group.checksDone >= group.expectedChecks then
+		if group.checksDone >= floor(group.expectedChecks*CHECKS_DONE_THRESHOLD) then
 			--WriteToFile("checksDone.txt", "checks done: " .. tostring(group.checksDone) .. " expected checks: " .. tostring(selectedCount * CHECKS_DONE_THRESHOLD) .. "\n")
 			-- fix units that havent backedUp
 			if group.checksDone >= selectedCount-1 then 
@@ -1589,7 +1589,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 				--ExecuteAction("NAMED_FLASH", self, 2)
 				FixBuggingUnit(self, true)
 			end
-		elseif isBugging and group.checksDone >= group.expectedChecks then
+		elseif isBugging and group.checksDone >= floor(group.expectedChecks*CHECKS_DONE_THRESHOLD) then
 			if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
 				ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)
 			end
