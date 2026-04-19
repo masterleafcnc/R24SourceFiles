@@ -107,7 +107,7 @@ end
 function clearGroupTable(t)
     if type(t) == "table" then
         for k, v in t do
-			WriteToFile("groupTable.txt", "Clearing Key: " .. tostring(k) .. " | Value Type: " .. type(v) .. "\n")
+			--WriteToFile("groupTable.txt", "Clearing Key: " .. tostring(k) .. " | Value Type: " .. type(v) .. "\n")
             if type(v) == "table" then
                 clearGroupTable(v) -- Clean the nested child
             end
@@ -164,7 +164,7 @@ unitsReversing = {}
 TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
-CHECKS_DONE_THRESHOLD = 0.85 -- ratio of units that must finish checking before fix decision
+--CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
 BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
 BUG_THRESHOLD_SMALL_GROUP = 0.70 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
@@ -1427,10 +1427,10 @@ function CheckForObjReverseBugging(self, frameDiff)
 	-- FALSE POSITIVE FILTERS -- 
 	local fixUnits = false
 	if not group.fixCancelled then
-		if group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+		if group.checksDone >= group.expectedChecks then
 			--WriteToFile("checksDone.txt", "checks done: " .. tostring(group.checksDone) .. " expected checks: " .. tostring(selectedCount * CHECKS_DONE_THRESHOLD) .. "\n")
 			-- fix units that havent backedUp
-			if group.checksDone == selectedCount then
+			if group.checksDone >= selectedCount-1 then 
 				for _, unitRef in selectedUnitList do
        				local unit = unitsReversing[unitRef]
 					-- make it so units that have never moved are affected
@@ -1471,71 +1471,6 @@ function CheckForObjReverseBugging(self, frameDiff)
 			--	WriteToFile("totalBugging.txt", tostring(totalBugging) .. "\n")
 			--end
 
-			-- key is the object name, value is a table of units of that objectname
-			for objName,_ in group.reverseUnitsByType do
-				
-				local unitBugDataType = unitBugDataTable[objName]
-				bugDuration = unitBugDataType.frameCount
-
-				local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType [objName]) or {}
-				local thirdTurnUnitCountForType = 0
-				thirdTurnFrameCountForType, thirdTurnUnitCountForType = currentTurnData(thirdTurnFrameCountForType)
-				if thirdTurnUnitCountForType > 1 then
-					local avgThirdTurnCount = floor((thirdTurnFrameCountForType + thirdTurnUnitCountForType - 1) / thirdTurnUnitCountForType) 
-					--WriteToFile("average.txt",  tostring(avgThirdTurnCount) .. "\n")
-					--WriteToFile("objTable2.txt",  "thirdTurnFrameCountForType: " .. tostring(thirdTurnFrameCountForType) .. " thirdTurnUnitCountForType: " .. tostring(thirdTurnUnitCountForType) .. "\n")
-					if avgThirdTurnCount >= bugDuration-unitBugDataType.avgTurnCountOffset-1 then
-						group.fixCancelledByType = group.fixCancelledByType or {}
-						group.fixCancelledByType[objName] = true
-						--print("avgThirdTurnCount false positive filter")
-						-- ExecuteAction("NAMED_FLASH_WHITE", self, 2)
-					end
-				end
-			
-				-- WriteToFile("objTable.txt",  tostring(getTableSize(objTable)) .. "\n")
-				-- per-type counts for avg third turn cancellation
-				local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or {}
-				local firstTurnUnitCountForType = 0
-				firstTurnFrameCountForType, firstTurnUnitCountForType = currentTurnData(firstTurnFrameCountForType)
-				--WriteToFile("objTable.txt",  "firstTurnFrameCountForType: " .. tostring(firstTurnFrameCountForType) .. " firstTurnUnitCountForType: " .. tostring(firstTurnUnitCountForType) .. "\n")
-				-- if the average first turn frameDiff for this unit type is within bug range, only fix units whose frameDiff == bugDuration
-				-- small groups trigger this when reversing across map, with large groups its ok.
-				if firstTurnUnitCountForType > 1 then
-					local avgFirstTurnCount = floor((firstTurnFrameCountForType + firstTurnUnitCountForType - 1) / firstTurnUnitCountForType) 
-					--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. " " .. tostring(floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5)) .. "\n")
-					if avgFirstTurnCount >= floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5) then
-						--print("avgFirstTurnRatio false positive filter")
-						group.fixCancelledByType[objName] = true
-					end
-				end
-			end
-
-			if not group.thirdTurnCountChecked then
-				group.thirdTurnCountChecked = true
-				-- total across all types for thirdTurnMinRatio check
-				local notAllTypesAreBugging = false
-				-- objCount is table of all units of objName 
-				for objName,objCount in group.reverseUnitsByType do 
-					local count = getTableSize(objCount)
-					local unitBugDataType = unitBugDataTable[objName]
-					local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType [objName]) or {}
-					local thirdTurnUnitCountForType = 0
-					_, thirdTurnUnitCountForType = currentTurnData(thirdTurnFrameCountForType)
-					--WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. " unit count: " .. tostring(count) .. "\n")
-					local unitsBuggingOfThisType = totalBuggingPerType[objName] or 0
-					if not ((unitsBuggingOfThisType <= thirdTurnUnitCountForType) and (thirdTurnUnitCountForType >= 1) and thirdTurnUnitCountForType < ceil(count*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(count*unitBugDataType.notMovingBackupRatio))) then
-						notAllTypesAreBugging = true
-						--group.fixCancelledByType[objName] = true
-						-- group.fixCancelled = true
-						--ExecuteAction("NAMED_FLASH", self, 2)
-					end
-				end
-				if not notAllTypesAreBugging then
-					--print("notAllTypesAreBugging false positive filter")
-					fixUnits = false
-				end
-			end
-
 			-- if fastTurn trigger is 1 and cur modelstate for majority is fast turn -> cancel fix 
 			local numOfUnitsTurning = 0
 			for unitId,_ in selectedUnitList do
@@ -1553,8 +1488,75 @@ function CheckForObjReverseBugging(self, frameDiff)
 			--WriteToFile("numOfUnitsTurning.txt", "numOfUnitsTurning: " ..  tostring(numOfUnitsTurning) .. "selectedCount: " .. tostring(ceil(selectedCount*0.80)) .. "\n")
 			if numOfUnitsTurning > ceil(selectedCount*0.80) then
 				group.fixCancelled = true
-			--	fixUnits = false
-			--  print("numOfUnitsTurning false positive filter")
+				fixUnits = false
+			  	--print("numOfUnitsTurning false positive filter")
+			end
+
+			if not group.fixCancelled then 
+				-- key is the object name, value is a table of units of that objectname
+				for objName,_ in group.reverseUnitsByType do
+					
+					local unitBugDataType = unitBugDataTable[objName]
+					bugDuration = unitBugDataType.frameCount
+
+					local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType [objName]) or {}
+					local thirdTurnUnitCountForType = 0
+					thirdTurnFrameCountForType, thirdTurnUnitCountForType = currentTurnData(thirdTurnFrameCountForType)
+					if thirdTurnUnitCountForType > 1 then
+						local avgThirdTurnCount = floor((thirdTurnFrameCountForType + thirdTurnUnitCountForType - 1) / thirdTurnUnitCountForType) 
+						--WriteToFile("average.txt",  tostring(avgThirdTurnCount) .. "\n")
+						--WriteToFile("objTable2.txt",  "thirdTurnFrameCountForType: " .. tostring(thirdTurnFrameCountForType) .. " thirdTurnUnitCountForType: " .. tostring(thirdTurnUnitCountForType) .. "\n")
+						if avgThirdTurnCount >= bugDuration-unitBugDataType.avgTurnCountOffset-1 then
+							group.fixCancelledByType = group.fixCancelledByType or {}
+							group.fixCancelledByType[objName] = true
+							--print("avgThirdTurnCount false positive filter")
+							-- ExecuteAction("NAMED_FLASH_WHITE", self, 2)
+						end
+					end
+				
+					-- WriteToFile("objTable.txt",  tostring(getTableSize(objTable)) .. "\n")
+					-- per-type counts for avg third turn cancellation
+					local firstTurnFrameCountForType = (group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]) or {}
+					local firstTurnUnitCountForType = 0
+					firstTurnFrameCountForType, firstTurnUnitCountForType = currentTurnData(firstTurnFrameCountForType)
+					--WriteToFile("objTable.txt",  "firstTurnFrameCountForType: " .. tostring(firstTurnFrameCountForType) .. " firstTurnUnitCountForType: " .. tostring(firstTurnUnitCountForType) .. "\n")
+					-- if the average first turn frameDiff for this unit type is within bug range, only fix units whose frameDiff == bugDuration
+					-- small groups trigger this when reversing across map, with large groups its ok.
+					if firstTurnUnitCountForType > 1 then
+						local avgFirstTurnCount = floor((firstTurnFrameCountForType + firstTurnUnitCountForType - 1) / firstTurnUnitCountForType) 
+						--WriteToFile("averageFirst.txt",  tostring(avgFirstTurnCount) .. " " .. tostring(floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5)) .. "\n")
+						if avgFirstTurnCount >= floor(bugDuration*unitBugDataType.avgFirstTurnRatio+0.5) then
+							--print("avgFirstTurnRatio false positive filter")
+							group.fixCancelledByType[objName] = true
+						end
+					end
+				end
+
+				if not group.thirdTurnCountChecked then
+					group.thirdTurnCountChecked = true
+					-- total across all types for thirdTurnMinRatio check
+					local notAllTypesAreBugging = false
+					-- objCount is table of all units of objName 
+					for objName,objCount in group.reverseUnitsByType do 
+						local count = getTableSize(objCount)
+						local unitBugDataType = unitBugDataTable[objName]
+						local thirdTurnFrameCountForType = (group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType [objName]) or {}
+						local thirdTurnUnitCountForType = 0
+						_, thirdTurnUnitCountForType = currentTurnData(thirdTurnFrameCountForType)
+						--WriteToFile("data.txt", "thirdTurnUnitCount: " .. tostring(thirdTurnUnitCountForType) .. " is less than " .. tostring(ceil(count*unitBugData.thirdTurnMinRatio)) .. " group.unitsNotMovingBeforeBackingUp: " .. tostring(group.unitsNotMovingBeforeBackingUp) .. " is more than: " .. tostring(ceil(count*unitBugData.notMovingBackupRatio)) .. " unit count: " .. tostring(count) .. "\n")
+						local unitsBuggingOfThisType = totalBuggingPerType[objName] or 0
+						if not ((unitsBuggingOfThisType <= thirdTurnUnitCountForType) and (thirdTurnUnitCountForType >= 1) and thirdTurnUnitCountForType < ceil(count*unitBugDataType.thirdTurnMinRatio) and not (group.unitsNotMovingBeforeBackingUp >= ceil(count*unitBugDataType.notMovingBackupRatio))) then
+							notAllTypesAreBugging = true
+							--group.fixCancelledByType[objName] = true
+							-- group.fixCancelled = true
+							--ExecuteAction("NAMED_FLASH", self, 2)
+						end
+					end
+					if not notAllTypesAreBugging then
+						--print("notAllTypesAreBugging false positive filter")
+						fixUnits = false
+					end
+				end
 			end
 
 		end
@@ -1587,7 +1589,7 @@ function CheckForObjReverseBugging(self, frameDiff)
 				--ExecuteAction("NAMED_FLASH", self, 2)
 				FixBuggingUnit(self, true)
 			end
-		elseif isBugging and group.checksDone >= ceil(group.expectedChecks * CHECKS_DONE_THRESHOLD) then
+		elseif isBugging and group.checksDone >= group.expectedChecks then
 			if EvaluateCondition("UNIT_HAS_OBJECT_STATUS", unitReversing.stringReference, 4) then
 				ExecuteAction("UNIT_CHANGE_OBJECT_STATUS", unitReversing.stringReference, 4, 0)
 			end
@@ -1615,6 +1617,21 @@ function UnitIsAttacking(self)
 	unitReversing.wasAttackingBeforeReverse = true
 end
 
+function BackingUpFastTurn(self)
+	local _,unitReversing = GetUnitReversingData(self)
+	local playerTeam = tostring(ObjectTeamName(self))
+	local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
+	--local group = unitGroups[unitReversing.groupId]
+
+	-- track units that have backedup after receiving a groupId
+	if not unitReversing.expectedChecksFlag then
+		if group ~= nil then
+			group.expectedChecks = (group.expectedChecks or 0) + 1
+		end
+		unitReversing.expectedChecksFlag = true
+	end
+end
+
 -- Triggered by +BACKING_UP -TURN_LEFT_HIGH_SPEED and +BACKING_UP -TURN_RIGHT_HIGH_SPEED
 function BackingUpFastTurnEnd(self)
     local unitId,unitReversing = GetUnitReversingData(self)
@@ -1631,13 +1648,6 @@ function BackingUpFastTurnEnd(self)
 	local group = isValidTeam(playerTeam) and getglobal(playerTeam)[unitReversing.groupId] or nil
 	--local group = unitGroups[unitReversing.groupId]
 
-	-- track units that have backedup after receiving a groupId
-	if not unitReversing.expectedChecksFlag then
-		if group ~= nil then
-			group.expectedChecks = (group.expectedChecks or 0) + 1
-		end
-		unitReversing.expectedChecksFlag = true
-	end
 	local objName = getObjectName(self)
 	if unitReversing.timesTriggeredFast == 1 then
 		if group ~= nil then
@@ -1686,7 +1696,7 @@ function BackingUpTurnEnd(self)
 	end
 	local frameDiff = GetFrame() - unitReversing.firstFrame
 
-   if unitReversing ~= nil and unitReversing.timesTriggeredNormal < TURN_TRIGGER_COUNT then
+    if unitReversing ~= nil and unitReversing.timesTriggeredNormal < TURN_TRIGGER_COUNT then
 		unitReversing.timesTriggeredNormal = unitReversing.timesTriggeredNormal + 1
 		if unitReversing.fastTurnWas0Frames then
 			--WriteToFile("backingupfastendthree.txt",  "object went this long with 3 triggers: " .. tostring(frameDiff) .. "\n")

@@ -99,14 +99,6 @@
 			<Conditions>+BACKING_UP</Conditions>
 		</ModelConditionEvent>
 
-		<ModelConditionEvent Name="OnBackingUpFastLeft1">
-			<Conditions>+BACKING_UP +TURN_LEFT_HIGH_SPEED</Conditions>
-		</ModelConditionEvent>
-
-		<ModelConditionEvent Name="OnBackingUpFastRight1">
-			<Conditions>+BACKING_UP +TURN_RIGHT_HIGH_SPEED</Conditions>
-		</ModelConditionEvent>
-
 		<ModelConditionEvent Name="OnBackingUpLeft">
 			<Conditions>+BACKING_UP +TURN_LEFT</Conditions>
 		</ModelConditionEvent>
@@ -139,6 +131,14 @@
 
 		<ModelConditionEvent Name="OnBackingUpFastRightEnd">
 			<Conditions>+BACKING_UP -TURN_RIGHT_HIGH_SPEED</Conditions>
+		</ModelConditionEvent>
+
+		<ModelConditionEvent Name="OnBackingUpFastLeft">
+			<Conditions>+BACKING_UP +TURN_LEFT_HIGH_SPEED</Conditions>
+		</ModelConditionEvent>
+
+		<ModelConditionEvent Name="OnBackingUpFastRight">
+			<Conditions>+BACKING_UP +TURN_RIGHT_HIGH_SPEED</Conditions>
 		</ModelConditionEvent>
 
 		<ModelConditionEvent Name="OnDeployed">
@@ -1008,10 +1008,10 @@
 	<EventList Name="GenericReverseMoveVehicleFunctions_R24" Inherit="BaseScriptFunctions">
 		<EventHandler EventName="OnBackingUp1"	ScriptFunctionName="BackingUpEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUp"	ScriptFunctionName="BackingUp" DebugSingleStep="false"/>
-		<!--
-		<EventHandler EventName="OnBackingUpFastRight1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-		<EventHandler EventName="OnBackingUpFastLeft1"	ScriptFunctionName="BackingUpFast" DebugSingleStep="false"/>
-	-->
+	
+		<EventHandler EventName="OnBackingUpFastRight"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
+		<EventHandler EventName="OnBackingUpFastLeft"	ScriptFunctionName="BackingUpFastTurn" DebugSingleStep="false"/>
+
 		<EventHandler EventName="OnBackingUpFastRightEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpFastLeftEnd"	ScriptFunctionName="BackingUpFastTurnEnd" DebugSingleStep="false"/>
 		<EventHandler EventName="OnBackingUpRightEnd"	ScriptFunctionName="BackingUpTurnEnd" DebugSingleStep="false"/>
