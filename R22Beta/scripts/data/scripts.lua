@@ -2080,20 +2080,23 @@ function CheckExistingGroups(unitReversing, group)
 	local groupId  = unitReversing.groupId
 
 	-- units that are reverse moving
+	local liveReverseCount = 0
 	local unitsNotReverseMovingCount = 0
 
-	for k, unitRef in reverseUnitList do
-		if not unitsReversing[unitRef].isReverseMoving then 
-			unitsNotReverseMovingCount = unitsNotReverseMovingCount + 1
-		end
-		if next(reverseUnitList, k) == nil then
-			--WriteToFile("reverseUnitList.txt", tostring(unitsNotReverseMovingCount) .. " " .. tostring(floor(group.reverseUnitCount*0.9)) .. "\n")
-			if unitsReversing[unitRef] ~= nil and unitsNotReverseMovingCount < floor(group.reverseUnitCount*0.8) and (unitsReversing[unitRef].groupId == groupId) then
-				-- if a unit is reverse moving, dont clear the list
-				clearList = false
+	for _, unitRef in reverseUnitList do
+		local unit = unitsReversing[unitRef]
+		if unit ~= nil then
+			liveReverseCount = liveReverseCount + 1
+			if not unit.isReverseMoving then
+				unitsNotReverseMovingCount = unitsNotReverseMovingCount + 1
 			end
 		end
 	end
+
+	if liveReverseCount > 0 and unitsNotReverseMovingCount < ceil(liveReverseCount * 0.8) then
+		clearList = false
+	end
+
 	if clearList and group ~= nil then
 		-- clear groupId for all units in this group including the current one.
 		for _, unitRef in groupUnitList do
@@ -2135,13 +2138,6 @@ end
 function GroupUnitOnDeath(self)
 	local a,unitReversing = GetUnitReversingData(self)	
 	local groupId = unitReversing and unitReversing.groupId
-	clearSubTables(unitsReversing[a])
-	unitsReversing[a] = nil
-	if next(unitsReversing) == nil then
-		flushPlayerTeams() 
-		return
-		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
-	end
 
 	-- remove from the group its part of
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
@@ -2150,20 +2146,21 @@ function GroupUnitOnDeath(self)
 		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[groupId] or nil
 		--local group = unitGroups[groupId] 
 		-- remove this unit from the group snapshot
-		if group ~= nil and group.units ~= nil and group.units[a] ~= nil then
-			group.units[a] = nil
-			--group.unitCount = (group.unitCount or 1) - 1
-			group.unitCount = getTableSize(group.units)
-			if group.reverseUnits ~= nil and group.reverseUnits[a] ~= nil then
-				group.reverseUnits[a] = nil
-				group.reverseUnitCount = getTableSize(group.reverseUnits)
-				if group.expectedChecks > 0 then
-					group.expectedChecks = group.expectedChecks - 1
-				end
+		if group ~= nil then
+			if group.units ~= nil then
+				group.units[a] = nil
+				group.unitCount = getTableSize(group.units)
 			end
+			 if group.reverseUnits ~= nil then
+                if group.reverseUnits[a] ~= nil and group.expectedChecks ~= nil and group.expectedChecks > 0 then
+					group.expectedChecks = group.expectedChecks - 1
+                end
+                group.reverseUnits[a] = nil
+                group.reverseUnitCount = getTableSize(group.reverseUnits)
+        	end
 			-- check if theres no units left in the group and if so , clear the global.
 			CheckExistingGroups(unitReversing, group)
-			if group ~= nil and (group.unitCount <= 0 or next(group.units) == nil) then
+			if group.units == nil or group.unitCount <= 0 or next(group.units) == nil then
 				--unitGroups[groupId] = nil
 				local parentTable = getglobal(playerTeam)
 				local subTable = parentTable[groupId]
@@ -2176,6 +2173,29 @@ function GroupUnitOnDeath(self)
 			end
 		end
 	end
+
+	-- clear anchors and remove unitAnchor assignment from units that are following this unit.
+	if unitReversing.unitAnchor ~= nil then
+		 SetUnitAnchor(self, nil)
+	end
+
+	 if unitReversing.beingFollowedBy ~= nil then
+        for followerId,_ in unitReversing.beingFollowedBy do
+			local follower = unitsReversing[followerId]
+			if follower ~= nil and follower.unitAnchor == a then
+				SetUnitAnchor(follower.selfReference, nil)
+			end
+        end
+  	end
+
+	clearSubTables(unitsReversing[a])
+	unitsReversing[a] = nil
+	if next(unitsReversing) == nil then
+		flushPlayerTeams() 
+		return
+		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
+	end
+
 	RemoveFromUnitSelection(self)
 end
 
