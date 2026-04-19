@@ -2187,7 +2187,7 @@ function GroupUnitOnDeath(self)
 			end
         end
   	end
-
+	RemoveFromUnitSelection(self)
 	clearSubTables(unitsReversing[a])
 	unitsReversing[a] = nil
 	if next(unitsReversing) == nil then
@@ -2196,7 +2196,6 @@ function GroupUnitOnDeath(self)
 		--WriteToFile("flushingplayers.txt", tostring(getn(unitsReversing)) .. "\n")
 	end
 
-	RemoveFromUnitSelection(self)
 end
 
 -- gets the current selection count of units that are within a group of units
