@@ -104,12 +104,12 @@ function isValidTeam(team)
 	return false
 end
 
-function clearGroupTable(t)
+function clearSubTables(t)
     if type(t) == "table" then
         for k, v in t do
 			--WriteToFile("groupTable.txt", "Clearing Key: " .. tostring(k) .. " | Value Type: " .. type(v) .. "\n")
             if type(v) == "table" then
-                clearGroupTable(v) -- Clean the nested child
+                clearSubTables(v) -- Clean the nested child
             end
             t[k] = nil -- Wipe the entry
         end
@@ -127,24 +127,24 @@ function flushPlayerTeams()
             for k, v in teamTable do
                 if type(k) == "string" and strsub(k, 1, 6) == "group_" and type(v) == "table" then
                     -- Deep clear all sub-keys/nested tables
-                    clearGroupTable(v) 
+                    clearSubTables(v) 
                     -- Nil the reference in the parent (teamTable)
                     teamTable[k] = nil 
                 end
             end
-            --call clearGroupTable on these to wipe their contents
+            --call clearSubTables on these to wipe their contents
             if type(teamTable.units) == "table" then
-                clearGroupTable(teamTable.units)
+                clearSubTables(teamTable.units)
             end
 
             if type(teamTable.reverseUnits) == "table" then
-                clearGroupTable(teamTable.reverseUnits)
+                clearSubTables(teamTable.reverseUnits)
             end
 
             if type(teamTable.reverseUnitsByType) == "table" then
                 -- Even though this is a table of tables, the recursion 
-                -- in clearGroupTable will handle the nested unitId tables.
-                clearGroupTable(teamTable.reverseUnitsByType)
+                -- in clearSubTables will handle the nested unitId tables.
+                clearSubTables(teamTable.reverseUnitsByType)
             end
 		
             teamTable.unitCount = 0
@@ -164,7 +164,7 @@ unitsReversing = {}
 TURN_TRIGGER_COUNT = 2 -- number of turn triggers before checking if unit is bugging
 NO_COLLISION_DURATION = 4 -- seconds to disable collision on a bugged unit during fix
 REVERSE_SPAM_FRAME_WINDOW = 2 -- frames within which a repeat reverse-move command is ignored
---CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
+CHECKS_DONE_THRESHOLD = 0.90 -- ratio of units that must finish checking before fix decision
 BUG_THRESHOLD_LARGE_GROUP = 0.35 -- bugging ratio threshold for groups > LARGE_GROUP_SIZE
 BUG_THRESHOLD_SMALL_GROUP = 0.70 -- bugging ratio threshold for groups <= LARGE_GROUP_SIZE
 LARGE_GROUP_SIZE = 30 -- unit count that switches between small/large threshold
@@ -1172,7 +1172,8 @@ function GetUnitReversingData(self)
 			hasBeenSelected = false,
 			expectedChecksFlag = false,
 			groupIdAssigned = false,
-			isBeingFollowed = false,
+			--isBeingFollowed = false,
+			beingFollowedBy = {},
 			isReverseMoveHarvester = checkHarv()
 		}
 		return a, unitsReversing[a]
@@ -1302,25 +1303,50 @@ end
 function UnitGettingOutOfTheWay(self)
 	-- this unit is the anchor 
 	local _,unitReversing = GetUnitReversingData(self)
-	if unitReversing.isBeingFollowed then
+	-- to stop it firing all the time
+	if next(unitReversing.beingFollowedBy) ~= nil then
+		--ExecuteAction("NAMED_FLASH_WHITE", self, 2)
 		ObjectBroadcastEventToAllies(self, "GettingOutOfTheWayEvent", 100)
 	end
 end
 
 -- other is the unit that broadcasted this event, self is potentially the unit that is bumping into other
 function GettingOutOfTheWayEvent(self, other)
-	local _,unitReversingSelf = GetUnitReversingData(self)
-	local _,unitReversingOther = GetUnitReversingData(other)
+	local selfId,unitReversingSelf = GetUnitReversingData(self)
+	local otherId,unitReversingOther = GetUnitReversingData(other)
 	-- the object id of the unit matches the unit that broadcasted this event, concluding that a collision took place between that unit and the other.
 	if unitReversingSelf.unitAnchor ~= nil then
 		--WriteToFile("unitAnchor.txt",  tostring(unitReversingSelf.unitAnchor) .. "  " .. tostring(selfId) .. "\n")
-		if unitReversingSelf.hasBeenFixed and unitReversingOther.isBeingFollowed and unitReversingOther.hasComeToAStop then
+		if unitReversingSelf.hasBeenFixed and next(unitReversingOther.beingFollowedBy) ~= nil and unitReversingOther.beingFollowedBy[selfId] and unitReversingOther.hasComeToAStop then
 			ExecuteAction("NAMED_STOP", unitReversingSelf.selfReference)
 			--ExecuteAction("NAMED_FLASH", unitReversingSelf.selfReference, 2)
 			unitReversingSelf.hasBeenFixed = false
-			unitReversingOther.isBeingFollowed = false
+			--unitReversingOther.isBeingFollowed = false
+			SetUnitAnchor(self, nil)
 		end
 	end
+end
+
+function SetUnitAnchor(self, newAnchorId)
+    local unitId, unitData = GetUnitReversingData(self)
+    
+    -- clear old anchor if it exists
+    if unitData.unitAnchor ~= nil then
+        local oldAnchor = unitsReversing[unitData.unitAnchor]
+        if oldAnchor and oldAnchor.beingFollowedBy then
+			--ExecuteAction("NAMED_FLASH_WHITE", oldAnchor.selfReference, 2)
+            oldAnchor.beingFollowedBy[unitId] = nil
+        end
+    end
+
+    -- assign new unit to its beingFollowedBy table
+	unitData.unitAnchor = newAnchorId
+    if newAnchorId ~= nil then
+        local newAnchor = unitsReversing[newAnchorId]
+        if newAnchor then
+            newAnchor.beingFollowedBy[unitId] = true
+        end
+    end
 end
 
 -- checks if most units are moving and if the number returned exceeds the threshold then assign the hasComeToAStop to true
@@ -1338,13 +1364,16 @@ function UnitNoLongerMoving(self)
 	end
 
 	-- unitAnchor corresponds with objectId
-	if unitReversing.unitAnchor ~= nil then
+	--if unitReversing.unitAnchor ~= nil then
 		-- unit im anchored to
-		local unitImFollowing = unitsReversing[unitReversing.unitAnchor]
-		if unitImFollowing ~= nil and unitImFollowing.unitAnchor == unitId and unitImFollowing.isBeingFollowed then
-			unitImFollowing.isBeingFollowed = false
-		end
-	end
+	--	local unitImFollowing = unitsReversing[unitReversing.unitAnchor]
+	--	if unitImFollowing ~= nil and unitImFollowing.beingFollowedBy[unitId] then
+			-- check if beingFollowedBy table if its empty and then assign isBeingFollowed to false if so, else remove this unit from its subtable
+			--unitImFollowing.isBeingFollowed = false
+	--		ExecuteAction("NAMED_FLASH_WHITE", unitImFollowing.selfReference, 2)
+	--		unitImFollowing.beingFollowedBy[unitId] = nil
+	--	end
+	--end
 end
 
 function CheckForObjReverseBugging(self, frameDiff)
@@ -1755,10 +1784,12 @@ function FixBuggingUnit(self, applySpeedBuff)
 	-- check if unitAnchor is destroyed or is nil
 	if unitReversing.unitAnchor ~= nil then
 		if unitsReversing[unitReversing.unitAnchor] ~= nil and not EvaluateCondition("NAMED_NOT_DESTROYED",unitsReversing[unitReversing.unitAnchor].stringReference) then 
-			unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+			--unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+			SetUnitAnchor(self, GetANonBuggingUnit(selectedUnitList, self))
 		end
 	else
-		 unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
+		SetUnitAnchor(self, GetANonBuggingUnit(selectedUnitList, self))
+		 --unitReversing.unitAnchor = GetANonBuggingUnit(selectedUnitList, self)
 		 --WriteToFile("GetANonBuggingUnit.txt",  "closest unit:  " .. tostring(unitReversing.unitAnchor) .. "\n")
 		 -- there are no units that arent bugging so lets just stop this one and return the function
 		 if unitReversing.unitAnchor == nil then
@@ -1775,7 +1806,8 @@ function FixBuggingUnit(self, applySpeedBuff)
 		unitReversing.hasBeenFixed = true
 		-- add this units objectid to the unitsFollowingMe array of the anchor unit
 		-- anchorUnit.unitsFollowingMe[a] = a
-		anchorUnit.isBeingFollowed = true
+		--anchorUnit.isBeingFollowed = true
+		anchorUnit.beingFollowedBy[a] = a
 		-- remove from first,turn average calculation 
 		local objName = getObjectName(self)
 		if group.firstTurnFrameCountByType[objName][a] ~= nil then
@@ -1808,7 +1840,8 @@ function FixBuggingUnit(self, applySpeedBuff)
 				-- only proceed if we found a non-bugging unit
 				if nonBuggingUnit ~= nil then
 					-- assign the new closeestUnit to a unit not flagged as being bugged
-					unitsReversing[unitRef].unitAnchor = nonBuggingUnit
+					--unitsReversing[unitRef].unitAnchor = nonBuggingUnit
+					SetUnitAnchor(unitsReversing[unitRef].selfReference, nonBuggingUnit)
 					-- move this unit to the previously assigned non bugging unit
 					if unitsReversing[unitRef].hasBeenFixed and EvaluateCondition("UNIT_HAS_UPGRADE",unitsReversing[unitRef].stringReference, "Upgrade_ReverseMoveSpeedBuff") and ObjectTestModelCondition(unitsReversing[unitRef].selfReference, "USER_72") then
 						--print("assigning to different unit")
@@ -1816,7 +1849,8 @@ function FixBuggingUnit(self, applySpeedBuff)
 						ExecuteAction("UNIT_GUARD_OBJECT", unitsReversing[unitRef].stringReference, newAnchorUnit.stringReference)
 						-- add this units objectid to the unitsFollowingMe array of the anchor unit
 						-- newAnchorUnit.unitsFollowingMe[unitRef] = unitRef
-						newAnchorUnit.isBeingFollowed = true
+						--newAnchorUnit.isBeingFollowed = true
+						newAnchorUnit.beingFollowedBy[unitRef] = unitRef
 					end
 				end
 			end
@@ -1851,7 +1885,8 @@ function AssignRandomAnchor(self)
 		-- gets a unit that isnt self randomly.
 		local randomUnitId = GetRandomKey(selectedUnitList, a)
 		if randomUnitId ~= nil and unitsReversing[randomUnitId] ~= nil then
-			unitReversing.unitAnchor = randomUnitId
+			--unitReversing.unitAnchor = randomUnitId
+			SetUnitAnchor(self, randomUnitId)
 		end
 	end
 	ObjectBroadcastEventToAllies(self, "UnitAnchorEvent", 65)
@@ -1879,7 +1914,7 @@ function BackingUp(self)
 	-- Reset the flags here to ensure we don't carry over bugs from previous moves
 	local resetFlags = function()
 		%unitReversing.hasBeenFixed = false
-		%unitReversing.unitAnchor = nil
+		--%unitReversing.unitAnchor = nil
 		%unitReversing.timesTriggeredFast = 0
 		%unitReversing.timesTriggeredNormal = 0
 		%unitReversing.firstFrame = %curFrame
@@ -1912,7 +1947,7 @@ function BackingUp(self)
 			local parentTable = getglobal(playerTeam)
 			local subTable = parentTable[groupId]
 			if type(subTable) == "table" then
-				clearGroupTable(subTable)   -- Step 1: Wipe all internal sub-keys
+				clearSubTables(subTable)   -- Step 1: Wipe all internal sub-keys
 				parentTable[groupId] = nil -- Step 2: Delete the reference from parent
 			end
 			--CheckExistingGroups(self)
@@ -1935,8 +1970,10 @@ function OptimizedUnitAnchor(self, other)
 	-- if one of the two units is a harvester dont override the random anchor.
 	if unitReversingSelf.isReverseMoveHarvester == unitReversingOther.isReverseMoveHarvester then
 		if unitReversingSelf.groupId == unitReversingOther.groupId then
-			unitReversingSelf.unitAnchor = otherId
-			unitReversingOther.unitAnchor = selfId
+			--unitReversingSelf.unitAnchor = otherId
+			--unitReversingOther.unitAnchor = selfId
+			SetUnitAnchor(unitReversingSelf.selfReference, otherId)
+			SetUnitAnchor(unitReversingOther.selfReference, selfId)
 			--ExecuteAction("NAMED_FLASH", unitReversingSelf.selfReference, 2)
 			--ExecuteAction("NAMED_FLASH_WHITE", unitReversingOther.selfReference, 2)
 		end
@@ -2086,7 +2123,7 @@ function CheckExistingGroups(unitReversing, group)
 			local parentTable = getglobal(playerTeam)
 			local subTable = parentTable[groupId]
 			if type(subTable) == "table" then
-				clearGroupTable(subTable)  
+				clearSubTables(subTable)  
 				parentTable[groupId] = nil
 			end
 		end
@@ -2098,6 +2135,7 @@ end
 function GroupUnitOnDeath(self)
 	local a,unitReversing = GetUnitReversingData(self)	
 	local groupId = unitReversing and unitReversing.groupId
+	clearSubTables(unitsReversing[a])
 	unitsReversing[a] = nil
 	if next(unitsReversing) == nil then
 		flushPlayerTeams() 
@@ -2130,7 +2168,7 @@ function GroupUnitOnDeath(self)
 				local parentTable = getglobal(playerTeam)
 				local subTable = parentTable[groupId]
 				if type(subTable) == "table" then
-					clearGroupTable(subTable)  
+					clearSubTables(subTable)  
 					parentTable[groupId] = nil
 				end
 				--CheckExistingGroups(self)
