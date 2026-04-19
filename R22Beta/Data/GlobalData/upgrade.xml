@@ -200,15 +200,15 @@
 		IconImage="Button_Upgrade_QuadTurrets">
 	</UpgradeTemplate>	
 
-	<!-- plasma disc launcher reduced to 1000$ 30s to make this unit more viable -->
+	<!-- plasma disc launcher increased back to 1500$ 45s to delay shock trooper transitions with disc launchers -->
 	<UpgradeTemplate id="Upgrade_AlienShockTrooperPlasmaDiskLauncher" 
 		DisplayName="UpgradeName:ALIENPlasmaDiscLauncher"
 		AcquireHint="UpgradePrereq:ALIENPlasmaDiscLauncher"
 		TypeDescription="UpgradeType:ALIENPlasmaDiscLauncher"
 		Description="UpgradeDesc:ALIENPlasmaDiscLauncher"
 		Type="PLAYER"
-		BuildTime="30.0s"
-		BuildCost="1000"
+		BuildTime="45.0s"
+		BuildCost="1500"
 		LocalPlayerProductionStartedEvaEvent="None"
 		ResearchCompleteEvaEvent ="UpgradeComplete"
 		LocalPlayerBuildOnHoldEvaEvent="BuildOnHold"

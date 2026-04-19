@@ -5970,9 +5970,9 @@
 		id="GDIGrenadeSoldierGrenade"
 		Name="GDIGrenadeSoldierGrenade"
 		AttackRange="260"
-		WeaponSpeed="220"
-		MinWeaponSpeed="220"
-		MaxWeaponSpeed="240"
+		WeaponSpeed="230"
+		MinWeaponSpeed="230"
+		MaxWeaponSpeed="250"
 		FireSound="AudioEvent:GDI_Grenadier_GrenadeThrow"
 		AcceptableAimDelta="20d"
 		PreAttackType="PER_SHOT"
@@ -6030,7 +6030,7 @@
 					Include="INFANTRY" />
 			</DamageContainedNugget>
 			<DamageNugget
-				Damage="60.0"
+				Damage="66.0"
 				Radius="40.0"
 				DamageType="GRENADE"
 				DamageFXType="GDI_GRENADE"

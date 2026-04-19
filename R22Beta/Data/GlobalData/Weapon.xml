@@ -642,7 +642,7 @@
 						<IncludeThing>Reaper17MCV</IncludeThing>
 					</Filter>
 				</DamageScalarDetails>
-	
+				<!-- removed scaler vs firehawks to prevent one shotting
 				<DamageScalarDetails Scalar= "105%">
 					<Filter
 						Rule="NONE">
@@ -651,7 +651,7 @@
 						<IncludeThing>ZOCOMFireHawk</IncludeThing>
 					</Filter>
 				</DamageScalarDetails>
-			
+				-->
 			</DamageNugget>
 		</Nuggets>
 	</WeaponTemplate>
