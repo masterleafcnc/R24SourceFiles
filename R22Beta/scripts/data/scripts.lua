@@ -1810,11 +1810,14 @@ function FixBuggingUnit(self, applySpeedBuff)
 		anchorUnit.beingFollowedBy[a] = a
 		-- remove from first,turn average calculation 
 		local objName = getObjectName(self)
-		if group.firstTurnFrameCountByType[objName][a] ~= nil then
-			group.firstTurnFrameCountByType[objName][a] = nil
+
+		local firstTurnFrameCountForType = group.firstTurnFrameCountByType and group.firstTurnFrameCountByType[objName]
+		if firstTurnFrameCountForType ~= nil and firstTurnFrameCountForType[a] ~= nil then
+			firstTurnFrameCountForType[a] = nil
 		end
-		if group.thirdTurnFrameCountByType[objName][a] ~= nil then
-			group.thirdTurnFrameCountByType[objName][a] = nil
+		local thirdTurnFrameCountForType = group.thirdTurnFrameCountByType and group.thirdTurnFrameCountByType[objName]
+		if thirdTurnFrameCountForType ~= nil and thirdTurnFrameCountForType[a] ~= nil then
+			thirdTurnFrameCountForType[a] = nil
 		end
 	end
 
@@ -2158,6 +2161,13 @@ function GroupUnitOnDeath(self)
                 group.reverseUnits[a] = nil
                 group.reverseUnitCount = getTableSize(group.reverseUnits)
         	end
+			local objName = getObjectName(self)
+			if group.reverseUnitsByType[objName] ~= nil then
+				group.reverseUnitsByType[objName][a] = nil
+				if getTableSize(group.reverseUnitsByType[objName]) <= 0 then 
+					group.reverseUnitsByType[objName] = nil
+				end
+			end
 			-- check if theres no units left in the group and if so , clear the global.
 			CheckExistingGroups(unitReversing, group)
 			if group.units == nil or group.unitCount <= 0 or next(group.units) == nil then
