@@ -34,7 +34,7 @@
 		id="Modifier_ReverseMoveSpeedBuff"
 		Category="NONE"
 		Duration="1.5s">
-		<Modifier Type="SPEED" Value="115%" />
+		<Modifier Type="SPEED" Value="120%" />
 	</AttributeModifier>
 
 	<!-- gunwalkers -->
@@ -42,7 +42,7 @@
 		id="Modifier_ReverseMoveSpeedBuffGunwalker"
 		Category="NONE"
 		Duration="1.5s">
-		<Modifier Type="SPEED" Value="105%" />
+		<Modifier Type="SPEED" Value="110%" />
 	</AttributeModifier>
 
 	<!-- MARVS, mammoth tanks, shatterers -->
@@ -50,7 +50,7 @@
 		id="Modifier_ReverseMoveSpeedBuffMammoth"
 		Category="NONE"
 		Duration="1.5s">
-		<Modifier Type="SPEED" Value="125%" />
+		<Modifier Type="SPEED" Value="130%" />
 	</AttributeModifier>
 
 	<!-- scorps, seekers, preds -->
@@ -58,7 +58,7 @@
 		id="Modifier_ReverseMoveSpeedBuffScorp"
 		Category="NONE"
 		Duration="1.5s">
-		<Modifier Type="SPEED" Value="120%" />
+		<Modifier Type="SPEED" Value="125%" />
 	</AttributeModifier>
 
 	<!-- to ensure traveler 59 do not get faster infantry with the base infantry speed buff --> 
