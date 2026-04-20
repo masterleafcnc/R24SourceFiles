@@ -215,8 +215,8 @@ unitBugDataTable = {
 	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
 	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
 	
-	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.01, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Nod Stealth Tank
-	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -3, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.01, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Marked of Kane Stealth Tank
+	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -2, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Nod Stealth Tank
+	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -2, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Marked of Kane Stealth Tank
 
 	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
 
@@ -260,21 +260,21 @@ unitBugDataTable = {
 	["51430053"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -6, bugCheckLowerLimit = 3, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.05, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.60 }, -- Traveler-59 Gunwalker
 
 	-- GDI UNITS --
-	["D01CFD88"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI APC
-	["7CC56843"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Steel Talons APC
-	["64BCB106"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM APC
-	["AF462A8F"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- GDI Veteran APC
-	["BD7701CB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- ZOCOM Veteran APC
+	["D01CFD88"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI APC
+	["7CC56843"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons APC
+	["64BCB106"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM APC
+	["AF462A8F"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Veteran APC
+	["BD7701CB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Veteran APC
 
 	["F714BBD3"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Predator Tank
 	["E6EAD02C"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Predator Tank
 
-	["AE73138F"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Zone Shatterer
-	["2144BD64"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Shatterer
+	["AE73138F"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 9, bugCheckUpperLimit = 10, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Zone Shatterer
+	["2144BD64"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 9, bugCheckUpperLimit = 10, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Shatterer
 
-	["12E1C8C8"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 10, bugCheckUpperLimit = 12, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Mammoth Tank
-	["BC0A0849"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 10, bugCheckUpperLimit = 12, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Mammoth Tank
-	["C1B5AB13"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 10, bugCheckUpperLimit = 12, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Mammoth Tank
+	["12E1C8C8"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 9, bugCheckUpperLimit = 11, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Mammoth Tank
+	["BC0A0849"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 9, bugCheckUpperLimit = 11, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Mammoth Tank
+	["C1B5AB13"] = { frameCount = 28,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 6, bugCheckLowerLimit = 9, bugCheckUpperLimit = 11, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Mammoth Tank
 	
 	["5A6044BC"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Slingshot
 	["B54034FF"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -2, bugCheckLowerLimit = 2, bugCheckUpperLimit = 3, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Slingshot
@@ -292,12 +292,12 @@ unitBugDataTable = {
 	["921C06CC"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Surveyor
 	["F3F183DD"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 0, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Steel Talons Surveyor
 
-	["AD5F0217"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- ZOCOM Pitbull
-	["6FF52808"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- GDI Pitbull
-	["C6387E0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Steel Talons Pitbull
-	["AABD1C1F"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- ZOCOM Veteran Pitbull
-	["D9E0C318"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- GDI Veteran Pitbull
-	["90BA3D4D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.45 }, -- Steel Talons Veteran Pitbull
+	["AD5F0217"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- ZOCOM Pitbull
+	["6FF52808"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- GDI Pitbull
+	["C6387E0"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Steel Talons Pitbull
+	["AABD1C1F"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- ZOCOM Veteran Pitbull
+	["D9E0C318"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- GDI Veteran Pitbull
+	["90BA3D4D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.25, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Steel Talons Veteran Pitbull
 
 	["6FCB2318"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Rig
 	["B48BEDD2"] = { frameCount = 12,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Rig
@@ -1830,6 +1830,7 @@ function FixBuggingUnit(self, applySpeedBuff)
 	end
 	-- apply upgrade 
 	if not EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") and applySpeedBuff then
+		--print("applying speed buff !")
 		ObjectGrantUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
 	end
 
@@ -2324,6 +2325,7 @@ function BuggedUnitTimeoutEnd(self)
 
 	if EvaluateCondition("UNIT_HAS_UPGRADE",unitReversing.stringReference, "Upgrade_ReverseMoveSpeedBuff") then
 		ObjectRemoveUpgrade(self, "Upgrade_ReverseMoveSpeedBuff") 
+		--ExecuteAction("NAMED_FLASH_WHITE", unitReversing.stringReference, 2)
 	end		
 end
 
