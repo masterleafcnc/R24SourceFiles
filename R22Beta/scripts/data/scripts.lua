@@ -214,14 +214,14 @@ unitBugDataTable = {
 	["79609108"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Black Hand Raider Buggy
 	["6354531D"] = { frameCount = 7,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 3, bugCheckUpperLimit = 2, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Nod Raider Buggy
 
-	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
-	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
-	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
+	["1B44D6AE"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Mok Scorpion Tank
+	["A33F11AF"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Scorpion Tank
+	["2F9131D"]  = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Nod Scorpion Tank
 	
 	["26538D"]   = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -2, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Nod Stealth Tank
 	["1025B90B"] = { frameCount = 7,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = -2, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.50 }, -- Marked of Kane Stealth Tank
 
-	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 5, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
+	["F38615BD"] = { frameCount = 11, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 1, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.40 }, -- Black Hand Mantis (Shares locomotor with Scorpion Tank)
 
 	["FD8822B1"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Nod Flame Tank
 	["1E1AEEBE"] = { frameCount = 14, reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 4, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- Black Hand Flame Tank
@@ -269,8 +269,8 @@ unitBugDataTable = {
 	["AF462A8F"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Veteran APC
 	["BD7701CB"] = { frameCount = 9,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = -1, bugCheckLowerLimit = 4, bugCheckUpperLimit = 4, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Veteran APC
 
-	["F714BBD3"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Predator Tank
-	["E6EAD02C"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 5, bugCheckUpperLimit = 6, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Predator Tank
+	["F714BBD3"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 6, bugCheckUpperLimit = 7, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Predator Tank
+	["E6EAD02C"] = { frameCount = 14,  reallyDamagedDurationMult = 1.5, avgTurnCountOffset = 2, bugCheckLowerLimit = 6, bugCheckUpperLimit = 7, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Predator Tank
 
 	["AE73138F"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 9, bugCheckUpperLimit = 10, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- ZOCOM Zone Shatterer
 	["2144BD64"] = { frameCount = 25,  reallyDamagedDurationMult = 1.0, avgTurnCountOffset = 1, bugCheckLowerLimit = 9, bugCheckUpperLimit = 10, thirdTurnMinRatio = 0.35, notMovingBackupRatio = 0.15, avgFirstTurnRatio = 0.36 }, -- GDI Shatterer
