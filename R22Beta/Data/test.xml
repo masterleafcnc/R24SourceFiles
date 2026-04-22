@@ -127,7 +127,8 @@
 		<Include source="MarkedOfKane/Units/markedofkanemobileartillery.xml" type="all"/>
 		<Include source="GlobalData/Locomotor.xml" type="all"/>  -->
 
-		<!-- new objects 
+		<Include source="GDI\Units\GDIMARV.xml" type="all"/>
+		<!-- new objects
 		<Include type="all" source="New Objects/AlienBuzzerHive.xml" />
 		<Include type="all" source="New Objects/AlienStormrider.xml" />
 		<Include type="all" source="New Objects/BlackHandRaiderTank.xml" />
@@ -146,7 +147,7 @@
 		<Include source="New Objects\Reaper17Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59Corrupter.xml" type="all"/>
 		<Include source="New Objects\Traveler59SeekerTank.xml" type="all"/>
-		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" /> -->
+		<Include type="all" source="New Objects/Traveler59DevastatorWarship.xml" /> 
 
 		<Include type="all" source="Alien\Structures\AlienStasisChamber.xml" />
 		<Include type="all" source="GDI\Structures\GDISpaceCommandUplink.xml" />
@@ -158,6 +159,15 @@
 		<Include type="all" source="ZOCOM\Structures\zocomarmory.xml" />
 		<Include type="all" source="ZOCOM\Structures\zocommedicalbay.xml" />
 		<Include type="all" source="traveler59\Structures\T59Reactor.xml" />
+
+		<Include type="all" source="GlobalData/Armor.xml" />
+		<Include type="all" source="GlobalData/AttributeModifier.xml" />
+		<Include type="all" source="GlobalData/Weapon.xml" />
+		<Include type="all" source="GlobalData/WeaponR21.xml" />
+		<Include type="all" source="GlobalData/upgrade.xml" /> -->
+
+
+
 
 		
 		<!-- Reverse move speed buff updated units 
@@ -186,7 +196,6 @@
 		<Include source="GDI\Units\GDIAPCVeteran.xml" type="all"/>
 		<Include source="GDI\Units\GDIHarvester.xml" type="all"/>
 		<Include source="GDI\Units\GDIMammoth.xml" type="all"/>
-		<Include source="GDI\Units\GDIMARV.xml" type="all"/>
 		<Include source="GDI\Units\GDIMCV.xml" type="all"/>
 		<Include source="GDI\Units\GDIRig.xml" type="all"/>
 		<Include source="GDI\Units\GDISurveyor.xml" type="all"/>

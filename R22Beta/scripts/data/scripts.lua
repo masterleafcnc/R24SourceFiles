@@ -125,6 +125,32 @@ function clearSubTables(t, seen)
 	end
 end
 
+function ClearGroup(playerTeam, groupId)
+	if groupId == nil or not isValidTeam(playerTeam) then return false end
+
+	local teamTable = getglobal(playerTeam)
+	if type(teamTable) ~= "table" then return false end
+
+	teamTable[groupId] = nil
+	return true
+end
+
+function GetGroup(playerTeam, groupId)
+	if groupId == nil or not isValidTeam(playerTeam) then return nil end
+
+	local teamTable = getglobal(playerTeam)
+	if type(teamTable) ~= "table" then return nil end
+
+	return teamTable[groupId]
+end
+
+function IsGroupEmpty(group)
+	if type(group) ~= "table" then return true end
+	if group.unitCount == nil or group.unitCount <= 0 then return true end
+	if type(group.units) ~= "table" then return true end
+	return next(group.units) == nil
+end
+
 function flushPlayerTeams()
     for i = 1, 8 do
         local player = "teamPlayer_" .. i
@@ -1948,15 +1974,10 @@ function BackingUp(self)
 	local groupId = unitReversing.groupId 
 	if groupId ~= nil then
 		local playerTeam = tostring(ObjectTeamName(self))
-		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[groupId] or nil
-		if group ~= nil and (group.units == nil or group.unitCount == nil or group.unitCount <= 0 or next(group.units) == nil) then
+		local group = GetGroup(playerTeam, groupId)
+		if IsGroupEmpty(group) then
 			--unitGroups[groupId] = nil
-			local parentTable = getglobal(playerTeam)
-			local subTable = parentTable[groupId]
-			if type(subTable) == "table" then
-				clearSubTables(subTable)   
-				parentTable[groupId] = nil 
-			end
+			ClearGroup(playerTeam, groupId)
 			--CheckExistingGroups(self)
 			--print("clearing global")
 		end
@@ -2130,14 +2151,8 @@ function CheckExistingGroups(unitReversing, group)
 		--unitGroups[groupId] = nil
 		local playerTeam = tostring(ObjectTeamName(unitReversing.selfReference))
 		if isValidTeam(playerTeam) then 
-			local parentTable = getglobal(playerTeam)
-			local subTable = parentTable[groupId]
-			if type(subTable) == "table" then
-				clearSubTables(subTable)  
-				parentTable[groupId] = nil
-			end
+			ClearGroup(playerTeam, groupId)
 		end
-		--CheckExistingGroups(self)
 		return true
 	end
 
@@ -2153,7 +2168,7 @@ function GroupUnitOnDeath(self)
 	-- WriteToFile("unitId.txt", tostring(a) .. "\n")
 	if groupId ~= nil then
 		local playerTeam = tostring(ObjectTeamName(self))
-		local group = isValidTeam(playerTeam) and getglobal(playerTeam)[groupId] or nil
+		local group = GetGroup(playerTeam, groupId)
 		--local group = unitGroups[groupId] 
 		-- remove this unit from the group snapshot
 		if group ~= nil then
@@ -2177,14 +2192,9 @@ function GroupUnitOnDeath(self)
 			end
 			-- check if theres no units left in the group and if so , clear the global.
 			local groupWasCleared = CheckExistingGroups(unitReversing, group)
-			if not groupWasCleared and (group.units == nil or group.unitCount == nil or group.unitCount <= 0 or next(group.units) == nil) then
+			if not groupWasCleared and IsGroupEmpty(group) then
 				--unitGroups[groupId] = nil
-				local parentTable = getglobal(playerTeam)
-				local subTable = parentTable[groupId]
-				if type(subTable) == "table" then
-					clearSubTables(subTable)  
-					parentTable[groupId] = nil
-				end
+				ClearGroup(playerTeam, groupId)
 				--CheckExistingGroups(self)
 				--print("clearing global on death")
 			end
