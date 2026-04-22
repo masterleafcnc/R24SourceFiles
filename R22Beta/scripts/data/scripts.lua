@@ -2112,14 +2112,15 @@ function CheckExistingGroups(unitReversing, group)
 	local unitsNotReverseMovingCount = 0
 
 	for _, unitRef in reverseUnitList do
-		local unit = unitsReversing[unitRef]
-		if unit ~= nil then
-			liveReverseCount = liveReverseCount + 1
-			if not unit.isReverseMoving then
-				unitsNotReverseMovingCount = unitsNotReverseMovingCount + 1
-			end
-		end
-	end
+        local unit = unitsReversing[unitRef]  
+        if unit ~= nil and unit.groupId == groupId then
+            liveReverseCount = liveReverseCount + 1
+            -- If the unit is part of the group but has stopped moving, count it
+            if not unit.isReverseMoving then
+                unitsNotReverseMovingCount = unitsNotReverseMovingCount + 1
+            end
+        end
+    end
 
 	if liveReverseCount > 0 and unitsNotReverseMovingCount < ceil(liveReverseCount * 0.8) then
 		clearList = false
@@ -2152,6 +2153,7 @@ function CheckExistingGroups(unitReversing, group)
 		local playerTeam = tostring(ObjectTeamName(unitReversing.selfReference))
 		if isValidTeam(playerTeam) then 
 			ClearGroup(playerTeam, groupId)
+			--print("clearing group!")
 		end
 		return true
 	end
