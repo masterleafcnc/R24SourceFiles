@@ -22,6 +22,7 @@
 		EditorName="Traveler59StalkerSquad"
 		Description="Desc:Traveler59Stalker"
 		TypeDescription="Type:Traveler59Stalker"
+		WorldMapArmoryUpgradesAllowed="Upgrade_Traveler59AdvancedArticulators"
 		UnitTypeIcon="ScrinStalkerPip"
 		RadarPriority="NOT_ON_RADAR">
 		<DisplayName>NAME:ALIENStalker</DisplayName>
