@@ -66,7 +66,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon="MissilemenIcon"
 		ReinvisibilityDelay="4s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_MoKTiberiumInfusion Upgrade_TiberiumInfusion"
+		WorldMapArmoryUpgradesAllowed="Upgrade_MoKTiberiumInfusion"
 		CaptureTime="0s"
 		BuildCost="400"
 		RefundValue="0"
@@ -356,7 +356,7 @@
 				SetBonusModelConditionOnSpeedBonus="False"
 				SecondaryQueue="False"
 				IgnorePreReqs="False" />
-			<BannerCarrierUpgrade
+			<!--<BannerCarrierUpgrade
 				id="85E46E84"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -364,7 +364,7 @@
 				WaypointMode="False"
 				WaypointModeTerminal="True">
 				<TriggeredBy>Upgrade_NODConfessorUpgrade</TriggeredBy>
-			</BannerCarrierUpgrade>
+			</BannerCarrierUpgrade>-->
 			<AttributeModifierUpgrade
 				id="3129F082"
 				RequiresAllTriggers="False"
@@ -377,7 +377,7 @@
 					AnimState="USER_1"
 					Frames="0"
 					Trigger="0" />
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<AimWeapon
