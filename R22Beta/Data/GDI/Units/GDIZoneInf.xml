@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="us-ascii" ?>
+<?xml version="1.0" encoding="us-ascii" ?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset">
 
 	<!-- ************************************************************************* GDI  *********************************************************************************** -->
@@ -75,6 +75,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon=""
 		ReinvisibilityDelay="4s"
+		WorldMapArmoryUpgradesAllowed="Upgrade_ZoneTrooperScannerPack Upgrade_ZoneTrooperAutoInjectors"
 		CaptureTime="0s"
 		BuildCost="313"
 		RefundValue="0"
