@@ -70,6 +70,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon="CyborgAwakenedPip"
 		ReinvisibilityDelay="4s"
+		WorldMapArmoryUpgradesAllowed="Upgrade_NodTechCenterChargedParticleBeam"
 		CaptureTime="0s"
 		BuildCost="1200"
 		RefuntValue="0"

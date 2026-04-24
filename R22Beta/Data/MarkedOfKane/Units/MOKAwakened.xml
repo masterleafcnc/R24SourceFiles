@@ -70,6 +70,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon=""
 		ReinvisibilityDelay="4s"
+		WorldMapArmoryUpgradesAllowed="Upgrade_NodTechCenterChargedParticleBeam"
 		CaptureTime="0s"
 		BuildCost="400"
 		RefundValue="0"
