@@ -23,13 +23,13 @@
 		EditorName="NODMilitantRocket"
 		Description="Desc:NODMilitantRocket"
 		TypeDescription="Type:NODMilitantRocket"
-		WorldMapArmoryUpgradesAllowed="Upgrade_TiberiumInfusion Upgrade_NODConfessorUpgrade">
+		WorldMapArmoryUpgradesAllowed="Upgrade_TiberiumInfusion">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:NODMilitantRocket</DisplayName>
 		<DisplayUpgrade
 			id="Tag_DisplayUpgrade1">Upgrade_TiberiumInfusion</DisplayUpgrade>
-		<DisplayUpgrade
-			id="Tag_DisplayUpgrade2">Upgrade_NODConfessorUpgrade</DisplayUpgrade>
+		<!--<DisplayUpgrade
+			id="Tag_DisplayUpgrade2">Upgrade_NODConfessorUpgrade</DisplayUpgrade>-->
 		<ArmorSet
 			Armor="NODRocketMilitantArmor"
 			DamageFX="InfantryDamageFX" />
@@ -620,11 +620,6 @@
 				id="TiberiumInfusionUpgradeSound"
 				SoundToPlay="AudioEvent:NOD_TiberiumUpgrade">
 				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
-			</AudioLoopUpgrade>
-			<AudioLoopUpgrade
-				id="NODConfessorUpgradeSound"
-				SoundToPlay="AudioEvent:NOD_Confessor_Upgrade">
-				<TriggeredBy>Upgrade_NODConfessorUpgrade</TriggeredBy>
 			</AudioLoopUpgrade>
 		</Behaviors>
 		<AI>

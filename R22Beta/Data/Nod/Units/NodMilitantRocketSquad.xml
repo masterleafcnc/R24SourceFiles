@@ -698,7 +698,11 @@
 				StartRechargeOnExit="False"
 				GoIdleInStartPreparation="True"
 				FaceTarget="True" />
-
+			<AudioLoopUpgrade
+				id="NODConfessorUpgradeSound"
+				SoundToPlay="AudioEvent:NOD_Confessor_Upgrade">
+				<TriggeredBy>Upgrade_NODConfessorUpgrade</TriggeredBy>
+			</AudioLoopUpgrade>
 		</Behaviors>
 		<AI>
 			<HordeAIUpdate
