@@ -1218,7 +1218,7 @@
 					OrientToObject="True"
 					ForceUseDoFXObj="False" />
 			</FXListBehavior>
-			<SubObjectsUpgrade
+			<!--<SubObjectsUpgrade
 				id="0D4DFDE8"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -1233,8 +1233,8 @@
 				HideSubObjectsOnRemove="False"
 				UnHideSubObjectsOnRemove="False">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
-			</SubObjectsUpgrade>
-			<StatusBitsUpgrade
+			</SubObjectsUpgrade>-->
+			<!--<StatusBitsUpgrade
 				id="85B2DF85"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -1245,7 +1245,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
-			</StatusBitsUpgrade>
+			</StatusBitsUpgrade>-->
 			<CreateAndEnterObjectSpecialPower
 				id="6D44A823"
 				SpecialPowerTemplate="SpecialPowerCallForTransportZOCOM"
