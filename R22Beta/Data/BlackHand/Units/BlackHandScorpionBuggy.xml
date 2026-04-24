@@ -1159,7 +1159,7 @@
 				KillOnDeath="False">
 				<TriggeredBy>Upgrade_NODEmpBurst</TriggeredBy>
 			</AudioLoopUpgrade>
-			<AudioLoopUpgrade
+			<!--<AudioLoopUpgrade
 				id="60913473"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -1170,7 +1170,7 @@
 				KillAfterMS="0"
 				KillOnDeath="False">
 				<TriggeredBy>Upgrade_NODTechCenterLaserCapacitor</TriggeredBy>
-			</AudioLoopUpgrade>
+			</AudioLoopUpgrade>-->
 			<StealthDetectorUpdate
 				id="D6D223EC"
 				RequiresAllTriggers="False"
