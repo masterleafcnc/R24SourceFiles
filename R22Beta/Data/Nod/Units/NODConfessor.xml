@@ -29,7 +29,7 @@
 		EditorName="NODConfessor"
 		Description="Desc:NODConfessor"
 		TypeDescription="Type:NODConfessor"
-		WorldMapArmoryUpgradesAllowed="Upgrade_TiberiumInfusion Upgrade_NodTechCenterChargedParticleBeam">
+		WorldMapArmoryUpgradesAllowed="Upgrade_TiberiumInfusion">
 		<DisplayName>Name:NODConfessor</DisplayName>
 		<ArmorSet
 			Conditions="PLAYER_UPGRADE"
@@ -644,14 +644,14 @@
 				StatusToSet="WEAPON_UPGRADED_02">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
 			</StatusBitsUpgrade>
-			 <StatusBitsUpgrade
+			 <!--<StatusBitsUpgrade
 				id="ModuleTag_UpgradeWeapon"
 				StatusToSet="WEAPON_UPGRADED_01">
 				<TriggeredBy>Upgrade_NodTechCenterChargedParticleBeam</TriggeredBy>
 			</StatusBitsUpgrade>
 			<AudioLoopUpgrade id="ChargedParticleBeamUpgrade" SoundToPlay="AudioEvent:NOD_Awakened_ChargedParticleBeamGunAvailable">
 				<TriggeredBy>Upgrade_NodTechCenterChargedParticleBeam</TriggeredBy>
-			</AudioLoopUpgrade>
+			</AudioLoopUpgrade>-->
 			<AudioLoopUpgrade
 				id="TiberiumInfusionUpgradeSound"
 				SoundToPlay="AudioEvent:NOD_TiberiumUpgrade">
