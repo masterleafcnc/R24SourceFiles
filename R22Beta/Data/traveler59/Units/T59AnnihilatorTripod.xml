@@ -22,7 +22,7 @@
 		ReinvisibilityDelay="7s"
 		EditorName="Traveler59AnnihilatorTripod"
 		Description="Desc:Traveler59AnnihilatorTripod"
-		WorldMapArmoryUpgradesAllowed="Upgrade_AlienReactorForcefieldGenerator"
+		WorldMapArmoryUpgradesAllowed=""
 		TypeDescription="Type:Traveler59AnnihilatorTripod">
 		<DisplayName>NAME:AlienAnnihilatorTripod</DisplayName>
 		<GameDependency>
@@ -1138,11 +1138,11 @@
 				AddConditionFlags="USER_6">
 				<TriggeredBy>Upgrade_AllFactionUpgrade</TriggeredBy>
 			</ModelConditionUpgrade>
-      <AudioLoopUpgrade 
+      <!--<AudioLoopUpgrade 
 				id="ForceFieldUpgradeSound" 
 				SoundToPlay="AudioEvent:ALI_ForceField_Begin">
         <TriggeredBy>Upgrade_AlienReactorForcefieldGenerator</TriggeredBy>
-      </AudioLoopUpgrade>
+      </AudioLoopUpgrade>-->
 		</Behaviors>
 		<AI>
 			<DeployStyleAIUpdate
