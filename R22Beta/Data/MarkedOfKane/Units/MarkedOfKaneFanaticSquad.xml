@@ -475,7 +475,7 @@
 					Frames="0"
 					Trigger="0" />
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 			</AttributeModifierUpgrade>
 			<StatusBitsUpgrade
 				id="637EDACA"
@@ -488,7 +488,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<CreateAndEnterObjectSpecialPower
 				id="10931FB8"
