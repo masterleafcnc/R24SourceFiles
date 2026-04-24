@@ -21,7 +21,7 @@
 		EditorName="BlackHandConfessor"
 		Description="Desc:BlackHandConfessor"
 		TypeDescription="Type:BlackHandConfessor"
-		WorldMapArmoryUpgradesAllowed="Upgrade_NodTechCenterChargedParticleBeam Upgrade_BlackHandBlackDisciplesUpgrade">
+		WorldMapArmoryUpgradesAllowed="Upgrade_NodTechCenterChargedParticleBeam">
 		<DisplayName>Name:NODConfessor</DisplayName>
 		<DisplayUpgrade>Upgrade_NodTechCenterChargedParticleBeam</DisplayUpgrade>
 		<DisplayUpgrade>Upgrade_BlackHandBlackDisciplesUpgrade</DisplayUpgrade>
