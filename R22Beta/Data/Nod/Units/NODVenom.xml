@@ -25,7 +25,7 @@
 		TypeDescription="Type:NODVenom"
 		ShockwaveResistance="100"
 		ReinvisibilityDelay="7s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_NODTechCenterLaserCapacitor">
+		WorldMapArmoryUpgradesAllowed="Upgrade_NODTechCenterLaserCapacitor Upgrade_NODSignatureGenerator">
 		<DisplayName>Name:NODVenom</DisplayName>
 		<DisplayUpgrade
 			id="Tag_DisplayUpgrade1">Upgrade_NODTechCenterLaserCapacitor</DisplayUpgrade>
