@@ -20,7 +20,7 @@
 		VoicePriority="104"
 		EditorName="SteelTalonsRifleSoldier"
 		Description="Desc:SteelTalonsRiflemanSquad"
-		WorldMapArmoryUpgradesAllowed="Upgrade_GDICompositeArmor Upgrade_GDIAPAmmo"
+		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"
 		TypeDescription="Type:GDIRiflemanSquad">
 		<DisplayName>Name:GDIRiflemanSquad</DisplayName>
 		<DisplayUpgrade>Upgrade_GDIAPAmmo</DisplayUpgrade>
