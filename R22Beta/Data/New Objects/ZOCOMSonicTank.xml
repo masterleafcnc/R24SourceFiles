@@ -413,7 +413,7 @@
                     Index="onDeath"
                     FX="FX_GDIMammothExplode" />
             </FXListBehavior>
-            <SubObjectsUpgrade
+            <!--<SubObjectsUpgrade
                 id="ModuleTag_ShowRail"
                 ShowSubObjects="UGRAIL_01">
                 <TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
@@ -422,7 +422,7 @@
                 id="ModuleTag_UpgradeWeapon"
                 StatusToSet="WEAPON_UPGRADED_01">
                 <TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
-            </StatusBitsUpgrade>
+            </StatusBitsUpgrade>-->
 
              <CreateAndEnterObjectSpecialPower
                 id="ModuleTag_CallForTransport"
@@ -448,11 +448,11 @@
                 AddConditionFlags="USER_5">
                 <TriggeredBy>Upgrade_AllFactionUpgrade</TriggeredBy>
             </ModelConditionUpgrade>
-            <AudioLoopUpgrade
+            <!--<AudioLoopUpgrade
                 id="RailCannonUpgradeSound"
                 SoundToPlay="AudioEvent:GDI_RailCannon_Upgrade">
                 <TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
-            </AudioLoopUpgrade>
+            </AudioLoopUpgrade>-->
             <ModelConditionUpgrade
                 id="ModuleTag_ShowThePlating"
                 Permanent="true"
