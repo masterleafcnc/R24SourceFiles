@@ -357,8 +357,8 @@
 				AudioType="voiceSelect" />
 		</AudioArrayVoice>
 		<AudioArraySound>
-			<AudioEntry Sound="AudioEvent:GDI_BuildingPlaced"
-				 AudioType="soundUnderConstruction" />
+			<!--<AudioEntry Sound="AudioEvent:GDI_BuildingPlaced"
+				 AudioType="soundUnderConstruction" />-->
 			<AudioEntry Sound="AudioEvent:ALI_BuzzerHive_AmbientLoop"
 				AudioType="soundAmbient" />
 			<AudioEntry Sound="AudioEvent:ALI_Building_LightDamage"
