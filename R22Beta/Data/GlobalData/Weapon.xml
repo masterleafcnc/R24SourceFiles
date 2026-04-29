@@ -624,6 +624,9 @@
 				DamageType="ROCKET"
 				DeathType="BURNED"
 				DamageFXType="ALIEN_ION">
+				<SpecialObjectFilter
+					Rule="ALL"
+					Exclude="AIRCRAFT" />	
 				<DamageScalarDetails Scalar= "20%">
 					<Filter
 						Rule="NONE">
@@ -642,7 +645,36 @@
 						<IncludeThing>Reaper17MCV</IncludeThing>
 					</Filter>
 				</DamageScalarDetails>
-				<!-- removed scaler vs firehawks to prevent one shotting
+			</DamageNugget>
+
+			<DamageNugget
+				Damage="2500.0"
+				Radius="0.0"
+				DamageType="ROCKET"
+				DeathType="BURNED"
+				DamageFXType="ALIEN_ION">
+				<SpecialObjectFilter
+					Rule="NONE"
+					Include="AIRCRAFT" />	
+				<DamageScalarDetails Scalar= "20%">
+					<Filter
+						Rule="NONE">
+						<IncludeThing>AlienStormrider</IncludeThing>
+						<IncludeThing>AlienDevastatorWarship</IncludeThing>
+						<IncludeThing>AlienMothership</IncludeThing>
+						<IncludeThing>AlienPlanetaryAssaultCarrier</IncludeThing>
+						<IncludeThing>AlienMCV</IncludeThing>
+						<IncludeThing>Traveler59Stormrider</IncludeThing>
+						<IncludeThing>Traveler59DevastatorWarship</IncludeThing>
+						<IncludeThing>Traveler59Mothership</IncludeThing>
+						<IncludeThing>Traveler59PlanetaryAssaultCarrier</IncludeThing>
+						<IncludeThing>Traveler59MCV</IncludeThing>
+						<IncludeThing>Reaper17Stormrider</IncludeThing>
+						<IncludeThing>Reaper17Mothership</IncludeThing>
+						<IncludeThing>Reaper17MCV</IncludeThing>
+					</Filter>
+				</DamageScalarDetails>
+				<!-- Storm column now one shots Firehawks without Ceramic Armor -->
 				<DamageScalarDetails Scalar= "105%">
 					<Filter
 						Rule="NONE">
@@ -650,9 +682,9 @@
 						<IncludeThing>SteelTalonsFireHawk</IncludeThing>
 						<IncludeThing>ZOCOMFireHawk</IncludeThing>
 					</Filter>
-				</DamageScalarDetails>
-				-->
+				</DamageScalarDetails>		
 			</DamageNugget>
+
 		</Nuggets>
 	</WeaponTemplate>
 	
