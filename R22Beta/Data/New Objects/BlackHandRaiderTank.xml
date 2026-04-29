@@ -20,7 +20,7 @@
         UnitCategory="VEHICLE"
         WeaponCategory="CANNON"
         VoicePriority="188"
-        WorldMapArmoryUpgradesAllowed="Upgrade_NODDozerBlades Upgrade_NODTechCenterLaserCapacitor"
+        WorldMapArmoryUpgradesAllowed="Upgrade_NODDozerBlades"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
         <DisplayName>Name:NODScorpionTank</DisplayName>
@@ -607,7 +607,7 @@
                 ShowSubObjects="DOZERBLADE">
                 <TriggeredBy>Upgrade_NODDozerBlades</TriggeredBy>
             </SubObjectsUpgrade>
-            <SubObjectsUpgrade
+            <!--<SubObjectsUpgrade
                 id="ModuleTag_ShowRails"
                 ShowSubObjects="Turret2 Turret2_Gun Gun_Upgrade"
                 HideSubObjects="Gun">
@@ -617,7 +617,7 @@
                 id="ModuleTag_UpgradeWeapon"
                 StatusToSet="WEAPON_UPGRADED_01">
                 <TriggeredBy>Upgrade_NODTechCenterLaserCapacitor</TriggeredBy>
-            </StatusBitsUpgrade>
+            </StatusBitsUpgrade>-->
             <CreateAndEnterObjectSpecialPower
                 id="ModuleTag_CallForTransport"
                 SpecialPowerTemplate="SpecialPowerCallForTransportNOD"
@@ -644,11 +644,11 @@
                 StatusToSet="WEAPON_UPGRADED_02">
                 <TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
             </StatusBitsUpgrade>
-            <AudioLoopUpgrade
+            <!--<AudioLoopUpgrade
                 id="LaserCapacitorUpgradeSound"
                 SoundToPlay="AudioEvent:NOD_LaserCapacitor_Upgrade">
                 <TriggeredBy>Upgrade_NODTechCenterLaserCapacitor</TriggeredBy>
-            </AudioLoopUpgrade>
+            </AudioLoopUpgrade>-->
             <AudioLoopUpgrade
                 id="DozerBladesUpgradeSound"
                 SoundToPlay="AudioEvent:NOD_ScorpionTank_DozerBladeAvailable">

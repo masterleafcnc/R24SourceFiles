@@ -1748,7 +1748,7 @@
 				Fade="False">
 				<Sound
 					Type="INITIAL"
-					List="Multisound:GDI_Generic_VoiceDieMS" />
+					List="GDI_Generic_VoiceDieMS" />
 				<DieMuxData
 					ExemptStatus=""
 					RequiredStatus=""

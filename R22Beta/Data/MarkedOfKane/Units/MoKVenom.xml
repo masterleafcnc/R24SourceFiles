@@ -25,7 +25,7 @@
 		TypeDescription="Type:MarkedOfKaneVenom"
 		ShockwaveResistance="100"
 		ReinvisibilityDelay="7s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_MarkedOfKaneTechCenterSuperChargedParticleBeam">
+		WorldMapArmoryUpgradesAllowed="Upgrade_MarkedOfKaneTechCenterSuperChargedParticleBeam Upgrade_NODSignatureGenerator">
 		<DisplayName>Name:NODVenom</DisplayName>
 		<DisplayUpgrade
 			id="Tag_DisplayUpgrade1">Upgrade_MarkedOfKaneTechCenterSuperChargedParticleBeam</DisplayUpgrade>

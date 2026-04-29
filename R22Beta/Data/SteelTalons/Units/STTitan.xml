@@ -70,7 +70,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon=""
 		ReinvisibilityDelay="7s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_STArmoryRailgunTech Upgrade_AdaptiveArmor Upgrade_GDIArmoryRailgunTech"
+		WorldMapArmoryUpgradesAllowed="Upgrade_STArmoryRailgunTech Upgrade_AdaptiveArmor"
 		CaptureTime="0s"
 		BuildCost="1300"
 		RefundValue="0"
@@ -4448,7 +4448,7 @@
 				HideSubObjectsOnRemove="False"
 				UnHideSubObjectsOnRemove="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</SubObjectsUpgrade>
 			<StatusBitsUpgrade
 				id="E6191BDE"
@@ -4461,7 +4461,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<StatusBitsUpgrade
 				id="A801B574"
@@ -4474,7 +4474,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<SubObjectsUpgrade
 				id="01875BF9"

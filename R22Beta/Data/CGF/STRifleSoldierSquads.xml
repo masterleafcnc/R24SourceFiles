@@ -66,7 +66,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon="RiflemenIcon"
 		ReinvisibilityDelay="4s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_GDICompositeArmor Upgrade_GDIAPAmmo"
+		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"
 		CaptureTime="0s"
 		BuildCost="300"
 		RefundValue="0"
@@ -545,7 +545,7 @@
 				SetBonusModelConditionOnSpeedBonus="False"
 				SecondaryQueue="False"
 				IgnorePreReqs="False" />
-			<ModelConditionUpgrade
+			<!--<ModelConditionUpgrade
 				id="50180BB4"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -557,7 +557,7 @@
 				AddTempConditionFlag="TOPPLED"
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_GDICompositeArmor</TriggeredBy>
-			</ModelConditionUpgrade>
+			</ModelConditionUpgrade>-->
 			<CreateAndEnterObjectSpecialPower
 				id="6D44A823"
 				SpecialPowerTemplate="SpecialPowerCallForTransportSteelTalons"
@@ -1058,7 +1058,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon="RiflemenIcon"
 		ReinvisibilityDelay="4s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_GDICompositeArmor Upgrade_GDIAPAmmo"
+		WorldMapArmoryUpgradesAllowed="Upgrade_GDIAPAmmo"
 		CaptureTime="0s"
 		BuildCost="300"
 		RefundValue="0"
@@ -1556,7 +1556,7 @@
 				SetBonusModelConditionOnSpeedBonus="False"
 				SecondaryQueue="False"
 				IgnorePreReqs="False" />
-			<ModelConditionUpgrade
+			<!--<ModelConditionUpgrade
 				id="50180BB4"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -1568,7 +1568,7 @@
 				AddTempConditionFlag="TOPPLED"
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_GDICompositeArmor</TriggeredBy>
-			</ModelConditionUpgrade>
+			</ModelConditionUpgrade>-->
 			<CreateAndEnterObjectSpecialPower
 				id="6D44A823"
 				SpecialPowerTemplate="SpecialPowerCallForTransportSteelTalons"

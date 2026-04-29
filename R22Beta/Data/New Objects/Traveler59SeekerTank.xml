@@ -20,7 +20,7 @@
         UnitCategory="VEHICLE"
         WeaponCategory="GUN"
         VoicePriority="180"
-        WorldMapArmoryUpgradesAllowed="Upgrade_AlienMinorForcefieldGenerator Upgrade_AlienShardLaunchers"
+        WorldMapArmoryUpgradesAllowed="Upgrade_AlienShardLaunchers"
         ShockwaveResistance="100"
         ReinvisibilityDelay="7s">
         <DisplayName>NAME:ALIENSeekerTank</DisplayName>

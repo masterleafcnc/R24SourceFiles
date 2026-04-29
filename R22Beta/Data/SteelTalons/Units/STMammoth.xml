@@ -70,7 +70,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon=""
 		ReinvisibilityDelay="7s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_STArmoryRailgunTech Upgrade_AdaptiveArmor Upgrade_GDIArmoryRailgunTech"
+		WorldMapArmoryUpgradesAllowed="Upgrade_STArmoryRailgunTech Upgrade_AdaptiveArmor"
 		CaptureTime="0s"
 		BuildCost="2500"
 		RefundValue="0"
@@ -1736,7 +1736,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<StatusBitsUpgrade
 				id="A801B574"
@@ -1749,7 +1749,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<SubObjectsUpgrade
 				id="B62D17BE"
@@ -1766,7 +1766,7 @@
 				HideSubObjectsOnRemove="False"
 				UnHideSubObjectsOnRemove="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</SubObjectsUpgrade>
 			<StatusBitsUpgrade
 				id="1F159A60"
@@ -1803,7 +1803,7 @@
 				SoundToPlay="AudioEvent:GDI_RailCannon_Upgrade"
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</AudioLoopUpgrade>
 			<SubObjectsUpgrade
 				id="01875BF9"

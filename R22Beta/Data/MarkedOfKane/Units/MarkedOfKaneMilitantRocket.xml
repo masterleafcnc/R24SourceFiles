@@ -584,13 +584,13 @@
 			<AttributeModifierUpgrade
 				id="Upgrade_TiberiumInfusion"
 				AttributeModifier="AttributeModifier_TiberiumInfusion">
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
 			</AttributeModifierUpgrade>
 			<StatusBitsUpgrade
 				id="ModuleTag_TiberiumInfusion2"
 				StatusToSet="HAS_TIBERIUM_UPGRADE">
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
 			</StatusBitsUpgrade>
 			<FindCoverBehavior
@@ -603,7 +603,7 @@
 					Permanent="true"
 					ArmorSetFlag="PLAYER_UPGRADE">
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 			</ArmorUpgrade>
 			<LargeGroupAudioUpdate
 				id="LGAU">
@@ -622,7 +622,7 @@
 			<AudioLoopUpgrade
 				id="TiberiumInfusionUpgradeSound"
 				SoundToPlay="AudioEvent:NOD_TiberiumUpgrade">
-				<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_TiberiumInfusion</TriggeredBy>-->
 				<TriggeredBy>Upgrade_MoKTiberiumInfusion</TriggeredBy>
 			</AudioLoopUpgrade>
 			<!--

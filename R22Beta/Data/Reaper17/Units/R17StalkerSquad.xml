@@ -22,6 +22,7 @@
 		UnitCategory="INFANTRY"
 		WeaponCategory="GUN"
 		EditorName="Reaper17StalkerSquad"
+		WorldMapArmoryUpgradesAllowed="Upgrade_AlienBlueShardWeapon"	
 		Description="Desc:Reaper17Stalker"
 		TypeDescription="Type:Reaper17Stalker"
 		UnitTypeIcon="ScrinStalkerPip"

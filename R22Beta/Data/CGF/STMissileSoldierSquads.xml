@@ -66,7 +66,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon="MissilemenIcon"
 		ReinvisibilityDelay="4s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_GDICompositeArmor"
+		WorldMapArmoryUpgradesAllowed=""
 		CaptureTime="0s"
 		BuildCost="400"
 		RefundValue="0"
@@ -340,7 +340,7 @@
 				SetBonusModelConditionOnSpeedBonus="False"
 				SecondaryQueue="False"
 				IgnorePreReqs="False" />
-			<ModelConditionUpgrade
+			<!--<ModelConditionUpgrade
 				id="FA82A6FA"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -352,7 +352,7 @@
 				AddTempConditionFlag="TOPPLED"
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_GDICompositeArmor</TriggeredBy>
-			</ModelConditionUpgrade>
+			</ModelConditionUpgrade>-->
 			<AimWeapon
 				id="06370EA6"
 				AimLowThreshold="0"
@@ -831,7 +831,7 @@
 		HasFiredRecentlyTime="2s"
 		UnitTypeIcon="MissilemenIcon"
 		ReinvisibilityDelay="4s"
-		WorldMapArmoryUpgradesAllowed="Upgrade_GDICompositeArmor"
+		WorldMapArmoryUpgradesAllowed=""
 		CaptureTime="0s"
 		BuildCost="400"
 		RefundValue="0"
@@ -1124,7 +1124,7 @@
 				SetBonusModelConditionOnSpeedBonus="False"
 				SecondaryQueue="False"
 				IgnorePreReqs="False" />
-			<ModelConditionUpgrade
+			<!--<ModelConditionUpgrade
 				id="FA82A6FA"
 				RequiresAllTriggers="False"
 				RequiresAllConflictingTriggers="False"
@@ -1136,7 +1136,7 @@
 				AddTempConditionFlag="TOPPLED"
 				TempConditionTime="0s">
 				<TriggeredBy>Upgrade_GDICompositeArmor</TriggeredBy>
-			</ModelConditionUpgrade>
+			</ModelConditionUpgrade>-->
 			<AimWeapon
 				id="06370EA6"
 				AimLowThreshold="0"

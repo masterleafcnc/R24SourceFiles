@@ -1173,18 +1173,6 @@
 						Upgrade=""
 						ObjectStatus="WEAPON_UPGRADED_01"
 						IsPlayerUpgradePermanent="False" />
-					<Weapon
-						Ordering="PRIMARY_WEAPON"
-						Template="NODFlameTankFlamer_Raged"
-						Upgrade="Upgrade_Raged"
-						ObjectStatus=""
-						IsPlayerUpgradePermanent="False" />
-					<Weapon
-						Ordering="PRIMARY_WEAPON"
-						Template="NODBlackHandFlameTankUpgradedFlamer_Raged"
-						Upgrade="Upgrade_Raged"
-						ObjectStatus="WEAPON_UPGRADED_01"
-						IsPlayerUpgradePermanent="False" />
 					<TurretSettings
 						TurretTurnRate="90"
 						TurretPitchRate="40"

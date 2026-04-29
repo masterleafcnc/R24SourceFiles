@@ -1556,6 +1556,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<StatusBitsUpgrade
 				id="8F5A755C"
@@ -1568,6 +1569,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 
 			<!--
@@ -1596,6 +1598,7 @@
 				HideSubObjectsOnRemove="False"
 				UnHideSubObjectsOnRemove="False">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>-->
 			</SubObjectsUpgrade>
 			<StatusBitsUpgrade
 				id="D305500E"
@@ -1632,6 +1635,7 @@
 				SoundToPlay="AudioEvent:GDI_RailCannon_Upgrade"
 				KillAfterMS="0">
 				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>-->
 			</AudioLoopUpgrade>
 		</Behaviors>
 		<AI>

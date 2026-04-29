@@ -925,7 +925,7 @@
 			UseCrushAttack="True"
 			CrushOnlyWhileCharging="False"
 			CrushAllies="False" />
-		<DisplayUpgrade>Upgrade_AlienMinorForcefieldGenerator</DisplayUpgrade>
 		<DisplayUpgrade>Upgrade_AlienShardLaunchers</DisplayUpgrade>
+		<DisplayUpgrade>Upgrade_AlienMinorForcefieldGenerator</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>

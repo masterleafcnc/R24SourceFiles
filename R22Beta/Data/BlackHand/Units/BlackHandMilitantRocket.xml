@@ -23,7 +23,7 @@
 		EditorName="BlackHandMilitantRocket"
 		Description="Desc:BlackHandMilitantRocket"
 		TypeDescription="Type:BlackHandMilitantRocket"
-		WorldMapArmoryUpgradesAllowed="Upgrade_BlackHandBlackDisciplesUpgrade">
+		WorldMapArmoryUpgradesAllowed="">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:NODMilitantRocket</DisplayName>
 		<DisplayUpgrade
