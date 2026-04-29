@@ -99,7 +99,7 @@
 			DamageFX=""
 			Conditions="" />
 		<LocomotorSet
-			Speed="71.5"
+			Speed="79.0"
 			Condition="NORMAL"
 			Locomotor="NormalRangedSquadLocomotor" />
 		<EquivalentTo>Reaper17ShockTrooperSquad</EquivalentTo>
@@ -858,4 +858,3 @@
 		<DisplayUpgrade>Upgrade_AlienShockTrooperBlinkPack</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
-

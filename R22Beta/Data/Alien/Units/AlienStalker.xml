@@ -26,7 +26,7 @@
 		<LocomotorSet
 			Locomotor="HumanLocomotor"
 			Condition="NORMAL"
-			Speed="87.5" />
+			Speed="100.0" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"

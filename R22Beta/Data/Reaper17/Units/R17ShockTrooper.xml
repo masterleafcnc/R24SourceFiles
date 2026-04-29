@@ -33,7 +33,7 @@
 		<LocomotorSet
 			Locomotor="HumanLocomotor"
 			Condition="NORMAL"
-			Speed="76.5" />
+			Speed="84.0" />
 		<Draws>
 			<ScriptedModelDraw
 				id="ModuleTag_Draw"

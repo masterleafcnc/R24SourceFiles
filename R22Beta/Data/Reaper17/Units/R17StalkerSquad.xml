@@ -37,7 +37,7 @@
 		<LocomotorSet
 			Locomotor="NormalRangedSquadLocomotor"
 			Condition="NORMAL"
-			Speed="82.5" />
+			Speed="95.0" />
 		<SkirmishAIInformation
 			UnitBuilderStandardCombatUnit="true" />
 		<Draws>
@@ -489,4 +489,3 @@
 			CrusherLevel="0" />
 	</GameObject>
 </AssetDeclaration>
-
