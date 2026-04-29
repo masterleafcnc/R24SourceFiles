@@ -501,7 +501,17 @@
 		</ObjectFilter>
 	</SpecialPowerTemplate>
 
-	<!-- traveler wormhole cooldown increased by 50% -->
+	<!-- traveler wormhole cooldown increased by 50%, cost increased from 2000 to 3500 -->
+
+	<SpecialPowerTemplate
+		id="SpecialPower_WormHole"
+		DisplayName="SPECIALPOWER:WormHole"
+		Flags="IS_PLAYER_POWER NOT_CLIFF_CELL PATHABLE_ONLY SHARED_SYNC"
+		ReloadTime="240s"
+		TargetType="LOCATION"
+		EvaEventToPlayWhenSelectingTarget="SelectWormholeLocation"
+		RadiusCursorRadius="50"
+		Money="-3500" />
 
 	<SpecialPowerTemplate
 		id="SpecialPower_Traveler59WormHole"
@@ -511,7 +521,7 @@
 		TargetType="LOCATION"
 		EvaEventToPlayWhenSelectingTarget="SelectWormholeLocation"
 		RadiusCursorRadius="50"
-		Money="-2000" />
+		Money="-3500" />
 
 	<!-- infestation hive cost reduced from 1000$ to 800$ -->
 
