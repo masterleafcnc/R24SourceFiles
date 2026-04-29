@@ -1334,18 +1334,14 @@ function SetUnitAnchor(self, newAnchorId)
         local oldAnchor = unitsReversing[unitData.unitAnchor]
         if oldAnchor and oldAnchor.beingFollowedBy then
 			--ExecuteAction("NAMED_FLASH_WHITE", oldAnchor.selfReference, 2)
+			-- self is no longer following this unit so lets remove it from the table of the unit being followed.
             oldAnchor.beingFollowedBy[unitId] = nil
         end
     end
 
     -- assign new unit to its beingFollowedBy table
 	unitData.unitAnchor = newAnchorId
-    if newAnchorId ~= nil then
-        local newAnchor = unitsReversing[newAnchorId]
-        if newAnchor then
-            newAnchor.beingFollowedBy[unitId] = true
-        end
-    end
+
 end
 
 -- checks if most units are moving and if the number returned exceeds the threshold then assign the hasComeToAStop to true
@@ -1922,6 +1918,7 @@ function BackingUp(self)
 		unitReversing.isReverseMoving = true
 		unitReversing.hasBeenCounted = false
 		unitReversing.expectedChecksFlag = false
+		SetUnitAnchor(%self, nil)
 	end
 
 	 -- Check if this is a spam/repeat command (within 1 frame) or a generic new command
