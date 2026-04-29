@@ -56,6 +56,11 @@ playerTable = {"Player_1","Player_2","Player_3","Player_4","Player_5","Player_6"
 "SkirmishBlackHand", "SkirmishCivilian", "SkirmishCommentator", "SkirmishGDI", "SkirmishMarkedOfKane",
 "SkirmishNeutral", "SkirmishNod", "SkirmishNull", "SkirmishObserver", "SkirmishReaper17","SkirmishSteelTalons", "SkirmishTraveler59", "SkirmishZOCOM", "PlyrCreeps", "PlyrCivilian"}
 
+validTeams = {}
+for i = 1, getn(playerTable) do
+	validTeams["team" .. playerTable[i]] = true
+end
+
 
 function WriteToFile(file, content) 
 	local file = openfile("C:\\Users\\Public\\Documents\\" .. file, "a")
@@ -66,18 +71,7 @@ function WriteToFile(file, content)
 end
 
 function isValidTeam(team)
-	if team == nil then return false end
-	local validTeams = {}
-
-	for i = 1, getn(playerTable) do
-		validTeams[tostring("team" .. playerTable[i])] = true
-	end
-
-	if validTeams[team] then 
-		return true 
-	end
-
-	return false
+	return team ~= nil and validTeams[team] == true
 end
 
 function clearSubTables(t, seen)
