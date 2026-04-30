@@ -133,9 +133,8 @@ function resetTeamTable(teamTable)
 end
 
 function flushPlayerTeams()
-    for i = 1, getn(playerTable) do 
-        local player = "team" .. playerTable[i] 
-        local teamTable = getglobal(player)
+	for player,_ in validTeams do 
+		 local teamTable = getglobal(player)
 
         if type(teamTable) == "table" then
             resetTeamTable(teamTable)
@@ -149,7 +148,7 @@ function flushPlayerTeams()
                 reverseUnitCount = 0
             })
         end
-    end
+	end
 
     collectgarbage()
 end
