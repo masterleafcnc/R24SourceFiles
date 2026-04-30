@@ -193,7 +193,7 @@
 					ButtonImage=""
 					RetainSubObjects="False">
 					<Model
-						Name="W3DContainer:AUPACARRIERION"
+						Name="W3DContainer:AUPACARRIERION2"
 						ExtraMesh="False" />
 					<Texture
 						Original="AUPACarrier"
@@ -255,7 +255,7 @@
 					ButtonImage=""
 					RetainSubObjects="False">
 					<Model
-						Name="W3DContainer:AUPACARRIERION"
+						Name="W3DContainer:AUPACARRIERION2"
 						ExtraMesh="False" />
 					<Texture
 						Original="AUPACarrier"
@@ -387,7 +387,7 @@
 					ButtonImage=""
 					RetainSubObjects="False">
 					<Model
-						Name="W3DContainer:AUPACARRIERION"
+						Name="W3DContainer:AUPACARRIERION2"
 						ExtraMesh="False" />
 					<ParticleSysBone
 						BoneName="FXFire01"
@@ -446,7 +446,7 @@
 					ButtonImage=""
 					RetainSubObjects="False">
 					<Model
-						Name="W3DContainer:AUPACARRIERION"
+						Name="W3DContainer:AUPACARRIERION2"
 						ExtraMesh="False" />
 					<Texture
 						Original="AUPACarrier"
@@ -963,7 +963,7 @@
 					ButtonImage=""
 					RetainSubObjects="False">
 					<Model
-						Name="W3DContainer:AUPACARRIERION"
+						Name="W3DContainer:AUPACARRIERION2"
 						ExtraMesh="False" />
 					<Texture
 						Original="AUPACarrier"
@@ -976,7 +976,7 @@
 					ButtonImage=""
 					RetainSubObjects="False">
 					<Model
-						Name="W3DContainer:AUPACARRIERION"
+						Name="W3DContainer:AUPACARRIERION2"
 						ExtraMesh="False" />
 				</ModelConditionState>
 				<ModelConditionState
@@ -1162,201 +1162,206 @@
 				</ModelConditionState>
 					-->
 			</SpotlightDraw>
-			<ScriptedModelDraw
-				id="2D00364A"
-				InitialRecoilSpeed="2"
-				MaxRecoilDistance="3"
-				RecoilDamping="0.4"
-				RecoilSettleSpeed="0.065"
-				MinLODRequired="LOW"
-				ProjectileBoneFeedbackEnabledSlots=""
-				TrackMarks=""
-				AttachToBoneInAnotherModule="roottransform"
-				DependencySharedModelFlags=""
-				HighDetailLODThreshold="0"
-				LowDetailLODThreshold="0"
-				WadingParticleSys=""
-				AlphaCameraFadeOuterRadius="0"
-				AlphaCameraFadeInnerRadius="0"
-				AlphaCameraAtInnerRadius="100%"
-				StaticSortLevelWhileFading="-1"
-				BirthFadeTime="0"
-				OkToChangeModelColor="False"
-				AnimationsRequirePower="True"
-				UseYAxisForTurretRotation="False"
-				TrackMarksOnlyWhenCorneringQuickly="False"
-				UseProducerTexture="False"
-				NoRotate="False"
-				UseFiringArcRotation="False"
-				Selectable="True"
-				RandomTextureFixedRandomIndex="False"
-				ParticlesAttachedToAnimatedBones="False"
-				ParticleBonesCheckDrawable="False"
-				ShadowForceDisable="False"
-				SwitchModelLODMode="False"
-				StaticModelLODMode="False"
-				ShowShadowWhileContained="False"
-				UseStandardModelNames="False"
-				UseDefaultAnimation="False"
-				BirthFadeAdditive="False"
-				ZWriteDisableOverride="False"
-				MultiPlayerOnly="False"
-				AffectedByStealth="True"
-				InvertStealthOpacity="False"
-				HighDetailOnly="False"
-				SetAnimsToLastFrameOnConstructionComplete="True">
+			<ScriptedModelDraw		
+				id="ModuleTag_DrawTravelerEnginesFX"
+				AttachToBoneInAnotherModule="roottransform">
 				<ModelConditionState
-					ParseCondStateType="PARSE_DEFAULT"
-					PortraitImage=""
-					ButtonImage=""
-					RetainSubObjects="False">
+					ParseCondStateType="PARSE_DEFAULT">
 					<Model
-						Name="W3DContainer:FXINVISBONE"
-						ExtraMesh="False" />
+						Name="W3DContainer:FXInvisBone" />
 				</ModelConditionState>
 				<AnimationState
-					ParseCondStateType="PARSE_DEFAULT"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False" />
+					ParseCondStateType="PARSE_DEFAULT"/>
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="DECELERATE"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False" />
+					ConditionsYes="DECELERATE">						
+				</AnimationState>
+				<!--
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="ACCELERATE"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False" />
+					ConditionsYes="ACCELERATE">						
+				</AnimationState>				
+				-->
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="USER_2 MOVING"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False">
+					ConditionsYes="USER_2 MOVING">
 					<ParticleSysBone
 						BoneName="INVISBONE01"
 						FXParticleSystemTemplate="AlienTravEngDist"
-						PersistID="0"
-						FollowBone="True"
-						OnlyIfOnWater="False"
-						OnlyIfOnLand="False" />
+						FollowBone="true" />
 				</AnimationState>
-			</ScriptedModelDraw>
-			<ScriptedModelDraw
-				id="2291C570"
-				InitialRecoilSpeed="2"
-				MaxRecoilDistance="3"
-				RecoilDamping="0.4"
-				RecoilSettleSpeed="0.065"
-				MinLODRequired="LOW"
-				ProjectileBoneFeedbackEnabledSlots=""
-				TrackMarks=""
-				DependencySharedModelFlags=""
-				HighDetailLODThreshold="0"
-				LowDetailLODThreshold="0"
-				WadingParticleSys=""
-				AlphaCameraFadeOuterRadius="0"
-				AlphaCameraFadeInnerRadius="0"
-				AlphaCameraAtInnerRadius="100%"
-				StaticSortLevelWhileFading="-1"
-				BirthFadeTime="0"
-				OkToChangeModelColor="False"
-				AnimationsRequirePower="True"
-				UseYAxisForTurretRotation="False"
-				TrackMarksOnlyWhenCorneringQuickly="False"
-				UseProducerTexture="False"
-				NoRotate="False"
-				UseFiringArcRotation="False"
-				Selectable="True"
-				RandomTextureFixedRandomIndex="False"
-				ParticlesAttachedToAnimatedBones="False"
-				ParticleBonesCheckDrawable="False"
-				ShadowForceDisable="False"
-				SwitchModelLODMode="False"
-				StaticModelLODMode="False"
-				ShowShadowWhileContained="False"
-				UseStandardModelNames="False"
-				UseDefaultAnimation="False"
-				BirthFadeAdditive="False"
-				ZWriteDisableOverride="False"
-				MultiPlayerOnly="False"
-				AffectedByStealth="True"
-				InvertStealthOpacity="False"
-				HighDetailOnly="False"
-				SetAnimsToLastFrameOnConstructionComplete="True">
+			</ScriptedModelDraw>	
+			
+			<ScriptedModelDraw		
+				id="ModuleTag_HideOrShowTravelerEnginesFX">
 				<ModelConditionState
-					ParseCondStateType="PARSE_DEFAULT"
-					PortraitImage=""
-					ButtonImage=""
-					RetainSubObjects="False">
+					ParseCondStateType="PARSE_DEFAULT">
 					<Model
-						Name=""
-						ExtraMesh="False" />
+						Name="" />
 				</ModelConditionState>
 				<AnimationState
-					ParseCondStateType="PARSE_DEFAULT"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False">
+					ParseCondStateType="PARSE_DEFAULT">
 					<Script>
 						CurDrawableHideSubObject("TravEng01")
 						CurDrawableHideSubObject("TravEng02")						
-					</Script>
+					</Script>		
 				</AnimationState>
+
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="DECELERATE"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False">
+					ConditionsYes="JUST_BUILT">
 					<Script>
 						CurDrawableHideSubObject("TravEng01")
 						CurDrawableHideSubObject("TravEng02")						
-					</Script>
+					</Script>		
 				</AnimationState>
+				<!-- ion storm -->
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="ACCELERATE"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False">
-					<Script>
-						CurDrawableHideSubObject("TravEng01")
-						CurDrawableHideSubObject("TravEng02")						
-					</Script>
-				</AnimationState>
-				<AnimationState
-					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="USER_2 MOVING"
-					EnteringStateFX=""
-					FrameForPristineBonePositions="0"
-					ShareAnimation="False"
-					AllowRepeatInRandomPick="False"
-					SimilarRestart="False">
+					ConditionsYes="MOVING USER_5 USER_2">
 					<Script>
 						CurDrawableShowSubObject("TravEng01")
 						CurDrawableShowSubObject("TravEng02")						
-					</Script>
+					</Script>	
 				</AnimationState>
-			</ScriptedModelDraw>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DECELERATE USER_5 USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DAMAGED USER_5 USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED USER_5 USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<!-- kane edition -->
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="MOVING USER_5">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")					
+					</Script>	
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DECELERATE USER_5">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DAMAGED USER_5">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED USER_5">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="MOVING USER_2">
+					<Script>
+						CurDrawableShowSubObject("TravEng01")
+						CurDrawableShowSubObject("TravEng02")						
+					</Script>	
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DECELERATE USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DAMAGED USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+				
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DAMAGED">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="USER_5">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="USER_2">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+			</ScriptedModelDraw>	
 		</Draws>
 		<Behaviors>
 			<AttributeModifierPoolUpdate
@@ -2224,4 +2229,3 @@
 		<DisplayUpgrade>Upgrade_TravelerEngines</DisplayUpgrade>
 	</GameObject>
 </AssetDeclaration>
-

@@ -31,5 +31,15 @@
 				<Mesh>AUPACARRIERION.PAC</Mesh>
 			</RenderObject>
 		</SubObject>
+		<SubObject SubObjectID="TRAVENG01" BoneIndex="2">
+			<RenderObject>
+				<Mesh>AUPACARRIER_SKN.TRAVENG01</Mesh>
+			</RenderObject>
+		</SubObject>
+		<SubObject SubObjectID="TRAVENG02" BoneIndex="2">
+			<RenderObject>
+				<Mesh>AUPACARRIER_SKN.TRAVENG02</Mesh>
+			</RenderObject>
+		</SubObject>
 	</W3DContainer>
 </AssetDeclaration>

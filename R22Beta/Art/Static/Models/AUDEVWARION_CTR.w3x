@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<W3DContainer id="AUDEVWARION2" Hierarchy="AUDEVWARION2">
+		<SubObject SubObjectID="DEVASTATOR" BoneIndex="1">
+			<RenderObject>
+				<Mesh>AUDEVWARION.DEVASTATOR</Mesh>
+			</RenderObject>
+		</SubObject>
+		<SubObject SubObjectID="OBBOX" BoneIndex="0">
+			<RenderObject>
+				<CollisionBox>AUDEVWARION.OBBOX</CollisionBox>
+			</RenderObject>
+		</SubObject>
+		<SubObject SubObjectID="TRAVENG02" BoneIndex="9">
+			<RenderObject>
+				<Mesh>AUDEVWAR_SKN.TRAVENG02</Mesh>
+			</RenderObject>
+		</SubObject>
+		<SubObject SubObjectID="TRAVENG01" BoneIndex="9">
+			<RenderObject>
+				<Mesh>AUDEVWAR_SKN.TRAVENG01</Mesh>
+			</RenderObject>
+		</SubObject>
+	</W3DContainer>
+</AssetDeclaration>

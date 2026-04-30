@@ -765,7 +765,7 @@
 					Include="INFANTRY" />
 			</DamageContainedNugget>
 			<DamageNugget
-				Damage="180.0"
+				Damage="200.0"
 				Radius="20.0"
 				DamageType="GRENADE"
 				DamageFXType="GDI_GRENADE"

@@ -1923,7 +1923,7 @@ function BackingUp(self)
 
 	 -- Check if this is a spam/repeat command (within 1 frame) or a generic new command
 	 -- and if the last reverse move command was not 5 frames before as units can still bug if two successive reverse move commands are issued back to back.
-    if (curFrame - unitReversing.lastReverseMoveFrame <= REVERSE_SPAM_FRAME_WINDOW) and not (curFrame - unitReversing.firstFrame <= 5) then
+    if (curFrame - unitReversing.lastReverseMoveFrame <= REVERSE_SPAM_FRAME_WINDOW) and not (curFrame - unitReversing.firstFrame <= 4) then
 		--ExecuteAction("NAMED_FLASH", self, 2)
         unitReversing.hasAlreadyReversed = true
         return resetFlags()
