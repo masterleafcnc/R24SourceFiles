@@ -11,6 +11,7 @@
 		EditorSorting="STRUCTURE"
 		BuildCost="1000"
 		BuildTime="10"
+		RefundValue="500"
 		PlacementViewAngle="270d"
 		CampnessValue="2000"
 		CampnessValueRadius="300"
