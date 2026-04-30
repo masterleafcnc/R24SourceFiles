@@ -72,7 +72,7 @@
 		ReinvisibilityDelay="4s"					
 		CaptureTime="0s"
 		BuildCost="2000"
-		RefuntValue="0"
+		RefundValue="0"
 		ThreatValue="0"
 		MaxSimultaneousOfType="0"
 		TransportSlotCount="0"
@@ -1221,7 +1221,7 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>
 			<StatusBitsUpgrade
 				id="8F5A755C"
@@ -1234,13 +1234,13 @@
 				StatusToClear=""
 				ApplyToContained="False">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</StatusBitsUpgrade>	
 			<SubObjectsUpgrade
 				id="ModuleTag_Upgrade_ShowRailguns"
 				ShowSubObjects="UGRAILMAIN UG_RAILBARREL1 UGRAILMAINR UG_RAILBARREL1R">
 				<TriggeredBy>Upgrade_STArmoryRailgunTech</TriggeredBy>
-				<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>
+				<!--<TriggeredBy>Upgrade_GDIArmoryRailgunTech</TriggeredBy>-->
 			</SubObjectsUpgrade>			
 			<FXListBehavior
 				id="C74C39D8">
