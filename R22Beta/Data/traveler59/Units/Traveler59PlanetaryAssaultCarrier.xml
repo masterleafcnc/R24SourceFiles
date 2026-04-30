@@ -1346,6 +1346,15 @@
 
 				<AnimationState
 					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="USER_6">
+					<Script>
+						CurDrawableHideSubObject("TravEng01")
+						CurDrawableHideSubObject("TravEng02")						
+					</Script>		
+				</AnimationState>
+
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="USER_5">
 					<Script>
 						CurDrawableHideSubObject("TravEng01")
