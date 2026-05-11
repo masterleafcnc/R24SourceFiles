@@ -4,6 +4,146 @@ In the future, I’m open to sharing, but I want to avoid situations where my wo
 
 This cannot be compiled as a standalone mod as it does not contain all of the 1.02+ files, only the ones I have modified or added over the years.
 
+# R24q Changelog
+
+## Balance Changes
+
+* Shock Trooper hp reduced from 400 to 360.
+* Scrin, Reaper-17 Shock Trooper/Ravager speed increased by 10%~.
+* Storm Columns now one shot Firehawks again but no longer deal splash damage to aircraft.
+* Infestation Hives are now sellable, hp increased by 10%.
+* Wormhole cost increased from 2000$ to 3500$.
+
+## Bug Fixes
+
+* Traveler Engines are no longer visible on damaged unupgraded Scrin warships, it now also shows when buffed by an Ion Storm.
+* Minor audio issues have been fixed.
+
+## Reverse Move Fix Improvements
+
+* Doing reverse move commands in quick succession will no longer prevent the reverse move fix from taking place.
+* Changes have been made to reduce the likelihood of a desync occurring.
+
+## R24p Changelog
+
+### Balance Changes
+
+* Shock Trooper Plasma Disc Launcher upgrade cost increased from $1000 to $1500. Upgrade research time increased from 30s to 45s.
+* Storm Columns no longer one shots non ceramic armour Firehawks.
+* Ravager gun armor increased by 25%.
+* Grenadier damage increased by 10%, projectile speed increased by 5%.
+* MARV grenade hardpoint damage increased by 10%.
+
+### Bug Fixes
+
+* Fixed an issue where many objects had missing death sounds.
+
+### Reverse Move Fix Improvements
+
+* Units that stop before receiving a move command followed by a reverse move now properly detect reverse bugs.
+* Bugged units will stop upon reaching their leader instead of continuing to chase.
+* Added a new false-positive detector that prevents units from being flagged for reverse-move bugs when reversing in their current movement direction.
+* Units that attack before reverse-moving will no longer be incorrectly flagged as bugging if given another reverse command.
+* Fixed an issue where units pending a fix were delayed by units stuck in turn events.
+* Fixed units now move 5% faster after correction.
+* Improved detection parameters for:
+
+  * Stealth Tank
+  * Shatterer
+  * APC
+  * Pitbull
+* Cleaned up group ID tables and improved desync handling.
+
+## R24m Changelog
+
+* Fixed a desync caused by players who played games and then switched to Observer/Commentator.
+* Unit anchor assignment improvements. Now checks for a nearby unit in the same group and if none is found, selects a random unit from that group. This prevents units moving towards enemy units if situated at the back of a group.
+* Fixed an issue where units that never reverse bugged were incorrectly detected as such.
+* Small group selections are no longer aggressively canceled by the reverse move fix.
+* Other small tweaks and optimizations have been made to the reverse move workaround.
+
+## R24k Changelog
+
+* Fixed a desync caused by players switching to maps with a different player count than previously.
+* Fixed an issue causing some units such as the GDI Predator Tank to not receive reverse bug fixes on certain maps.
+
+## R24j Changelog
+
+* Fixed a desync caused by players switching to maps with a different player count than previously.
+* Fixed an issue in R24 causing harvesters to sometimes follow other units on the map.
+
+## R24i Changelog
+
+* Fixed an issue causing single unit selections to stop moving.
+* Fixed another desync caused by Carryalls leaving the map, resulting in cleanup never happening.
+* Fixed an R24 issue which resulted in Dozer Blade Scorpion Tanks having no immunity to mine damage.
+* Crane cost has been increased from 1300$ to 1500$.
+* Prodigy Area Mind Control max leash range increased from 300 to 350.
+* APCs, Raider Buggies, Gunwalkers and Pitbulls have been optimized further for the reverse move fix.
+* Fixed Reaper-17 Stormrider taxiing locomotor.
+
+## R24h Changelog
+
+* Desyncs have finally been fixed. Tested with 8 players to verify the fix.
+* Addressed an issue causing units to behave erratically when reverse moved while standing still.
+
+## R24g Changelog
+
+* Fixed a desync issue caused by Engineer capturing, epic unit garrisoning.
+* Fixed a desync issue caused by garrisoning the Eradicator Hexapod with a Mastermind/Prodigy.
+
+## R24f Changelog
+
+* Fixed an issue causing Sniper Teams and Mutant Marauders to be deleted straight away.
+* Fixed an issue causing unit groups leaking if a unit recently came out of a War Factory or barracks.
+* Fixed an issue causing unit groups to occasionally not be deleted if destroyed whilst reverse moving.
+* Selected unit tables now get deleted from memory if a players unit selection count is 0.
+* General cleanup and optimizations.
+* The installer now properly ensures old patches files are cleaned up and that the game closes properly before installation.
+
+## R24e Changelog
+
+* Fixed a desync issue caused by squad based infantry not properly cleaning up after being destroyed.
+* Improved reverse move behavior: units that hadn’t attempted to move after the last unit in the group is checked will now function correctly.
+* Fixed an issue where reverse move groups did not clear properly when issuing a new reverse move command to a group already reversing.
+* Units affected by the reverse move bug will now correctly stop in place if all units in the group are impacted.
+* General cleanup and optimizations.
+* The MARV no longer will exhibit strange turn behaviour.
+
+## R24d Changelog
+
+* Fixed a desync issue caused a typo made in R24c.
+
+## R24c Changelog
+
+* Fixed a desync issue caused by the MCV and Rig ReplaceSelf code deleting the unit before Lua can clean up.
+* Fixed an issue causing Harvesters to attempt reverse bug detection while waiting to dock, caused by an uninitialized table.
+* Added additional safety checks for unit anchors to ensure a nil value can never be used as a candidate (likely desync or crash cause).
+* Additional clean up done to the reverse move script.
+
+## R24b Changelog
+
+* Units that are not moving or Harvesters that are docking will no longer attempt reverse bug detection.
+* Seeker reverse bug detection sensitivity increased.
+* The Fuel Depot on the map “Discovery” now explodes for 9000 grenade damage.
+* Target Adjustments for AI usage of Stasis shield / Temporal Wormhole, Shockwave & Orbital Strike.
+* The bridges now work properly on the “Arctic Circle”.
+* The maps “Tournament Island II” and “Islands Temple” have been moved from the Legacy map pack to the 1vs1 map pack.
+* Script date set in Command Post to prevent one player having a different version of the file, triggering a desync.
+
+## R24 Changelog
+
+* Reverse move bugging is now detected, affected units will automatically path toward another unit in the group. A modest speed boost is applied to affected units for 1.5s as they are being fixed.
+* Stormriders now deal 25% additional damage against Mechapedes.
+* Prodigy AOE Mind Control max cast range has been reduced from 400 to 300.
+* Drone Ships can now crush Motherships again, formation preview fixed (R23 issue).
+* Kane Edition Stormriders now show the correct damaged skin.
+* An exploit involving the EMP Control Center has been fixed.
+* Temporal Wormhole fire rate reduction reduced from 50% to 40%.
+* Improvements have been implemented to enhance overall game stability and minimize the risk of crashes.
+* Unit abilities and Support Powers for Skirmish AI that haven't been implemented since Tiberium Wars have been added for AI use.
+* Titan geometry has been reduced slightly to fix a repeating error.
+
 # R23x Changelog
 * Mammoth Tank rockets now deal 300 damage vs all targets.
 * Laser Scorpion Tanks now deal 10% less damage against Scorpion Tanks.
