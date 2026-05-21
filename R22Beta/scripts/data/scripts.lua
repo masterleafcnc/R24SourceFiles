@@ -101,7 +101,7 @@ function ClearGroup(playerTeam, groupId)
 	local teamTable = getglobal(playerTeam)
 	if type(teamTable) ~= "table" then return false end
 
-	teamTable.groups[groupId] = nil
+	clearSubTables(teamTable.groups[groupId])
 	return true
 end
 
@@ -1180,9 +1180,11 @@ function GetUnitReversingData(self)
 end
 
 -- Sets the initial frame when a unit fast turns while backing up, triggered by +BACKING_UP +TURN_LEFT_HIGH_SPEED
-function BackingUpFast(self)
+function BackingUpInitGroup(self)
 	local _,unitReversing = GetUnitReversingData(self)
-	--local curFrame = GetFrame()
+	if not unitReversing.isReverseMoving then 
+		BackingUp(self) 
+	end
 end
 
 function GetNumberOfUnitsMoving(selectedUnitList)
@@ -1642,6 +1644,7 @@ end
 
 function BackingUpFastTurn(self)
 	local _,unitReversing = GetUnitReversingData(self)
+	BackingUpInitGroup(self)
 	local playerTeam = tostring(ObjectTeamName(self))
 	local group = GetGroup(playerTeam, unitReversing.groupId)
 	--local group = unitGroups[unitReversing.groupId]
@@ -2088,7 +2091,7 @@ function CheckExistingGroups(unitReversing, group)
         end
     end
 
-	if liveReverseCount > 0 and unitsNotReverseMovingCount < ceil(liveReverseCount * 0.8) then
+	if liveReverseCount > 0 and unitsNotReverseMovingCount < ceil(liveReverseCount * 0.75) then
 		clearList = false
 	end
 
@@ -2098,7 +2101,7 @@ function CheckExistingGroups(unitReversing, group)
 			-- WriteToFile("groupUnitList.txt", tostring(unitRef) .. "\n")
 			-- if the id is the same as the id in current index clear it
 			if unitsReversing[unitRef] ~= nil and unitsReversing[unitRef].groupId == groupId and EvaluateCondition("NAMED_NOT_DESTROYED", unitsReversing[unitRef].stringReference) then
-				--unitsReversing[unitRef].groupId = nil
+				unitsReversing[unitRef].groupId = nil
 				unitsReversing[unitRef].groupIdAssigned = false
 				unitsReversing[unitRef].expectedChecksFlag = false
 				unitsReversing[unitRef].hasBeenCounted = false
@@ -2111,6 +2114,7 @@ function CheckExistingGroups(unitReversing, group)
 					--ExecuteAction("NAMED_FLASH", unitsReversing[unitRef].selfReference, 2)
 					BuggedUnitTimeoutEnd(unitsReversing[unitRef].selfReference)
 				end
+				--ExecuteAction("NAMED_FLASH_WHITE", unitsReversing[unitRef].selfReference, 2)
 			end
 		end
 		--WriteToFile("cleared list.txt", tostring(unitReversing.groupId) .. " " ..  tostring(unitReversing.groupIdAssigned) .. "\n")
@@ -2218,7 +2222,7 @@ function SuddenStopCheck(self)
 	local _,unitReversing = GetUnitReversingData(self)
 	if unitReversing == nil or unitReversing.groupId == nil then return end
 	local resetGroupId = function()
-		--%unitReversing.groupId = nil
+		%unitReversing.groupId = nil
 		%unitReversing.groupIdAssigned = false
 		--%unitReversing.firstFrame = 0
 	end
